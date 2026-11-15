@@ -62,7 +62,8 @@ export function posicionarCasos(casos, gestoes, pessoaPorId) {
   const indiceGestao = Object.fromEntries(gestoes.map((g, i) => [g.codigo, i]));
   const grupos = {};
   for (const c of casos) {
-    const setor = Math.max(0, SETORES.indexOf(pessoaPorId[c.autor]?.grupo));
+    // Casos novos (da conversa de legado) trazem a fatia pronta; os do legado usam o grupo de quem contou.
+    const setor = Math.max(0, SETORES.indexOf(c.setor ?? pessoaPorId[c.autor]?.grupo));
     const chave = c.gestao + "|" + setor;
     (grupos[chave] ||= []).push(c);
   }
@@ -157,10 +158,11 @@ export function caminhoFaixa(raioInterno, raioExterno, chave) {
 // Perspectiva: o corte do tronco é visto de cima, então fica oval (achatado na vertical),
 // e sobe um pouco na tela para dar espaço ao tronco e às raízes.
 // ZOOM aproxima ou afasta o tronco inteiro (foto e corte juntos).
-export const ZOOM = 1.24;
+export const ZOOM = 1.42;
 export const ESCALA_X = 0.95 * ZOOM;
 export const ESCALA_Y = 0.56 * ZOOM;
-export const CENTRO_TELA = { x: 800, y: 304 };
+// O corte fica um pouco à esquerda do centro, para o painel da direita não cobrir os anéis.
+export const CENTRO_TELA = { x: 722, y: 384 };
 
 // Imagem do tronco com raízes (public/tronco.webp, 1632 x 1632), posicionada para que
 // o corte da imagem fique sob o corte interativo. O corte interativo é maior que o da foto,

@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-.topo, .pergunta { position: relative; z-index: 2; }
+.topo, .base { position: relative; z-index: 2; }
 
 .topo {
   display: flex;
@@ -240,12 +240,40 @@
 
 .dica { margin-top: 1em; color: var(--texto-suave); font-size: 0.88em; }
 
-.pergunta {
+.base {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  width: min(640px, 90vw);
+  justify-content: center;
+  gap: 12px;
   margin: 8px auto 22px;
+  width: min(860px, 94vw);
+}
+.contar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 20px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid var(--verde);
+  background: rgba(47, 217, 122, 0.12);
+  color: var(--verde-claro);
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(32, 184, 104, 0.18);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.contar span { font-size: 18px; line-height: 1; }
+.contar:hover { background: rgba(47, 217, 122, 0.22); box-shadow: 0 0 40px rgba(32, 184, 104, 0.35); }
+.pergunta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
   padding: 6px 6px 6px 22px;
   border: 1px solid rgba(56, 230, 130, 0.25);
   border-radius: 999px;
@@ -362,3 +390,40 @@
 .respostaTexto { white-space: pre-line; }
 .respostaPadrao { padding: 0.7em 0.9em; border-left: 2px solid var(--texto-suave); color: var(--texto-suave); background: rgba(255, 255, 255, 0.03); }
 .pergunta button:disabled { opacity: 0.5; cursor: default; }
+
+/* Botões da demonstração no painel do anel */
+.demo { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.9em; }
+.demoBotao {
+  font: inherit;
+  font-size: 0.8em;
+  color: var(--texto-suave);
+  background: none;
+  border: 1px dashed rgba(141, 255, 192, 0.25);
+  border-radius: 999px;
+  padding: 0.35em 0.9em;
+  cursor: pointer;
+}
+.demoBotao:hover { color: var(--verde-claro); border-color: var(--verde); }
+.statusFechado { color: var(--verde-claro); }
+
+/* Aviso que aparece quando um caso entra no tronco ou o anel fecha */
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: 96px;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: grid;
+  gap: 4px;
+  width: min(520px, 92vw);
+  padding: 14px 20px;
+  background: rgba(7, 16, 10, 0.94);
+  border: 1px solid var(--verde);
+  box-shadow: 0 0 50px rgba(32, 184, 104, 0.35);
+  color: var(--texto);
+  font-size: 13px;
+  line-height: 1.45;
+  animation: avisoEntra 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.aviso strong { font-family: var(--fonte-titulo); font-size: 16px; color: var(--verde-claro); }
+@keyframes avisoEntra { from { transform: translate(-50%, 16px); opacity: 0; } }

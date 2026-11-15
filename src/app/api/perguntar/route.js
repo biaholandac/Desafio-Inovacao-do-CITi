@@ -9,7 +9,10 @@ export const maxDuration = 30;
 
 // Pergunte ao LegaCITi: responde só com base nos casos registrados.
 export async function POST(request) {
-  const { pergunta = "", cargo = null } = await request.json().catch(() => ({}));
+  const { pergunta = "", cargo = null, extras = [] } = await request.json().catch(() => ({}));
+  // Casos que a própria pessoa registrou nesta demonstração (ficam no navegador dela).
+  const meus = (Array.isArray(extras) ? extras : []).slice(0, 30).map(limparExtra).filter(Boolean);
+  const legado = meus.length ? [...casos, ...meus] : casos;
   const texto = String(pergunta).slice(0, 500).trim();
 
   if (!texto) return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
@@ -20,7 +23,7 @@ export async function POST(request) {
   }
 
   // 2. Busca os casos do legado. Sem casos próximos, não há o que responder.
-  const encontrados = buscarCasos(texto, casos, { relevanciaCargo: cargo ? (c) => relevancia(c, cargo) : null });
+  const encontrados = buscarCasos(texto, legado, { relevanciaCargo: cargo ? (c) => relevancia(c, cargo) : null });
   if (encontrados.length === 0) {
     return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
   }
@@ -49,4 +52,14 @@ export async function POST(request) {
     console.error("perguntar:", erro?.message);
     return Response.json({ tipo: "indisponivel", motivo: String(erro?.message ?? "desconhecido").slice(0, 40), resposta: MENSAGENS.indisponivel, casos: encontrados.slice(0, 3).map((c) => c.id) });
   }
+}
+
+const corta = (t, max = 600) => String(t ?? "").slice(0, max);
+function limparExtra(c) {
+  if (!c || !/^N\d{3,4}$/.test(String(c.id))) return null;
+  return {
+    id: c.id, titulo: corta(c.titulo, 90), gestao: corta(c.gestao, 8), cargoAutor: corta(c.cargoAutor, 60), area: corta(c.area, 40),
+    situacao: corta(c.situacao), dilema: corta(c.dilema), decisao: corta(c.decisao), resultado: corta(c.resultado), licao: corta(c.licao, 300),
+    padroes: (Array.isArray(c.padroes) ? c.padroes : []).filter((p) => /^P[1-6]$/.test(p)), origem: corta(c.origem, 20),
+  };
 }

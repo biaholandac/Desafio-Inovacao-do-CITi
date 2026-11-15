@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Tronco from "./Tronco";
 import Marca from "./Marca";
 import Fundo from "./Fundo";
-import { casos, gestoes, padroes, pessoaPorId } from "@/data";
+import Entrevista from "./Entrevista";
+import { lerDemonstracao, salvarDemonstracao, novoCaso } from "@/lib/meusCasos";
+import { casos as casosLegado, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto, naTela } from "@/lib/geometria";
 import { acharCargo, relevancia, ehNovato, CHEGADA, FOCO } from "@/data/cargos";
 import estilos from "./Palco.module.css";
@@ -40,6 +42,103 @@ export default function Palco({ cargo = null }) {
   const [resposta, setResposta] = useState(null);
   const [pensando, setPensando] = useState(false);
 
+  // Conversas de legado feitas nesta demonstração (guardadas só neste navegador).
+  const [demo, setDemo] = useState({ casos: [], simuladas: 0 });
+  const [entrevistaAberta, setEntrevistaAberta] = useState(false);
+  const [nasceu, setNasceu] = useState(null);
+  const [aviso, setAviso] = useState(null);
+  const [celebrando, setCelebrando] = useState(null);
+  const fechadoAntes = useRef(null);
+  const [pronto, setPronto] = useState(false);
+  useEffect(() => {
+    const salvo = lerDemonstracao();
+    // Ao recarregar, um anel que já estava fechado não comemora de novo.
+    const g = gestoes.find((x) => x.codigo === "2026.2");
+    fechadoAntes.current = g.conversas.feitas + salvo.casos.length + salvo.simuladas >= g.conversas.esperadas;
+    setDemo(salvo);
+    setPronto(true);
+  }, []);
+  function atualizarDemo(novo) {
+    setDemo(novo);
+    salvarDemonstracao(novo);
+  }
+
+  const casos = useMemo(() => [...casosLegado, ...demo.casos], [demo.casos]);
+
+  // O anel em andamento avança a cada conversa registrada e fecha quando todas forem feitas.
+  const ANEL_ATUAL = "2026.2";
+  const gestoesVivas = useMemo(() => gestoes.map((g) => {
+    if (g.codigo !== ANEL_ATUAL || !g.conversas) return g;
+    const feitas = Math.min(g.conversas.esperadas, g.conversas.feitas + demo.casos.filter((c) => c.gestao === ANEL_ATUAL).length + demo.simuladas);
+    return { ...g, conversas: { ...g.conversas, feitas }, status: feitas >= g.conversas.esperadas ? "completa" : g.status };
+  }), [demo]);
+  const anelAtual = gestoesVivas.find((g) => g.codigo === ANEL_ATUAL);
+
+  useEffect(() => {
+    if (!pronto) return;
+    const fechado = anelAtual?.status === "completa";
+    if (fechadoAntes.current === false && fechado) {
+      setCelebrando(ANEL_ATUAL);
+      setGestaoAtiva(ANEL_ATUAL);
+      setAviso({ titulo: `O anel ${ANEL_ATUAL} fechou`, texto: "Todas as conversas da gestão foram feitas. O legado desta geração está completo e já ajuda a próxima." });
+      setTimeout(() => setCelebrando(null), 4200);
+    }
+    fechadoAntes.current = fechado;
+  }, [anelAtual?.status, pronto]);
+
+  useEffect(() => {
+    if (!aviso) return;
+    const t = setTimeout(() => setAviso(null), 6500);
+    return () => clearTimeout(t);
+  }, [aviso]);
+
+  function registrar({ rascunho, tipo }) {
+    const indice = demo.casos.length + 1;
+    const c = novoCaso({ rascunho, tipo, entrada, indice, gestao: ANEL_ATUAL });
+    atualizarDemo({ ...demo, casos: [...demo.casos, c] });
+    setEntrevistaAberta(false);
+    setResposta(null);
+    setGestaoAtiva(ANEL_ATUAL);
+    setCasoAtivo(c.id);
+    setNasceu(c.id);
+    setTimeout(() => setNasceu(null), 3500);
+    const g = gestoes.find((x) => x.codigo === ANEL_ATUAL);
+    const feitas = Math.min(g.conversas.esperadas, (anelAtual?.conversas.feitas ?? 0) + 1);
+    if (feitas < g.conversas.esperadas) {
+      setAviso({ titulo: "Seu caso entrou no tronco", texto: `Anel ${ANEL_ATUAL} · ${feitas} de ${g.conversas.esperadas} conversas feitas. Quem perguntar ao LegaCITi sobre isso agora encontra o que você viveu.` });
+    }
+  }
+
+  // Para a apresentação: completa as conversas que faltam, uma a uma, até o anel fechar.
+  const simulando = useRef(null);
+  function simularRestantes() {
+    if (simulando.current) return;
+    simulando.current = setInterval(() => {
+      setDemo((atual) => {
+        const g = gestoes.find((x) => x.codigo === ANEL_ATUAL);
+        const feitas = g.conversas.feitas + atual.casos.filter((c) => c.gestao === ANEL_ATUAL).length + atual.simuladas;
+        if (feitas >= g.conversas.esperadas) {
+          clearInterval(simulando.current);
+          simulando.current = null;
+          return atual;
+        }
+        const novo = { ...atual, simuladas: atual.simuladas + 1 };
+        salvarDemonstracao(novo);
+        return novo;
+      });
+    }, 160);
+  }
+  useEffect(() => () => clearInterval(simulando.current), []);
+
+  function recomecar() {
+    clearInterval(simulando.current);
+    simulando.current = null;
+    fechadoAntes.current = false;
+    atualizarDemo({ casos: [], simuladas: 0 });
+    setCasoAtivo(null);
+    setAviso(null);
+  }
+
   async function perguntar(e) {
     e.preventDefault();
     const texto = pergunta.trim();
@@ -54,7 +153,7 @@ export default function Palco({ cargo = null }) {
       const r = await fetch("/api/perguntar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pergunta: texto, cargo }),
+        body: JSON.stringify({ pergunta: texto, cargo, extras: demo.casos }),
         signal: controle.signal,
       });
       if (!r.ok) throw new Error(`erro_${r.status}`);
@@ -68,7 +167,7 @@ export default function Palco({ cargo = null }) {
     }
   }
 
-  const posicoes = useMemo(() => posicionarCasos(casos, gestoes, pessoaPorId), []);
+  const posicoes = useMemo(() => posicionarCasos(casos, gestoes, pessoaPorId), [casos]);
 
   // O que o cargo de quem entrou enxerga com mais destaque.
   const foco = useMemo(() => {
@@ -98,9 +197,9 @@ export default function Palco({ cargo = null }) {
       sugeridos = recentes(base.filter((c) => c.licao)).slice(0, 3);
     }
     return { mapa, doCargo, daArea, padraoTopo, sugeridos };
-  }, [entrada]);
+  }, [entrada, casos]);
   const caso = casos.find((c) => c.id === casoAtivo);
-  const gestao = gestoes.find((g) => g.codigo === gestaoAtiva);
+  const gestao = gestoesVivas.find((g) => g.codigo === gestaoAtiva);
   const indiceGestao = gestoes.findIndex((g) => g.codigo === gestaoAtiva);
   const casosDaGestao = casos.filter((c) => c.gestao === gestaoAtiva);
 
@@ -115,7 +214,7 @@ export default function Palco({ cargo = null }) {
     const c = {};
     for (const caso of casos) for (const p of caso.padroes) c[p] = (c[p] || 0) + 1;
     return c;
-  }, []);
+  }, [casos]);
 
   function escolherLente(id) {
     setLente(id);
@@ -153,20 +252,20 @@ export default function Palco({ cargo = null }) {
       <div className={estilos.moldura}>
       <div className={estilos.palco}>
         <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
-          <Tronco gestoes={gestoes} casos={casos} posicoes={posicoes}
+          <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando}
             selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0])) : lente === "legado" ? foco?.mapa : null}
             aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); setResposta(null); }} />
 
           {/* Linhas que ligam os painéis ao tronco */}
           {alvoGestao && !resposta && (
             <g className={estilos.ligacao}>
-              <polyline points={`338,250 368,250 ${alvoGestao.x},${alvoGestao.y}`} />
+              <polyline points={`328,560 358,560 ${alvoGestao.x},${alvoGestao.y}`} />
               <circle cx={alvoGestao.x} cy={alvoGestao.y} r="4" />
             </g>
           )}
           {caso && (
             <g className={estilos.ligacao}>
-              <polyline points={`1268,230 1238,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
+              <polyline points={`1252,230 1222,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
               <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
             </g>
           )}
@@ -174,7 +273,7 @@ export default function Palco({ cargo = null }) {
 
         {/* Painel da gestão */}
         {gestao && !resposta && (
-          <section className={estilos.painel} style={{ left: px(28), top: py(150), width: px(310), maxHeight: py(720) }}>
+          <section className={estilos.painel} style={{ left: px(28), top: py(520), width: px(300), maxHeight: py(372) }}>
             <div className={estilos.rotulo}>Anel · gestão</div>
             <h2 className={estilos.tituloGestao}>{gestao.codigo}</h2>
             {gestao.status === "fechando" && (
@@ -186,6 +285,14 @@ export default function Palco({ cargo = null }) {
             {gestao.status === "em_formacao" && (
               <div className={estilos.status}><span className={estilos.statusPonto} /> Anel em formação</div>
             )}
+            {gestao.codigo === ANEL_ATUAL && gestao.status === "completa" && (
+              <div className={`${estilos.status} ${estilos.statusFechado}`}>
+                <span className={estilos.statusPonto} /> Anel fechado · {gestao.conversas.feitas} de {gestao.conversas.esperadas} conversas feitas
+                <div className={estilos.barra}><div style={{ width: "100%" }} /></div>
+              </div>
+            )}
+              </div>
+            )}
             <p className={`${estilos.texto} ${retratoAberto ? "" : estilos.textoRecolhido}`}>{gestao.descricao}</p>
             <button className={estilos.lerMais} onClick={() => setRetratoAberto(!retratoAberto)}>{retratoAberto ? "Ler menos" : "Ler mais"}</button>
             <div className={estilos.numeros}>
@@ -193,19 +300,28 @@ export default function Palco({ cargo = null }) {
               <div><strong>{new Set(casosDaGestao.map((c) => c.autor)).size}</strong><span>pessoas</span></div>
               <div><strong>{new Set(casosDaGestao.flatMap((c) => c.padroes)).size}</strong><span>padrões</span></div>
             </div>
+            {gestao.codigo === ANEL_ATUAL && (
+              <div className={estilos.demo}>
+                {gestao.status !== "completa" && (
+                  <button className={estilos.demoBotao} onClick={simularRestantes}>Simular as conversas que faltam</button>
+                )}
+                {(demo.casos.length > 0 || demo.simuladas > 0) && (
+                  <button className={estilos.demoBotao} onClick={recomecar}>Recomeçar a demonstração</button>
+                )}
           </section>
         )}
 
         {/* Painel da direita: caso escolhido, padrões ou visão geral */}
-        <section className={estilos.painel} style={{ left: px(1268), top: py(110), width: px(316), maxHeight: py(770) }}>
+        <section className={estilos.painel} style={{ left: px(1252), top: py(40), width: px(330), maxHeight: py(840) }}>
           {caso ? (
             <>
-              <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}</div>
+              <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}{caso.meu ? " · registrado por você" : ""}</div>
               <h3 className={estilos.tituloCaso}>{caso.titulo}</h3>
               <p className={estilos.autor}>Contado por: {caso.cargoAutor} · {ORIGEM[caso.origem]}</p>
               <dl className={estilos.campos}>
                 <dt>Situação</dt><dd>{caso.situacao}</dd>
                 <dt>Decisão</dt><dd>{caso.decisao}</dd>
+                {caso.meu && caso.resultado && (<><dt>Resultado</dt><dd>{caso.resultado}</dd></>)}
                 {caso.licao && (<><dt>Lição</dt><dd className={estilos.licao}>{caso.licao}</dd></>)}
               </dl>
               {caso.padroes.length > 0 && (
@@ -311,11 +427,27 @@ export default function Palco({ cargo = null }) {
 
       </div>
 
-      <form className={estilos.pergunta} onSubmit={perguntar}>
-        <input value={pergunta} onChange={(e) => setPergunta(e.target.value)} maxLength={500}
-          placeholder="Pergunte ao LegaCITi: o que o CITi já aprendeu sobre…" aria-label="Pergunte ao LegaCITi" />
-        <button type="submit" aria-label="Enviar pergunta" disabled={pensando}>→</button>
-      </form>
+      <div className={estilos.base}>
+        <button className={estilos.contar} onClick={() => setEntrevistaAberta(true)}>
+          <span aria-hidden="true">＋</span> Contar meu legado
+        </button>
+        <form className={estilos.pergunta} onSubmit={perguntar}>
+          <input value={pergunta} onChange={(e) => setPergunta(e.target.value)} maxLength={500}
+            placeholder="Pergunte ao LegaCITi: o que o CITi já aprendeu sobre…" aria-label="Pergunte ao LegaCITi" />
+          <button type="submit" aria-label="Enviar pergunta" disabled={pensando}>→</button>
+        </form>
+      </div>
+
+      {aviso && (
+        <div className={estilos.aviso} role="status">
+          <strong>{aviso.titulo}</strong>
+          <span>{aviso.texto}</span>
+        </div>
+      )}
+
+      {entrevistaAberta && (
+        <Entrevista entrada={entrada} gestao={ANEL_ATUAL} aoFechar={() => setEntrevistaAberta(false)} aoRegistrar={registrar} />
+      )}
     </div>
   );
 }

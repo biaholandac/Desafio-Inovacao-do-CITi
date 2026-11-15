@@ -20,7 +20,7 @@ const FOTO_CORTE = {
 };
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
-export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false }) {
+export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false, novo = null, celebrando = null }) {
   const total = gestoes.length;
 
   // Linhas finas de crescimento dentro de cada anel, para dar textura de madeira.
@@ -57,7 +57,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
   const hud = useMemo(() => {
     const contagem = gestoes.map((g) => casos.filter((c) => c.gestao === g.codigo).length);
     const max = Math.max(...contagem);
-    const alvo = { x: 520, y: 790 };
+    const alvo = naTela(ponto(RAIO_EXTERNO + 24, 218));
     return { contagem, max, alvo };
   }, [gestoes, casos]);
 
@@ -124,7 +124,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         <mask id="mascaraFoto" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
           <rect width="1600" height="900" fill="url(#fundirFoto)" />
         </mask>
-        <radialGradient id="sombraCorte" gradientUnits="userSpaceOnUse" cx="800" cy="320" r="480" gradientTransform="translate(800 320) scale(1 0.62) translate(-800 -320)">
+        <radialGradient id="sombraCorte">
           <stop offset="70%" stopColor="#000" stopOpacity="0.85" />
           <stop offset="100%" stopColor="#000" stopOpacity="0" />
         </radialGradient>
@@ -162,7 +162,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         const fim = g.status === "fechando" ? -90 + 360 * (g.conversas.feitas / g.conversas.esperadas) : 270;
         const linha = caminhoAnel(externo, g.codigo, { minima: ativo ? 1.6 : 0.8, maxima: ativo ? 5.5 : 3.6, inicio: -90, fim });
         return (
-          <g key={g.codigo} className={`${estilos.anel} ${ativo ? estilos.anelAtivo : ""}`}>
+          <g key={g.codigo} className={`${estilos.anel} ${ativo ? estilos.anelAtivo : ""} ${celebrando === g.codigo ? estilos.anelCelebrando : ""}`}>
             <path d={tardio} className={estilos.anelTardio} />
             <path d={linha} className={estilos.anelLinha} filter="url(#brilho)" />
             {g.status === "fechando" && <path d={caminhoOndulado(externo, g.codigo, 0.012, fim, 270)} className={estilos.anelPendente} />}
@@ -209,7 +209,8 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         const estado = escolhido ? estilos.casoEscolhido : destaque ? estilos.casoDestaque : apagado ? estilos.casoApagado : estilos.casoNormal;
         const atraso = { animationDelay: `${(semente(c.id + "t") * -6).toFixed(2)}s` };
         return (
-          <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={`${estilos.caso} ${estado} ${c.origem === "em_andamento" ? estilos.casoAndamento : ""}`}>
+          <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={`${estilos.caso} ${estado} ${c.origem === "em_andamento" ? estilos.casoAndamento : ""} ${novo === c.id ? estilos.casoNasceu : ""}`}>
+            {novo === c.id && <><circle cx={p.x} cy={p.y} r={10} className={estilos.nascimento} /><circle cx={p.x} cy={p.y} r={10} className={estilos.nascimento} style={{ animationDelay: "0.5s" }} /></>}
             <circle cx={p.x} cy={p.y} r={11} fill="transparent" />
             {(destaque || escolhido) && <circle cx={p.x} cy={p.y} r={7} className={estilos.onda} style={atraso} />}
             <circle cx={p.x} cy={p.y} r={escolhido ? 13 : destaque ? 10 : 8} className={estilos.halo} style={atraso} />
@@ -221,14 +222,14 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
 
       {/* HUD: casos por gestão */}
       {!decorativo && <g className={estilos.hud} aria-hidden="true">
-        <polyline className={estilos.linha} points={`${hud.alvo.x},${hud.alvo.y} 400,812`} />
+        <polyline className={estilos.linha} points={`${hud.alvo.x},${hud.alvo.y} 210,74`} />
         <circle className={estilos.ponta} cx={hud.alvo.x} cy={hud.alvo.y} r="3" />
-        <rect className={estilos.caixa} x="250" y="790" width="150" height="86" />
-        <text x="262" y="808">CASOS POR ANEL</text>
-        <text x="262" y="831" className={estilos.numero}>{casos.length}</text>
+        <rect className={estilos.caixa} x="40" y="30" width="170" height="86" />
+        <text x="52" y="48">CASOS POR ANEL</text>
+        <text x="52" y="71" className={estilos.numero}>{casos.length}</text>
         {hud.contagem.map((n, i) => {
           const h = (n / hud.max) * 38;
-          return <rect key={i} x={314 + i * 11} y={864 - h} width="7" height={h} className={i === hud.contagem.length - 2 ? estilos.barraAtual : estilos.barra} />;
+          return <rect key={i} x={112 + i * 12} y={104 - h} width="8" height={h} className={i === hud.contagem.length - 2 ? estilos.barraAtual : estilos.barra} />;
         })}
       </g>}
 

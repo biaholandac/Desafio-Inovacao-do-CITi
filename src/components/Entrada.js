@@ -41,7 +41,7 @@ export default function Entrada() {
     <main className={estilos.tela}>
       <Fundo />
       <div className={estilos.conteudo}>
-        <svg viewBox="130 50 1340 880" className={estilos.tronco} aria-hidden="true">
+        <svg viewBox="52 70 1340 880" className={estilos.tronco} aria-hidden="true">
           <Tronco gestoes={gestoes} casos={casos} posicoes={posicoes}
             selecionado={null} gestaoAtiva={null} padraoAtivo={null}
             aoEscolherCaso={() => {}} aoEscolherGestao={() => {}} decorativo />
