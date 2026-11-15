@@ -1,6 +1,7 @@
 .tela {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background:
@@ -9,7 +10,7 @@
   overflow: hidden;
 }
 
-.topo, .palco, .pergunta { position: relative; z-index: 1; }
+.topo, .pergunta { position: relative; z-index: 1; }
 
 .topo {
   display: flex;
@@ -57,11 +58,20 @@
   padding: 6px 12px;
 }
 
+.moldura {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  container-type: size;
+}
+
 .palco {
   position: relative;
-  width: min(100vw, calc((100vh - 150px) * 16 / 9));
+  width: min(100cqw, 100cqh * 16 / 9);
   aspect-ratio: 16 / 9;
-  margin: 0 auto;
 }
 
 .desenho {
@@ -81,6 +91,9 @@
 
 .painel {
   position: absolute;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 230, 130, 0.35) transparent;
   padding: 22px 24px;
   background: rgba(7, 13, 9, 0.78);
   border: 1px solid rgba(56, 230, 130, 0.18);
@@ -224,10 +237,11 @@
 .dica { margin-top: 14px; color: var(--texto-suave); font-size: 12px; }
 
 .pergunta {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   width: min(640px, 90vw);
-  margin: 4px auto 26px;
+  margin: 8px auto 22px;
   padding: 6px 6px 6px 22px;
   border: 1px solid rgba(56, 230, 130, 0.25);
   border-radius: 999px;
@@ -280,3 +294,44 @@
 .usuarioTexto { display: flex; flex-direction: column; line-height: 1.2; }
 .usuarioTexto strong { font-size: 13px; font-weight: 600; }
 .usuarioTexto span { font-size: 11px; color: var(--texto-suave); }
+
+.alerta {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--verde);
+  background: rgba(56, 230, 130, 0.06);
+  font-size: 13px;
+}
+.alerta span {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--verde);
+  margin-bottom: 2px;
+}
+.rotuloLista {
+  margin-top: 18px;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde);
+}
+.sugeridos { list-style: none; margin-top: 6px; }
+.sugeridos button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 8px;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  color: var(--texto);
+  background: none;
+  border: none;
+  border-top: 1px solid var(--borda);
+  padding: 9px 0;
+  cursor: pointer;
+}
+.sugeridos button:hover span:last-child { color: var(--verde-claro); }
+.sugeridoGestao { font-size: 11px; color: var(--verde); padding-top: 1px; }

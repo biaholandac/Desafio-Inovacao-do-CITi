@@ -8,7 +8,7 @@ import {
 import estilos from "./Tronco.module.css";
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
-export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, aoEscolherCaso, aoEscolherGestao }) {
+export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao }) {
   const total = gestoes.length;
 
   // Linhas finas de crescimento dentro de cada anel, para dar textura de madeira.
@@ -131,14 +131,16 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       {casos.map((c) => {
         const p = posicoes[c.id];
         const doPadrao = padraoAtivo && c.padroes.includes(padraoAtivo);
-        const apagado = padraoAtivo && !doPadrao;
+        const rel = relevancia ? relevancia[c.id] : null;
+        const apagado = (padraoAtivo && !doPadrao) || rel === 0;
+        const destaque = rel === 2 && !padraoAtivo;
         const escolhido = selecionado === c.id;
         return (
           <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={estilos.caso}>
             <circle cx={p.x} cy={p.y} r={12} fill="transparent" />
-            <circle cx={p.x} cy={p.y} r={escolhido ? 6 : doPadrao ? 4.5 : 3}
-              className={`${estilos.ponto} ${apagado ? estilos.pontoApagado : ""} ${escolhido || doPadrao ? estilos.pontoAceso : ""} ${c.origem === "em_andamento" ? estilos.pontoAndamento : ""}`}
-              filter={escolhido || doPadrao ? "url(#brilho)" : undefined} />
+            <circle cx={p.x} cy={p.y} r={escolhido ? 6 : doPadrao || destaque ? 4.5 : 3}
+              className={`${estilos.ponto} ${apagado ? estilos.pontoApagado : ""} ${escolhido || doPadrao || destaque ? estilos.pontoAceso : ""} ${c.origem === "em_andamento" ? estilos.pontoAndamento : ""}`}
+              filter={escolhido || doPadrao || destaque ? "url(#brilho)" : undefined} />
             <title>{c.titulo}</title>
           </g>
         );
