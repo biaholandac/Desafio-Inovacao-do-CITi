@@ -1,8 +1,9 @@
 // Chamada ao Gemini pela API REST. A chave vem do cofre da Vercel (GEMINI_API_KEY).
-const MODELOS = [process.env.GEMINI_MODELO, "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest"].filter(Boolean);
+// O Google aposentou a família 2.5 para chaves novas. O 3.5 Flash-Lite responde em menos de 1 s no plano gratuito.
+const MODELOS = [...new Set([process.env.GEMINI_MODELO, "gemini-3.5-flash-lite"].filter(Boolean))];
 
 // Cada tentativa tem um limite de tempo; a soma de todas também.
-const LIMITE_TENTATIVA_MS = 9000;
+const LIMITE_TENTATIVA_MS = 12000;
 const LIMITE_TOTAL_MS = 18000;
 
 async function chamar(modelo, chave, corpo, limiteMs) {
@@ -33,8 +34,8 @@ export async function gerarJSON({ instrucao, conteudo, esquema }) {
       maxOutputTokens: 700,
       responseMimeType: "application/json",
       responseSchema: esquema,
-      // Sem "pensamento" longo: a resposta sai rápida e o limite de tokens vai todo para o texto.
-      thinkingConfig: { thinkingBudget: 0 },
+      // Pensamento no mínimo: a resposta sai rápida e o limite de tokens vai todo para o texto.
+      thinkingConfig: { thinkingLevel: "minimal" },
     },
   };
 
