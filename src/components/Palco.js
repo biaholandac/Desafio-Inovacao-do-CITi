@@ -93,7 +93,9 @@ export default function Palco({ cargo = null }) {
       const recepcao = ["C069", "C111"].map((id) => casos.find((c) => c.id === id));
       sugeridos = [...new Map([...chegadaDaArea, ...conselhos.slice(0, 2), ...recepcao].filter(Boolean).map((c) => [c.id, c])).values()].slice(0, 4);
     } else {
-      sugeridos = recentes(doCargo.filter((c) => c.licao)).slice(0, 3);
+      // Cargo sem casos próprios ainda (como Analista de software): começa pelo que a área deixou.
+      const base = doCargo.length ? doCargo : daArea;
+      sugeridos = recentes(base.filter((c) => c.licao)).slice(0, 3);
     }
     return { mapa, doCargo, daArea, padraoTopo, sugeridos };
   }, [entrada]);
@@ -270,6 +272,9 @@ export default function Palco({ cargo = null }) {
                 <div><strong>{foco.doCargo.length}</strong><span>{novato ? "sobre chegar" : "do seu cargo"}</span></div>
                 <div><strong>{novato ? foco.daArea.length - foco.doCargo.length : foco.daArea.length}</strong><span>{novato ? "da sua subárea" : "da sua área"}</span></div>
               </div>
+              {!novato && foco.doCargo.length === 0 && (
+                <p className={estilos.dica}>Ninguém deste cargo contou um caso ainda. Enquanto isso, comece pelo que a sua área já viveu.</p>
+              )}
               {foco.padraoTopo && (
                 <p className={estilos.alerta}>
                   <span>{novato ? "O que mais se repete na sua subárea" : "Padrão mais comum na sua área"}</span>
@@ -287,7 +292,7 @@ export default function Palco({ cargo = null }) {
                   </li>
                 ))}
               </ul>
-              <p className={estilos.dica}>{novato ? "No tronco, brilham os casos sobre chegar ao CITi; os da sua subárea aparecem logo atrás." : "No tronco, os casos de quem ocupou o seu cargo brilham mais."}</p>
+              <p className={estilos.dica}>{novato ? "No tronco, brilham os casos sobre chegar ao CITi; os da sua subárea aparecem logo atrás." : foco.doCargo.length ? "No tronco, os casos de quem ocupou o seu cargo brilham mais." : "No tronco, os casos da sua área ficam acesos e os outros, mais apagados."}</p>
             </>
           ) : (
             <>

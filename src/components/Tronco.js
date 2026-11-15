@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import {
   RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
-  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE, IMAGEM_TRONCO,
+  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE, IMAGEM_TRONCO, ZOOM,
 } from "@/lib/geometria";
 import estilos from "./Tronco.module.css";
 
@@ -115,15 +115,15 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
           <feComposite in2="SourceGraphic" operator="in" />
         </filter>
         {/* A foto do tronco se dissolve no fundo nas bordas */}
-        <radialGradient id="fundirFoto" gradientUnits="userSpaceOnUse" cx="736" cy="420" r="720" gradientTransform="translate(736 420) scale(1 0.85) translate(-736 -420)">
+        <radialGradient id="fundirFoto" gradientUnits="userSpaceOnUse" cx="795" cy="470" r="650" gradientTransform="translate(795 470) scale(1 0.92) translate(-795 -470)">
           <stop offset="0%" stopColor="#fff" />
-          <stop offset="72%" stopColor="#fff" />
+          <stop offset="58%" stopColor="#fff" />
           <stop offset="100%" stopColor="#000" />
         </radialGradient>
         <mask id="mascaraFoto" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
           <rect width="1600" height="900" fill="url(#fundirFoto)" />
         </mask>
-        <radialGradient id="sombraCorte" gradientUnits="userSpaceOnUse" cx="800" cy="300" r="420" gradientTransform="translate(800 300) scale(1 0.62) translate(-800 -300)">
+        <radialGradient id="sombraCorte" gradientUnits="userSpaceOnUse" cx="800" cy="320" r="480" gradientTransform="translate(800 320) scale(1 0.62) translate(-800 -320)">
           <stop offset="70%" stopColor="#000" stopOpacity="0.85" />
           <stop offset="100%" stopColor="#000" stopOpacity="0" />
         </radialGradient>
@@ -133,7 +133,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       <image href="/tronco.webp" x={IMAGEM_TRONCO.x} y={IMAGEM_TRONCO.y} width={IMAGEM_TRONCO.largura} height={IMAGEM_TRONCO.altura}
         preserveAspectRatio="none" mask="url(#mascaraFoto)" className={estilos.foto} />
       {/* Sombra sob a borda do corte, para ele assentar no tronco */}
-      <ellipse cx={naTela(centroPara(0)).x} cy={naTela(centroPara(0)).y + 22} rx="372" ry="214" fill="url(#sombraCorte)" opacity="0.7" />
+      <ellipse cx={naTela(centroPara(0)).x} cy={naTela(centroPara(0)).y + 22} rx={372 * ZOOM} ry={214 * ZOOM} fill="url(#sombraCorte)" opacity="0.7" />
 
       {/* Corte do tronco, visto em perspectiva */}
       <g transform={TRANSFORMACAO_CORTE}>
@@ -196,20 +196,22 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
 
       </g>
 
-      {/* Casos: desenhados fora da perspectiva, como círculos de verdade e com área de toque generosa */}
+      {/* Casos: luzes verdes que respiram, cada uma no seu tempo; os casos em destaque emitem um pulso */}
       {casos.map((c) => {
         const p = naTela(posicoes[c.id]);
         const doPadrao = padraoAtivo && c.padroes.includes(padraoAtivo);
         const rel = relevancia ? relevancia[c.id] : null;
         const apagado = (padraoAtivo && !doPadrao) || rel === 0;
-        const destaque = rel === 2 && !padraoAtivo;
+        const destaque = (rel === 2 && !padraoAtivo) || doPadrao;
         const escolhido = selecionado === c.id;
+        const estado = escolhido ? estilos.casoEscolhido : destaque ? estilos.casoDestaque : apagado ? estilos.casoApagado : estilos.casoNormal;
+        const atraso = { animationDelay: `${(semente(c.id + "t") * -6).toFixed(2)}s` };
         return (
-          <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={estilos.caso}>
+          <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={`${estilos.caso} ${estado} ${c.origem === "em_andamento" ? estilos.casoAndamento : ""}`}>
             <circle cx={p.x} cy={p.y} r={11} fill="transparent" />
-            <circle cx={p.x} cy={p.y} r={escolhido ? 9 : doPadrao || destaque ? 7 : 5.2}
-              className={`${estilos.ponto} ${apagado ? estilos.pontoApagado : ""} ${escolhido || doPadrao || destaque ? estilos.pontoAceso : ""} ${c.origem === "em_andamento" ? estilos.pontoAndamento : ""}`}
-              filter={escolhido || doPadrao || destaque ? "url(#brilho)" : undefined} />
+            {(destaque || escolhido) && <circle cx={p.x} cy={p.y} r={7} className={estilos.onda} style={atraso} />}
+            <circle cx={p.x} cy={p.y} r={escolhido ? 13 : destaque ? 10 : 8} className={estilos.halo} style={atraso} />
+            <circle cx={p.x} cy={p.y} r={escolhido ? 6.5 : destaque ? 5.5 : apagado ? 3.6 : 4.4} className={estilos.ponto} style={atraso} />
             <title>{c.titulo}</title>
           </g>
         );
@@ -231,8 +233,10 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       {/* Nomes das áreas, curvados ao longo da casca (fora da perspectiva, para o texto não deformar) */}
       {!decorativo && SETORES.map((s, i) => {
         const fatia = 360 / SETORES.length;
-        const meio = -90 + i * fatia + fatia / 2;
-        const r = RAIO_EXTERNO + 64;
+        let meio = -90 + i * fatia + fatia / 2;
+        // Rótulos nas laterais ficariam atrás dos painéis: descem para a parte de baixo da fatia.
+        if (Math.abs(Math.cos((meio * Math.PI) / 180)) > 0.85) meio += Math.cos((meio * Math.PI) / 180) > 0 ? 30 : -30;
+        const r = RAIO_EXTERNO + 50;
         const embaixo = Math.sin((meio * Math.PI) / 180) > 0.2;
         const angs = Array.from({ length: 13 }, (_, k) => meio - 26 + (52 * k) / 12);
         const pts = (embaixo ? angs.reverse() : angs).map((a) => naTela(ponto(r, a)));

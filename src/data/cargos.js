@@ -26,6 +26,7 @@ export const AREAS = [
   ] },
   { id: "tech", nome: "Tech", cargos: [
     { id: "dev", nome: "Pessoa desenvolvedora", pessoa: 11 },
+    { id: "analista-software", nome: "Analista de software", pessoa: null },
     { id: "analista-dados", nome: "Analista de dados", pessoa: 60 },
   ] },
   { id: "produto", nome: "Produto", cargos: [{ id: "operacional-produto", nome: "Operacionais", pessoa: 51 }] },
@@ -39,11 +40,9 @@ export const AREAS = [
   ] },
   { id: "inovacao", nome: "Inovação", cargos: [{ id: "inovacao", nome: "Time de Inovação", pessoa: 28 }] },
   { id: "new-pig", nome: "New Pig", pergunta: "escolha a subárea em que você está entrando", cargos: [
-    { id: "np-dev", nome: "Desenvolvimento", cargos: [{ id: "new-pig-dev", nome: "New Pig de Desenvolvimento", pessoa: null }] },
-    { id: "np-dados", nome: "Dados", cargos: [{ id: "new-pig-dados", nome: "New Pig de Dados", pessoa: null }] },
+    { id: "np-tech", nome: "Tech", cargos: [{ id: "new-pig-tech", nome: "New Pig de Tech", pessoa: null }] },
     { id: "np-produto", nome: "Produto", cargos: [{ id: "new-pig-produto", nome: "New Pig de Produto", pessoa: null }] },
-    { id: "np-comercial", nome: "Comercial", cargos: [{ id: "new-pig-comercial", nome: "New Pig de Comercial", pessoa: null }] },
-    { id: "np-marketing", nome: "Marketing", cargos: [{ id: "new-pig-marketing", nome: "New Pig de Marketing", pessoa: null }] },
+    { id: "np-negocios", nome: "Negócios", cargos: [{ id: "new-pig-negocios", nome: "New Pig de Negócios", pessoa: null }] },
     { id: "np-gg", nome: "Gente e Gestão", cargos: [{ id: "new-pig-gg", nome: "New Pig de Gente e Gestão", pessoa: null }] },
     { id: "np-inovacao", nome: "Inovação", cargos: [{ id: "new-pig-inovacao", nome: "New Pig de Inovação", pessoa: null }] },
   ] },
@@ -65,6 +64,7 @@ export const FOCO = {
   "lider-comercial": { papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
   "lider-marketing": { papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },
   dev: { papeis: ["Pessoa desenvolvedora"], areas: DEV },
+  "analista-software": { papeis: ["Analista de software"], areas: [...DEV, ...DADOS] },
   "analista-dados": { papeis: ["Analista de dados"], areas: DADOS },
   "gerente-software": { papeis: ["Gerente de software"], areas: DEV },
   "gerente-dados": { papeis: ["Gerente de dados"], areas: DADOS },
@@ -76,11 +76,9 @@ export const FOCO = {
   "especialista-gg": { papeis: ["Especialista de Gente e Gestão"], areas: GG },
   inovacao: { papeis: ["Time de Inovação"], areas: ["Inovação"] },
   // New Pig: os casos de chegada valem para todos; somam-se os da subárea em que a pessoa entra.
-  "new-pig-dev": { novato: true, papeis: ["Pessoa desenvolvedora"], areas: DEV },
-  "new-pig-dados": { novato: true, papeis: ["Analista de dados"], areas: DADOS },
+  "new-pig-tech": { novato: true, papeis: ["Pessoa desenvolvedora", "Analista de dados"], areas: [...DEV, ...DADOS] },
   "new-pig-produto": { novato: true, papeis: ["Operacional de Produto"], areas: PRODUTO },
-  "new-pig-comercial": { novato: true, papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
-  "new-pig-marketing": { novato: true, papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },
+  "new-pig-negocios": { novato: true, papeis: ["Gerente de contas", "Analista de marketing"], areas: NEGOCIOS },
   "new-pig-gg": { novato: true, papeis: ["Analista de Gente e Gestão"], areas: GG },
   "new-pig-inovacao": { novato: true, papeis: ["Time de Inovação"], areas: ["Inovação"] },
 };

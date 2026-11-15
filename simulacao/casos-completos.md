@@ -4,7 +4,7 @@
 
 São 115 casos, organizados por gestão. Cada caso mostra o cargo de quem contou na época, sem nomes.
 
-**Padrões:** P1 escopo que cresce sem registro · P2 passada de bastão incompleta · P3 cliente que some · P4 time sobrecarregado com projetos simultâneos · P5 conhecimento concentrado numa pessoa · P6 acerto: descoberta bem feita + cliente envolvido toda semana.
+**Padrões:** P1 escopo que cresce sem registro · P2 passada de bastão incompleta · P3 cliente que some · P4 time sobrecarregado com projetos simultâneos · P5 conhecimento que não circula pelo time · P6 acerto: descoberta bem feita + cliente envolvido toda semana.
 
 | Padrão | Casos |
 |---|---|

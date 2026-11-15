@@ -4,7 +4,7 @@
 
 São 53 personagens mais leves, com um caso curto cada. Eles dão densidade aos anéis do tronco e volume para os padrões aparecerem com força. A numeração continua a dos protagonistas (1 a 30).
 
-**Padrões:** P1 escopo que cresce sem registro · P2 passada de bastão incompleta · P3 cliente que some · P4 time sobrecarregado com projetos simultâneos · P5 conhecimento concentrado numa pessoa · P6 acerto: descoberta bem feita + cliente envolvido toda semana. Um traço (–) indica um caso sem padrão plantado.
+**Padrões:** P1 escopo que cresce sem registro · P2 passada de bastão incompleta · P3 cliente que some · P4 time sobrecarregado com projetos simultâneos · P5 conhecimento que não circula pelo time · P6 acerto: descoberta bem feita + cliente envolvido toda semana. Um traço (–) indica um caso sem padrão plantado.
 
 **Status:** *ativo* = está no CITi em 2027.1; *alumni* = já saiu.
 

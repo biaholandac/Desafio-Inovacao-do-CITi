@@ -137,14 +137,22 @@ export function caminhoFaixa(raioInterno, raioExterno, chave) {
 
 // Perspectiva: o corte do tronco é visto de cima, então fica oval (achatado na vertical),
 // e sobe um pouco na tela para dar espaço ao tronco e às raízes.
-export const ESCALA_X = 0.95;
-export const ESCALA_Y = 0.56;
-export const CENTRO_TELA = { x: 800, y: 275 };
+// ZOOM aproxima ou afasta o tronco inteiro (foto e corte juntos).
+export const ZOOM = 1.14;
+export const ESCALA_X = 0.95 * ZOOM;
+export const ESCALA_Y = 0.56 * ZOOM;
+export const CENTRO_TELA = { x: 800, y: 292 };
 
 // Imagem do tronco com raízes (public/tronco.webp, 1632 x 1632), posicionada para que
 // o corte da imagem fique sob o corte interativo. O corte interativo é maior que o da foto,
 // para os anéis e os casos ficarem fáceis de ler e tocar.
-export const IMAGEM_TRONCO = { x: 34.6, y: 3.75, largura: 1403.5, altura: 1020 };
+// O ponto (445, 217) da foto de 816 px fica no centro do corte; a foto é esticada 1,72 x 1,25.
+export const IMAGEM_TRONCO = {
+  x: CENTRO_TELA.x - 445 * 1.72 * ZOOM,
+  y: CENTRO_TELA.y - 217 * 1.25 * ZOOM,
+  largura: 816 * 1.72 * ZOOM,
+  altura: 816 * 1.25 * ZOOM,
+};
 export const TRANSFORMACAO_CORTE = `translate(${CENTRO_TELA.x} ${CENTRO_TELA.y}) scale(${ESCALA_X} ${ESCALA_Y}) translate(${-CENTRO.x} ${-CENTRO.y})`;
 export function naTela(p) {
   return { x: CENTRO_TELA.x + (p.x - CENTRO.x) * ESCALA_X, y: CENTRO_TELA.y + (p.y - CENTRO.y) * ESCALA_Y };

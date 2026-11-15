@@ -13,7 +13,7 @@ export const padroes = {
   P2: "Passada de bastão incompleta",
   P3: "Cliente que some no meio do projeto",
   P4: "Time sobrecarregado com projetos simultâneos",
-  P5: "Conhecimento concentrado numa pessoa",
+  P5: "Conhecimento que não circula pelo time",
   P6: "Descoberta bem feita e cliente envolvido toda semana",
 };
 

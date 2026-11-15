@@ -119,33 +119,51 @@
   cursor: pointer;
 }
 
+/* Casos: luzes verdes vivas */
+.caso .ponto, .caso .halo, .caso .onda {
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+}
 .ponto {
-  fill: var(--verde-claro);
-  opacity: 0.85;
-  transition: r 0.2s, opacity 0.3s;
+  fill: #38e682;
+  animation: respirar 4.8s ease-in-out infinite;
+  transition: transform 0.2s;
 }
-
-.ponto { stroke: rgba(2, 10, 5, 0.85); stroke-width: 1.4; }
-.caso:hover .ponto {
-  opacity: 1;
-  r: 8.5;
-  fill: #eafff2;
+.halo {
+  fill: rgba(56, 230, 130, 0.22);
+  filter: blur(2px);
+  animation: brilhar 4.8s ease-in-out infinite;
 }
+@keyframes respirar { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+@keyframes brilhar { 0%, 100% { opacity: 0.35; transform: scale(0.85); } 50% { opacity: 0.9; transform: scale(1.15); } }
 
-.pontoAceso {
-  fill: #eafff2;
-  opacity: 1;
-}
+.caso:hover .ponto { transform: scale(1.45); fill: #8dffc0; }
+.caso:hover .halo { opacity: 1; }
 
-.pontoApagado {
-  opacity: 0.5;
-  fill: #9fd9b8;
-}
+.casoApagado .ponto { fill: #1f7a49; animation-name: respirarFraco; }
+.casoApagado .halo { fill: rgba(56, 230, 130, 0.08); }
+@keyframes respirarFraco { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.8; } }
 
-.pontoAndamento {
+.casoDestaque .ponto { fill: #7dffb8; }
+.casoDestaque .halo { fill: rgba(80, 255, 160, 0.35); }
+
+.casoEscolhido .ponto { fill: #eafff2; animation: none; }
+.casoEscolhido .halo { fill: rgba(80, 255, 160, 0.45); }
+
+/* Pulso que se espalha a partir dos casos em destaque */
+.onda {
   fill: none;
-  stroke: var(--verde-claro);
-  stroke-width: 1.8;
+  stroke: #5dffa8;
+  stroke-width: 1.4;
+  animation: onda 3s ease-out infinite;
+}
+@keyframes onda { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(2.6); opacity: 0; } }
+
+.casoAndamento .ponto { fill: transparent; stroke: #5dffa8; stroke-width: 1.6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ponto, .halo, .onda { animation: none; }
 }
 
 .linhaPadrao line {
