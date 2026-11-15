@@ -1,8 +1,8 @@
 // Entrada por área e cargo. Cada cargo usa um membro ativo da simulação
 // como referência para personalizar o que o LegaCITi mostra.
 export const AREAS = [
-  { id: "ceo", nome: "CEO", cargos: [{ id: "ceo", nome: "CEO" }] },
   { id: "diretoria", nome: "Diretoria", cargos: [
+    { id: "ceo", nome: "CEO" },
     { id: "coo", nome: "COO" },
     { id: "cro", nome: "CRO" },
     { id: "cto", nome: "CTO" },
