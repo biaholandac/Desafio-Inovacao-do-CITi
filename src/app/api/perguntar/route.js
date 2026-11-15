@@ -4,6 +4,9 @@ import { buscarCasos, casosComoTexto } from "@/lib/ia/busca";
 import { gerarJSON } from "@/lib/ia/gemini";
 import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel } from "@/lib/ia/regras";
 
+// A função pode rodar por até 30 s na Vercel; a IA tem 18 s e, depois disso, entra o modo de segurança.
+export const maxDuration = 30;
+
 // Pergunte ao LegaCITi: responde só com base nos casos registrados.
 export async function POST(request) {
   const { pergunta = "", cargo = null } = await request.json().catch(() => ({}));

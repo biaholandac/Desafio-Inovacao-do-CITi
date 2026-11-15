@@ -5,6 +5,7 @@ import {
   RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
   raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE,
 } from "@/lib/geometria";
+import { montarArvore } from "@/lib/raizes";
 import estilos from "./Tronco.module.css";
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
@@ -17,28 +18,13 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     gestoes.forEach((g, i) => {
       if (g.status === "em_formacao") return;
       const { interno, externo } = raiosDoAnel(i, total);
-      for (let k = 1; k <= 10; k++) {
-        const r = interno + ((externo - interno) * k) / 11 + (semente(g.codigo + k) - 0.5) * 2;
+      for (let k = 1; k <= 16; k++) {
+        const r = interno + ((externo - interno) * k) / 17 + (semente(g.codigo + k) - 0.5) * 1.6;
         linhas.push({ chave: g.codigo + k, d: caminhoOndulado(r, g.codigo + k, 0.008) });
       }
     });
     return linhas;
   }, [gestoes, total]);
-
-  // Rachaduras em cunha, abertas na borda e finas perto do centro.
-  const rachaduras = useMemo(() => [[28, 0.86], [148, 0.62], [258, 0.74]].map(([ang, alcance], i) => {
-    const pts = [];
-    const passos = 9;
-    for (let k = 0; k <= passos; k++) {
-      const r = RAIO_NUCLEO + 12 + (RAIO_EXTERNO * alcance - RAIO_NUCLEO - 12) * (k / passos);
-      const desvio = (semente("rc" + i + k) - 0.5) * 3;
-      const abertura = 0.5 + 7.5 * Math.pow(k / passos, 1.6);
-      pts.push([ponto(r, ang + desvio - abertura * (40 / r)), ponto(r, ang + desvio + abertura * (40 / r))]);
-    }
-    const ida = pts.map(([a]) => `${a.x.toFixed(1)} ${a.y.toFixed(1)}`).join("L");
-    const volta = pts.reverse().map(([, b]) => `${b.x.toFixed(1)} ${b.y.toFixed(1)}`).join("L");
-    return `M${ida}L${volta}Z`;
-  }), []);
 
   // Raios da madeira: linhas muito finas da medula até a casca.
   const raiosMedulares = useMemo(() => Array.from({ length: 48 }, (_, i) => {
@@ -56,45 +42,8 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     return { chave: g.codigo, d: caminhoFaixa(meio, externo, g.codigo) };
   }).filter(Boolean), [gestoes, total]);
 
-  // Tronco de pé: o corpo desce do corte e se abre em raízes no chão.
-  const arvore = useMemo(() => {
-    const R = RAIO_EXTERNO + 40;
-    const esq = naTela(ponto(R, 180)), dir = naTela(ponto(R, 0)), frente = naTela(ponto(R, 90));
-    const lx = esq.x, rx = dir.x, cx = frente.x, y0 = (esq.y + dir.y) / 2;
-    const n = (v) => v.toFixed(1);
-    const corpo = [
-      `M${n(lx)} ${n(esq.y)}`,
-      `C${n(lx + 6)} ${n(y0 + 170)} ${n(lx - 8)} 600 ${n(lx - 55)} 690`,
-      `C${n(lx - 120)} 735 ${n(lx - 230)} 752 ${n(lx - 310)} 792`,
-      `C${n(lx - 215)} 796 ${n(lx - 125)} 786 ${n(lx - 40)} 768`,
-      `C${n(lx - 60)} 808 ${n(lx - 105)} 858 ${n(lx - 150)} 890`,
-      `C${n(lx - 65)} 872 ${n(lx - 5)} 820 ${n(lx + 70)} 790`,
-      `C${n(cx - 150)} 822 ${n(cx - 120)} 872 ${n(cx - 95)} 902`,
-      `C${n(cx - 45)} 878 ${n(cx - 15)} 828 ${n(cx + 50)} 798`,
-      `C${n(rx - 70)} 816 ${n(rx + 5)} 870 ${n(rx + 140)} 892`,
-      `C${n(rx + 105)} 858 ${n(rx + 60)} 808 ${n(rx + 40)} 768`,
-      `C${n(rx + 125)} 786 ${n(rx + 215)} 796 ${n(rx + 310)} 790`,
-      `C${n(rx + 230)} 752 ${n(rx + 120)} 735 ${n(rx + 55)} 690`,
-      `C${n(rx + 8)} 600 ${n(rx - 6)} ${n(y0 + 170)} ${n(rx)} ${n(dir.y)}`,
-      "Z",
-    ].join("");
-    // Pontas das raízes, de onde a seiva sobe até os anéis.
-    const pontas = [[lx - 300, 790], [lx - 145, 886], [cx - 92, 898], [rx + 136, 888], [rx + 300, 788]];
-    const veias = pontas.flatMap(([x, y], i) => [0, 1].map((k) => {
-      const destino = naTela(ponto(R - 6, 155 - i * 32 - k * 12 + (semente("vd" + i + k) - 0.5) * 6));
-      const meioX = (x + destino.x) / 2 + (semente("vm" + i + k) - 0.5) * 60;
-      return { d: `M${n(x)} ${n(y)}Q${n(meioX)} ${n(720 - k * 30)} ${n(destino.x)} ${n(destino.y)}`, forte: k === 0 };
-    }));
-    // Sulcos verticais da casca ao longo do tronco.
-    const sulcos = Array.from({ length: 64 }, (_, i) => {
-      const t = i / 63;
-      const x = lx + (rx - lx) * t + (semente("sx" + i) - 0.5) * 8;
-      const yTopo = naTela(ponto(R, 180 - 180 * t)).y + 4;
-      const abre = (t - 0.5) * 70;
-      return `M${n(x)} ${n(yTopo)}Q${n(x + (semente("sq" + i) - 0.5) * 10)} ${n(560)} ${n(x + abre)} ${n(760 + semente("sb" + i) * 30)}`;
-    });
-    return { corpo, veias, sulcos, cx, base: 830 };
-  }, []);
+  // Tronco de pé, com raízes que se ramificam e mergulham no chão.
+  const arvore = useMemo(() => montarArvore(), []);
 
   // Painel HUD ligado ao tronco: casos por gestão, do centro para a casca.
   const hud = useMemo(() => {
@@ -165,6 +114,26 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
           <feColorMatrix in="r" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.35  0 0 0 0 0.2  0 0 0 1.6 -0.75" />
           <feComposite in2="SourceGraphic" operator="in" />
         </filter>
+        {/* Casca nodosa: o relevo vem de um ruído iluminado; os nós pegam um brilho verde. */}
+        <filter id="relevoCasca" filterUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
+          <feTurbulence type="turbulence" baseFrequency="0.032 0.024" numOctaves="4" seed="11" result="ruido" />
+          <feDiffuseLighting in="ruido" surfaceScale="6" diffuseConstant="1" lightingColor="#24372c" result="difusa">
+            <feDistantLight azimuth="235" elevation="42" />
+          </feDiffuseLighting>
+          <feSpecularLighting in="ruido" surfaceScale="6" specularConstant="1.25" specularExponent="26" lightingColor="#3dff95" result="especular">
+            <feDistantLight azimuth="235" elevation="58" />
+          </feSpecularLighting>
+          <feComposite in="difusa" in2="especular" operator="arithmetic" k2="0.75" k3="0.5" result="luz" />
+          <feComposite in="luz" in2="SourceAlpha" operator="in" />
+        </filter>
+        <radialGradient id="fundirNoChao" gradientUnits="userSpaceOnUse" cx="800" cy="690" r="780" gradientTransform="translate(800 690) scale(1 0.42) translate(-800 -690)">
+          <stop offset="0%" stopColor="#fff" />
+          <stop offset="70%" stopColor="#fff" />
+          <stop offset="100%" stopColor="#000" />
+        </radialGradient>
+        <mask id="mascaraRaizes" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
+          <rect width="1600" height="900" fill="url(#fundirNoChao)" />
+        </mask>
       </defs>
 
       {/* Feixes de luz */}
@@ -173,22 +142,45 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       {/* Brilho no chão, na base da árvore */}
       <ellipse cx={arvore.cx} cy={arvore.base + 30} rx="560" ry="46" fill="url(#chao)" />
 
-      {/* Tronco e raízes */}
-      <clipPath id="recorteTronco"><path d={arvore.corpo} /></clipPath>
-      <path d={arvore.corpo} className={estilos.toraCorpo} />
-      <path d={arvore.corpo} className={estilos.toraTextura} />
-      <g clipPath="url(#recorteTronco)">
-        <g className={estilos.sulcos}>{arvore.sulcos.map((d, i) => <path key={i} d={d} />)}</g>
-        <rect x="0" y="0" width="1600" height="900" fill="url(#sombraTronco)" />
+      {/* Raízes de trás, mais escuras, somem atrás do tronco */}
+      <g mask="url(#mascaraRaizes)">
+        <g className={estilos.raizAtras}>{arvore.raizesAtras.map((d, i) => <path key={i} d={d} />)}</g>
+        <g filter="url(#relevoCasca)" opacity="0.55">{arvore.raizesAtras.map((d, i) => <path key={i} d={d} />)}</g>
       </g>
-      <path d={arvore.corpo} className={estilos.contornoTronco} />
-      <g filter="url(#brilho)">
-        {arvore.veias.map((v, i) => (
-          <g key={i}>
-            <path d={v.d} className={v.forte ? estilos.veiaForte : estilos.veia} />
-            <path d={v.d} className={estilos.faisca} style={{ animationDelay: `${(i * 0.7) % 5}s` }} />
-          </g>
-        ))}
+
+      {/* Tronco e raízes da frente: uma peça só de casca */}
+      <clipPath id="recorteTronco">
+        <path d={arvore.corpo} />
+        {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
+      </clipPath>
+      <g mask="url(#mascaraRaizes)">
+        <g className={estilos.toraCorpo}>
+          <path d={arvore.corpo} />
+          {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
+        </g>
+        <g filter="url(#relevoCasca)">
+          <path d={arvore.corpo} />
+          {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
+        </g>
+        <g clipPath="url(#recorteTronco)">
+          <g className={estilos.sulcos}>{arvore.sulcos.map((s, i) => <path key={i} d={s.d} className={s.forte ? estilos.sulcoForte : undefined} />)}</g>
+          <rect x="0" y="0" width="1600" height="900" fill="url(#sombraTronco)" />
+        </g>
+        <g className={estilos.contornoTronco} filter="url(#brilho)">
+          <path d={arvore.corpo} />
+          {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
+        </g>
+        {/* Fissuras de luz: a seiva sobe das raízes até os anéis */}
+        <g filter="url(#brilho)">
+          {arvore.fissuras.map((f, i) => (
+            <g key={i}>
+              <path d={f.d} className={estilos.fissuraHalo} />
+              <path d={f.d} className={estilos.fissuraLuz} />
+              {f.ramos.map((r, k) => <path key={k} d={r} className={estilos.fissuraRamo} />)}
+              <path d={f.d} className={estilos.faisca} style={{ animationDelay: `${(i * 0.9) % 5}s` }} />
+            </g>
+          ))}
+        </g>
       </g>
 
       {/* Corte do tronco, visto em perspectiva */}
@@ -207,7 +199,6 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       <circle cx={centroPara(RAIO_EXTERNO / 2).x} cy={centroPara(RAIO_EXTERNO / 2).y} r={RAIO_EXTERNO} className={estilos.pulso} />
 
       <g className={estilos.crescimento}>{linhasDeCrescimento.map((l) => <path key={l.chave} d={l.d} />)}</g>
-      <g className={estilos.rachaduras}>{rachaduras.map((d, i) => <path key={i} d={d} />)}</g>
 
       {/* Anéis: uma gestão cada */}
       {gestoes.map((g, i) => {

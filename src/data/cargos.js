@@ -38,7 +38,15 @@ export const AREAS = [
     { id: "especialista-gg", nome: "Especialista de Gente e Gestão", pessoa: 27 },
   ] },
   { id: "inovacao", nome: "Inovação", cargos: [{ id: "inovacao", nome: "Time de Inovação", pessoa: 28 }] },
-  { id: "new-pig", nome: "New Pig", cargos: [{ id: "new-pig", nome: "New Pig", pessoa: null }] },
+  { id: "new-pig", nome: "New Pig", pergunta: "escolha a subárea em que você está entrando", cargos: [
+    { id: "np-dev", nome: "Desenvolvimento", cargos: [{ id: "new-pig-dev", nome: "New Pig de Desenvolvimento", pessoa: null }] },
+    { id: "np-dados", nome: "Dados", cargos: [{ id: "new-pig-dados", nome: "New Pig de Dados", pessoa: null }] },
+    { id: "np-produto", nome: "Produto", cargos: [{ id: "new-pig-produto", nome: "New Pig de Produto", pessoa: null }] },
+    { id: "np-comercial", nome: "Comercial", cargos: [{ id: "new-pig-comercial", nome: "New Pig de Comercial", pessoa: null }] },
+    { id: "np-marketing", nome: "Marketing", cargos: [{ id: "new-pig-marketing", nome: "New Pig de Marketing", pessoa: null }] },
+    { id: "np-gg", nome: "Gente e Gestão", cargos: [{ id: "new-pig-gg", nome: "New Pig de Gente e Gestão", pessoa: null }] },
+    { id: "np-inovacao", nome: "Inovação", cargos: [{ id: "new-pig-inovacao", nome: "New Pig de Inovação", pessoa: null }] },
+  ] },
 ];
 
 // O que cada cargo enxerga com mais destaque no tronco:
@@ -67,15 +75,29 @@ export const FOCO = {
   "analista-gg": { papeis: ["Analista de Gente e Gestão"], areas: GG },
   "especialista-gg": { papeis: ["Especialista de Gente e Gestão"], areas: GG },
   inovacao: { papeis: ["Time de Inovação"], areas: ["Inovação"] },
-  // New Pig: casos sobre chegar, integrar e aprender os primeiros combinados.
-  "new-pig": { casos: ["C023", "C111", "C069", "C053", "C026", "C041", "C036", "C098"] },
+  // New Pig: os casos de chegada valem para todos; somam-se os da subárea em que a pessoa entra.
+  "new-pig-dev": { novato: true, papeis: ["Pessoa desenvolvedora"], areas: DEV },
+  "new-pig-dados": { novato: true, papeis: ["Analista de dados"], areas: DADOS },
+  "new-pig-produto": { novato: true, papeis: ["Operacional de Produto"], areas: PRODUTO },
+  "new-pig-comercial": { novato: true, papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
+  "new-pig-marketing": { novato: true, papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },
+  "new-pig-gg": { novato: true, papeis: ["Analista de Gente e Gestão"], areas: GG },
+  "new-pig-inovacao": { novato: true, papeis: ["Time de Inovação"], areas: ["Inovação"] },
 };
+
+// Casos sobre chegar, integrar e aprender os primeiros combinados do CITi.
+export const CHEGADA = ["C023", "C036", "C046", "C030", "C041", "C098", "C069", "C111", "C053", "C026"];
+
+export const ehNovato = (cargoId) => Boolean(FOCO[cargoId]?.novato);
 
 // 2 = mesmo cargo, 1 = mesma área, 0 = fora do foco.
 export function relevancia(caso, cargoId) {
   const foco = FOCO[cargoId];
   if (!foco) return null;
-  if (foco.casos) return foco.casos.includes(caso.id) ? 2 : 0;
+  if (foco.novato) {
+    if (CHEGADA.includes(caso.id)) return 2;
+    return foco.areas.includes(caso.area) ? 1 : 0;
+  }
   if (foco.papeis.includes(caso.cargoAutor)) return 2;
   if (foco.areas.includes(caso.area)) return 1;
   return 0;

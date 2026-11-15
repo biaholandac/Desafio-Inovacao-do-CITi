@@ -7,7 +7,7 @@ import Marca from "./Marca";
 import Fundo from "./Fundo";
 import { casos, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto, naTela } from "@/lib/geometria";
-import { acharCargo, relevancia } from "@/data/cargos";
+import { acharCargo, relevancia, ehNovato, CHEGADA, FOCO } from "@/data/cargos";
 import estilos from "./Palco.module.css";
 
 const LENTES = [
@@ -30,6 +30,7 @@ const py = (y) => `${(y / 900) * 100}%`;
 
 export default function Palco({ cargo = null }) {
   const entrada = acharCargo(cargo);
+  const novato = ehNovato(entrada?.cargo.id);
   const [lente, setLente] = useState("legado");
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
@@ -46,17 +47,23 @@ export default function Palco({ cargo = null }) {
     setPensando(true);
     setCasoAtivo(null);
     setResposta({ pergunta: texto, carregando: true });
+    // Se a resposta não chegar em 25 s, o LegaCITi desiste e avisa, em vez de ficar pensando para sempre.
+    const controle = new AbortController();
+    const relogio = setTimeout(() => controle.abort(), 25000);
     try {
       const r = await fetch("/api/perguntar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pergunta: texto, cargo }),
+        signal: controle.signal,
       });
+      if (!r.ok) throw new Error(`erro_${r.status}`);
       const dados = await r.json();
       setResposta({ pergunta: texto, ...dados });
     } catch {
       setResposta({ pergunta: texto, tipo: "indisponivel", resposta: "Não consegui falar com o LegaCITi agora. Tente de novo em instantes.", casos: [] });
     } finally {
+      clearTimeout(relogio);
       setPensando(false);
     }
   }
@@ -73,10 +80,21 @@ export default function Palco({ cargo = null }) {
     for (const c of daArea) for (const p of c.padroes) contagem[p] = (contagem[p] || 0) + 1;
     const padraoTopo = Object.entries(contagem).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
     const ordem = gestoes.map((g) => g.codigo);
-    const sugeridos = [...doCargo]
-      .filter((c) => c.licao)
-      .sort((a, b) => ordem.indexOf(b.gestao) - ordem.indexOf(a.gestao))
-      .slice(0, 3);
+    const recentes = (lista) => [...lista].sort((a, b) => ordem.indexOf(b.gestao) - ordem.indexOf(a.gestao));
+    let sugeridos;
+    if (ehNovato(entrada.cargo.id)) {
+      // Quem está chegando: primeiro o que se aprende ao entrar na sua subárea,
+      // depois os conselhos de quem saiu e, por fim, como o CITi recebe quem chega.
+      const areas = FOCO[entrada.cargo.id].areas;
+      const peso = { despedida: 3, fim_gestao: 2, squad: 1, em_andamento: 0 };
+      const chegadaDaArea = CHEGADA.map((id) => casos.find((c) => c.id === id)).filter((c) => c && areas.includes(c.area));
+      const conselhos = recentes(casos.filter((c) => areas.includes(c.area) && c.licao && !CHEGADA.includes(c.id)))
+        .sort((a, b) => peso[b.origem] - peso[a.origem]);
+      const recepcao = ["C069", "C111"].map((id) => casos.find((c) => c.id === id));
+      sugeridos = [...new Map([...chegadaDaArea, ...conselhos.slice(0, 2), ...recepcao].filter(Boolean).map((c) => [c.id, c])).values()].slice(0, 4);
+    } else {
+      sugeridos = recentes(doCargo.filter((c) => c.licao)).slice(0, 3);
+    }
     return { mapa, doCargo, daArea, padraoTopo, sugeridos };
   }, [entrada]);
   const caso = casos.find((c) => c.id === casoAtivo);
@@ -123,7 +141,7 @@ export default function Palco({ cargo = null }) {
               <span className={estilos.avatar} aria-hidden="true">{entrada.area.nome.slice(0, 2).toUpperCase()}</span>
               <span className={estilos.usuarioTexto}>
                 <strong>{entrada.area.nome === entrada.cargo.nome ? entrada.cargo.nome : entrada.area.nome}</strong>
-                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : entrada.cargo.nome}</span>
+                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : novato ? entrada.subarea.nome : entrada.cargo.nome}</span>
               </span>
             </Link>
           )}
@@ -135,10 +153,10 @@ export default function Palco({ cargo = null }) {
         <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
           <Tronco gestoes={gestoes} casos={casos} posicoes={posicoes}
             selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0])) : lente === "legado" ? foco?.mapa : null}
-            aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); }} />
+            aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); setResposta(null); }} />
 
           {/* Linhas que ligam os painéis ao tronco */}
-          {alvoGestao && (
+          {alvoGestao && !resposta && (
             <g className={estilos.ligacao}>
               <polyline points={`390,250 420,250 ${alvoGestao.x},${alvoGestao.y}`} />
               <circle cx={alvoGestao.x} cy={alvoGestao.y} r="4" />
@@ -153,7 +171,7 @@ export default function Palco({ cargo = null }) {
         </svg>
 
         {/* Painel da gestão */}
-        {gestao && (
+        {gestao && !resposta && (
           <section className={estilos.painel} style={{ left: px(40), top: py(150), width: px(350), maxHeight: py(720) }}>
             <div className={estilos.rotulo}>Anel · gestão</div>
             <h2 className={estilos.tituloGestao}>{gestao.codigo}</h2>
@@ -244,17 +262,17 @@ export default function Palco({ cargo = null }) {
             <>
               <div className={estilos.rotulo}>Para você · {entrada.cargo.nome}</div>
               <h3 className={estilos.tituloCaso}>
-                {entrada.cargo.id === "new-pig"
-                  ? <>Bem-vindo ao CITi. <em>Comece pelo que quem chegou antes aprendeu.</em></>
+                {novato
+                  ? <>Boas-vindas ao CITi. <em>Comece pelo que quem chegou antes aprendeu.</em></>
                   : <>O que quem já esteve no seu lugar <em>deixou para você.</em></>}
               </h3>
               <div className={estilos.numeros}>
-                <div><strong>{foco.doCargo.length}</strong><span>{entrada.cargo.id === "new-pig" ? "casos para começar" : "do seu cargo"}</span></div>
-                {entrada.cargo.id !== "new-pig" && <div><strong>{foco.daArea.length}</strong><span>da sua área</span></div>}
+                <div><strong>{foco.doCargo.length}</strong><span>{novato ? "sobre chegar" : "do seu cargo"}</span></div>
+                <div><strong>{novato ? foco.daArea.length - foco.doCargo.length : foco.daArea.length}</strong><span>{novato ? "da sua subárea" : "da sua área"}</span></div>
               </div>
-              {foco.padraoTopo && entrada.cargo.id !== "new-pig" && (
+              {foco.padraoTopo && (
                 <p className={estilos.alerta}>
-                  <span>Padrão mais comum na sua área</span>
+                  <span>{novato ? "O que mais se repete na sua subárea" : "Padrão mais comum na sua área"}</span>
                   {foco.padraoTopo} · {padroes[foco.padraoTopo]}
                 </p>
               )}
@@ -269,7 +287,7 @@ export default function Palco({ cargo = null }) {
                   </li>
                 ))}
               </ul>
-              <p className={estilos.dica}>No tronco, os casos de quem ocupou o seu cargo brilham mais.</p>
+              <p className={estilos.dica}>{novato ? "No tronco, brilham os casos sobre chegar ao CITi; os da sua subárea aparecem logo atrás." : "No tronco, os casos de quem ocupou o seu cargo brilham mais."}</p>
             </>
           ) : (
             <>
