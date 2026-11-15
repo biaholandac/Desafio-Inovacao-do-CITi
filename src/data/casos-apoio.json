@@ -318,18 +318,18 @@
     "gestao": "2024.1",
     "origem": "squad",
     "projeto": null,
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [
       "P2"
     ],
     "situacao": "O protótipo foi aprovado pelo dono da empresa, mas quem usaria o sistema era a equipe dele.",
     "dilema": "Considerar a aprovação suficiente ou validar com os usuários.",
     "opcoes": null,
-    "decisao": "A designer de produto considerou a aprovação suficiente.",
+    "decisao": "A operacional de Produto considerou a aprovação suficiente.",
     "resultado": "A equipe do cliente estranhou o sistema e pediu mudanças.",
     "licao": "Aprovação de quem paga não é validação de quem usa.",
     "simulacao": null,
-    "cargoAutor": "Designer de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C080",
@@ -342,14 +342,14 @@
     "padroes": [
       "P6"
     ],
-    "situacao": "A analista de produto entrevistou usuários antes de definir o escopo.",
+    "situacao": "A operacional de Produto entrevistou usuários antes de definir o escopo.",
     "dilema": "Seguir o escopo do contrato ou ajustar com o que ouviu.",
     "opcoes": null,
-    "decisao": "A analista de produto propôs ajustes ao cliente com base nas entrevistas.",
+    "decisao": "A operacional de Produto propôs ajustes ao cliente com base nas entrevistas.",
     "resultado": "O produto ficou mais simples e mais útil.",
     "licao": "Ouvir os usuários cedo muda o escopo para melhor, não para maior.",
     "simulacao": null,
-    "cargoAutor": "Analista de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C081",
@@ -378,18 +378,18 @@
     "gestao": "2026.2",
     "origem": "despedida",
     "projeto": null,
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [
       "P5"
     ],
-    "situacao": "A líder de design encontrou a biblioteca de componentes desatualizada.",
+    "situacao": "A líder de Produto encontrou a biblioteca de componentes desatualizada.",
     "dilema": "Atualizar a biblioteca ou focar nos projetos.",
     "opcoes": null,
-    "decisao": "A líder de design atualizou a biblioteca e definiu quem cuidaria dela a cada gestão.",
+    "decisao": "A líder de Produto atualizou a biblioteca e definiu quem cuidaria dela a cada gestão.",
     "resultado": "A biblioteca voltou a ser usada.",
     "licao": "Material compartilhado precisa de um responsável em cada gestão.",
     "simulacao": null,
-    "cargoAutor": "Líder de design"
+    "cargoAutor": "Líder de produto"
   },
   {
     "id": "C083",
@@ -402,14 +402,14 @@
     "padroes": [
       "P2"
     ],
-    "situacao": "Só na terceira reunião o analista de produto descobriu quem tomava as decisões no cliente.",
+    "situacao": "Só na terceira reunião o operacional de Produto descobriu quem tomava as decisões no cliente.",
     "dilema": "Seguir com o contato inicial ou incluir quem decide.",
     "opcoes": null,
-    "decisao": "O analista de produto pediu para incluir quem decide nas reuniões.",
+    "decisao": "O operacional de Produto pediu para incluir quem decide nas reuniões.",
     "resultado": "As decisões passaram a ser tomadas mais rápido.",
     "licao": "Descubra cedo quem decide. Essa informação deveria vir na passada de bastão.",
     "simulacao": null,
-    "cargoAutor": "Analista de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C084",
@@ -418,18 +418,18 @@
     "gestao": "2026.2",
     "origem": "fim_gestao",
     "projeto": null,
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [
       "P5"
     ],
-    "situacao": "A designer de produto percebeu que só ela sabia aplicar a identidade visual de um cliente.",
+    "situacao": "A operacional de Produto percebeu que só ela sabia aplicar a identidade visual de um cliente.",
     "dilema": "Seguir assim ou criar um guia.",
     "opcoes": null,
-    "decisao": "A designer de produto criou um guia visual simples.",
-    "resultado": "Outros designers passaram a atender o cliente sem depender dela.",
+    "decisao": "A operacional de Produto criou um guia visual simples.",
+    "resultado": "Outros operacionais de Produto passaram a atender o cliente sem depender dela.",
     "licao": "Um guia visual transforma o conhecimento de uma pessoa em conhecimento do time.",
     "simulacao": null,
-    "cargoAutor": "Designer de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C085",
@@ -438,18 +438,18 @@
     "gestao": "2026.2",
     "origem": "squad",
     "projeto": null,
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [
       "P6"
     ],
-    "situacao": "O designer de produto convidou o cliente para todas as revisões de design.",
+    "situacao": "O operacional de Produto convidou o cliente para todas as revisões de design.",
     "dilema": "Revisar só com o time ou com o cliente.",
     "opcoes": null,
-    "decisao": "O designer de produto incluiu o cliente.",
+    "decisao": "O operacional de Produto incluiu o cliente.",
     "resultado": "As telas foram aprovadas sem retrabalho.",
     "licao": "Cliente presente nas revisões é cliente sem surpresas.",
     "simulacao": null,
-    "cargoAutor": "Designer de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C086",
@@ -462,14 +462,14 @@
     "padroes": [
       "P6"
     ],
-    "situacao": "A analista de produto conduziu sozinha a descoberta de um projeto.",
+    "situacao": "A operacional de Produto conduziu sozinha a descoberta de um projeto.",
     "dilema": "Seguir um roteiro pronto ou adaptar ao cliente.",
     "opcoes": null,
-    "decisao": "A analista de produto partiu de um roteiro e adaptou as perguntas a cada entrevista.",
+    "decisao": "A operacional de Produto partiu de um roteiro e adaptou as perguntas a cada entrevista.",
     "resultado": "A descoberta trouxe informações que mudaram a proposta para melhor.",
     "licao": "Um roteiro é ponto de partida, não limite.",
     "simulacao": null,
-    "cargoAutor": "Analista de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C087",

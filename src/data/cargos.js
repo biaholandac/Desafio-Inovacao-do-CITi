@@ -28,11 +28,7 @@ export const AREAS = [
     { id: "dev", nome: "Pessoa desenvolvedora", pessoa: 11 },
     { id: "analista-dados", nome: "Analista de dados", pessoa: 60 },
   ] },
-  { id: "produto", nome: "Produto", cargos: [
-    { id: "analista-produto", nome: "Analista de produto", pessoa: 51 },
-    { id: "designer", nome: "Designer de produto", pessoa: 52 },
-    { id: "especialista-produto", nome: "Especialista de produto", pessoa: 51 },
-  ] },
+  { id: "produto", nome: "Produto", cargos: [{ id: "operacional-produto", nome: "Operacionais", pessoa: 51 }] },
   { id: "negocios", nome: "Negócios", cargos: [
     { id: "gerente-contas", nome: "Gerente de contas", pessoa: 22 },
     { id: "analista-marketing", nome: "Analista de marketing", pessoa: 24 },
@@ -47,7 +43,7 @@ export const AREAS = [
 
 // O que cada cargo enxerga com mais destaque no tronco:
 // "papeis" = casos contados por quem ocupou o mesmo cargo; "areas" = casos da mesma área.
-const DEV = ["Desenvolvimento"], DADOS = ["Inteligência de Dados"], PRODUTO = ["Produto", "Design de Produto"];
+const DEV = ["Desenvolvimento"], DADOS = ["Inteligência de Dados"], PRODUTO = ["Produto"];
 const NEGOCIOS = ["Comercial", "Marketing", "Negócios"], GG = ["Gente e Gestão"];
 export const FOCO = {
   ceo: { papeis: ["CEO"], areas: ["Diretoria"] },
@@ -56,8 +52,7 @@ export const FOCO = {
   cro: { papeis: ["CRO"], areas: [...NEGOCIOS, "Diretoria"] },
   "lider-dev": { papeis: ["Gerente de software"], areas: DEV },
   "lider-dados": { papeis: ["Líder de dados", "Gerente de dados"], areas: DADOS },
-  "lider-produto": { papeis: ["Gerente de produto", "Líder de design"], areas: PRODUTO },
-  "especialista-produto": { papeis: ["Analista de produto", "Designer de produto"], areas: PRODUTO },
+  "lider-produto": { papeis: ["Líder de produto", "Gerente de produto"], areas: PRODUTO },
   "lider-inovacao": { papeis: ["Time de Inovação"], areas: ["Inovação"] },
   "lider-comercial": { papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
   "lider-marketing": { papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },
@@ -65,8 +60,7 @@ export const FOCO = {
   "analista-dados": { papeis: ["Analista de dados"], areas: DADOS },
   "gerente-software": { papeis: ["Gerente de software"], areas: DEV },
   "gerente-dados": { papeis: ["Gerente de dados"], areas: DADOS },
-  "analista-produto": { papeis: ["Analista de produto"], areas: PRODUTO },
-  designer: { papeis: ["Designer de produto", "Líder de design"], areas: PRODUTO },
+  "operacional-produto": { papeis: ["Operacional de Produto"], areas: PRODUTO },
   "gerente-produto": { papeis: ["Gerente de produto"], areas: PRODUTO },
   "gerente-contas": { papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
   "analista-marketing": { papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },

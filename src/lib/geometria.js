@@ -101,3 +101,10 @@ export function caminhoCasca(raio, chave = "casca") {
 export function caminhoFaixa(raioInterno, raioExterno, chave) {
   return caminhoOndulado(raioExterno, chave + "e", 0.007) + caminhoOndulado(raioInterno, chave + "i", 0.007);
 }
+
+// Perspectiva: o corte do tronco é visto um pouco de lado, então fica levemente oval.
+export const ESCALA_X = 0.8;
+export const TRANSFORMACAO_CORTE = `translate(${CENTRO.x} 0) scale(${ESCALA_X} 1) translate(${-CENTRO.x} 0)`;
+export function naTela(p) {
+  return { x: CENTRO.x + (p.x - CENTRO.x) * ESCALA_X, y: p.y };
+}

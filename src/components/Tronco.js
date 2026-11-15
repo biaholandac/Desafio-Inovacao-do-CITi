@@ -3,12 +3,12 @@
 import { useMemo } from "react";
 import {
   RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
-  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente,
+  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, ESCALA_X, TRANSFORMACAO_CORTE,
 } from "@/lib/geometria";
 import estilos from "./Tronco.module.css";
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
-export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao }) {
+export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false }) {
   const total = gestoes.length;
 
   // Linhas finas de crescimento dentro de cada anel, para dar textura de madeira.
@@ -17,8 +17,8 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     gestoes.forEach((g, i) => {
       if (g.status === "em_formacao") return;
       const { interno, externo } = raiosDoAnel(i, total);
-      for (let k = 1; k <= 7; k++) {
-        const r = interno + ((externo - interno) * k) / 8 + (semente(g.codigo + k) - 0.5) * 2;
+      for (let k = 1; k <= 10; k++) {
+        const r = interno + ((externo - interno) * k) / 11 + (semente(g.codigo + k) - 0.5) * 2;
         linhas.push({ chave: g.codigo + k, d: caminhoOndulado(r, g.codigo + k, 0.008) });
       }
     });
@@ -55,6 +55,60 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     const meio = interno + (externo - interno) * (0.55 + 0.2 * semente(g.codigo));
     return { chave: g.codigo, d: caminhoFaixa(meio, externo, g.codigo) };
   }).filter(Boolean), [gestoes, total]);
+
+  // Corpo da tora: a lateral da casca aparece atrás do corte, indo para o fundo.
+  const tora = useMemo(() => {
+    const R = RAIO_EXTERNO + 40;
+    const c = naTela(centroPara(R));
+    const rx = R * ESCALA_X, ry = R;
+    const dx = -230, dy = -70;
+    const lado = (x0, y0, chave) => {
+      let d = "";
+      for (let k = 1; k <= 20; k++) {
+        const x = x0 + (dx * k) / 20, y = y0 + (dy * k) / 20 + (semente(chave + k) - 0.5) * 6;
+        d += `L${x.toFixed(1)} ${y.toFixed(1)}`;
+      }
+      return d;
+    };
+    const corpo = `M${c.x} ${c.y - ry}` + lado(c.x, c.y - ry, "t") +
+      `A${rx} ${ry} 0 0 0 ${c.x + dx} ${c.y + ry + dy}` +
+      `L${c.x} ${c.y + ry}Z`;
+    const veias = Array.from({ length: 11 }, (_, i) => {
+      const ang = 110 + (140 * i) / 10 + (semente("va" + i) - 0.5) * 8;
+      const a = (ang * Math.PI) / 180;
+      const x0 = c.x + rx * Math.cos(a), y0 = c.y + ry * Math.sin(a);
+      let d = `M${x0.toFixed(1)} ${y0.toFixed(1)}`;
+      for (let k = 1; k <= 16; k++) {
+        const t = k / 16;
+        const x = x0 + dx * t * 1.05, y = y0 + dy * t * 1.05 + Math.sin(k * 0.45 + i * 1.7) * 5;
+        d += `L${x.toFixed(1)} ${y.toFixed(1)}`;
+      }
+      return { d, forte: semente("vf" + i) > 0.5 };
+    });
+    const sulcos = Array.from({ length: 80 }, (_, i) => {
+      const ang = 92 + (176 * i) / 79;
+      const a = (ang * Math.PI) / 180;
+      const x0 = c.x + rx * Math.cos(a), y0 = c.y + ry * Math.sin(a);
+      const t = 0.6 + 0.45 * semente("sl" + i);
+      return `M${x0.toFixed(1)} ${y0.toFixed(1)}L${(x0 + dx * t).toFixed(1)} ${(y0 + dy * t + (semente("sy" + i) - 0.5) * 6).toFixed(1)}`;
+    });
+    return { corpo, veias, sulcos, fundo: { x: c.x + dx, y: c.y + dy, rx, ry } };
+  }, []);
+
+  // Painel HUD ligado ao tronco: casos por gestão, do centro para a casca.
+  const hud = useMemo(() => {
+    const contagem = gestoes.map((g) => casos.filter((c) => c.gestao === g.codigo).length);
+    const max = Math.max(...contagem);
+    const alvo = naTela(ponto(RAIO_EXTERNO + 30, 38));
+    return { contagem, max, alvo };
+  }, [gestoes, casos]);
+
+  // Feixes de luz verde ao fundo.
+  const feixes = [
+    "M-50 760 C 300 700, 520 820, 820 640 S 1300 520, 1700 600",
+    "M-50 840 C 260 800, 600 880, 900 760 S 1350 700, 1700 760",
+    "M1700 180 C 1400 260, 1200 140, 980 230",
+  ];
 
   // Casca grossa e rugosa, com fissuras.
   const casca = useMemo(() => caminhoCasca(RAIO_EXTERNO + 40), []);
@@ -95,6 +149,10 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
           <feGaussianBlur stdDeviation="7" result="b" />
           <feMerge><feMergeNode in="b" /><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
+        <linearGradient id="sombraTora" gradientUnits="userSpaceOnUse" x1="560" y1="0" x2="240" y2="0">
+          <stop offset="0%" stopColor="#000" stopOpacity="0" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0.85" />
+        </linearGradient>
         <filter id="texturaCasca" x="0" y="0" width="100%" height="100%">
           <feTurbulence type="fractalNoise" baseFrequency="0.09 0.02" numOctaves="3" seed="4" result="r" />
           <feColorMatrix in="r" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.35  0 0 0 0 0.2  0 0 0 1.6 -0.75" />
@@ -102,6 +160,22 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         </filter>
       </defs>
 
+      {/* Feixes de luz */}
+      <g className={estilos.feixes} filter="url(#brilho)">{feixes.map((d, i) => <path key={i} d={d} />)}</g>
+
+      {/* Corpo da tora: lateral da casca com veias de seiva */}
+      <g>
+        <path d={tora.corpo} className={estilos.toraCorpo} />
+        <path d={tora.corpo} className={estilos.toraTextura} />
+        <g className={estilos.sulcos}>{tora.sulcos.map((d, i) => <path key={i} d={d} />)}</g>
+        <path d={tora.corpo} className={estilos.toraSombra} />
+        <g filter="url(#brilho)">
+          {tora.veias.map((v, i) => <path key={i} d={v.d} className={v.forte ? estilos.veiaForte : estilos.veia} />)}
+        </g>
+      </g>
+
+      {/* Corte do tronco, visto em perspectiva */}
+      <g transform={TRANSFORMACAO_CORTE}>
       {/* Casca */}
       <path d={casca} className={estilos.casca} />
       <path d={casca} className={estilos.cascaTextura} />
@@ -183,16 +257,30 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         );
       })}
 
-      {/* Nomes das áreas, curvados ao longo da casca */}
-      {SETORES.map((s, i) => {
+      </g>
+
+      {/* HUD: casos por gestão */}
+      {!decorativo && <g className={estilos.hud} aria-hidden="true">
+        <polyline className={estilos.linha} points={`${hud.alvo.x},${hud.alvo.y} 1040,${hud.alvo.y + 40} 1040,742`} />
+        <circle className={estilos.ponta} cx={hud.alvo.x} cy={hud.alvo.y} r="3" />
+        <rect className={estilos.caixa} x="1040" y="742" width="150" height="86" />
+        <text x="1052" y="760">CASOS POR ANEL</text>
+        <text x="1052" y="783" className={estilos.numero}>{casos.length}</text>
+        {hud.contagem.map((n, i) => {
+          const h = (n / hud.max) * 38;
+          return <rect key={i} x={1104 + i * 11} y={816 - h} width="7" height={h} className={i === hud.contagem.length - 2 ? estilos.barraAtual : estilos.barra} />;
+        })}
+      </g>}
+
+      {/* Nomes das áreas, curvados ao longo da casca (fora da perspectiva, para o texto não deformar) */}
+      {!decorativo && SETORES.map((s, i) => {
         const fatia = 360 / SETORES.length;
         const meio = -90 + i * fatia + fatia / 2;
         const r = RAIO_EXTERNO + 64;
         const embaixo = Math.sin((meio * Math.PI) / 180) > 0.2;
-        const a1 = ponto(r, meio - 30), a2 = ponto(r, meio + 30);
-        const d = embaixo
-          ? `M${a2.x} ${a2.y}A${r} ${r} 0 0 0 ${a1.x} ${a1.y}`
-          : `M${a1.x} ${a1.y}A${r} ${r} 0 0 1 ${a2.x} ${a2.y}`;
+        const angs = Array.from({ length: 13 }, (_, k) => meio - 26 + (52 * k) / 12);
+        const pts = (embaixo ? angs.reverse() : angs).map((a) => naTela(ponto(r, a)));
+        const d = "M" + pts.map((p) => `${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join("L");
         return (
           <g key={s}>
             <path id={`setor-${i}`} d={d} fill="none" />

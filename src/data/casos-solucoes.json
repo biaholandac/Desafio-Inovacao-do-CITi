@@ -220,7 +220,7 @@
       "P1",
       "P2"
     ],
-    "situacao": "A descoberta com a Clínica Bem Cuidar foi reduzida a uma reunião para começar logo o desenvolvimento. A analista de produto não entrevistou a recepcionista, que era quem mais usaria o aplicativo.",
+    "situacao": "A descoberta com a Clínica Bem Cuidar foi reduzida a uma reunião para começar logo o desenvolvimento. A operacional de Produto não entrevistou a recepcionista, que era quem mais usaria o aplicativo.",
     "dilema": "Defender mais tempo de descoberta ou seguir o ritmo que a gestão pedia.",
     "opcoes": [
       "Seguir com uma reunião só",
@@ -233,7 +233,7 @@
     "simulacao": {
       "tipo": "escolha"
     },
-    "cargoAutor": "Analista de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C026",
@@ -265,23 +265,23 @@
     "gestao": "2025.1",
     "origem": "squad",
     "projeto": "C",
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [
       "P6"
     ],
-    "situacao": "O designer de produto levou os primeiros esboços da plataforma de matrículas para a secretaria da escola antes de qualquer tela final.",
+    "situacao": "O operacional de Produto levou os primeiros esboços da plataforma de matrículas para a secretaria da escola antes de qualquer tela final.",
     "dilema": "Mostrar esboços simples ou esperar ter telas bonitas para impressionar.",
     "opcoes": [
       "Mostrar esboços simples",
       "Esperar telas finais"
     ],
-    "decisao": "O designer de produto mostrou esboços em papel e ajustou na hora com a secretária.",
+    "decisao": "O operacional de Produto mostrou esboços em papel e ajustou na hora com a secretária.",
     "resultado": "O fluxo de matrícula ficou com metade dos passos previstos, e quase nada mudou depois.",
     "licao": "Esboço simples na frente do usuário vale mais do que tela bonita na gaveta.",
     "simulacao": {
       "tipo": "escolha"
     },
-    "cargoAutor": "Designer de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C028",
@@ -290,18 +290,18 @@
     "gestao": "2026.1",
     "origem": "despedida",
     "projeto": "F",
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [
       "P5"
     ],
-    "situacao": "O designer de produto criou toda a identidade visual da loja virtual do Ateliê Maré, mas os arquivos estavam só no computador dele, sem guia de uso.",
+    "situacao": "O operacional de Produto criou toda a identidade visual da loja virtual do Ateliê Maré, mas os arquivos estavam só no computador dele, sem guia de uso.",
     "dilema": "Organizar e compartilhar os arquivos antes de sair ou deixar para quem assumir pedir depois.",
     "opcoes": null,
-    "decisao": "O designer de produto deixou um link para a pasta, sem organizar nem explicar.",
+    "decisao": "O operacional de Produto deixou um link para a pasta, sem organizar nem explicar.",
     "resultado": "Quem assumiu não conseguiu atualizar a loja sem quebrar o padrão visual, e o projeto perdeu ritmo.",
     "licao": "Material de design só é legado quando outra pessoa consegue usar sem precisar de quem o criou.",
     "simulacao": null,
-    "cargoAutor": "Designer de produto"
+    "cargoAutor": "Operacional de Produto"
   },
   {
     "id": "C029",
@@ -314,7 +314,7 @@
     "padroes": [
       "P5"
     ],
-    "situacao": "A gerente de produto assumiu a loja virtual do Ateliê Maré depois da saída do designer. Não havia guia visual nem registro das decisões tomadas com a cliente.",
+    "situacao": "A gerente de produto assumiu a loja virtual do Ateliê Maré depois da saída de quem cuidava do visual. Não havia guia visual nem registro das decisões tomadas com a cliente.",
     "dilema": "Reconstruir o que faltava ou pedir à cliente que repetisse tudo.",
     "opcoes": [
       "Reconstruir sozinha a partir da loja",
@@ -355,34 +355,34 @@
     "gestao": "2025.1",
     "origem": "fim_gestao",
     "projeto": null,
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [],
     "situacao": "Cada projeto recomeçava botões, formulários e telas do zero. A biblioteca de componentes existente estava incompleta.",
     "dilema": "Investir tempo da subárea na biblioteca ou focar só nos projetos.",
     "opcoes": null,
-    "decisao": "O líder de design reservou algumas horas por semana de cada designer para ampliar a biblioteca.",
+    "decisao": "O líder de Produto reservou algumas horas por semana de cada operacional de Produto para ampliar a biblioteca.",
     "resultado": "Os projetos seguintes começaram mais rápido e com mais consistência visual.",
     "licao": "Tempo investido no que se repete em todo projeto volta multiplicado.",
     "simulacao": null,
-    "cargoAutor": "Líder de design"
+    "cargoAutor": "Líder de produto"
   },
   {
     "id": "C032",
-    "titulo": "O conselho para quem vai liderar Design",
+    "titulo": "O conselho para quem vai liderar Produto",
     "autor": 15,
     "gestao": "2025.2",
     "origem": "despedida",
     "projeto": null,
-    "area": "Design de Produto",
+    "area": "Produto",
     "padroes": [],
-    "situacao": "Na despedida, o líder de design refletiu sobre o que mais importou na liderança de Design.",
+    "situacao": "Na despedida, o líder de Produto refletiu sobre o que mais importou na liderança de Produto.",
     "dilema": "O que priorizar: a qualidade das entregas ou o desenvolvimento das pessoas.",
     "opcoes": null,
-    "decisao": "O líder de design deixou como conselho dedicar tempo fixo para revisar o trabalho dos designers junto com eles.",
-    "resultado": "O conselho entrou no kit do sucessor de quem assume a liderança de Design.",
+    "decisao": "O líder de Produto deixou como conselho dedicar tempo fixo para revisar o trabalho dos operacionais junto com eles.",
+    "resultado": "O conselho entrou no kit do sucessor de quem assume a liderança de Produto.",
     "licao": "A qualidade das entregas vem da qualidade das pessoas. Revisar junto ensina mais do que corrigir sozinho.",
     "simulacao": null,
-    "cargoAutor": "Líder de design"
+    "cargoAutor": "Líder de produto"
   },
   {
     "id": "C033",

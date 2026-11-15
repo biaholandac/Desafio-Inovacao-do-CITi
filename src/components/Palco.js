@@ -6,7 +6,7 @@ import Tronco from "./Tronco";
 import Marca from "./Marca";
 import Fundo from "./Fundo";
 import { casos, gestoes, padroes, pessoaPorId } from "@/data";
-import { posicionarCasos, raiosDoAnel, ponto } from "@/lib/geometria";
+import { posicionarCasos, raiosDoAnel, ponto, naTela } from "@/lib/geometria";
 import { acharCargo, relevancia } from "@/data/cargos";
 import estilos from "./Palco.module.css";
 
@@ -88,7 +88,7 @@ export default function Palco({ cargo = null }) {
   const alvoGestao = useMemo(() => {
     if (indiceGestao < 0) return null;
     const { interno, externo } = raiosDoAnel(indiceGestao, gestoes.length);
-    return ponto((interno + externo) / 2, 196);
+    return naTela(ponto((interno + externo) / 2, 196));
   }, [indiceGestao]);
 
   const contagemPadroes = useMemo(() => {
@@ -146,8 +146,8 @@ export default function Palco({ cargo = null }) {
           )}
           {caso && (
             <g className={estilos.ligacao}>
-              <polyline points={`1200,230 1170,230 ${posicoes[caso.id].x},${posicoes[caso.id].y}`} />
-              <circle cx={posicoes[caso.id].x} cy={posicoes[caso.id].y} r="9" className={estilos.mira} />
+              <polyline points={`1200,230 1170,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
+              <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
             </g>
           )}
         </svg>

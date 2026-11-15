@@ -19,8 +19,8 @@
 
 .tronco {
   position: absolute;
-  width: min(92vh, 900px);
-  height: min(92vh, 900px);
+  width: min(110vh, 1150px);
+  height: min(95vh, 990px);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
