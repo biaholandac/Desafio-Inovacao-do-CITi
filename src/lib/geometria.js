@@ -73,7 +73,7 @@ export function caminhoOndulado(raio, chave, intensidade = 0.007, inicio = 0, fi
 }
 
 // Posição de cada caso: o anel diz a gestão, a fatia diz a área.
-export function posicionarCasos(casos, gestoes, pessoaPorId) {
+export function posicionarCasos(casos, gestoes, pessoaPorId, { distanciaMinima = 22 } = {}) {
   const indiceGestao = Object.fromEntries(gestoes.map((g, i) => [g.codigo, i]));
   const grupos = {};
   for (const c of casos) {
@@ -95,7 +95,7 @@ export function posicionarCasos(casos, gestoes, pessoaPorId) {
       posicoes[c.id] = { ...ponto(raio, angulo), angulo, raio, interno, externo };
     });
   }
-  return afastarCasos(posicoes);
+  return afastarCasos(posicoes, distanciaMinima);
 }
 
 // Espalha os casos que ficaram muito perto uns dos outros na tela, sem tirá-los do seu anel:

@@ -46,6 +46,16 @@ export default function Palco({ cargo = null }) {
   const [resposta, setResposta] = useState(null);
   const [pensando, setPensando] = useState(false);
   const [solucoesJuntas, setSolucoesJuntas] = useState(false);
+  // No celular, o tronco fica em cima e os painéis descem, um embaixo do outro.
+  const [celular, setCelular] = useState(false);
+  useEffect(() => {
+    const consulta = window.matchMedia("(max-width: 760px)");
+    const atualizar = () => setCelular(consulta.matches);
+    atualizar();
+    consulta.addEventListener("change", atualizar);
+    return () => consulta.removeEventListener("change", atualizar);
+  }, []);
+  const painelDireito = useRef(null);
 
   // Conversas de legado feitas nesta demonstração (guardadas só neste navegador).
   const [demo, setDemo] = useState({ casos: [], simuladas: 0 });
@@ -204,7 +214,13 @@ export default function Palco({ cargo = null }) {
     }
   }
 
-  const posicoes = useMemo(() => posicionarCasos(casos, gestoes, pessoaPorId), [casos]);
+  // No celular, o que a pessoa abriu aparece no painel abaixo do tronco: a tela rola até ele.
+  useEffect(() => {
+    if (!celular || (!casoAtivo && !resposta)) return;
+    painelDireito.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [celular, casoAtivo, resposta?.pergunta]);
+
+  const posicoes = useMemo(() => posicionarCasos(casos, gestoes, pessoaPorId, { distanciaMinima: celular ? 40 : 22 }), [casos, celular]);
 
   // O que o cargo de quem entrou enxerga com mais destaque.
   const foco = useMemo(() => {
@@ -290,21 +306,21 @@ export default function Palco({ cargo = null }) {
 
       <div className={estilos.moldura}>
       <div className={estilos.palco}>
-        <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
-          <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando} solucoesJuntas={solucoesJuntas}
+        <svg viewBox={celular ? "150 10 1260 790" : "0 0 1600 900"} className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
+          <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando} solucoesJuntas={solucoesJuntas} compacto={celular}
             selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0]))
               : lente === "bastao" ? Object.fromEntries(casos.map((c) => [c.id, citadosBastao.has(c.id) ? 2 : c.cargoAutor === cargoBastao ? 1 : 0]))
               : lente === "legado" ? foco?.mapa : null}
             aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); setResposta(null); }} />
 
           {/* Linhas que ligam os painéis ao tronco */}
-          {alvoGestao && !resposta && (
+          {alvoGestao && !resposta && !celular && (
             <g className={estilos.ligacao}>
               <polyline points={`-300,620 ${alvoGestao.x - 50},620 ${alvoGestao.x},${alvoGestao.y}`} />
               <circle cx={alvoGestao.x} cy={alvoGestao.y} r="4" />
             </g>
           )}
-          {caso && (
+          {caso && !celular && (
             <g className={estilos.ligacao}>
               <polyline points={`1900,230 ${naTela(posicoes[caso.id]).x + 60},230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
               <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
@@ -359,7 +375,7 @@ export default function Palco({ cargo = null }) {
         )}
 
         {/* Painel da direita: caso escolhido, padrões ou visão geral */}
-        <section className={`${estilos.painel} ${estilos.painelDireita}`} style={{ top: py(24), width: `max(${px(410)}, 330px)`, maxHeight: py(860) }}>
+        <section ref={painelDireito} className={`${estilos.painel} ${estilos.painelDireita}`} style={{ top: py(24), width: `max(${px(410)}, 330px)`, maxHeight: py(860) }}>
           {caso ? (
             <>
               <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}{caso.meu ? " · registrado por você" : ""}</div>
@@ -516,7 +532,7 @@ export default function Palco({ cargo = null }) {
         </button>
         <form className={estilos.pergunta} onSubmit={perguntar}>
           <input value={pergunta} onChange={(e) => setPergunta(e.target.value)} maxLength={500}
-            placeholder="Pergunte ao LegaCITi: o que o CITi já aprendeu sobre…" aria-label="Pergunte ao LegaCITi" />
+            placeholder={celular ? "Pergunte ao LegaCITi…" : "Pergunte ao LegaCITi: o que o CITi já aprendeu sobre…"} aria-label="Pergunte ao LegaCITi" />
           <button type="submit" aria-label="Enviar pergunta" disabled={pensando}>→</button>
         </form>
       </div>

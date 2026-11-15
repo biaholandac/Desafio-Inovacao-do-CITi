@@ -266,3 +266,5 @@
 }
 
 .rotuloJunto { fill: #eafff2; font-size: 17px; }
+
+.rotuloCompacto { font-size: 30px; stroke-width: 7px; letter-spacing: 0.16em; }

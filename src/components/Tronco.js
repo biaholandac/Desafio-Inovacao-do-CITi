@@ -20,8 +20,10 @@ const FOTO_CORTE = {
 };
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
-export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false, novo = null, celebrando = null, solucoesJuntas = false }) {
+export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false, novo = null, celebrando = null, solucoesJuntas = false, compacto = false }) {
   const total = gestoes.length;
+  // No celular o tronco aparece menor; os pontos crescem para continuarem fáceis de tocar.
+  const k = compacto ? 2.1 : 1;
 
   // Linhas finas de crescimento dentro de cada anel, para dar textura de madeira.
   const linhasDeCrescimento = useMemo(() => {
@@ -63,10 +65,11 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       if (g > 136 && g < 190) return 136;
       return a;
     };
-    const lista = SETORES.map((nome, i) => ({ nome, angulo: visivel(meioDoSetor(i)), abertura: 40 }));
+    const pos = (a) => (compacto ? a : visivel(a));
+    const lista = SETORES.map((nome, i) => ({ nome, angulo: pos(meioDoSetor(i)), abertura: compacto ? 50 : 40 }));
     if (!solucoesJuntas) return lista;
-    return [...lista.filter((r) => r.nome !== "Tech" && r.nome !== "Produto"), { nome: "Soluções", angulo: visivel(MEIO_SOLUCOES), abertura: 56 }];
-  }, [solucoesJuntas]);
+    return [...lista.filter((r) => r.nome !== "Tech" && r.nome !== "Produto"), { nome: "Soluções", angulo: pos(MEIO_SOLUCOES), abertura: compacto ? 70 : 56 }];
+  }, [solucoesJuntas, compacto]);
 
   // Painel HUD ligado ao tronco: casos por gestão, do centro para a casca.
   const hud = useMemo(() => {
@@ -226,17 +229,17 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         return (
           <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={`${estilos.caso} ${estado} ${c.origem === "em_andamento" ? estilos.casoAndamento : ""} ${novo === c.id ? estilos.casoNasceu : ""}`}>
             {novo === c.id && <><circle cx={p.x} cy={p.y} r={10} className={estilos.nascimento} /><circle cx={p.x} cy={p.y} r={10} className={estilos.nascimento} style={{ animationDelay: "0.5s" }} /></>}
-            <circle cx={p.x} cy={p.y} r={11} fill="transparent" />
-            {(destaque || escolhido) && <circle cx={p.x} cy={p.y} r={7} className={estilos.onda} style={atraso} />}
-            <circle cx={p.x} cy={p.y} r={escolhido ? 13 : destaque ? 10 : 8} className={estilos.halo} style={atraso} />
-            <circle cx={p.x} cy={p.y} r={escolhido ? 6.5 : destaque ? 5.5 : apagado ? 3.6 : 4.4} className={estilos.ponto} style={atraso} />
+            <circle cx={p.x} cy={p.y} r={11 * k} fill="transparent" />
+            {(destaque || escolhido) && <circle cx={p.x} cy={p.y} r={7 * k} className={estilos.onda} style={atraso} />}
+            <circle cx={p.x} cy={p.y} r={(escolhido ? 13 : destaque ? 10 : 8) * k} className={estilos.halo} style={atraso} />
+            <circle cx={p.x} cy={p.y} r={(escolhido ? 6.5 : destaque ? 5.5 : apagado ? 3.6 : 4.4) * k} className={estilos.ponto} style={atraso} />
             <title>{c.titulo}</title>
           </g>
         );
       })}
 
       {/* HUD: casos por gestão */}
-      {!decorativo && <g className={estilos.hud} aria-hidden="true">
+      {!decorativo && !compacto && <g className={estilos.hud} aria-hidden="true">
         <polyline className={estilos.linha} points={`${hud.alvo.x},${hud.alvo.y} 210,74`} />
         <circle className={estilos.ponta} cx={hud.alvo.x} cy={hud.alvo.y} r="3" />
         <rect className={estilos.caixa} x="40" y="30" width="170" height="86" />
@@ -250,7 +253,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
 
       {/* Nomes das áreas, curvados ao longo da casca (fora da perspectiva, para o texto não deformar) */}
       {!decorativo && rotulos.map(({ nome, angulo, abertura }, i) => {
-        const r = RAIO_EXTERNO + 46;
+        const r = RAIO_EXTERNO + (compacto ? 62 : 46);
         const embaixo = Math.sin((angulo * Math.PI) / 180) > 0.2;
         const angs = Array.from({ length: 13 }, (_, k) => angulo - abertura / 2 + (abertura * k) / 12);
         const pts = (embaixo ? angs.reverse() : angs).map((a) => naTela(ponto(r, a)));
@@ -258,7 +261,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         return (
           <g key={nome}>
             <path id={`setor-${i}`} d={d} fill="none" />
-            <text className={`${estilos.rotuloSetor} ${nome === "Soluções" ? estilos.rotuloJunto : ""}`} dominantBaseline="middle" paintOrder="stroke">
+            <text className={`${estilos.rotuloSetor} ${nome === "Soluções" ? estilos.rotuloJunto : ""} ${compacto ? estilos.rotuloCompacto : ""}`} dominantBaseline="middle" paintOrder="stroke">
               <textPath href={`#setor-${i}`} startOffset="50%" textAnchor="middle">{nome.toUpperCase()}</textPath>
             </text>
           </g>

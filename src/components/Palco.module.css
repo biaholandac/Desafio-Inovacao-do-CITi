@@ -490,3 +490,81 @@
 }
 .alternarSolucoes:hover { border-color: var(--verde); }
 .alternarSolucoes[aria-pressed="true"] { background: rgba(47, 217, 122, 0.18); border-color: var(--verde); }
+
+/* ---------- Celular ---------- */
+@media (max-width: 760px) {
+  .tela { height: auto; min-height: 100dvh; overflow: visible; }
+  .topo { flex-wrap: wrap; gap: 10px 12px; padding: 14px 14px 0; }
+  .topo > :first-child { order: 1; }
+  .direita { order: 2; gap: 8px; }
+  .selo { display: none; }
+  .lentes {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+  .lentes::-webkit-scrollbar { display: none; }
+  .lente { flex-shrink: 0; padding: 8px 14px; }
+  .usuario { padding-right: 10px; }
+
+  .moldura { display: block; container-type: normal; flex: none; }
+  .palco {
+    width: 100%;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 12px 150px;
+    --u: 0.95px;
+  }
+  .desenho {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1260 / 790;
+    overflow: hidden;
+    margin: 4px 0 0;
+  }
+  .painel {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-height: none !important;
+    overflow: visible;
+    font-size: 14px;
+  }
+  .alternarSolucoes {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    align-self: center;
+    margin-top: -4px;
+  }
+  /* O painel da direita (o que muda com as escolhas) vem antes do painel da gestão */
+  .painelDireita { order: 2; }
+  .painelEsquerda { order: 3; }
+  .alternarSolucoes { order: 1; }
+
+  .base {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    flex-direction: column-reverse;
+    gap: 8px;
+    background: rgba(3, 7, 5, 0.94);
+    border-top: 1px solid rgba(56, 230, 130, 0.15);
+    backdrop-filter: blur(10px);
+  }
+  .contar { height: 42px; width: 100%; justify-content: center; }
+  .pergunta { width: 100%; flex: none; }
+  .aviso { bottom: 130px; }
+}
