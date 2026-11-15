@@ -295,13 +295,13 @@ export default function Palco({ cargo = null }) {
           {/* Linhas que ligam os painéis ao tronco */}
           {alvoGestao && !resposta && (
             <g className={estilos.ligacao}>
-              <polyline points={`314,610 344,610 ${alvoGestao.x},${alvoGestao.y}`} />
+              <polyline points={`-300,620 ${alvoGestao.x - 50},620 ${alvoGestao.x},${alvoGestao.y}`} />
               <circle cx={alvoGestao.x} cy={alvoGestao.y} r="4" />
             </g>
           )}
           {caso && (
             <g className={estilos.ligacao}>
-              <polyline points={`1176,230 1146,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
+              <polyline points={`1900,230 ${naTela(posicoes[caso.id]).x + 60},230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
               <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
             </g>
           )}
@@ -309,7 +309,7 @@ export default function Palco({ cargo = null }) {
 
         {/* Painel da gestão */}
         {gestao && !resposta && (
-          <section className={estilos.painel} style={{ left: px(24), top: py(518), width: px(290), maxHeight: py(374) }}>
+          <section className={`${estilos.painel} ${estilos.painelEsquerda}`} style={{ top: py(500), width: `max(${px(360)}, 300px)`, maxHeight: py(392) }}>
             <div className={estilos.rotulo}>Anel · gestão</div>
             <h2 className={estilos.tituloGestao}>{gestao.codigo}</h2>
             {gestao.status === "fechando" && (
@@ -348,7 +348,7 @@ export default function Palco({ cargo = null }) {
         )}
 
         {/* Painel da direita: caso escolhido, padrões ou visão geral */}
-        <section className={estilos.painel} style={{ right: px(14), top: py(24), width: `max(${px(410)}, 330px)`, maxHeight: py(860) }}>
+        <section className={`${estilos.painel} ${estilos.painelDireita}`} style={{ top: py(24), width: `max(${px(410)}, 330px)`, maxHeight: py(860) }}>
           {caso ? (
             <>
               <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}{caso.meu ? " · registrado por você" : ""}</div>

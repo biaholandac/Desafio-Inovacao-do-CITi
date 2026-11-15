@@ -470,3 +470,8 @@
   cursor: pointer;
 }
 .citacoes button:hover { background: rgba(56, 230, 130, 0.2); }
+
+/* Os painéis encostam nas bordas da tela (não do palco), para saírem de cima dos anéis.
+   A folga é o espaço entre o palco 16:9 e a largura disponível. */
+.painelEsquerda { left: calc(16px - (100cqw - min(100cqw, 100cqh * 16 / 9)) / 2); }
+.painelDireita { right: calc(16px - (100cqw - min(100cqw, 100cqh * 16 / 9)) / 2); }
