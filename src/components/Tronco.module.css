@@ -176,26 +176,33 @@
 
 .toraCorpo { fill: #070b08; }
 .toraTextura { fill: #0b120d; filter: url(#texturaCasca); opacity: 0.95; }
-.toraSombra { fill: url(#sombraTora); }
-.sulcos path { fill: none; stroke: rgba(0, 0, 0, 0.75); stroke-width: 1.1; }
+.contornoTronco { fill: none; stroke: rgba(56, 230, 130, 0.25); stroke-width: 1; }
+.sulcos path { fill: none; stroke: rgba(0, 0, 0, 0.7); stroke-width: 1.3; }
 
 .veia, .veiaForte {
   fill: none;
   stroke: var(--verde);
   stroke-linecap: round;
-  stroke-dasharray: 180 70;
-  animation: seiva 9s linear infinite;
 }
-.veia { stroke-width: 0.9; opacity: 0.35; }
-.veiaForte { stroke-width: 1.6; opacity: 0.8; }
+.veia { stroke-width: 0.8; opacity: 0.22; }
+.veiaForte { stroke-width: 1.3; opacity: 0.4; }
 
-/* A seiva corre em direção ao corte: o legado chegando ao presente. */
+/* Um brilho sobe das raízes até os anéis: a seiva levando o legado ao presente. */
+.faisca {
+  fill: none;
+  stroke: var(--verde-claro);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 28 900;
+  stroke-dashoffset: 928;
+  animation: seiva 5s linear infinite;
+}
 @keyframes seiva {
-  to { stroke-dashoffset: 500; }
+  to { stroke-dashoffset: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .veia, .veiaForte { animation: none; }
+  .faisca { animation: none; opacity: 0; }
 }
 
 .hud rect.caixa { fill: rgba(5, 10, 7, 0.85); stroke: rgba(56, 230, 130, 0.3); stroke-width: 1; }

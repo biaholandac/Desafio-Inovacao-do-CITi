@@ -102,9 +102,12 @@ export function caminhoFaixa(raioInterno, raioExterno, chave) {
   return caminhoOndulado(raioExterno, chave + "e", 0.007) + caminhoOndulado(raioInterno, chave + "i", 0.007);
 }
 
-// Perspectiva: o corte do tronco é visto um pouco de lado, então fica levemente oval.
-export const ESCALA_X = 0.8;
-export const TRANSFORMACAO_CORTE = `translate(${CENTRO.x} 0) scale(${ESCALA_X} 1) translate(${-CENTRO.x} 0)`;
+// Perspectiva: o corte do tronco é visto de cima, então fica oval (achatado na vertical),
+// e sobe um pouco na tela para dar espaço ao tronco e às raízes.
+export const ESCALA_X = 0.92;
+export const ESCALA_Y = 0.56;
+export const CENTRO_TELA = { x: 800, y: 300 };
+export const TRANSFORMACAO_CORTE = `translate(${CENTRO_TELA.x} ${CENTRO_TELA.y}) scale(${ESCALA_X} ${ESCALA_Y}) translate(${-CENTRO.x} ${-CENTRO.y})`;
 export function naTela(p) {
-  return { x: CENTRO.x + (p.x - CENTRO.x) * ESCALA_X, y: p.y };
+  return { x: CENTRO_TELA.x + (p.x - CENTRO.x) * ESCALA_X, y: CENTRO_TELA.y + (p.y - CENTRO.y) * ESCALA_Y };
 }
