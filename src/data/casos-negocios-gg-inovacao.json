@@ -7,14 +7,24 @@
     "origem": "squad",
     "projeto": "A",
     "area": "Comercial",
-    "padroes": ["P2"],
+    "padroes": [
+      "P2"
+    ],
     "situacao": "Na negociação com a Clínica Bem Cuidar, Felipe prometeu que o aplicativo enviaria lembretes por mensagem. Na passada de bastão, ele resumiu o projeto como um app de agendamento simples.",
     "dilema": "Como transmitir tudo o que foi combinado sem transformar a passada de bastão numa reunião interminável.",
-    "opcoes": ["Passar um resumo rápido", "Entregar um documento com tudo o que foi prometido", "Levar o time para conhecer o cliente antes de começar"],
+    "opcoes": [
+      "Passar um resumo rápido",
+      "Entregar um documento com tudo o que foi prometido",
+      "Levar o time para conhecer o cliente antes de começar"
+    ],
     "decisao": "Resumo rápido, por falta de tempo.",
     "resultado": "O time descobriu a promessa dos lembretes só no meio do projeto, quando o cliente cobrou. Foi o primeiro dos pedidos pequenos.",
     "licao": "A passada de bastão precisa conter tudo o que foi prometido, por escrito, mesmo o que parece detalhe.",
-    "simulacao": {"tipo": "conversa", "personagem": "Dr. Márcio Leite, dono da Clínica Bem Cuidar, que quer tudo rápido e acha cada pedido simples"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Dr. Márcio Leite, dono da Clínica Bem Cuidar, que quer tudo rápido e acha cada pedido simples"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C040",
@@ -24,14 +34,23 @@
     "origem": "squad",
     "projeto": "B",
     "area": "Comercial",
-    "padroes": ["P3"],
+    "padroes": [
+      "P3"
+    ],
     "situacao": "O squad do Mercadinho Boa Praça avisou Felipe que o cliente não respondia havia duas semanas. Felipe também estava com outros clientes em negociação.",
     "dilema": "Acionar o cliente de novo por mensagem ou ir pessoalmente ao mercado.",
-    "opcoes": ["Mandar outra mensagem", "Ligar e marcar uma visita", "Deixar o squad resolver"],
+    "opcoes": [
+      "Mandar outra mensagem",
+      "Ligar e marcar uma visita",
+      "Deixar o squad resolver"
+    ],
     "decisao": "Felipe mandou mais uma mensagem e voltou às negociações.",
     "resultado": "O cliente só respondeu uma semana depois, e o atraso caiu sobre o squad.",
     "licao": "Quem cuida da relação com o cliente é quem precisa agir quando ele some. Uma visita resolve o que dez mensagens não resolvem.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C041",
@@ -41,14 +60,22 @@
     "origem": "squad",
     "projeto": "C",
     "area": "Comercial",
-    "padroes": ["P6"],
+    "padroes": [
+      "P6"
+    ],
     "situacao": "Ao fechar o contrato com a Escola Aprender Mais, Bruna organizou a passada de bastão com tudo o que foi prometido e levou a diretora da escola para conhecer o squad.",
     "dilema": "Investir tempo numa passada de bastão completa ou seguir para o próximo cliente.",
-    "opcoes": ["Passada rápida e seguir em frente", "Documento completo e reunião com o cliente presente"],
+    "opcoes": [
+      "Passada rápida e seguir em frente",
+      "Documento completo e reunião com o cliente presente"
+    ],
     "decisao": "Documento completo e reunião com a diretora presente.",
     "resultado": "O squad começou sabendo exatamente o que foi combinado, e não houve surpresas de escopo.",
     "licao": "Uma hora a mais na passada de bastão economiza semanas de retrabalho.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C042",
@@ -58,14 +85,23 @@
     "origem": "squad",
     "projeto": "D",
     "area": "Comercial",
-    "padroes": ["P1"],
+    "padroes": [
+      "P1"
+    ],
     "situacao": "No projeto da Distribuidora Litoral, o cliente começou a pedir mudanças por mensagem direto aos membros do squad, sem passar por Bruna.",
     "dilema": "Proibir o contato direto ou criar um canal organizado para os pedidos.",
-    "opcoes": ["Proibir o contato direto", "Criar um canal único de pedidos com registro", "Deixar como estava"],
+    "opcoes": [
+      "Proibir o contato direto",
+      "Criar um canal único de pedidos com registro",
+      "Deixar como estava"
+    ],
     "decisao": "Bruna percebeu tarde e criou um canal único de pedidos já perto do prazo.",
     "resultado": "O canal organizou o fim do projeto, mas o atraso causado pelos pedidos anteriores já tinha acontecido.",
     "licao": "Combine logo no início por onde os pedidos do cliente devem chegar.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C043",
@@ -75,14 +111,23 @@
     "origem": "squad",
     "projeto": "F",
     "area": "Comercial",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "A dona do Ateliê Maré ligou para Vinícius reclamando que a loja virtual não recebia atualizações havia semanas, desde a saída do designer.",
     "dilema": "Explicar a situação com transparência ou prometer uma solução rápida.",
-    "opcoes": ["Prometer atualizações na semana seguinte", "Explicar a transição e apresentar um novo plano com prazo realista"],
+    "opcoes": [
+      "Prometer atualizações na semana seguinte",
+      "Explicar a transição e apresentar um novo plano com prazo realista"
+    ],
     "decisao": "Vinícius explicou a transição e apresentou o plano da Isadora com um prazo realista.",
     "resultado": "A cliente ficou insatisfeita no início, mas renovou o contrato depois de ver o plano cumprido.",
     "licao": "Transparência sobre um problema interno preserva mais a relação do que uma promessa que não se cumpre.",
-    "simulacao": {"tipo": "conversa", "personagem": "Marta Benevides, dona do Ateliê Maré, chateada com a demora"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Marta Benevides, dona do Ateliê Maré, chateada com a demora"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C044",
@@ -99,7 +144,8 @@
     "decisao": "Vinícius está testando um funil compartilhado, em que Marketing qualifica os contatos antes de chegarem ao comercial.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C045",
@@ -109,14 +155,24 @@
     "origem": "squad",
     "projeto": "E",
     "area": "Comercial",
-    "padroes": ["P2"],
+    "padroes": [
+      "P2"
+    ],
     "situacao": "A dona da Ótica Visão Clara queria um assistente com IA, mas não sabia dizer o que ele deveria fazer. Clara fechou o contrato com um escopo amplo.",
     "dilema": "Fechar logo com escopo amplo ou detalhar mais antes de assinar.",
-    "opcoes": ["Fechar com escopo amplo", "Fazer uma reunião de descoberta antes de fechar", "Fechar uma primeira fase pequena"],
+    "opcoes": [
+      "Fechar com escopo amplo",
+      "Fazer uma reunião de descoberta antes de fechar",
+      "Fechar uma primeira fase pequena"
+    ],
     "decisao": "Clara fechou com escopo amplo e deixou a definição para o squad.",
     "resultado": "O squad precisou de uma semana extra de descoberta. A partir daí, Clara passou a incluir uma etapa de descoberta nos contratos com IA.",
     "licao": "Em projetos com IA, o escopo precisa de descoberta antes da assinatura, não depois.",
-    "simulacao": {"tipo": "conversa", "personagem": "Regina Falcão, dona da Ótica Visão Clara, empolgada com IA e sem clareza do que precisa"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Regina Falcão, dona da Ótica Visão Clara, empolgada com IA e sem clareza do que precisa"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C046",
@@ -133,7 +189,8 @@
     "decisao": "Clara passou a abrir as reuniões perguntando sobre o problema do cliente, e só depois falando de tecnologia.",
     "resultado": "As propostas ficaram mais precisas e os contratos, mais fáceis de entregar.",
     "licao": "O cliente compra a solução para o problema dele, não a tecnologia.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C047",
@@ -150,7 +207,8 @@
     "decisao": "Yasmin revisou a campanha junto com o comercial para focar no perfil ideal de cliente.",
     "resultado": "A campanha seguinte gerou menos contatos, mas o dobro de reuniões de venda.",
     "licao": "Marketing bom traz os clientes certos, não os mais numerosos.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C048",
@@ -160,14 +218,17 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Marketing",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "A cada troca de gestão, o calendário de conteúdo e as lições sobre o que funcionava nas redes sociais recomeçavam do zero.",
     "dilema": "Deixar o calendário para a próxima pessoa ou registrar também o que aprendeu.",
     "opcoes": null,
     "decisao": "Na despedida, Yasmin registrou o calendário e os aprendizados sobre cada tipo de conteúdo.",
     "resultado": "Quem assumiu pôde começar a partir do que já funcionava.",
     "licao": "Um calendário sem os aprendizados por trás dele é só uma lista de datas.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C049",
@@ -184,7 +245,8 @@
     "decisao": "Eduardo construiu a comunicação a partir de exemplos reais das ferramentas criadas pela Inovação.",
     "resultado": "Os conteúdos geraram contatos de empresas interessadas em soluções com IA.",
     "licao": "Resultados concretos comunicam mais do que promessas sobre tecnologia.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C050",
@@ -201,7 +263,8 @@
     "decisao": "Eduardo está acompanhando quantos contatos de Marketing viram reuniões de venda.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C051",
@@ -211,14 +274,22 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Gente e Gestão",
-    "padroes": ["P4"],
+    "padroes": [
+      "P4"
+    ],
     "situacao": "Mariana percebeu que membros estavam faltando a ritos, demorando a responder e reclamando de cansaço. Eram as mesmas pessoas que estavam em vários projetos.",
     "dilema": "Levar o assunto à diretoria ou esperar a pesquisa de clima confirmar.",
-    "opcoes": ["Esperar a pesquisa de clima", "Conversar com as pessoas e levar o mapa à diretoria"],
+    "opcoes": [
+      "Esperar a pesquisa de clima",
+      "Conversar com as pessoas e levar o mapa à diretoria"
+    ],
     "decisao": "Mariana esperou a pesquisa de clima.",
     "resultado": "A pesquisa confirmou a sobrecarga, mas só depois de vários projetos atrasarem.",
     "licao": "Os sinais de sobrecarga aparecem antes dos números. Agir no sinal evita o atraso.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C052",
@@ -235,7 +306,8 @@
     "decisao": "As retrospectivas passaram a ser conduzidas por alguém de Gente e Gestão, de fora do squad.",
     "resultado": "Os squads passaram a falar com mais abertura sobre os problemas.",
     "licao": "Uma pessoa de fora ajuda o squad a falar de situações, e não de culpados.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Especialista de Gente e Gestão"
   },
   {
     "id": "C053",
@@ -252,7 +324,8 @@
     "decisao": "Otávio está montando a integração a partir das trilhas do LegaCITi, com uma pessoa de referência em cada área.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C054",
@@ -269,7 +342,8 @@
     "decisao": "Otávio está ouvindo cada área antes de propor mudanças.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C055",
@@ -286,7 +360,8 @@
     "decisao": "Nathalia organizou uma base única com as receitas e despesas da gestão.",
     "resultado": "As projeções ficaram mais confiáveis e mais fáceis de explicar à diretoria.",
     "licao": "Informação financeira espalhada é informação que ninguém confia.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C056",
@@ -303,7 +378,8 @@
     "decisao": "Nathalia está fazendo conversas individuais com os membros das áreas fundidas.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C057",
@@ -316,11 +392,16 @@
     "padroes": [],
     "situacao": "O time de Inovação voltou com a missão de levar IA para o dia a dia do CITi. Logo nas primeiras semanas, todas as áreas tinham pedidos de ferramentas.",
     "dilema": "Por onde começar, se cada área queria a sua ferramenta e o time só libera o que está impecável.",
-    "opcoes": ["Atender os pedidos por ordem de chegada", "Começar pelas ferramentas que serviriam ao CITi inteiro", "Começar pelos processos que mais consumiam tempo em cada subárea"],
+    "opcoes": [
+      "Atender os pedidos por ordem de chegada",
+      "Começar pelas ferramentas que serviriam ao CITi inteiro",
+      "Começar pelos processos que mais consumiam tempo em cada subárea"
+    ],
     "decisao": "O time mapeou os processos que mais consumiam tempo em todas as áreas, começou pelas ferramentas que serviam à empresa inteira e, em seguida, construiu ferramentas sob medida para subáreas específicas. Cada uma passou por testes rigorosos antes de ser liberada.",
     "resultado": "As ferramentas chegaram às áreas prontas para uso e viraram parte da rotina do CITi.",
     "licao": "Com muitos pedidos ao mesmo tempo, comece pelo que gera mais impacto para mais pessoas, e só entregue quando estiver pronto de verdade.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C058",
@@ -337,7 +418,8 @@
     "decisao": "O time adaptou a ferramenta para clientes, mantendo o mesmo padrão de qualidade da versão interna.",
     "resultado": "A ferramenta passou a ser vendida como produto pronto.",
     "licao": "Uma solução interna bem feita pode virar produto quando resolve um problema que outras empresas também têm.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C059",
@@ -347,14 +429,23 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Inovação",
-    "padroes": ["P2"],
+    "padroes": [
+      "P2"
+    ],
     "situacao": "Na venda de um produto pronto da Inovação, o comercial deu a entender ao cliente que o produto poderia ser adaptado ao seu processo. O produto foi feito para funcionar de forma padrão.",
     "dilema": "Fazer adaptações para manter o cliente ou alinhar expectativas.",
-    "opcoes": ["Fazer as adaptações pedidas", "Explicar o que o produto faz e oferecer uma configuração dentro do padrão"],
+    "opcoes": [
+      "Fazer as adaptações pedidas",
+      "Explicar o que o produto faz e oferecer uma configuração dentro do padrão"
+    ],
     "decisao": "Lara explicou ao cliente como o produto funciona e mostrou como ele resolveria o problema dentro do padrão.",
     "resultado": "O cliente aceitou e o produto entrou em uso sem perder qualidade. Lara passou a participar das reuniões de venda dos produtos da Inovação.",
     "licao": "Quem conhece o produto precisa estar na venda. Expectativa alinhada protege o cliente e a qualidade do produto.",
-    "simulacao": {"tipo": "conversa", "personagem": "Gestora de uma empresa de serviços que quer adaptações no produto"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Gestora de uma empresa de serviços que quer adaptações no produto"
+    },
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C060",
@@ -371,7 +462,8 @@
     "decisao": "Lara propôs avaliar cada ideia pelo tempo que ela economizaria e por quantas pessoas a usariam.",
     "resultado": "O time passou a priorizar com critérios claros e as áreas entenderam a ordem das entregas.",
     "licao": "Critérios claros de prioridade evitam que tudo pareça urgente.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C061",
@@ -381,14 +473,17 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Inovação",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Samuel entrou na Inovação junto com a volta do time e percebeu que cada ferramenta tinha detalhes que só quem a construiu conhecia.",
     "dilema": "Documentar enquanto constrói ou só depois de entregar.",
     "opcoes": null,
     "decisao": "Samuel passou a documentar cada ferramenta durante a construção, com um padrão que o time adotou.",
     "resultado": "Qualquer pessoa da Inovação consegue manter e evoluir as ferramentas.",
     "licao": "Documentar durante a construção é parte de entregar algo impecável.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C062",
@@ -405,6 +500,7 @@
     "decisao": "Samuel ajudou a criar uma bateria de testes com situações reais de cada área.",
     "resultado": "As ferramentas chegam às áreas funcionando como esperado.",
     "licao": "Testar com situações reais é o que transforma uma boa ideia em uma ferramenta confiável.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   }
 ]

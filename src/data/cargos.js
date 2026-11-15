@@ -7,11 +7,11 @@ export const AREAS = [
     { id: "coo", nome: "COO", pessoa: 37 },
     { id: "cro", nome: "CRO", pessoa: 7 },
   ] },
-  { id: "ondas", nome: "Ondas", pergunta: "escolha a subárea que você lidera", cargos: [
+  { id: "ondas", nome: "Ondas", pergunta: "escolha a subárea da qual você faz parte", cargos: [
     { id: "lider-dev", nome: "Desenvolvimento", titulo: "Liderança de Desenvolvimento", pessoa: 10 },
     { id: "lider-dados", nome: "Dados", titulo: "Liderança de Dados", pessoa: 18 },
     { id: "lider-produto", nome: "Produto", titulo: "Liderança de Produto", pessoa: 14 },
-    { id: "lider-design", nome: "Design", titulo: "Liderança de Design", pessoa: 52 },
+    { id: "lider-inovacao", nome: "Inovação", titulo: "Liderança de Inovação", pessoa: 28 },
     { id: "lider-comercial", nome: "Comercial", titulo: "Liderança de Comercial", pessoa: 21 },
     { id: "lider-marketing", nome: "Marketing", titulo: "Liderança de Marketing", pessoa: 24 },
   ] },
@@ -30,7 +30,10 @@ export const AREAS = [
     { id: "gerente-contas", nome: "Gerente de contas", pessoa: 22 },
     { id: "analista-marketing", nome: "Analista de marketing", pessoa: 24 },
   ] },
-  { id: "gg", nome: "Gente e Gestão", cargos: [{ id: "analista-gg", nome: "Analista de Gente e Gestão", pessoa: 26 }] },
+  { id: "gg", nome: "Gente e Gestão", cargos: [
+    { id: "analista-gg", nome: "Analista de Gente e Gestão", pessoa: 26 },
+    { id: "especialista-gg", nome: "Especialista de Gente e Gestão", pessoa: 27 },
+  ] },
   { id: "inovacao", nome: "Inovação", cargos: [{ id: "inovacao", nome: "Time de Inovação", pessoa: 28 }] },
   { id: "new-pig", nome: "New Pig", cargos: [{ id: "new-pig", nome: "New Pig", pessoa: null }] },
 ];

@@ -7,14 +7,24 @@
     "origem": "squad",
     "projeto": "B",
     "area": "Desenvolvimento",
-    "padroes": ["P3", "P4"],
+    "padroes": [
+      "P3",
+      "P4"
+    ],
     "situacao": "Gabriel desenvolvia o painel de vendas do Mercadinho Boa Praça enquanto tocava outros dois projetos. O cliente parou de responder justamente quando o painel precisava ser validado.",
     "dilema": "Seguir desenvolvendo sem validação ou pausar o painel e focar nos outros projetos.",
-    "opcoes": ["Seguir desenvolvendo com base em suposições", "Pausar e focar nos outros projetos", "Avisar o gerente e pedir que alguém acione o cliente"],
+    "opcoes": [
+      "Seguir desenvolvendo com base em suposições",
+      "Pausar e focar nos outros projetos",
+      "Avisar o gerente e pedir que alguém acione o cliente"
+    ],
     "decisao": "Gabriel seguiu desenvolvendo com base em suposições para não perder o ritmo.",
     "resultado": "Quando o cliente voltou, metade das telas precisou ser refeita, e os outros dois projetos também atrasaram.",
     "licao": "Desenvolver sem validação parece ganhar tempo, mas costuma gerar retrabalho. Cliente em silêncio é sinal para escalar, não para adivinhar.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C017",
@@ -31,7 +41,8 @@
     "decisao": "Gabriel está reunindo as boas práticas das duas subáreas, partindo do legado registrado pelas lideranças anteriores.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CTO"
   },
   {
     "id": "C018",
@@ -41,14 +52,23 @@
     "origem": "squad",
     "projeto": "A",
     "area": "Desenvolvimento",
-    "padroes": ["P1"],
+    "padroes": [
+      "P1"
+    ],
     "situacao": "A cada reunião de acompanhamento, o dono da Clínica Bem Cuidar pedia um ajuste rapidinho: lembrete por mensagem, confirmação de consulta, uma tela de relatórios. Ninguém anotava os pedidos como mudança de escopo.",
     "dilema": "Dizer não e arriscar a relação com um cliente importante, ou absorver tudo e arriscar o prazo.",
-    "opcoes": ["Aceitar tudo e trabalhar mais", "Registrar cada pedido e renegociar o prazo", "Entregar o combinado e propor as novidades numa segunda fase"],
+    "opcoes": [
+      "Aceitar tudo e trabalhar mais",
+      "Registrar cada pedido e renegociar o prazo",
+      "Entregar o combinado e propor as novidades numa segunda fase"
+    ],
     "decisao": "O time aceitou tudo, e Marina passou a resolver os pedidos sozinha, à noite.",
     "resultado": "A entrega atrasou quatro semanas e o cliente achou que o time tinha sido lento.",
     "licao": "Um pedido pequeno não registrado vira prazo perdido. Todo pedido novo precisa ser anotado e ter o impacto discutido com o cliente na hora.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C019",
@@ -58,14 +78,17 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Desenvolvimento",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Na conversa de despedida, Marina percebeu que era a única pessoa que entendia o sistema de agendamento de um cliente. Ela resolvia tudo sozinha e nunca tinha documentado as decisões.",
     "dilema": "Usar as últimas semanas para documentar ou para terminar as entregas pendentes.",
     "opcoes": null,
     "decisao": "Marina terminou as entregas e deixou só um resumo curto do sistema.",
     "resultado": "Meses depois, um pedido de melhoria do cliente levou semanas para ser atendido, porque o time precisou entender o código do zero.",
     "licao": "Quem resolve tudo sozinho cria um ponto único de falha. Documentar enquanto trabalha custa menos do que documentar na saída.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C020",
@@ -75,14 +98,23 @@
     "origem": "squad",
     "projeto": "C",
     "area": "Desenvolvimento",
-    "padroes": ["P6"],
+    "padroes": [
+      "P6"
+    ],
     "situacao": "No projeto da Escola Aprender Mais, Lucas começou a programar só depois de duas semanas de descoberta. Toda sexta, mostrava à diretora o que tinha sido feito.",
     "dilema": "Começar a programar logo ou esperar a descoberta terminar.",
-    "opcoes": ["Começar a programar em paralelo à descoberta", "Esperar a descoberta e programar com tudo definido", "Programar só um protótipo enquanto a descoberta acontece"],
+    "opcoes": [
+      "Começar a programar em paralelo à descoberta",
+      "Esperar a descoberta e programar com tudo definido",
+      "Programar só um protótipo enquanto a descoberta acontece"
+    ],
     "decisao": "Lucas esperou a descoberta e aproveitou o tempo para preparar a estrutura técnica do projeto.",
     "resultado": "Quase nada precisou ser refeito, e o projeto foi entregue no prazo.",
     "licao": "Esperar a descoberta não é perder tempo. Programar o que já foi validado é o jeito mais rápido de entregar.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C021",
@@ -92,14 +124,25 @@
     "origem": "squad",
     "projeto": "E",
     "area": "Desenvolvimento",
-    "padroes": ["P2", "P6"],
+    "padroes": [
+      "P2",
+      "P6"
+    ],
     "situacao": "A Ótica Visão Clara contratou um assistente com IA para atendimento. Na passada de bastão, ficou claro que nem o cliente sabia exatamente o que o assistente deveria responder.",
     "dilema": "Começar a construir com o que havia ou voltar ao cliente para definir melhor o escopo.",
-    "opcoes": ["Construir uma primeira versão e ajustar depois", "Fazer uma rodada de descoberta com as atendentes", "Pedir ao comercial que fechasse o escopo"],
+    "opcoes": [
+      "Construir uma primeira versão e ajustar depois",
+      "Fazer uma rodada de descoberta com as atendentes",
+      "Pedir ao comercial que fechasse o escopo"
+    ],
     "decisao": "Lucas propôs uma semana de conversa com as atendentes da ótica e uma validação semanal com a dona.",
     "resultado": "O assistente foi treinado com as dúvidas reais dos clientes da ótica e entrou em uso no prazo.",
     "licao": "Quando o cliente não sabe o que quer, ouvir quem faz o trabalho no dia a dia define o escopo melhor do que qualquer reunião.",
-    "simulacao": {"tipo": "conversa", "personagem": "Regina Falcão, dona da Ótica Visão Clara, entusiasmada com IA mas sem clareza do que precisa"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Regina Falcão, dona da Ótica Visão Clara, entusiasmada com IA mas sem clareza do que precisa"
+    },
+    "cargoAutor": "Gerente de software"
   },
   {
     "id": "C022",
@@ -109,14 +152,23 @@
     "origem": "squad",
     "projeto": "D",
     "area": "Desenvolvimento",
-    "padroes": ["P1"],
+    "padroes": [
+      "P1"
+    ],
     "situacao": "No dashboard da Distribuidora Litoral, o gerente de operações do cliente começou a pedir mudanças direto para Ana Clara, por mensagem. Ela atendia sem avisar o restante do squad.",
     "dilema": "Atender o cliente rapidamente ou encaminhar cada pedido para quem cuida do escopo.",
-    "opcoes": ["Atender direto para agradar o cliente", "Encaminhar todo pedido à gerente de contas", "Atender e registrar num documento compartilhado"],
+    "opcoes": [
+      "Atender direto para agradar o cliente",
+      "Encaminhar todo pedido à gerente de contas",
+      "Atender e registrar num documento compartilhado"
+    ],
     "decisao": "Ana Clara atendia direto, sem registrar.",
     "resultado": "A entrega atrasou e ninguém conseguia explicar ao cliente de onde vinha o atraso.",
     "licao": "Pedido do cliente que não passa por quem cuida do escopo vira atraso invisível.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C023",
@@ -133,7 +185,8 @@
     "decisao": "Ana Clara registrou as percepções na conversa de fim de gestão.",
     "resultado": "Os pontos dela passaram a fazer parte da trilha de quem acaba de virar New Pig em Desenvolvimento.",
     "licao": "Quem acabou de chegar é quem melhor sabe o que falta para quem vai chegar depois.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C024",
@@ -143,14 +196,17 @@
     "origem": "squad",
     "projeto": "E",
     "area": "Desenvolvimento",
-    "padroes": ["P6"],
+    "padroes": [
+      "P6"
+    ],
     "situacao": "No assistente da Ótica Visão Clara, Ana Clara mostrava toda semana à dona da ótica como o assistente respondia às perguntas reais dos clientes.",
     "dilema": "Mostrar versões incompletas ou esperar o assistente estar pronto.",
     "opcoes": null,
     "decisao": "Ana Clara mostrou as versões incompletas, explicando o que ainda faltava.",
     "resultado": "A dona da ótica corrigiu respostas cedo, e o assistente chegou à versão final sem surpresas.",
     "licao": "Mostrar cedo, mesmo incompleto, evita surpresas no fim.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C025",
@@ -160,14 +216,24 @@
     "origem": "squad",
     "projeto": "A",
     "area": "Produto",
-    "padroes": ["P1", "P2"],
+    "padroes": [
+      "P1",
+      "P2"
+    ],
     "situacao": "A descoberta com a Clínica Bem Cuidar foi reduzida a uma reunião para começar logo o desenvolvimento. Sofia não entrevistou a recepcionista, que era quem mais usaria o aplicativo.",
     "dilema": "Defender mais tempo de descoberta ou seguir o ritmo que a gestão pedia.",
-    "opcoes": ["Seguir com uma reunião só", "Pedir uma semana de descoberta", "Fazer entrevistas curtas durante o desenvolvimento"],
+    "opcoes": [
+      "Seguir com uma reunião só",
+      "Pedir uma semana de descoberta",
+      "Fazer entrevistas curtas durante o desenvolvimento"
+    ],
     "decisao": "Uma reunião só.",
     "resultado": "A maior parte dos pedidos pequenos veio da recepcionista, que só viu o aplicativo na metade do projeto.",
     "licao": "Pular a descoberta não economiza tempo, só adia o trabalho. Ouvir quem vai usar o produto antes de construir evita o escopo que cresce depois.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Analista de produto"
   },
   {
     "id": "C026",
@@ -177,14 +243,20 @@
     "origem": "despedida",
     "projeto": "C",
     "area": "Produto",
-    "padroes": ["P6"],
+    "padroes": [
+      "P6"
+    ],
     "situacao": "Depois do projeto A, Sofia propôs um formato diferente: duas semanas de descoberta com a secretaria da escola, os pais e a direção, e uma reunião curta toda sexta com o cliente para validar o que foi feito.",
     "dilema": "Convencer a gestão de que duas semanas sem código valiam a pena.",
     "opcoes": null,
     "decisao": "A descoberta completa, com a passada de bastão da Bruna já incluindo as entrevistas.",
     "resultado": "Entrega no prazo, sem mudanças grandes de escopo, e o cliente indicou o CITi para outra escola.",
     "licao": "Descoberta bem feita e cliente envolvido toda semana são o caminho mais curto até a entrega.",
-    "simulacao": {"tipo": "conversa", "personagem": "Sônia Medeiros, diretora da Escola Aprender Mais, cuidadosa e cheia de perguntas"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Sônia Medeiros, diretora da Escola Aprender Mais, cuidadosa e cheia de perguntas"
+    },
+    "cargoAutor": "Gerente de produto"
   },
   {
     "id": "C027",
@@ -194,14 +266,22 @@
     "origem": "squad",
     "projeto": "C",
     "area": "Design de Produto",
-    "padroes": ["P6"],
+    "padroes": [
+      "P6"
+    ],
     "situacao": "Pedro levou os primeiros esboços da plataforma de matrículas para a secretaria da escola antes de qualquer tela final.",
     "dilema": "Mostrar esboços simples ou esperar ter telas bonitas para impressionar.",
-    "opcoes": ["Mostrar esboços simples", "Esperar telas finais"],
+    "opcoes": [
+      "Mostrar esboços simples",
+      "Esperar telas finais"
+    ],
     "decisao": "Pedro mostrou esboços em papel e ajustou na hora com a secretária.",
     "resultado": "O fluxo de matrícula ficou com metade dos passos previstos, e quase nada mudou depois.",
     "licao": "Esboço simples na frente do usuário vale mais do que tela bonita na gaveta.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Designer de produto"
   },
   {
     "id": "C028",
@@ -211,14 +291,17 @@
     "origem": "despedida",
     "projeto": "F",
     "area": "Design de Produto",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Pedro criou toda a identidade visual da loja virtual do Ateliê Maré, mas os arquivos estavam só no computador dele, sem guia de uso.",
     "dilema": "Organizar e compartilhar os arquivos antes de sair ou deixar para quem assumir pedir depois.",
     "opcoes": null,
     "decisao": "Pedro deixou um link para a pasta, sem organizar nem explicar.",
     "resultado": "Quem assumiu não conseguiu atualizar a loja sem quebrar o padrão visual, e o projeto perdeu ritmo.",
     "licao": "Material de design só é legado quando outra pessoa consegue usar sem precisar de quem o criou.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Designer de produto"
   },
   {
     "id": "C029",
@@ -228,14 +311,24 @@
     "origem": "squad",
     "projeto": "F",
     "area": "Produto",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Isadora assumiu a loja virtual do Ateliê Maré depois da saída do designer. Não havia guia visual nem registro das decisões tomadas com a cliente.",
     "dilema": "Reconstruir o que faltava ou pedir à cliente que repetisse tudo.",
-    "opcoes": ["Reconstruir sozinha a partir da loja", "Marcar uma reunião para a cliente repetir as decisões", "Combinar as duas coisas e registrar tudo"],
+    "opcoes": [
+      "Reconstruir sozinha a partir da loja",
+      "Marcar uma reunião para a cliente repetir as decisões",
+      "Combinar as duas coisas e registrar tudo"
+    ],
     "decisao": "Isadora estudou a loja, montou um guia visual e validou com a cliente em uma reunião.",
     "resultado": "O projeto voltou a andar, mas com duas semanas de atraso e uma cliente um pouco desconfiada.",
     "licao": "Assumir um projeto sem registro custa tempo e confiança. O guia que faltou agora existe para quem vier depois.",
-    "simulacao": {"tipo": "conversa", "personagem": "Marta Benevides, dona do Ateliê Maré, preocupada com a demora"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Marta Benevides, dona do Ateliê Maré, preocupada com a demora"
+    },
+    "cargoAutor": "Gerente de produto"
   },
   {
     "id": "C030",
@@ -252,7 +345,8 @@
     "decisao": "Isadora passou a delegar as entrevistas e a focar na organização do squad e na relação com o cliente.",
     "resultado": "O squad ganhou autonomia e as entregas ficaram mais previsíveis.",
     "licao": "Virar gerente é trocar o fazer pelo fazer acontecer.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de produto"
   },
   {
     "id": "C031",
@@ -269,7 +363,8 @@
     "decisao": "Caio reservou algumas horas por semana de cada designer para ampliar a biblioteca.",
     "resultado": "Os projetos seguintes começaram mais rápido e com mais consistência visual.",
     "licao": "Tempo investido no que se repete em todo projeto volta multiplicado.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Líder de design"
   },
   {
     "id": "C032",
@@ -286,7 +381,8 @@
     "decisao": "Caio deixou como conselho dedicar tempo fixo para revisar o trabalho dos designers junto com eles.",
     "resultado": "O conselho entrou no kit do sucessor de quem assume a liderança de Design.",
     "licao": "A qualidade das entregas vem da qualidade das pessoas. Revisar junto ensina mais do que corrigir sozinho.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Líder de design"
   },
   {
     "id": "C033",
@@ -296,14 +392,24 @@
     "origem": "squad",
     "projeto": "D",
     "area": "Inteligência de Dados",
-    "padroes": ["P1"],
+    "padroes": [
+      "P1"
+    ],
     "situacao": "No dashboard da Distribuidora Litoral, o cliente pedia um gráfico novo toda semana. Cada pedido parecia pequeno, mas exigia novos tratamentos de dados.",
     "dilema": "Atender cada pedido ou entender qual pergunta o cliente queria responder.",
-    "opcoes": ["Atender cada pedido", "Pausar e perguntar qual decisão o cliente queria tomar", "Recusar novos gráficos"],
+    "opcoes": [
+      "Atender cada pedido",
+      "Pausar e perguntar qual decisão o cliente queria tomar",
+      "Recusar novos gráficos"
+    ],
     "decisao": "Renata atendeu os pedidos por semanas até propor uma conversa sobre as decisões do cliente.",
     "resultado": "Na conversa, ficou claro que três indicadores respondiam a quase tudo. O painel foi simplificado, mas o prazo já estava estourado.",
     "licao": "Por trás de cada novo gráfico há uma pergunta. Entender a pergunta cedo evita painéis que crescem sem fim.",
-    "simulacao": {"tipo": "conversa", "personagem": "Paulo Couto, gerente de operações da Distribuidora Litoral, sempre com um pedido novo"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Paulo Couto, gerente de operações da Distribuidora Litoral, sempre com um pedido novo"
+    },
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C034",
@@ -320,7 +426,8 @@
     "decisao": "Renata orientou o time a usar o tempo ganho para entender melhor as perguntas dos clientes.",
     "resultado": "As entregas ficaram mais estratégicas e os clientes passaram a pedir análises, não só painéis.",
     "licao": "A IA acelera o trabalho, mas o valor continua em fazer as perguntas certas.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de dados"
   },
   {
     "id": "C035",
@@ -330,14 +437,24 @@
     "origem": "squad",
     "projeto": "B",
     "area": "Inteligência de Dados",
-    "padroes": ["P3"],
+    "padroes": [
+      "P3"
+    ],
     "situacao": "Matheus precisava dos dados de vendas do Mercadinho Boa Praça. O dono do mercado parou de responder por três semanas, mas o prazo do contrato continuou o mesmo.",
     "dilema": "Esperar, insistir com mais mensagens ou escalar.",
-    "opcoes": ["Esperar o cliente", "Mandar mais mensagens", "Pedir ao gerente de contas que acionasse o cliente e renegociasse o prazo"],
+    "opcoes": [
+      "Esperar o cliente",
+      "Mandar mais mensagens",
+      "Pedir ao gerente de contas que acionasse o cliente e renegociasse o prazo"
+    ],
     "decisao": "Matheus mandou mensagens por semanas, sem escalar.",
     "resultado": "Os dados chegaram tarde e o time teve que comprimir o trabalho no fim.",
     "licao": "Silêncio do cliente precisa de prazo: se não houver resposta em poucos dias, escale e renegocie.",
-    "simulacao": {"tipo": "conversa", "personagem": "Antônio Ramos, dono do Mercadinho Boa Praça, atarefado e pouco familiarizado com dados"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Antônio Ramos, dono do Mercadinho Boa Praça, atarefado e pouco familiarizado com dados"
+    },
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C036",
@@ -347,14 +464,17 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Inteligência de Dados",
-    "padroes": ["P3"],
+    "padroes": [
+      "P3"
+    ],
     "situacao": "Na despedida, Matheus refletiu sobre o projeto do mercadinho e sobre o que poderia ter evitado o sumiço do cliente.",
     "dilema": "O que combinar logo na primeira reunião.",
     "opcoes": null,
     "decisao": "Matheus deixou como conselho combinar, logo no início, quem envia os dados, em que data e o que acontece se atrasar.",
     "resultado": "O conselho passou a fazer parte do briefing de projetos de dados.",
     "licao": "Combinados claros na primeira reunião evitam semanas de espera depois.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C037",
@@ -371,7 +491,8 @@
     "decisao": "Larissa registrou as práticas, os modelos de entrega e as lições da subárea antes da fusão.",
     "resultado": "O material serviu de base para o CTO da nova área de Tech.",
     "licao": "Antes de uma fusão, registre o que cada parte faz bem. É isso que se perde primeiro.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Líder de dados"
   },
   {
     "id": "C038",
@@ -381,13 +502,16 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Inteligência de Dados",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Larissa percebeu que cada analista guardava as próprias consultas e scripts, e que tudo se perdia quando alguém saía.",
     "dilema": "Criar um repositório comum ou deixar cada um com seu jeito.",
     "opcoes": null,
     "decisao": "Larissa criou um repositório comum de consultas e um padrão simples de documentação.",
     "resultado": "Novos analistas passaram a começar a partir do trabalho de quem veio antes.",
     "licao": "Conhecimento que fica no computador de cada um vai embora com ele.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Líder de dados"
   }
 ]

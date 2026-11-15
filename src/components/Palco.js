@@ -24,6 +24,10 @@ const ORIGEM = {
   em_andamento: "Caso em andamento",
 };
 
+// "um" ou "uma" antes do cargo de quem contou o caso.
+const FEMININOS = ["Pessoa desenvolvedora", "Liderança"];
+const artigo = (cargo) => (FEMININOS.some((f) => cargo.startsWith(f)) ? "uma" : "um");
+
 // Converte coordenadas do desenho (1600 x 900) em porcentagem do palco.
 const px = (x) => `${(x / 1600) * 100}%`;
 const py = (y) => `${(y / 900) * 100}%`;
@@ -138,7 +142,7 @@ export default function Palco({ cargo = null }) {
             <>
               <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}</div>
               <h3 className={estilos.tituloCaso}>{caso.titulo}</h3>
-              <p className={estilos.autor}>{pessoaPorId[caso.autor].nome} · {caso.area} · {ORIGEM[caso.origem]}</p>
+              <p className={estilos.autor}>Contado por {artigo(caso.cargoAutor)} {caso.cargoAutor} · {ORIGEM[caso.origem]}</p>
               <dl className={estilos.campos}>
                 <dt>Situação</dt><dd>{caso.situacao}</dd>
                 <dt>Decisão</dt><dd>{caso.decisao}</dd>

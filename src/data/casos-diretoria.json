@@ -7,14 +7,23 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Diretoria",
-    "padroes": ["P4"],
+    "padroes": [
+      "P4"
+    ],
     "situacao": "A diretoria de 2024 definiu como prioridade ampliar a carteira de clientes. O comercial fechou muitos contratos em poucas semanas, e os mesmos membros de Soluções foram alocados em dois ou três projetos ao mesmo tempo.",
     "dilema": "Segurar novas vendas para proteger o time ou aproveitar o bom momento comercial.",
-    "opcoes": ["Manter o ritmo de vendas e pedir mais esforço ao time", "Limitar o número de projetos por pessoa antes de vender mais", "Escalonar o início dos novos projetos ao longo do semestre"],
+    "opcoes": [
+      "Manter o ritmo de vendas e pedir mais esforço ao time",
+      "Limitar o número de projetos por pessoa antes de vender mais",
+      "Escalonar o início dos novos projetos ao longo do semestre"
+    ],
     "decisao": "A diretoria manteve o ritmo de vendas e prometeu reforço de pessoas para a gestão seguinte.",
     "resultado": "Os projetos foram entregues, mas com atrasos e sinais claros de cansaço no time. O reforço só chegou meses depois.",
     "licao": "Antes de acelerar as vendas, combine quantos projetos cada pessoa consegue tocar ao mesmo tempo.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "CEO"
   },
   {
     "id": "C002",
@@ -24,14 +33,17 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Diretoria",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Ao fim do mandato, Helena passou a presidência para o Rafael em uma reunião de duas horas. Acordos com parceiros, combinados com clientes antigos e os motivos de várias decisões estratégicas estavam só na memória dela.",
     "dilema": "Como transmitir um ano de contexto em pouco tempo, sem sobrecarregar quem chega.",
     "opcoes": null,
     "decisao": "Helena fez uma reunião de passagem e se colocou à disposição para dúvidas por mensagem.",
     "resultado": "Nos primeiros meses de 2025, o Rafael precisou reconstruir decisões do zero e procurou a Helena várias vezes, já formada e com pouco tempo.",
     "licao": "Uma passagem de gestão precisa registrar não só o que foi decidido, mas por que foi decidido.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CEO"
   },
   {
     "id": "C003",
@@ -41,14 +53,23 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Diretoria",
-    "padroes": ["P4"],
+    "padroes": [
+      "P4"
+    ],
     "situacao": "Depois de um semestre de sobrecarga, a diretoria de 2025 decidiu reformular os rituais de retrospectiva dos squads. Nas primeiras tentativas, os encontros viraram uma lista de culpados.",
     "dilema": "Manter um formato rígido de retrospectiva ou abrir espaço para conversas mais livres.",
-    "opcoes": ["Formato rígido, com perguntas fixas", "Conversa livre conduzida pelo gerente", "Formato curto conduzido por alguém de Gente e Gestão"],
+    "opcoes": [
+      "Formato rígido, com perguntas fixas",
+      "Conversa livre conduzida pelo gerente",
+      "Formato curto conduzido por alguém de Gente e Gestão"
+    ],
     "decisao": "Rafael e Mariana, de Gente e Gestão, criaram um formato curto, conduzido por alguém de fora do squad, focado em situações e não em pessoas.",
     "resultado": "As retrospectivas passaram a apontar problemas de alocação antes que virassem atrasos.",
     "licao": "Processos funcionam quando protegem as pessoas. Uma retrospectiva útil olha para situações, não para culpados.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "CEO"
   },
   {
     "id": "C004",
@@ -58,14 +79,24 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Diretoria",
-    "padroes": ["P3"],
+    "padroes": [
+      "P3"
+    ],
     "situacao": "Um projeto de dados para uma rede de academias ficou três semanas parado porque o cliente não enviava os dados nem respondia mensagens. O squad cogitou cancelar o projeto.",
     "dilema": "Cancelar o contrato, esperar ou escalar o contato.",
-    "opcoes": ["Esperar o cliente responder", "Cancelar o projeto", "A diretoria entrar em contato com quem decide no cliente"],
+    "opcoes": [
+      "Esperar o cliente responder",
+      "Cancelar o projeto",
+      "A diretoria entrar em contato com quem decide no cliente"
+    ],
     "decisao": "Rafael ligou diretamente para o sócio da rede, que nem sabia que o projeto estava parado.",
     "resultado": "Os dados chegaram em uma semana e o projeto foi concluído com um novo prazo combinado.",
     "licao": "Quando o cliente some, quase sempre há alguém acima que não sabe disso. Descubra cedo quem realmente decide.",
-    "simulacao": {"tipo": "conversa", "personagem": "Sócio de uma rede de academias, ocupado e surpreso ao saber do atraso"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Sócio de uma rede de academias, ocupado e surpreso ao saber do atraso"
+    },
+    "cargoAutor": "CEO"
   },
   {
     "id": "C005",
@@ -75,14 +106,23 @@
     "origem": "squad",
     "projeto": null,
     "area": "Inteligência de Dados",
-    "padroes": ["P1"],
+    "padroes": [
+      "P1"
+    ],
     "situacao": "No primeiro projeto que gerenciou, um painel de pedidos para uma padaria, Lívia aceitava pequenos ajustes em cada reunião. No fim, o painel tinha o dobro de indicadores combinados.",
     "dilema": "Recusar os ajustes e frustrar o cliente, ou aceitar e estourar o prazo.",
-    "opcoes": ["Aceitar os ajustes", "Registrar cada pedido e avaliar o impacto", "Recusar tudo que não estava no contrato"],
+    "opcoes": [
+      "Aceitar os ajustes",
+      "Registrar cada pedido e avaliar o impacto",
+      "Recusar tudo que não estava no contrato"
+    ],
     "decisao": "Lívia aceitou os ajustes até perceber o atraso.",
     "resultado": "O projeto atrasou um mês. Depois disso, ela passou a manter uma lista de pedidos com o impacto de cada um, revisada com o cliente toda semana.",
     "licao": "Escopo não cresce de uma vez, cresce em pedidos pequenos. Registrar cada um torna o crescimento visível para todos.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "Gerente de dados"
   },
   {
     "id": "C006",
@@ -99,7 +139,8 @@
     "decisao": "A diretoria definiu que a Inovação teria autonomia para escolher a ordem das ferramentas e que cada área indicaria uma pessoa de contato.",
     "resultado": "A implementação avançou sem interromper projetos, e cada área recebeu ferramentas pensadas para a sua rotina.",
     "licao": "Dar autonomia a um time especializado e um ponto de contato em cada área acelera mudanças grandes.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CEO"
   },
   {
     "id": "C007",
@@ -109,14 +150,17 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Diretoria",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Lívia planejou a fusão das áreas durante todo o semestre, mas muitas decisões estavam só na cabeça dela e de poucos diretores. Ela sairia antes de a fusão acontecer.",
     "dilema": "Como entregar para a Júlia não só o plano, mas os porquês de cada decisão.",
     "opcoes": null,
     "decisao": "Lívia fez a conversa de despedida no LegaCITi e registrou um caso para cada decisão importante da fusão, com o que foi considerado e descartado.",
     "resultado": "A Júlia começou 2027.1 com o kit do sucessor de CEO, que reúne o legado de todos os CEOs anteriores e as decisões da fusão.",
     "licao": "Numa passagem de gestão, o plano é a parte fácil de transmitir. O que se perde são os porquês.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CEO"
   },
   {
     "id": "C008",
@@ -126,14 +170,23 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Gente e Gestão",
-    "padroes": ["P4"],
+    "padroes": [
+      "P4"
+    ],
     "situacao": "No meio de 2024.2, metade dos squads estava atrasada. As mesmas cinco pessoas apareciam em quase todos os projetos.",
     "dilema": "Redistribuir pessoas no meio do semestre ou renegociar prazos com os clientes.",
-    "opcoes": ["Redistribuir pessoas entre os projetos", "Renegociar prazos com os clientes", "Pedir mais horas ao time"],
+    "opcoes": [
+      "Redistribuir pessoas entre os projetos",
+      "Renegociar prazos com os clientes",
+      "Pedir mais horas ao time"
+    ],
     "decisao": "Thiago mapeou quem estava em cada projeto e propôs que ninguém ficasse em mais de dois ao mesmo tempo, renegociando dois prazos.",
     "resultado": "Os projetos renegociados foram entregues bem, e o mapa de alocação passou a ser revisado toda semana.",
     "licao": "A sobrecarga aparece primeiro na alocação. Olhar quem está em cada projeto evita atrasos em cadeia.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "COO"
   },
   {
     "id": "C009",
@@ -150,7 +203,8 @@
     "decisao": "Thiago manteve um encontro mensal curto entre todas as áreas, mesmo nas semanas mais cheias.",
     "resultado": "Os membros relataram mais sensação de pertencimento, e problemas entre áreas passaram a ser resolvidos em conversa direta.",
     "licao": "Em períodos de crescimento, os ritos são os primeiros a serem cortados e os que mais fazem falta.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "COO"
   },
   {
     "id": "C010",
@@ -160,14 +214,23 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Desenvolvimento",
-    "padroes": ["P5"],
+    "padroes": [
+      "P5"
+    ],
     "situacao": "Um cliente pediu melhorias num sistema entregue um ano antes. A única pessoa que conhecia a arquitetura tinha saído do CITi e não havia documentação.",
     "dilema": "Reescrever partes do sistema ou investir tempo em entender o código existente.",
-    "opcoes": ["Reescrever as partes afetadas", "Estudar o código e documentar antes de mudar", "Recusar as melhorias"],
+    "opcoes": [
+      "Reescrever as partes afetadas",
+      "Estudar o código e documentar antes de mudar",
+      "Recusar as melhorias"
+    ],
     "decisao": "Camila separou duas semanas para estudar e documentar o sistema antes de qualquer mudança.",
     "resultado": "As melhorias foram feitas com segurança, e a documentação virou modelo para os projetos seguintes.",
     "licao": "Código sem documentação é conhecimento que sai junto com quem o escreveu.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "CTO"
   },
   {
     "id": "C011",
@@ -177,14 +240,17 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Desenvolvimento",
-    "padroes": ["P2"],
+    "padroes": [
+      "P2"
+    ],
     "situacao": "Quando um projeto mudava de squad, cada time fazia a passagem do seu jeito. Informações importantes, como acessos e combinados com o cliente, se perdiam.",
     "dilema": "Criar um processo obrigatório ou confiar no bom senso de cada time.",
     "opcoes": null,
     "decisao": "Camila criou um roteiro curto de passagem, com acessos, decisões técnicas e combinados com o cliente.",
     "resultado": "As passagens ficaram mais rápidas e as dúvidas do time que recebia o projeto caíram bastante.",
     "licao": "Uma passagem bem feita cabe em um roteiro curto. O difícil é garantir que ele seja usado.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CTO"
   },
   {
     "id": "C012",
@@ -194,14 +260,23 @@
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Gente e Gestão",
-    "padroes": ["P4"],
+    "padroes": [
+      "P4"
+    ],
     "situacao": "Como COO, Júlia percebeu que a alocação de pessoas era decidida por cada gerente, sem visão do todo. Alguns membros estavam em três projetos, outros em nenhum.",
     "dilema": "Centralizar a alocação em Gente e Gestão ou manter a autonomia dos gerentes.",
-    "opcoes": ["Centralizar a alocação", "Manter a autonomia dos gerentes", "Criar um painel de alocação compartilhado"],
+    "opcoes": [
+      "Centralizar a alocação",
+      "Manter a autonomia dos gerentes",
+      "Criar um painel de alocação compartilhado"
+    ],
     "decisao": "Júlia criou um painel de alocação compartilhado, revisado a cada duas semanas com os gerentes.",
     "resultado": "A distribuição ficou mais equilibrada e os gerentes passaram a negociar pessoas entre si com dados.",
     "licao": "Visibilidade resolve mais do que controle. Quando todos veem a alocação, o equilíbrio vem mais fácil.",
-    "simulacao": {"tipo": "escolha"}
+    "simulacao": {
+      "tipo": "escolha"
+    },
+    "cargoAutor": "COO"
   },
   {
     "id": "C013",
@@ -218,7 +293,8 @@
     "decisao": "Júlia está revisando cada decisão do plano com os novos diretores, a partir dos casos deixados pela Lívia.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CEO"
   },
   {
     "id": "C014",
@@ -228,14 +304,24 @@
     "origem": "squad",
     "projeto": null,
     "area": "Comercial",
-    "padroes": ["P2"],
+    "padroes": [
+      "P2"
+    ],
     "situacao": "Para fechar um contrato com uma academia, Davi prometeu integração com o aplicativo de pagamentos que o cliente já usava. A promessa não entrou na passada de bastão.",
     "dilema": "Admitir a falha ao time e ao cliente ou tentar encaixar a integração sem renegociar.",
-    "opcoes": ["Pedir ao time que encaixe a integração", "Renegociar prazo e escopo com o cliente", "Retirar a promessa"],
+    "opcoes": [
+      "Pedir ao time que encaixe a integração",
+      "Renegociar prazo e escopo com o cliente",
+      "Retirar a promessa"
+    ],
     "decisao": "Davi reuniu o time, explicou a promessa e renegociou duas semanas a mais com o cliente.",
     "resultado": "A integração foi entregue e o cliente valorizou a transparência. Davi passou a revisar a passada de bastão com o gerente do projeto.",
     "licao": "Tudo o que foi prometido precisa estar na passada de bastão, principalmente o que parece pequeno na hora da venda.",
-    "simulacao": {"tipo": "conversa", "personagem": "Dono de uma academia, animado com o projeto e com pressa"}
+    "simulacao": {
+      "tipo": "conversa",
+      "personagem": "Dono de uma academia, animado com o projeto e com pressa"
+    },
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C015",
@@ -252,6 +338,7 @@
     "decisao": "Davi começou com um planejamento comercial único e reuniões semanais conjuntas, mantendo as rotinas de cada subárea por enquanto.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CRO"
   }
 ]

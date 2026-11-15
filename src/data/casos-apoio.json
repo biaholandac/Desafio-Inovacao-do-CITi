@@ -16,7 +16,8 @@
     "decisao": "Bianca manteve a meta e aceitou os projetos.",
     "resultado": "Os projetos fora do perfil consumiram mais tempo do time e geraram atrasos.",
     "licao": "Meta de vendas precisa vir acompanhada de um perfil claro de cliente.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CRO"
   },
   {
     "id": "C064",
@@ -33,7 +34,8 @@
     "decisao": "André definiu uma tecnologia padrão para novos aplicativos.",
     "resultado": "Os membros passaram a circular entre projetos com mais facilidade.",
     "licao": "Padronizar o que se repete libera energia para o que é único em cada projeto.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CTO"
   },
   {
     "id": "C065",
@@ -52,7 +54,8 @@
     "decisao": "Paula redistribuiu pessoas e limitou a dois projetos por membro.",
     "resultado": "Os atrasos diminuíram nas semanas seguintes.",
     "licao": "O limite de projetos por pessoa precisa ser regra, não exceção.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "COO"
   },
   {
     "id": "C066",
@@ -71,7 +74,8 @@
     "decisao": "Leonardo reforçou o checklist de passada de bastão e tornou o uso obrigatório.",
     "resultado": "As passadas de bastão ficaram mais completas.",
     "licao": "O que é prometido na venda precisa estar escrito antes do projeto começar.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CRO"
   },
   {
     "id": "C067",
@@ -88,7 +92,8 @@
     "decisao": "Tatiana definiu uma pessoa por squad para adotar as ferramentas primeiro e ensinar o resto do time.",
     "resultado": "A adoção aconteceu sem atrasar entregas.",
     "licao": "Mudanças de ferramenta funcionam melhor com alguém de referência dentro de cada time.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CTO"
   },
   {
     "id": "C068",
@@ -107,7 +112,8 @@
     "decisao": "Bernardo vendeu como produto padrão, com alguém da Inovação na reunião.",
     "resultado": "O cliente entendeu o que estava comprando desde o começo.",
     "licao": "Produto pronto se vende diferente de projeto: quem conhece o produto precisa estar na venda.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "CRO"
   },
   {
     "id": "C069",
@@ -124,7 +130,8 @@
     "decisao": "Priscila está integrando os New Pigs direto na nova estrutura, com apoio das trilhas do LegaCITi.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "COO"
   },
   {
     "id": "C070",
@@ -143,7 +150,8 @@
     "decisao": "João Victor refez a tela três vezes.",
     "resultado": "Duas semanas foram gastas numa única tela.",
     "licao": "Feche a definição com o cliente antes de construir, e registre o que foi decidido.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C071",
@@ -160,7 +168,8 @@
     "decisao": "Sérgio entregou no prazo, sem testes.",
     "resultado": "O aplicativo apresentou falhas na primeira semana de uso.",
     "licao": "Pular testes não economiza tempo, só transfere o problema para o cliente.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C072",
@@ -179,7 +188,8 @@
     "decisao": "Daniel publicou na véspera.",
     "resultado": "O sistema do cliente ficou fora do ar por algumas horas.",
     "licao": "Publicação nunca deve ficar para a última hora, principalmente quando o time está sobrecarregado.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C073",
@@ -198,7 +208,8 @@
     "decisao": "Pietro seguiu com os três.",
     "resultado": "Nenhum dos projetos teve a atenção que precisava.",
     "licao": "Gerenciar bem um projeto exige tempo. Três ao mesmo tempo dividem a atenção em partes pequenas demais.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de software"
   },
   {
     "id": "C074",
@@ -217,7 +228,8 @@
     "decisao": "Carolina seguiu com o desenvolvimento.",
     "resultado": "Quando o cliente voltou, pediu mudanças que invalidaram parte do trabalho.",
     "licao": "Aprovação de protótipo não substitui acompanhamento. Combine validações ao longo do projeto.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de software"
   },
   {
     "id": "C075",
@@ -236,7 +248,8 @@
     "decisao": "Rodrigo estudou o código e documentou enquanto entendia.",
     "resultado": "As próximas manutenções ficaram muito mais rápidas.",
     "licao": "Quem herda código sem documentação pode quebrar o ciclo documentando para o próximo.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C076",
@@ -255,7 +268,8 @@
     "decisao": "Letícia aceitou e organizou rituais em dias alternados.",
     "resultado": "Funcionou por um tempo, mas um dos squads sentiu falta de acompanhamento.",
     "licao": "Acúmulo de gestão é solução temporária, não modelo.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de software"
   },
   {
     "id": "C077",
@@ -274,7 +288,8 @@
     "decisao": "Fernanda mostrou toda sexta, mesmo incompleto.",
     "resultado": "O projeto andou sem surpresas e foi entregue no prazo.",
     "licao": "Validação frequente reduz o risco de retrabalho.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C078",
@@ -293,7 +308,8 @@
     "decisao": "Arthur marcou conversas curtas com a pessoa e registrou tudo.",
     "resultado": "O registro ajudou também quem entrou depois dele.",
     "licao": "Quem aprende com uma pessoa só deve registrar para que o próximo não dependa dela.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Pessoa desenvolvedora"
   },
   {
     "id": "C079",
@@ -312,7 +328,8 @@
     "decisao": "Gabriela considerou a aprovação suficiente.",
     "resultado": "A equipe do cliente estranhou o sistema e pediu mudanças.",
     "licao": "Aprovação de quem paga não é validação de quem usa.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Designer de produto"
   },
   {
     "id": "C080",
@@ -331,7 +348,8 @@
     "decisao": "Rebeca propôs ajustes ao cliente com base nas entrevistas.",
     "resultado": "O produto ficou mais simples e mais útil.",
     "licao": "Ouvir os usuários cedo muda o escopo para melhor, não para maior.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de produto"
   },
   {
     "id": "C081",
@@ -350,7 +368,8 @@
     "decisao": "Murilo escreveu com o cliente.",
     "resultado": "Na entrega, não houve discussão sobre o que estava pronto.",
     "licao": "Combinar o que é pronto antes de começar evita discussões no fim.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de produto"
   },
   {
     "id": "C082",
@@ -369,7 +388,8 @@
     "decisao": "Alice atualizou a biblioteca e definiu quem cuidaria dela a cada gestão.",
     "resultado": "A biblioteca voltou a ser usada.",
     "licao": "Material compartilhado precisa de um responsável em cada gestão.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Líder de design"
   },
   {
     "id": "C083",
@@ -388,7 +408,8 @@
     "decisao": "Diego pediu para incluir quem decide nas reuniões.",
     "resultado": "As decisões passaram a ser tomadas mais rápido.",
     "licao": "Descubra cedo quem decide. Essa informação deveria vir na passada de bastão.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de produto"
   },
   {
     "id": "C084",
@@ -407,7 +428,8 @@
     "decisao": "Lorena criou um guia visual simples.",
     "resultado": "Outros designers passaram a atender o cliente sem depender dela.",
     "licao": "Um guia visual transforma o conhecimento de uma pessoa em conhecimento do time.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Designer de produto"
   },
   {
     "id": "C085",
@@ -426,7 +448,8 @@
     "decisao": "Enzo incluiu o cliente.",
     "resultado": "As telas foram aprovadas sem retrabalho.",
     "licao": "Cliente presente nas revisões é cliente sem surpresas.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Designer de produto"
   },
   {
     "id": "C086",
@@ -445,7 +468,8 @@
     "decisao": "Lia partiu de um roteiro e adaptou as perguntas a cada entrevista.",
     "resultado": "A descoberta trouxe informações que mudaram a proposta para melhor.",
     "licao": "Um roteiro é ponto de partida, não limite.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de produto"
   },
   {
     "id": "C087",
@@ -464,7 +488,8 @@
     "decisao": "Vitória esperou.",
     "resultado": "O projeto ficou parado e o prazo foi perdido.",
     "licao": "Combine no contrato quando os dados devem chegar e o que acontece se atrasarem.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C088",
@@ -481,7 +506,8 @@
     "decisao": "Heloísa revisou e padronizou o formato de entrega.",
     "resultado": "Os clientes passaram a entender os relatórios com mais facilidade.",
     "licao": "Padrão de entrega é parte da qualidade do trabalho.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Líder de dados"
   },
   {
     "id": "C089",
@@ -500,7 +526,8 @@
     "decisao": "Ícaro seguiu sozinho.",
     "resultado": "Dois projetos atrasaram.",
     "licao": "Pedir ajuda cedo é sinal de responsabilidade, não de fraqueza.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C090",
@@ -519,7 +546,8 @@
     "decisao": "Wesley entregou mesmo assim.",
     "resultado": "O painel nunca foi usado.",
     "licao": "Painel sem participação do cliente vira painel sem uso.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C091",
@@ -538,7 +566,8 @@
     "decisao": "Gustavo renegociou o escopo com o cliente.",
     "resultado": "O projeto mudou, com novo prazo combinado.",
     "licao": "Quando o pedido muda de natureza, o escopo precisa ser renegociado, não absorvido.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de dados"
   },
   {
     "id": "C092",
@@ -557,7 +586,8 @@
     "decisao": "Manuela documentou as consultas no repositório comum.",
     "resultado": "Novos analistas passaram a reaproveitar o trabalho dela.",
     "licao": "Cada consulta documentada é uma hora economizada para quem vem depois.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C093",
@@ -574,7 +604,8 @@
     "decisao": "Renan revisou os pontos críticos e confiou no restante.",
     "resultado": "O projeto foi entregue mais rápido e com qualidade.",
     "licao": "IA acelera, mas a revisão dos pontos críticos continua sendo de quem entrega.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de dados"
   },
   {
     "id": "C094",
@@ -593,7 +624,8 @@
     "decisao": "Amanda fechou rápido.",
     "resultado": "O cliente e o squad entenderam o projeto de formas diferentes.",
     "licao": "Escopo não escrito é escopo em disputa.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C095",
@@ -612,7 +644,8 @@
     "decisao": "Fábio vendeu sem verificar.",
     "resultado": "O squad descobriu que metade dos dados não existia.",
     "licao": "Em projetos de dados, verificar os dados vem antes da proposta.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C096",
@@ -631,7 +664,8 @@
     "decisao": "Ricardo enviou logo.",
     "resultado": "O prazo era curto demais, e o projeto atrasou.",
     "licao": "Prazo na proposta precisa vir de quem vai fazer o trabalho.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C097",
@@ -650,7 +684,8 @@
     "decisao": "Jéssica combinou uma reunião fixa a cada quinze dias.",
     "resultado": "O cliente passou a participar mais e as decisões foram registradas.",
     "licao": "Combine um ritmo de contato que funcione para o cliente e para o time.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C098",
@@ -669,7 +704,8 @@
     "decisao": "Elisa gravou e compartilhou com o squad.",
     "resultado": "Membros que entraram depois no projeto conseguiram entender o contexto.",
     "licao": "Uma passada de bastão gravada continua útil para quem chega depois.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C099",
@@ -688,7 +724,8 @@
     "decisao": "Nicolas formalizou no contrato.",
     "resultado": "O cliente participou de todas as reuniões e o projeto foi entregue no prazo.",
     "licao": "Envolvimento do cliente combinado no contrato vira compromisso dos dois lados.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C100",
@@ -705,7 +742,8 @@
     "decisao": "Clarice está usando os dados das campanhas para preparar cada reunião de venda.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Gerente de contas"
   },
   {
     "id": "C101",
@@ -722,7 +760,8 @@
     "decisao": "Cecília passou a medir pela qualidade dos contatos.",
     "resultado": "As campanhas seguintes foram ajustadas ao perfil ideal.",
     "licao": "O número que importa é o de clientes certos.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C102",
@@ -741,7 +780,8 @@
     "decisao": "Raquel atualizou e definiu um responsável por semana.",
     "resultado": "O calendário passou a ser confiável.",
     "licao": "Informação que só uma pessoa atualiza vira informação que ninguém confia.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C103",
@@ -760,7 +800,8 @@
     "decisao": "Marcelo recuperou os acessos e registrou os responsáveis por cada um.",
     "resultado": "As trocas seguintes não perderam acessos.",
     "licao": "Acessos precisam de dono e de registro, principalmente na troca de gestão.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C104",
@@ -777,7 +818,8 @@
     "decisao": "Sabrina focou nos resultados para os clientes.",
     "resultado": "Os conteúdos geraram interesse de novas empresas.",
     "licao": "Resultado convence mais do que tecnologia.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C105",
@@ -794,7 +836,8 @@
     "decisao": "Hugo está montando o calendário a partir das dúvidas que os clientes trazem nas reuniões.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de marketing"
   },
   {
     "id": "C106",
@@ -813,7 +856,8 @@
     "decisao": "Valéria redistribuiu os projetos, mas sem registro do que cada um estava fazendo.",
     "resultado": "Os novos responsáveis levaram semanas para retomar.",
     "licao": "Toda saída precisa de uma passagem, mesmo no meio do semestre.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Especialista de Gente e Gestão"
   },
   {
     "id": "C107",
@@ -832,7 +876,8 @@
     "decisao": "Luana divulgou o resultado e propôs ações com a diretoria.",
     "resultado": "A alocação passou a ser revista com mais frequência.",
     "licao": "Dado de clima só tem valor quando vira ação.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C108",
@@ -851,7 +896,8 @@
     "decisao": "Kevin simplificou a planilha e treinou quem assumiria.",
     "resultado": "A transição financeira aconteceu sem problemas.",
     "licao": "Ferramenta que só uma pessoa entende é risco para a empresa.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C109",
@@ -870,7 +916,8 @@
     "decisao": "Bruno compartilhou o mapa com todos os gerentes.",
     "resultado": "Os gerentes passaram a negociar pessoas entre si.",
     "licao": "Quando todos veem a alocação, a sobrecarga é percebida mais cedo.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Especialista de Gente e Gestão"
   },
   {
     "id": "C110",
@@ -887,7 +934,8 @@
     "decisao": "Ela manteve o roteiro e adaptou as perguntas ao momento de cada projeto.",
     "resultado": "Os squads relataram retrospectivas mais úteis.",
     "licao": "Um bom roteiro de retrospectiva se adapta ao momento do time.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C111",
@@ -904,7 +952,8 @@
     "decisao": "Joana está combinando uma recepção geral com encontros por área.",
     "resultado": "Em andamento.",
     "licao": null,
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C112",
@@ -921,7 +970,8 @@
     "decisao": "Yuri construiu uma ferramenta de IA que automatizou o processo de ponta a ponta, testada com a área antes de ser liberada.",
     "resultado": "A área passou a dedicar o tempo economizado ao acompanhamento das pessoas.",
     "licao": "A melhor automação é a que devolve tempo para o que só pessoas fazem.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C113",
@@ -938,7 +988,8 @@
     "decisao": "Mirela criou uma ferramenta sob medida, junto com os analistas de Dados.",
     "resultado": "A etapa que levava horas passou a levar minutos.",
     "licao": "Ferramenta sob medida nasce de conversa com quem faz o trabalho.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C114",
@@ -955,7 +1006,8 @@
     "decisao": "Caíque mediu o tempo das tarefas antes e depois das ferramentas.",
     "resultado": "O CITi passou a ter números para mostrar o impacto da IA.",
     "licao": "Medir o impacto ajuda a decidir quais ferramentas construir a seguir.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   },
   {
     "id": "C115",
@@ -974,6 +1026,7 @@
     "decisao": "Tainá documentou cada ferramenta durante a construção.",
     "resultado": "As ferramentas passaram a ser mantidas por qualquer pessoa da Inovação.",
     "licao": "Ferramenta bem documentada continua impecável mesmo quando o time muda.",
-    "simulacao": null
+    "simulacao": null,
+    "cargoAutor": "Time de Inovação"
   }
 ]
