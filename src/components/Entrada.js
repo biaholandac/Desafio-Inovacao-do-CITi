@@ -14,11 +14,23 @@ import estilos from "./Entrada.module.css";
 export default function Entrada() {
   const router = useRouter();
   const [area, setArea] = useState(null);
+  const [subarea, setSubarea] = useState(null);
   const posicoes = useMemo(() => posicionarCasos(casos, gestoes, pessoaPorId), []);
 
   function escolherArea(a) {
-    if (a.cargos.length === 1) return entrar(a.cargos[0].id);
+    if (a.cargos.length === 1 && !a.cargos[0].cargos) return entrar(a.cargos[0].id);
     setArea(a);
+  }
+
+  function escolherItem(item) {
+    if (!item.cargos) return entrar(item.id);
+    if (item.cargos.length === 1) return entrar(item.cargos[0].id);
+    setSubarea(item);
+  }
+
+  function voltar() {
+    if (subarea) setSubarea(null);
+    else setArea(null);
   }
 
   function entrar(cargoId) {
@@ -43,8 +55,10 @@ export default function Entrada() {
         <div className={estilos.pilula} aria-live="polite">
           {area ? (
             <>
-              <button className={estilos.voltar} onClick={() => setArea(null)} aria-label="Voltar para as áreas">←</button>
-              <span className={estilos.passo}><strong>{area.nome}</strong> · {area.pergunta ?? "escolha o seu cargo"}</span>
+              <button className={estilos.voltar} onClick={voltar} aria-label="Voltar">←</button>
+              <span className={estilos.passo}>
+                <strong>{area.nome}{subarea ? ` › ${subarea.nome}` : ""}</strong> · {subarea ? "escolha o seu cargo" : area.pergunta ?? "escolha o seu cargo"}
+              </span>
             </>
           ) : (
             <span className={estilos.passo}>Entrar como… <strong>escolha a sua área</strong></span>
@@ -52,9 +66,13 @@ export default function Entrada() {
         </div>
 
         <div className={estilos.atalhos}>
-          {area
-            ? area.cargos.map((c) => (
+          {subarea
+            ? subarea.cargos.map((c) => (
                 <button key={c.id} className={estilos.atalho} onClick={() => entrar(c.id)}>{c.nome}</button>
+              ))
+            : area
+            ? area.cargos.map((c) => (
+                <button key={c.id} className={estilos.atalho} onClick={() => escolherItem(c)}>{c.nome}</button>
               ))
             : AREAS.map((a) => (
                 <button key={a.id} onClick={() => escolherArea(a)}

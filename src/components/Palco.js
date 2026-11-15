@@ -123,7 +123,7 @@ export default function Palco({ cargo = null }) {
               <span className={estilos.avatar} aria-hidden="true">{entrada.area.nome.slice(0, 2).toUpperCase()}</span>
               <span className={estilos.usuarioTexto}>
                 <strong>{entrada.area.nome === entrada.cargo.nome ? entrada.cargo.nome : entrada.area.nome}</strong>
-                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : entrada.cargo.titulo ?? entrada.cargo.nome}</span>
+                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : entrada.cargo.nome}</span>
               </span>
             </Link>
           )}
@@ -242,7 +242,7 @@ export default function Palco({ cargo = null }) {
             </>
           ) : foco ? (
             <>
-              <div className={estilos.rotulo}>Para você · {entrada.cargo.titulo ?? entrada.cargo.nome}</div>
+              <div className={estilos.rotulo}>Para você · {entrada.cargo.nome}</div>
               <h3 className={estilos.tituloCaso}>
                 {entrada.cargo.id === "new-pig"
                   ? <>Bem-vindo ao CITi. <em>Comece pelo que quem chegou antes aprendeu.</em></>

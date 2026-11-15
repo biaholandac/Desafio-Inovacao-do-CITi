@@ -27,9 +27,17 @@ export function raiosDoAnel(indice, total) {
   return { interno: RAIO_NUCLEO + indice * w, externo: RAIO_NUCLEO + (indice + 1) * w };
 }
 
+// Num tronco real o centro não fica no meio: cada anel cresce um pouco mais
+// para um lado. O centro de cada círculo se desloca conforme o raio.
+const EXCENTRICIDADE = { x: 0.045, y: -0.028 };
+export function centroPara(raio) {
+  return { x: CENTRO.x + raio * EXCENTRICIDADE.x, y: CENTRO.y + raio * EXCENTRICIDADE.y };
+}
+
 export function ponto(raio, anguloGraus) {
   const a = (anguloGraus * Math.PI) / 180;
-  return { x: CENTRO.x + raio * Math.cos(a), y: CENTRO.y + raio * Math.sin(a) };
+  const c = centroPara(raio);
+  return { x: c.x + raio * Math.cos(a), y: c.y + raio * Math.sin(a) };
 }
 
 // Círculo levemente irregular, como um anel de árvore de verdade.
@@ -41,7 +49,8 @@ export function caminhoOndulado(raio, chave, intensidade = 0.007, inicio = 0, fi
   for (let i = 0; i <= passos; i++) {
     const ang = inicio + ((fim - inicio) * i) / passos;
     const t = (ang * Math.PI) / 180;
-    const r = raio * (1 + intensidade * Math.sin(3 * t + fase1) + intensidade * 0.6 * Math.sin(7 * t + fase2));
+    const r = raio * (1 + intensidade * Math.sin(3 * t + fase1) + intensidade * 0.6 * Math.sin(7 * t + fase2)
+      + intensidade * 0.3 * Math.sin(13 * t + fase1 * 2) + intensidade * 0.15 * Math.sin(29 * t + fase2 * 3));
     const p = ponto(r, ang);
     d += (i === 0 ? "M" : "L") + p.x.toFixed(1) + " " + p.y.toFixed(1);
   }
@@ -72,4 +81,23 @@ export function posicionarCasos(casos, gestoes, pessoaPorId) {
     });
   }
   return posicoes;
+}
+
+// Contorno rugoso da casca: muitas irregularidades pequenas.
+export function caminhoCasca(raio, chave = "casca") {
+  const passos = 260;
+  let d = "";
+  for (let i = 0; i <= passos; i++) {
+    const ang = (360 * i) / passos;
+    const t = (ang * Math.PI) / 180;
+    const rugas = 0.012 * Math.sin(3 * t + 1) + 0.006 * Math.sin(17 * t) + 0.009 * (semente(chave + i) - 0.5) + 0.004 * Math.sin(41 * t + 2);
+    const p = ponto(raio * (1 + rugas), ang);
+    d += (i === 0 ? "M" : "L") + p.x.toFixed(1) + " " + p.y.toFixed(1);
+  }
+  return d + "Z";
+}
+
+// Faixa entre dois raios (anel cheio), para pintar madeira clara e escura.
+export function caminhoFaixa(raioInterno, raioExterno, chave) {
+  return caminhoOndulado(raioExterno, chave + "e", 0.007) + caminhoOndulado(raioInterno, chave + "i", 0.007);
 }

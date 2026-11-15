@@ -8,23 +8,30 @@ export const AREAS = [
     { id: "cro", nome: "CRO", pessoa: 7 },
   ] },
   { id: "ondas", nome: "Ondas", pergunta: "escolha a subárea da qual você faz parte", cargos: [
-    { id: "lider-dev", nome: "Desenvolvimento", titulo: "Liderança de Desenvolvimento", pessoa: 10 },
-    { id: "lider-dados", nome: "Dados", titulo: "Liderança de Dados", pessoa: 18 },
-    { id: "lider-produto", nome: "Produto", titulo: "Liderança de Produto", pessoa: 14 },
-    { id: "lider-inovacao", nome: "Inovação", titulo: "Liderança de Inovação", pessoa: 28 },
-    { id: "lider-comercial", nome: "Comercial", titulo: "Liderança de Comercial", pessoa: 21 },
-    { id: "lider-marketing", nome: "Marketing", titulo: "Liderança de Marketing", pessoa: 24 },
+    { id: "ondas-dev", nome: "Desenvolvimento", cargos: [
+      { id: "lider-dev", nome: "Líder de desenvolvimento", pessoa: 10 },
+      { id: "gerente-software", nome: "Gerente de software", pessoa: 10 },
+    ] },
+    { id: "ondas-dados", nome: "Dados", cargos: [
+      { id: "lider-dados", nome: "Líder de dados", pessoa: 18 },
+      { id: "gerente-dados", nome: "Gerente de dados", pessoa: 16 },
+    ] },
+    { id: "ondas-produto", nome: "Produto", cargos: [
+      { id: "lider-produto", nome: "Líder de produto", pessoa: 14 },
+      { id: "gerente-produto", nome: "Gerente de produto", pessoa: 14 },
+    ] },
+    { id: "ondas-inovacao", nome: "Inovação", cargos: [{ id: "lider-inovacao", nome: "Líder de Inovação", pessoa: 28 }] },
+    { id: "ondas-comercial", nome: "Comercial", cargos: [{ id: "lider-comercial", nome: "Líder de Comercial", pessoa: 21 }] },
+    { id: "ondas-marketing", nome: "Marketing", cargos: [{ id: "lider-marketing", nome: "Líder de Marketing", pessoa: 24 }] },
   ] },
   { id: "tech", nome: "Tech", cargos: [
     { id: "dev", nome: "Pessoa desenvolvedora", pessoa: 11 },
     { id: "analista-dados", nome: "Analista de dados", pessoa: 60 },
-    { id: "gerente-software", nome: "Gerente de software", pessoa: 10 },
-    { id: "gerente-dados", nome: "Gerente de dados", pessoa: 16 },
   ] },
   { id: "produto", nome: "Produto", cargos: [
     { id: "analista-produto", nome: "Analista de produto", pessoa: 51 },
     { id: "designer", nome: "Designer de produto", pessoa: 52 },
-    { id: "gerente-produto", nome: "Gerente de produto", pessoa: 14 },
+    { id: "especialista-produto", nome: "Especialista de produto", pessoa: 51 },
   ] },
   { id: "negocios", nome: "Negócios", cargos: [
     { id: "gerente-contas", nome: "Gerente de contas", pessoa: 22 },
@@ -50,6 +57,7 @@ export const FOCO = {
   "lider-dev": { papeis: ["Gerente de software"], areas: DEV },
   "lider-dados": { papeis: ["Líder de dados", "Gerente de dados"], areas: DADOS },
   "lider-produto": { papeis: ["Gerente de produto", "Líder de design"], areas: PRODUTO },
+  "especialista-produto": { papeis: ["Analista de produto", "Designer de produto"], areas: PRODUTO },
   "lider-inovacao": { papeis: ["Time de Inovação"], areas: ["Inovação"] },
   "lider-comercial": { papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
   "lider-marketing": { papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },
@@ -79,10 +87,17 @@ export function relevancia(caso, cargoId) {
   return 0;
 }
 
+// Acha um cargo pelo id, inclusive dentro das subáreas das Ondas.
 export function acharCargo(id) {
   for (const area of AREAS) {
-    const cargo = area.cargos.find((c) => c.id === id);
-    if (cargo) return { area, cargo };
+    for (const item of area.cargos) {
+      if (item.cargos) {
+        const cargo = item.cargos.find((c) => c.id === id);
+        if (cargo) return { area, subarea: item, cargo };
+      } else if (item.id === id) {
+        return { area, subarea: null, cargo: item };
+      }
+    }
   }
   return null;
 }

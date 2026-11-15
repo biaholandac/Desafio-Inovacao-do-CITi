@@ -1,25 +1,49 @@
 .casca {
-  fill: #0a0f0b;
-  stroke: rgba(56, 230, 130, 0.35);
-  stroke-width: 1.2;
+  fill: #060807;
+  stroke: rgba(56, 230, 130, 0.22);
+  stroke-width: 1;
 }
 
-.marcasCasca path {
-  stroke: rgba(56, 230, 130, 0.18);
-  stroke-width: 1.4;
+.cascaTextura {
+  fill: #0b120d;
+  filter: url(#texturaCasca);
+  opacity: 0.9;
+}
+
+.fissuras path {
+  stroke: rgba(141, 255, 192, 0.10);
+  stroke-width: 1.6;
   stroke-linecap: round;
+}
+.fissuras .fissuraForte {
+  stroke: rgba(0, 0, 0, 0.95);
+  stroke-width: 3.2;
+}
+
+.cambio {
+  stroke: rgba(56, 230, 130, 0.55);
+  stroke-width: 1.4;
+}
+
+.faixas path {
+  fill: rgba(56, 230, 130, 0.045);
+}
+
+.raiosMedulares path {
+  stroke: rgba(141, 255, 192, 0.05);
+  stroke-width: 0.6;
 }
 
 .crescimento path {
   fill: none;
-  stroke: rgba(56, 230, 130, 0.17);
-  stroke-width: 0.6;
+  stroke: rgba(56, 230, 130, 0.14);
+  stroke-width: 0.5;
 }
 
 .rachaduras path {
-  fill: none;
-  stroke: rgba(0, 0, 0, 0.7);
-  stroke-width: 1.6;
+  fill: #010302;
+  stroke: rgba(56, 230, 130, 0.25);
+  stroke-width: 0.6;
 }
 
 .anel {

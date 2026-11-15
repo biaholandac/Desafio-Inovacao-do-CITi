@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 import {
-  CENTRO, RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
-  raiosDoAnel, caminhoOndulado, ponto, semente,
+  RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
+  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente,
 } from "@/lib/geometria";
 import estilos from "./Tronco.module.css";
 
@@ -17,29 +17,55 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     gestoes.forEach((g, i) => {
       if (g.status === "em_formacao") return;
       const { interno, externo } = raiosDoAnel(i, total);
-      for (let k = 1; k <= 5; k++) {
-        const r = interno + ((externo - interno) * k) / 6;
-        linhas.push({ chave: g.codigo + k, d: caminhoOndulado(r, g.codigo + k, 0.005) });
+      for (let k = 1; k <= 7; k++) {
+        const r = interno + ((externo - interno) * k) / 8 + (semente(g.codigo + k) - 0.5) * 2;
+        linhas.push({ chave: g.codigo + k, d: caminhoOndulado(r, g.codigo + k, 0.008) });
       }
     });
     return linhas;
   }, [gestoes, total]);
 
-  // Rachaduras radiais, como na madeira cortada.
-  const rachaduras = useMemo(() => [24, 151, 262].map((ang, i) => {
-    const a = ponto(RAIO_NUCLEO + 20, ang);
-    const meio = ponto(RAIO_EXTERNO * 0.6, ang + 3 * (semente("r" + i) - 0.5));
-    const b = ponto(RAIO_EXTERNO * (0.82 + 0.1 * semente("q" + i)), ang + 2);
-    return `M${a.x} ${a.y}L${meio.x} ${meio.y}L${b.x} ${b.y}`;
+  // Rachaduras em cunha, abertas na borda e finas perto do centro.
+  const rachaduras = useMemo(() => [[28, 0.86], [148, 0.62], [258, 0.74]].map(([ang, alcance], i) => {
+    const pts = [];
+    const passos = 9;
+    for (let k = 0; k <= passos; k++) {
+      const r = RAIO_NUCLEO + 12 + (RAIO_EXTERNO * alcance - RAIO_NUCLEO - 12) * (k / passos);
+      const desvio = (semente("rc" + i + k) - 0.5) * 3;
+      const abertura = 0.5 + 7.5 * Math.pow(k / passos, 1.6);
+      pts.push([ponto(r, ang + desvio - abertura * (40 / r)), ponto(r, ang + desvio + abertura * (40 / r))]);
+    }
+    const ida = pts.map(([a]) => `${a.x.toFixed(1)} ${a.y.toFixed(1)}`).join("L");
+    const volta = pts.reverse().map(([, b]) => `${b.x.toFixed(1)} ${b.y.toFixed(1)}`).join("L");
+    return `M${ida}L${volta}Z`;
   }), []);
 
-  // Casca: borda irregular por fora do último anel.
-  const casca = useMemo(() => caminhoOndulado(RAIO_EXTERNO + 22, "casca", 0.014), []);
-  const marcasCasca = useMemo(() => Array.from({ length: 90 }, (_, i) => {
-    const ang = i * 4 + semente("m" + i) * 3;
-    const a = ponto(RAIO_EXTERNO + 4, ang);
-    const b = ponto(RAIO_EXTERNO + 14 + 10 * semente("n" + i), ang + 1);
-    return `M${a.x} ${a.y}L${b.x} ${b.y}`;
+  // Raios da madeira: linhas muito finas da medula até a casca.
+  const raiosMedulares = useMemo(() => Array.from({ length: 48 }, (_, i) => {
+    const ang = i * 7.5 + semente("rm" + i) * 4;
+    const a = ponto(RAIO_NUCLEO + 8 + semente("ra" + i) * 60, ang);
+    const b = ponto(RAIO_EXTERNO * (0.7 + 0.28 * semente("rb" + i)), ang);
+    return `M${a.x.toFixed(1)} ${a.y.toFixed(1)}L${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+  }), []);
+
+  // Faixas alternadas de madeira clara e escura, uma por anel.
+  const faixas = useMemo(() => gestoes.map((g, i) => {
+    if (g.status === "em_formacao") return null;
+    const { interno, externo } = raiosDoAnel(i, total);
+    const meio = interno + (externo - interno) * (0.55 + 0.2 * semente(g.codigo));
+    return { chave: g.codigo, d: caminhoFaixa(meio, externo, g.codigo) };
+  }).filter(Boolean), [gestoes, total]);
+
+  // Casca grossa e rugosa, com fissuras.
+  const casca = useMemo(() => caminhoCasca(RAIO_EXTERNO + 40), []);
+  const cascaInterna = useMemo(() => caminhoOndulado(RAIO_EXTERNO + 5, "cambio", 0.006), []);
+  const fissuras = useMemo(() => Array.from({ length: 200 }, (_, i) => {
+    const ang = i * 1.8 + semente("f" + i) * 1.5;
+    const ini = RAIO_EXTERNO + 6 + semente("g" + i) * 6;
+    const fim = RAIO_EXTERNO + 22 + semente("h" + i) * 20;
+    const a = ponto(ini, ang);
+    const b = ponto(fim, ang + (semente("k" + i) - 0.5) * 2.5);
+    return { d: `M${a.x.toFixed(1)} ${a.y.toFixed(1)}L${b.x.toFixed(1)} ${b.y.toFixed(1)}`, forte: semente("j" + i) > 0.7 };
   }), []);
 
   // Pontos do padrão ativo, em ordem de gestão, ligados por uma linha.
@@ -55,10 +81,11 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
   return (
     <g>
       <defs>
-        <radialGradient id="madeira" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#0f2a1a" />
-          <stop offset="70%" stopColor="#08140d" />
-          <stop offset="100%" stopColor="#050a07" />
+        <radialGradient id="madeira" cx="47%" cy="52%" r="55%">
+          <stop offset="0%" stopColor="#11301d" />
+          <stop offset="55%" stopColor="#0a1c11" />
+          <stop offset="88%" stopColor="#0d2416" />
+          <stop offset="100%" stopColor="#061009" />
         </radialGradient>
         <filter id="brilho" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="3" result="b" />
@@ -68,15 +95,25 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
           <feGaussianBlur stdDeviation="7" result="b" />
           <feMerge><feMergeNode in="b" /><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
+        <filter id="texturaCasca" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.09 0.02" numOctaves="3" seed="4" result="r" />
+          <feColorMatrix in="r" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.35  0 0 0 0 0.2  0 0 0 1.6 -0.75" />
+          <feComposite in2="SourceGraphic" operator="in" />
+        </filter>
       </defs>
 
-      {/* Casca e corte da madeira */}
+      {/* Casca */}
       <path d={casca} className={estilos.casca} />
-      <g className={estilos.marcasCasca}>{marcasCasca.map((d, i) => <path key={i} d={d} />)}</g>
-      <circle cx={CENTRO.x} cy={CENTRO.y} r={RAIO_EXTERNO + 2} fill="url(#madeira)" />
+      <path d={casca} className={estilos.cascaTextura} />
+      <g className={estilos.fissuras}>{fissuras.map((f, i) => <path key={i} d={f.d} className={f.forte ? estilos.fissuraForte : undefined} />)}</g>
+
+      {/* Madeira */}
+      <path d={cascaInterna} fill="url(#madeira)" className={estilos.cambio} />
+      <g className={estilos.faixas}>{faixas.map((f) => <path key={f.chave} d={f.d} fillRule="evenodd" />)}</g>
+      <g className={estilos.raiosMedulares}>{raiosMedulares.map((d, i) => <path key={i} d={d} />)}</g>
 
       {/* Pulso do coração do tronco */}
-      <circle cx={CENTRO.x} cy={CENTRO.y} r={RAIO_EXTERNO} className={estilos.pulso} />
+      <circle cx={centroPara(RAIO_EXTERNO / 2).x} cy={centroPara(RAIO_EXTERNO / 2).y} r={RAIO_EXTERNO} className={estilos.pulso} />
 
       <g className={estilos.crescimento}>{linhasDeCrescimento.map((l) => <path key={l.chave} d={l.d} />)}</g>
       <g className={estilos.rachaduras}>{rachaduras.map((d, i) => <path key={i} d={d} />)}</g>
@@ -102,15 +139,15 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       })}
 
       {/* Núcleo */}
-      <circle cx={CENTRO.x} cy={CENTRO.y} r={RAIO_NUCLEO} className={estilos.nucleo} filter="url(#brilhoForte)" />
-      <circle cx={CENTRO.x} cy={CENTRO.y} r={6} className={estilos.centro} />
+      <circle cx={centroPara(RAIO_NUCLEO).x} cy={centroPara(RAIO_NUCLEO).y} r={RAIO_NUCLEO} className={estilos.nucleo} filter="url(#brilhoForte)" />
+      <circle cx={centroPara(0).x} cy={centroPara(0).y} r={6} className={estilos.centro} />
 
       {/* Áreas clicáveis de cada anel */}
       {gestoes.map((g, i) => {
         const { interno, externo } = raiosDoAnel(i, total);
         const meio = (interno + externo) / 2;
         return (
-          <circle key={"alvo" + g.codigo} cx={CENTRO.x} cy={CENTRO.y} r={meio} className={estilos.alvoAnel}
+          <circle key={"alvo" + g.codigo} cx={centroPara(meio).x} cy={centroPara(meio).y} r={meio} className={estilos.alvoAnel}
             strokeWidth={externo - interno} onClick={() => aoEscolherGestao(g.codigo)}>
             <title>{`Gestão ${g.codigo}`}</title>
           </circle>
@@ -150,7 +187,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       {SETORES.map((s, i) => {
         const fatia = 360 / SETORES.length;
         const meio = -90 + i * fatia + fatia / 2;
-        const r = RAIO_EXTERNO + 44;
+        const r = RAIO_EXTERNO + 64;
         const embaixo = Math.sin((meio * Math.PI) / 180) > 0.2;
         const a1 = ponto(r, meio - 30), a2 = ponto(r, meio + 30);
         const d = embaixo
