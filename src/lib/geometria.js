@@ -77,8 +77,41 @@ export function posicionarCasos(casos, gestoes, pessoaPorId) {
       const inicio = -90 + setor * fatia + 6;
       const angulo = inicio + ((i + 0.5) / lista.length) * (fatia - 12) + (semente(c.id) - 0.5) * 6;
       const raio = interno + (externo - interno) * (0.3 + 0.4 * semente(c.id + "r"));
-      posicoes[c.id] = { ...ponto(raio, angulo), angulo, raio };
+      posicoes[c.id] = { ...ponto(raio, angulo), angulo, raio, interno, externo };
     });
+  }
+  return afastarCasos(posicoes);
+}
+
+// Espalha os casos que ficaram muito perto uns dos outros na tela, sem tirá-los do seu anel:
+// cada par próximo se afasta ao longo do anel (ângulo) e um pouco na direção do centro (raio).
+function afastarCasos(posicoes, distanciaMinima = 22, voltas = 80) {
+  const ids = Object.keys(posicoes);
+  const tela = (q) => ({ x: CENTRO_TELA.x + (q.x - CENTRO.x) * ESCALA_X, y: CENTRO_TELA.y + (q.y - CENTRO.y) * ESCALA_Y });
+  for (let v = 0; v < voltas; v++) {
+    let mexeu = false;
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        const a = posicoes[ids[i]], b = posicoes[ids[j]];
+        const ta = tela(a), tb = tela(b);
+        const d = Math.hypot(ta.x - tb.x, ta.y - tb.y);
+        if (d >= distanciaMinima) continue;
+        mexeu = true;
+        const falta = (distanciaMinima - d) / 2 + 0.5;
+        // Quanto um grau de ângulo anda na tela, aproximadamente, neste raio.
+        const pxPorGrau = (r) => (r * Math.PI) / 180 * ((ESCALA_X + ESCALA_Y) / 2);
+        const sinal = a.angulo <= b.angulo ? -1 : 1;
+        a.angulo += (sinal * falta) / pxPorGrau(a.raio) * 0.7;
+        b.angulo -= (sinal * falta) / pxPorGrau(b.raio) * 0.7;
+        const sinalR = a.raio <= b.raio ? -1 : 1;
+        const passoR = (falta / ESCALA_Y) * 0.35;
+        a.raio = Math.min(a.externo - 6, Math.max(a.interno + 6, a.raio + sinalR * passoR));
+        b.raio = Math.min(b.externo - 6, Math.max(b.interno + 6, b.raio - sinalR * passoR));
+        Object.assign(a, ponto(a.raio, a.angulo));
+        Object.assign(b, ponto(b.raio, b.angulo));
+      }
+    }
+    if (!mexeu) break;
   }
   return posicoes;
 }
@@ -104,9 +137,14 @@ export function caminhoFaixa(raioInterno, raioExterno, chave) {
 
 // Perspectiva: o corte do tronco é visto de cima, então fica oval (achatado na vertical),
 // e sobe um pouco na tela para dar espaço ao tronco e às raízes.
-export const ESCALA_X = 0.92;
+export const ESCALA_X = 0.95;
 export const ESCALA_Y = 0.56;
-export const CENTRO_TELA = { x: 800, y: 300 };
+export const CENTRO_TELA = { x: 800, y: 275 };
+
+// Imagem do tronco com raízes (public/tronco.webp, 1632 x 1632), posicionada para que
+// o corte da imagem fique sob o corte interativo. O corte interativo é maior que o da foto,
+// para os anéis e os casos ficarem fáceis de ler e tocar.
+export const IMAGEM_TRONCO = { x: 34.6, y: 3.75, largura: 1403.5, altura: 1020 };
 export const TRANSFORMACAO_CORTE = `translate(${CENTRO_TELA.x} ${CENTRO_TELA.y}) scale(${ESCALA_X} ${ESCALA_Y}) translate(${-CENTRO.x} ${-CENTRO.y})`;
 export function naTela(p) {
   return { x: CENTRO_TELA.x + (p.x - CENTRO.x) * ESCALA_X, y: CENTRO_TELA.y + (p.y - CENTRO.y) * ESCALA_Y };

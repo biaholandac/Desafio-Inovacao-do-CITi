@@ -125,9 +125,11 @@
   transition: r 0.2s, opacity 0.3s;
 }
 
+.ponto { stroke: rgba(2, 10, 5, 0.85); stroke-width: 1.4; }
 .caso:hover .ponto {
   opacity: 1;
-  r: 5;
+  r: 8.5;
+  fill: #eafff2;
 }
 
 .pontoAceso {
@@ -136,13 +138,14 @@
 }
 
 .pontoApagado {
-  opacity: 0.22;
+  opacity: 0.5;
+  fill: #9fd9b8;
 }
 
 .pontoAndamento {
   fill: none;
   stroke: var(--verde-claro);
-  stroke-width: 1.2;
+  stroke-width: 1.8;
 }
 
 .linhaPadrao line {
@@ -220,3 +223,6 @@
 .hud .barraAtual { fill: var(--verde-claro); }
 .hud text { font-family: var(--fonte-texto); fill: rgba(237, 245, 239, 0.6); font-size: 10px; letter-spacing: 0.14em; }
 .hud .numero { font-family: var(--fonte-titulo); fill: var(--verde); font-size: 20px; letter-spacing: 0; font-weight: 700; }
+
+.foto { pointer-events: none; }
+.veuMadeira { fill: rgba(1, 10, 5, 0.5); stroke: rgba(80, 245, 150, 0.35); stroke-width: 1.2; }

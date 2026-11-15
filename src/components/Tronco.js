@@ -3,10 +3,20 @@
 import { useMemo } from "react";
 import {
   RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
-  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE,
+  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE, IMAGEM_TRONCO,
 } from "@/lib/geometria";
-import { montarArvore } from "@/lib/raizes";
 import estilos from "./Tronco.module.css";
+
+// O corte da foto (public/corte.webp) é um recorte de 430 x 240 px da imagem original, com o centro
+// da madeira em (212,5; 114,5) e raios de 162 x 95 px. Aqui ele é esticado para coincidir com a madeira do desenho.
+const RAIO_MADEIRA = RAIO_EXTERNO + 5;
+const CENTRO_MADEIRA = centroPara(RAIO_MADEIRA);
+const FOTO_CORTE = {
+  x: CENTRO_MADEIRA.x - 212.5 * (RAIO_MADEIRA / 162),
+  y: CENTRO_MADEIRA.y - 114.5 * (RAIO_MADEIRA / 95),
+  largura: 430 * (RAIO_MADEIRA / 162),
+  altura: 240 * (RAIO_MADEIRA / 95),
+};
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
 export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false }) {
@@ -42,9 +52,6 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     return { chave: g.codigo, d: caminhoFaixa(meio, externo, g.codigo) };
   }).filter(Boolean), [gestoes, total]);
 
-  // Tronco de pé, com raízes que se ramificam e mergulham no chão.
-  const arvore = useMemo(() => montarArvore(), []);
-
   // Painel HUD ligado ao tronco: casos por gestão, do centro para a casca.
   const hud = useMemo(() => {
     const contagem = gestoes.map((g) => casos.filter((c) => c.gestao === g.codigo).length);
@@ -52,13 +59,6 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     const alvo = { x: 520, y: 790 };
     return { contagem, max, alvo };
   }, [gestoes, casos]);
-
-  // Feixes de luz verde ao fundo.
-  const feixes = [
-    "M-50 760 C 300 700, 520 820, 820 640 S 1300 520, 1700 600",
-    "M-50 840 C 260 800, 600 880, 900 760 S 1350 700, 1700 760",
-    "M1700 180 C 1400 260, 1200 140, 980 230",
-  ];
 
   // Casca grossa e rugosa, com fissuras.
   const casca = useMemo(() => caminhoCasca(RAIO_EXTERNO + 40), []);
@@ -114,91 +114,39 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
           <feColorMatrix in="r" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.35  0 0 0 0 0.2  0 0 0 1.6 -0.75" />
           <feComposite in2="SourceGraphic" operator="in" />
         </filter>
-        {/* Casca nodosa: o relevo vem de um ruído iluminado; os nós pegam um brilho verde. */}
-        <filter id="relevoCasca" filterUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
-          <feTurbulence type="turbulence" baseFrequency="0.032 0.024" numOctaves="4" seed="11" result="ruido" />
-          <feDiffuseLighting in="ruido" surfaceScale="6" diffuseConstant="1" lightingColor="#24372c" result="difusa">
-            <feDistantLight azimuth="235" elevation="42" />
-          </feDiffuseLighting>
-          <feSpecularLighting in="ruido" surfaceScale="6" specularConstant="1.25" specularExponent="26" lightingColor="#3dff95" result="especular">
-            <feDistantLight azimuth="235" elevation="58" />
-          </feSpecularLighting>
-          <feComposite in="difusa" in2="especular" operator="arithmetic" k2="0.75" k3="0.5" result="luz" />
-          <feComposite in="luz" in2="SourceAlpha" operator="in" />
-        </filter>
-        <radialGradient id="fundirNoChao" gradientUnits="userSpaceOnUse" cx="800" cy="690" r="780" gradientTransform="translate(800 690) scale(1 0.42) translate(-800 -690)">
+        {/* A foto do tronco se dissolve no fundo nas bordas */}
+        <radialGradient id="fundirFoto" gradientUnits="userSpaceOnUse" cx="736" cy="420" r="720" gradientTransform="translate(736 420) scale(1 0.85) translate(-736 -420)">
           <stop offset="0%" stopColor="#fff" />
-          <stop offset="70%" stopColor="#fff" />
+          <stop offset="72%" stopColor="#fff" />
           <stop offset="100%" stopColor="#000" />
         </radialGradient>
-        <mask id="mascaraRaizes" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
-          <rect width="1600" height="900" fill="url(#fundirNoChao)" />
+        <mask id="mascaraFoto" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
+          <rect width="1600" height="900" fill="url(#fundirFoto)" />
         </mask>
+        <radialGradient id="sombraCorte" gradientUnits="userSpaceOnUse" cx="800" cy="300" r="420" gradientTransform="translate(800 300) scale(1 0.62) translate(-800 -300)">
+          <stop offset="70%" stopColor="#000" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0" />
+        </radialGradient>
       </defs>
 
-      {/* Feixes de luz */}
-      <g className={estilos.feixes} filter="url(#brilho)">{feixes.map((d, i) => <path key={i} d={d} />)}</g>
-
-      {/* Brilho no chão, na base da árvore */}
-      <ellipse cx={arvore.cx} cy={arvore.base + 30} rx="560" ry="46" fill="url(#chao)" />
-
-      {/* Raízes de trás, mais escuras, somem atrás do tronco */}
-      <g mask="url(#mascaraRaizes)">
-        <g className={estilos.raizAtras}>{arvore.raizesAtras.map((d, i) => <path key={i} d={d} />)}</g>
-        <g filter="url(#relevoCasca)" opacity="0.55">{arvore.raizesAtras.map((d, i) => <path key={i} d={d} />)}</g>
-      </g>
-
-      {/* Tronco e raízes da frente: uma peça só de casca */}
-      <clipPath id="recorteTronco">
-        <path d={arvore.corpo} />
-        {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
-      </clipPath>
-      <g mask="url(#mascaraRaizes)">
-        <g className={estilos.toraCorpo}>
-          <path d={arvore.corpo} />
-          {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
-        </g>
-        <g filter="url(#relevoCasca)">
-          <path d={arvore.corpo} />
-          {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
-        </g>
-        <g clipPath="url(#recorteTronco)">
-          <g className={estilos.sulcos}>{arvore.sulcos.map((s, i) => <path key={i} d={s.d} className={s.forte ? estilos.sulcoForte : undefined} />)}</g>
-          <rect x="0" y="0" width="1600" height="900" fill="url(#sombraTronco)" />
-        </g>
-        <g className={estilos.contornoTronco} filter="url(#brilho)">
-          <path d={arvore.corpo} />
-          {arvore.raizesFrente.map((d, i) => <path key={i} d={d} />)}
-        </g>
-        {/* Fissuras de luz: a seiva sobe das raízes até os anéis */}
-        <g filter="url(#brilho)">
-          {arvore.fissuras.map((f, i) => (
-            <g key={i}>
-              <path d={f.d} className={estilos.fissuraHalo} />
-              <path d={f.d} className={estilos.fissuraLuz} />
-              {f.ramos.map((r, k) => <path key={k} d={r} className={estilos.fissuraRamo} />)}
-              <path d={f.d} className={estilos.faisca} style={{ animationDelay: `${(i * 0.9) % 5}s` }} />
-            </g>
-          ))}
-        </g>
-      </g>
+      {/* Tronco com raízes: imagem de referência da autora, com o corte coberto pelo desenho interativo */}
+      <image href="/tronco.webp" x={IMAGEM_TRONCO.x} y={IMAGEM_TRONCO.y} width={IMAGEM_TRONCO.largura} height={IMAGEM_TRONCO.altura}
+        preserveAspectRatio="none" mask="url(#mascaraFoto)" className={estilos.foto} />
+      {/* Sombra sob a borda do corte, para ele assentar no tronco */}
+      <ellipse cx={naTela(centroPara(0)).x} cy={naTela(centroPara(0)).y + 22} rx="372" ry="214" fill="url(#sombraCorte)" opacity="0.7" />
 
       {/* Corte do tronco, visto em perspectiva */}
       <g transform={TRANSFORMACAO_CORTE}>
-      {/* Casca */}
-      <path d={casca} className={estilos.casca} />
-      <path d={casca} className={estilos.cascaTextura} />
-      <g className={estilos.fissuras}>{fissuras.map((f, i) => <path key={i} d={f.d} className={f.forte ? estilos.fissuraForte : undefined} />)}</g>
-
-      {/* Madeira */}
-      <path d={cascaInterna} fill="url(#madeira)" className={estilos.cambio} />
-      <g className={estilos.faixas}>{faixas.map((f) => <path key={f.chave} d={f.d} fillRule="evenodd" />)}</g>
-      <g className={estilos.raiosMedulares}>{raiosMedulares.map((d, i) => <path key={i} d={d} />)}</g>
+      {/* Madeira e casca da própria foto, ampliadas na medida dos anéis interativos (sem a rachadura) */}
+      <clipPath id="recorteCorte"><path d={casca} /></clipPath>
+      <image href="/corte.webp" x={FOTO_CORTE.x} y={FOTO_CORTE.y} width={FOTO_CORTE.largura} height={FOTO_CORTE.altura}
+        preserveAspectRatio="none" clipPath="url(#recorteCorte)" className={estilos.foto} />
+      {/* Véu escuro sobre a madeira, para os anéis das gestões e os casos se destacarem */}
+      <path d={cascaInterna} className={estilos.veuMadeira} />
 
       {/* Pulso do coração do tronco */}
       <circle cx={centroPara(RAIO_EXTERNO / 2).x} cy={centroPara(RAIO_EXTERNO / 2).y} r={RAIO_EXTERNO} className={estilos.pulso} />
 
-      <g className={estilos.crescimento}>{linhasDeCrescimento.map((l) => <path key={l.chave} d={l.d} />)}</g>
 
       {/* Anéis: uma gestão cada */}
       {gestoes.map((g, i) => {
@@ -246,9 +194,11 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         </g>
       )}
 
-      {/* Casos */}
+      </g>
+
+      {/* Casos: desenhados fora da perspectiva, como círculos de verdade e com área de toque generosa */}
       {casos.map((c) => {
-        const p = posicoes[c.id];
+        const p = naTela(posicoes[c.id]);
         const doPadrao = padraoAtivo && c.padroes.includes(padraoAtivo);
         const rel = relevancia ? relevancia[c.id] : null;
         const apagado = (padraoAtivo && !doPadrao) || rel === 0;
@@ -256,16 +206,14 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         const escolhido = selecionado === c.id;
         return (
           <g key={c.id} onClick={() => aoEscolherCaso(c.id)} className={estilos.caso}>
-            <circle cx={p.x} cy={p.y} r={12} fill="transparent" />
-            <circle cx={p.x} cy={p.y} r={escolhido ? 6 : doPadrao || destaque ? 4.5 : 3}
+            <circle cx={p.x} cy={p.y} r={11} fill="transparent" />
+            <circle cx={p.x} cy={p.y} r={escolhido ? 9 : doPadrao || destaque ? 7 : 5.2}
               className={`${estilos.ponto} ${apagado ? estilos.pontoApagado : ""} ${escolhido || doPadrao || destaque ? estilos.pontoAceso : ""} ${c.origem === "em_andamento" ? estilos.pontoAndamento : ""}`}
               filter={escolhido || doPadrao || destaque ? "url(#brilho)" : undefined} />
             <title>{c.titulo}</title>
           </g>
         );
       })}
-
-      </g>
 
       {/* HUD: casos por gestão */}
       {!decorativo && <g className={estilos.hud} aria-hidden="true">
