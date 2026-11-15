@@ -910,14 +910,14 @@
     "padroes": [
       "P4"
     ],
-    "situacao": "O analista de Gente e Gestão mapeou a alocação de todos os membros.",
+    "situacao": "O especialista de Gente e Gestão mapeou a alocação de todos os membros.",
     "dilema": "Mostrar o mapa só à diretoria ou a todos.",
     "opcoes": null,
-    "decisao": "O analista de Gente e Gestão compartilhou o mapa com todos os gerentes.",
+    "decisao": "O especialista de Gente e Gestão compartilhou o mapa com todos os gerentes.",
     "resultado": "Os gerentes passaram a negociar pessoas entre si.",
     "licao": "Quando todos veem a alocação, a sobrecarga é percebida mais cedo.",
     "simulacao": null,
-    "cargoAutor": "Analista de Gente e Gestão"
+    "cargoAutor": "Especialista de Gente e Gestão"
   },
   {
     "id": "C110",

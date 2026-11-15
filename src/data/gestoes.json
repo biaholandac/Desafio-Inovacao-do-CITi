@@ -30,7 +30,33 @@
     "status": "fechando",
     "conversas": {
       "feitas": 31,
-      "esperadas": 47
+      "esperadas": 47,
+      "porArea": {
+        "Diretoria": [
+          4,
+          4
+        ],
+        "Inovação": [
+          9,
+          10
+        ],
+        "Tech": [
+          7,
+          12
+        ],
+        "Produto": [
+          5,
+          8
+        ],
+        "Negócios": [
+          4,
+          8
+        ],
+        "Gente e Gestão": [
+          2,
+          5
+        ]
+      }
     }
   },
   {

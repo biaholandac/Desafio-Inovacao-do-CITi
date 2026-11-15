@@ -6,6 +6,8 @@ import Tronco from "./Tronco";
 import Marca from "./Marca";
 import Fundo from "./Fundo";
 import Entrevista from "./Entrevista";
+import PainelDiretoria from "./PainelDiretoria";
+import { montarPainel } from "@/lib/diretoria";
 import { lerDemonstracao, salvarDemonstracao, novoCaso } from "@/lib/meusCasos";
 import { SECOES } from "@/lib/ia/bastao";
 import { casos as casosLegado, gestoes, padroes, pessoaPorId } from "@/data";
@@ -34,6 +36,8 @@ const py = (y) => `${(y / 900) * 100}%`;
 export default function Palco({ cargo = null }) {
   const entrada = acharCargo(cargo);
   const novato = ehNovato(entrada?.cargo.id);
+  // O painel da diretoria aparece só para CEO e diretores.
+  const daDiretoria = entrada?.area.id === "ceo" || entrada?.area.id === "diretoria";
   const [lente, setLente] = useState("legado");
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
@@ -66,6 +70,7 @@ export default function Palco({ cargo = null }) {
   }
 
   const casos = useMemo(() => [...casosLegado, ...demo.casos], [demo.casos]);
+  const painelDiretoria = useMemo(() => montarPainel({ casos, gestoes, meusCasos: demo.casos, simuladas: demo.simuladas }), [casos, demo]);
 
   // Para quem assume: o legado de todas as pessoas que já ocuparam um cargo, para quem vai assumir.
   const cargosComLegado = useMemo(() => [...new Set(casosLegado.map((c) => c.cargoAutor))].sort((a, b) => a.localeCompare(b, "pt-BR")), []);
@@ -263,7 +268,7 @@ export default function Palco({ cargo = null }) {
       <header className={estilos.topo}>
         <Marca altura={30} />
         <nav className={estilos.lentes} aria-label="Lentes">
-          {LENTES.map((l) => (
+          {[...LENTES, ...(daDiretoria ? [{ id: "diretoria", nome: "Diretoria" }] : [])].map((l) => (
             <button key={l.id} disabled={l.emBreve} onClick={() => escolherLente(l.id)}
               className={`${estilos.lente} ${lente === l.id ? estilos.lenteAtiva : ""}`}>
               {l.nome}
@@ -522,6 +527,11 @@ export default function Palco({ cargo = null }) {
           <strong>{aviso.titulo}</strong>
           <span>{aviso.texto}</span>
         </div>
+      )}
+
+      {lente === "diretoria" && daDiretoria && (
+        <PainelDiretoria painel={painelDiretoria} casos={casos} aoFechar={() => escolherLente("legado")}
+          aoAbrirCaso={(id) => { escolherLente("legado"); setCasoAtivo(id); }} />
       )}
 
       {entrevistaAberta && (

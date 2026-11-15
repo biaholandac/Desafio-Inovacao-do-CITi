@@ -300,14 +300,14 @@
     "projeto": null,
     "area": "Gente e Gestão",
     "padroes": [],
-    "situacao": "A líder de Gente e Gestão ajudou o CEO a reformular as retrospectivas dos squads, depois de tentativas que viraram listas de culpados.",
+    "situacao": "A especialista de Gente e Gestão ajudou o CEO a reformular as retrospectivas dos squads, depois de tentativas que viraram listas de culpados.",
     "dilema": "Quem deveria conduzir as retrospectivas.",
     "opcoes": null,
     "decisao": "As retrospectivas passaram a ser conduzidas por alguém de Gente e Gestão, de fora do squad.",
     "resultado": "Os squads passaram a falar com mais abertura sobre os problemas.",
     "licao": "Uma pessoa de fora ajuda o squad a falar de situações, e não de culpados.",
     "simulacao": null,
-    "cargoAutor": "Líder de Gente e Gestão"
+    "cargoAutor": "Especialista de Gente e Gestão"
   },
   {
     "id": "C053",

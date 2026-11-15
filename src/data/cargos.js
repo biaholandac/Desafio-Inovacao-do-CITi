@@ -28,7 +28,10 @@ export const AREAS = [
     { id: "gerente-contas", nome: "Gerente de contas" },
     { id: "analista-marketing", nome: "Analista de marketing" },
   ] },
-  { id: "gg", nome: "Gente e Gestão", cargos: [{ id: "analista-gg", nome: "Analista de Gente e Gestão" }] },
+  { id: "gg", nome: "Gente e Gestão", cargos: [
+    { id: "analista-gg", nome: "Analista de Gente e Gestão" },
+    { id: "especialista-gg", nome: "Especialista de Gente e Gestão" },
+  ] },
   { id: "inovacao", nome: "Inovação", cargos: [{ id: "inovacao", nome: "Time de Inovação" }] },
   { id: "new-pig", nome: "New Pig", pergunta: "escolha a subárea em que você está entrando", cargos: [
     { id: "np-tech", nome: "Tech", cargos: [{ id: "new-pig-tech", nome: "New Pig de Tech" }] },
@@ -63,6 +66,7 @@ export const FOCO = {
   "gerente-contas": { papeis: ["Gerente de contas"], areas: ["Comercial", "Negócios"] },
   "analista-marketing": { papeis: ["Analista de marketing"], areas: ["Marketing", "Negócios"] },
   "analista-gg": { papeis: ["Analista de Gente e Gestão"], areas: GG },
+  "especialista-gg": { papeis: ["Especialista de Gente e Gestão"], areas: GG },
   inovacao: { papeis: ["Time de Inovação"], areas: ["Inovação"] },
   // New Pig: os casos de chegada valem para todos; somam-se os da subárea em que a pessoa entra.
   "new-pig-tech": { novato: true, papeis: ["Pessoa desenvolvedora", "Analista de software", "Analista de dados"], areas: [...DEV, ...DADOS] },
