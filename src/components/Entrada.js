@@ -44,7 +44,7 @@ export default function Entrada() {
           {area ? (
             <>
               <button className={estilos.voltar} onClick={() => setArea(null)} aria-label="Voltar para as áreas">←</button>
-              <span className={estilos.passo}><strong>{area.nome}</strong> · escolha o seu cargo</span>
+              <span className={estilos.passo}><strong>{area.nome}</strong> · {area.pergunta ?? "escolha o seu cargo"}</span>
             </>
           ) : (
             <span className={estilos.passo}>Entrar como… <strong>escolha a sua área</strong></span>

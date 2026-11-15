@@ -7,19 +7,24 @@ export const AREAS = [
     { id: "coo", nome: "COO", pessoa: 37 },
     { id: "cro", nome: "CRO", pessoa: 7 },
   ] },
-  { id: "ondas", nome: "Ondas", cargos: [
-    { id: "gerente-software", nome: "Gerente de software", pessoa: 10 },
-    { id: "gerente-produto", nome: "Gerente de produto", pessoa: 14 },
-    { id: "gerente-dados", nome: "Gerente de dados", pessoa: 16 },
-    { id: "lider-dados", nome: "Líder de dados", pessoa: 18 },
+  { id: "ondas", nome: "Ondas", pergunta: "escolha a subárea que você lidera", cargos: [
+    { id: "lider-dev", nome: "Desenvolvimento", titulo: "Liderança de Desenvolvimento", pessoa: 10 },
+    { id: "lider-dados", nome: "Dados", titulo: "Liderança de Dados", pessoa: 18 },
+    { id: "lider-produto", nome: "Produto", titulo: "Liderança de Produto", pessoa: 14 },
+    { id: "lider-design", nome: "Design", titulo: "Liderança de Design", pessoa: 52 },
+    { id: "lider-comercial", nome: "Comercial", titulo: "Liderança de Comercial", pessoa: 21 },
+    { id: "lider-marketing", nome: "Marketing", titulo: "Liderança de Marketing", pessoa: 24 },
   ] },
   { id: "tech", nome: "Tech", cargos: [
     { id: "dev", nome: "Pessoa desenvolvedora", pessoa: 11 },
     { id: "analista-dados", nome: "Analista de dados", pessoa: 60 },
+    { id: "gerente-software", nome: "Gerente de software", pessoa: 10 },
+    { id: "gerente-dados", nome: "Gerente de dados", pessoa: 16 },
   ] },
   { id: "produto", nome: "Produto", cargos: [
     { id: "analista-produto", nome: "Analista de produto", pessoa: 51 },
     { id: "designer", nome: "Designer de produto", pessoa: 52 },
+    { id: "gerente-produto", nome: "Gerente de produto", pessoa: 14 },
   ] },
   { id: "negocios", nome: "Negócios", cargos: [
     { id: "gerente-contas", nome: "Gerente de contas", pessoa: 22 },

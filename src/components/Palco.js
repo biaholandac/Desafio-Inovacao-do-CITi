@@ -80,7 +80,7 @@ export default function Palco({ cargo = null }) {
               <span className={estilos.avatar} aria-hidden="true">{entrada.area.nome.slice(0, 2).toUpperCase()}</span>
               <span className={estilos.usuarioTexto}>
                 <strong>{entrada.area.nome === entrada.cargo.nome ? entrada.cargo.nome : entrada.area.nome}</strong>
-                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : entrada.cargo.nome}</span>
+                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : entrada.cargo.titulo ?? entrada.cargo.nome}</span>
               </span>
             </Link>
           )}
