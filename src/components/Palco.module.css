@@ -96,6 +96,7 @@
 .painel {
   position: absolute;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(56, 230, 130, 0.35) transparent;
   padding: calc(var(--u) * 24) calc(var(--u) * 26);
@@ -432,6 +433,7 @@
 .seletor { display: flex; align-items: center; gap: 0.6em; margin: 0.6em 0 0.9em; font-size: 0.85em; color: var(--texto-suave); }
 .seletor select {
   flex: 1;
+  min-width: 0;
   font: inherit;
   color: var(--texto);
   background: rgba(3, 8, 5, 0.85);
