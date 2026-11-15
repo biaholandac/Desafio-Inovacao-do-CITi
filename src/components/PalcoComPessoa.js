@@ -3,8 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import Palco from "./Palco";
 
-// Lê quem entrou (?pessoa=) e abre o tronco para essa pessoa.
+// Lê o cargo de quem entrou (?cargo=) e abre o tronco.
 export default function PalcoComPessoa() {
-  const pessoa = useSearchParams().get("pessoa");
-  return <Palco pessoa={pessoa} />;
+  const cargo = useSearchParams().get("cargo");
+  return <Palco cargo={cargo} />;
 }

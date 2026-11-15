@@ -7,6 +7,7 @@ import Marca from "./Marca";
 import Fundo from "./Fundo";
 import { casos, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto } from "@/lib/geometria";
+import { acharCargo } from "@/data/cargos";
 import estilos from "./Palco.module.css";
 
 const LENTES = [
@@ -27,8 +28,8 @@ const ORIGEM = {
 const px = (x) => `${(x / 1600) * 100}%`;
 const py = (y) => `${(y / 900) * 100}%`;
 
-export default function Palco({ pessoa = null }) {
-  const usuario = pessoa === "novo" ? { nome: "New Pig", cargoAtual: "Acabou de chegar ao CITi" } : pessoaPorId[Number(pessoa)] ?? null;
+export default function Palco({ cargo = null }) {
+  const entrada = acharCargo(cargo);
   const [lente, setLente] = useState("legado");
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
@@ -74,10 +75,13 @@ export default function Palco({ pessoa = null }) {
         </nav>
         <div className={estilos.direita}>
           <div className={estilos.selo}>Dados simulados</div>
-          {usuario && (
-            <Link href="/" className={estilos.usuario} title="Trocar de pessoa">
-              <span className={estilos.avatar}>{usuario.nome === "New Pig" ? "NP" : usuario.nome.split(" ").map((n) => n[0]).slice(0, 2).join("")}</span>
-              <span className={estilos.usuarioTexto}><strong>{usuario.nome}</strong><span>{usuario.cargoAtual}</span></span>
+          {entrada && (
+            <Link href="/" className={estilos.usuario} title="Trocar de cargo">
+              <span className={estilos.avatar} aria-hidden="true">{entrada.area.nome.slice(0, 2).toUpperCase()}</span>
+              <span className={estilos.usuarioTexto}>
+                <strong>{entrada.area.nome === entrada.cargo.nome ? entrada.cargo.nome : entrada.area.nome}</strong>
+                <span>{entrada.area.nome === entrada.cargo.nome ? "Trocar de cargo" : entrada.cargo.nome}</span>
+              </span>
             </Link>
           )}
         </div>

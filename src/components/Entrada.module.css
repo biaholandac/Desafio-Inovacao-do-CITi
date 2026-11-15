@@ -46,64 +46,28 @@
   position: relative;
   display: flex;
   align-items: center;
+  gap: 12px;
   width: min(560px, 92vw);
-  padding: 6px 6px 6px 24px;
+  min-height: 56px;
+  padding: 6px 24px;
   border-radius: 999px;
   border: 1px solid rgba(56, 230, 130, 0.3);
   background: rgba(5, 10, 7, 0.88);
   box-shadow: 0 0 50px rgba(32, 184, 104, 0.15);
-}
-.pilula input {
-  flex: 1;
-  font: inherit;
   font-size: 15px;
-  color: var(--texto);
-  background: none;
-  border: none;
-  outline: none;
+  color: var(--texto-suave);
 }
-.pilula input::placeholder { color: var(--texto-suave); }
-.pilula > button {
-  width: 42px; height: 42px;
+.passo strong { color: var(--texto); font-weight: 600; }
+.voltar {
+  width: 32px; height: 32px;
+  margin-left: -14px;
   border-radius: 50%;
-  border: none;
-  background: var(--verde);
-  color: #04140a;
-  font-size: 18px;
-  cursor: pointer;
-}
-.pilula > button:disabled { opacity: 0.35; cursor: default; }
-
-.resultados {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  list-style: none;
-  text-align: left;
-  background: rgba(5, 10, 7, 0.96);
-  border: 1px solid rgba(56, 230, 130, 0.25);
-  border-radius: 18px;
-  padding: 6px;
-  z-index: 2;
-}
-.resultados button {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font: inherit;
-  font-size: 14px;
-  color: var(--texto);
+  border: 1px solid var(--borda);
   background: none;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 14px;
+  color: var(--verde);
+  font-size: 16px;
   cursor: pointer;
-  text-align: left;
 }
-.resultados button:hover { background: rgba(56, 230, 130, 0.08); }
-.resultados span { color: var(--texto-suave); font-size: 12px; }
 
 .atalhos {
   position: relative;
@@ -112,9 +76,9 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  max-width: 640px;
   margin-top: 22px;
 }
-.ou { color: var(--texto-suave); font-size: 13px; margin-right: 4px; }
 .atalho {
   font: inherit;
   font-size: 13px;
@@ -125,7 +89,6 @@
   padding: 8px 14px;
   cursor: pointer;
 }
-.atalho em { font-style: normal; color: var(--texto-suave); margin-left: 4px; }
 .atalho:hover { border-color: rgba(56, 230, 130, 0.5); }
 .newPig {
   color: #04140a;
