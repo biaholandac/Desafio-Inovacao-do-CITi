@@ -34,6 +34,32 @@ export default function Palco({ cargo = null }) {
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
   const [padraoAtivo, setPadraoAtivo] = useState(null);
+  const [retratoAberto, setRetratoAberto] = useState(false);
+  const [pergunta, setPergunta] = useState("");
+  const [resposta, setResposta] = useState(null);
+  const [pensando, setPensando] = useState(false);
+
+  async function perguntar(e) {
+    e.preventDefault();
+    const texto = pergunta.trim();
+    if (!texto || pensando) return;
+    setPensando(true);
+    setCasoAtivo(null);
+    setResposta({ pergunta: texto, carregando: true });
+    try {
+      const r = await fetch("/api/perguntar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pergunta: texto, cargo }),
+      });
+      const dados = await r.json();
+      setResposta({ pergunta: texto, ...dados });
+    } catch {
+      setResposta({ pergunta: texto, tipo: "indisponivel", resposta: "Não consegui falar com o LegaCITi agora. Tente de novo em instantes.", casos: [] });
+    } finally {
+      setPensando(false);
+    }
+  }
 
   const posicoes = useMemo(() => posicionarCasos(casos, gestoes, pessoaPorId), []);
 
@@ -108,8 +134,8 @@ export default function Palco({ cargo = null }) {
       <div className={estilos.palco}>
         <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
           <Tronco gestoes={gestoes} casos={casos} posicoes={posicoes}
-            selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={lente === "legado" ? foco?.mapa : null}
-            aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); }} />
+            selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0])) : lente === "legado" ? foco?.mapa : null}
+            aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); }} />
 
           {/* Linhas que ligam os painéis ao tronco */}
           {alvoGestao && (
@@ -140,7 +166,8 @@ export default function Palco({ cargo = null }) {
             {gestao.status === "em_formacao" && (
               <div className={estilos.status}><span className={estilos.statusPonto} /> Anel em formação</div>
             )}
-            <p className={estilos.texto}>{gestao.descricao}</p>
+            <p className={`${estilos.texto} ${retratoAberto ? "" : estilos.textoRecolhido}`}>{gestao.descricao}</p>
+            <button className={estilos.lerMais} onClick={() => setRetratoAberto(!retratoAberto)}>{retratoAberto ? "Ler menos" : "Ler mais"}</button>
             <div className={estilos.numeros}>
               <div><strong>{casosDaGestao.length}</strong><span>casos</span></div>
               <div><strong>{new Set(casosDaGestao.map((c) => c.autor)).size}</strong><span>pessoas</span></div>
@@ -165,6 +192,37 @@ export default function Palco({ cargo = null }) {
                 <div className={estilos.chips}>{caso.padroes.map((p) => <span key={p} className={estilos.chip}>{p} · {padroes[p]}</span>)}</div>
               )}
               <button className={estilos.fechar} onClick={() => setCasoAtivo(null)}>Fechar caso</button>
+            </>
+          ) : resposta ? (
+            <>
+              <div className={estilos.rotulo}>Pergunte ao LegaCITi</div>
+              <p className={estilos.perguntaFeita}>“{resposta.pergunta}”</p>
+              {resposta.carregando ? (
+                <p className={estilos.pensando}><span className={estilos.statusPonto} /> Consultando o legado…</p>
+              ) : (
+                <>
+                  <p className={`${estilos.respostaTexto} ${resposta.tipo !== "resposta" ? estilos.respostaPadrao : ""}`}>{resposta.resposta}</p>
+                  {resposta.casos?.length > 0 && (
+                    <>
+                      <div className={estilos.rotuloLista}>{resposta.tipo === "resposta" ? "Baseado nestes casos" : "Casos mais próximos"}</div>
+                      <ul className={estilos.sugeridos}>
+                        {resposta.casos.map((id) => {
+                          const c = casos.find((x) => x.id === id);
+                          return c && (
+                            <li key={id}>
+                              <button onClick={() => setCasoAtivo(id)}>
+                                <span className={estilos.sugeridoGestao}>{c.gestao}</span>
+                                <span>{c.titulo}</span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  )}
+                </>
+              )}
+              <button className={estilos.fechar} onClick={() => { setResposta(null); setPergunta(""); }}>Fechar resposta</button>
             </>
           ) : lente === "padroes" ? (
             <>
@@ -230,9 +288,10 @@ export default function Palco({ cargo = null }) {
 
       </div>
 
-      <form className={estilos.pergunta} onSubmit={(e) => e.preventDefault()}>
-        <input placeholder="Pergunte ao LegaCITi: o que o CITi já aprendeu sobre…" aria-label="Pergunte ao LegaCITi" />
-        <button type="submit" aria-label="Enviar pergunta">→</button>
+      <form className={estilos.pergunta} onSubmit={perguntar}>
+        <input value={pergunta} onChange={(e) => setPergunta(e.target.value)} maxLength={500}
+          placeholder="Pergunte ao LegaCITi: o que o CITi já aprendeu sobre…" aria-label="Pergunte ao LegaCITi" />
+        <button type="submit" aria-label="Enviar pergunta" disabled={pensando}>→</button>
       </form>
     </div>
   );
