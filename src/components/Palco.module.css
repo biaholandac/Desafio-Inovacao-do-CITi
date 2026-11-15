@@ -475,3 +475,18 @@
    A folga é o espaço entre o palco 16:9 e a largura disponível. */
 .painelEsquerda { left: calc(16px - (100cqw - min(100cqw, 100cqh * 16 / 9)) / 2); }
 .painelDireita { right: calc(16px - (100cqw - min(100cqw, 100cqh * 16 / 9)) / 2); }
+
+.alternarSolucoes {
+  position: absolute;
+  z-index: 1;
+  font: inherit;
+  font-size: max(11px, calc(var(--u) * 12.5));
+  color: var(--verde-claro);
+  background: rgba(5, 12, 8, 0.8);
+  border: 1px solid rgba(56, 230, 130, 0.3);
+  border-radius: 999px;
+  padding: 0.45em 1em;
+  cursor: pointer;
+}
+.alternarSolucoes:hover { border-color: var(--verde); }
+.alternarSolucoes[aria-pressed="true"] { background: rgba(47, 217, 122, 0.18); border-color: var(--verde); }

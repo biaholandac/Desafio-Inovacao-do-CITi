@@ -120,7 +120,7 @@
       "Prometer atualizações na semana seguinte",
       "Explicar a transição e apresentar um novo plano com prazo realista"
     ],
-    "decisao": "O gerente de contas explicou a transição e apresentou o plano da nova gerente de produto, com um prazo realista.",
+    "decisao": "O gerente de contas explicou a transição e apresentou o plano da nova gerente de projeto, com um prazo realista.",
     "resultado": "A cliente ficou insatisfeita no início, mas renovou o contrato depois de ver o plano cumprido.",
     "licao": "Transparência sobre um problema interno preserva mais a relação do que uma promessa que não se cumpre.",
     "simulacao": {
@@ -138,14 +138,14 @@
     "projeto": null,
     "area": "Negócios",
     "padroes": [],
-    "situacao": "Com a fusão em Negócios, o gerente de contas passou a planejar a prospecção junto com o time de Marketing.",
+    "situacao": "Com a fusão em Negócios, o líder de comercial passou a planejar a prospecção junto com o time de Marketing.",
     "dilema": "Como dividir o trabalho entre atrair e vender sem duplicar esforços.",
     "opcoes": null,
-    "decisao": "O gerente de contas está testando um funil compartilhado, em que Marketing qualifica os contatos antes de chegarem ao comercial.",
+    "decisao": "O líder de comercial está testando um funil compartilhado, em que Marketing qualifica os contatos antes de chegarem ao comercial.",
     "resultado": "Em andamento.",
     "licao": null,
     "simulacao": null,
-    "cargoAutor": "Gerente de contas"
+    "cargoAutor": "Líder de comercial"
   },
   {
     "id": "C045",
@@ -224,11 +224,11 @@
     "situacao": "A cada troca de gestão, o calendário de conteúdo e as lições sobre o que funcionava nas redes sociais recomeçavam do zero.",
     "dilema": "Deixar o calendário para a próxima pessoa ou registrar também o que aprendeu.",
     "opcoes": null,
-    "decisao": "Na despedida, a analista de marketing registrou o calendário e os aprendizados sobre cada tipo de conteúdo.",
+    "decisao": "Na despedida, a líder de marketing registrou o calendário e os aprendizados sobre cada tipo de conteúdo.",
     "resultado": "Quem assumiu pôde começar a partir do que já funcionava.",
     "licao": "Um calendário sem os aprendizados por trás dele é só uma lista de datas.",
     "simulacao": null,
-    "cargoAutor": "Analista de marketing"
+    "cargoAutor": "Líder de marketing"
   },
   {
     "id": "C049",
@@ -257,14 +257,14 @@
     "projeto": null,
     "area": "Negócios",
     "padroes": [],
-    "situacao": "Com a fusão, o analista de marketing passou a dividir metas com o time comercial.",
+    "situacao": "Com a fusão, o líder de marketing passou a dividir metas com o time comercial.",
     "dilema": "Como medir o trabalho de Marketing quando a meta passa a ser de vendas.",
     "opcoes": null,
-    "decisao": "O analista de marketing está acompanhando quantos contatos de Marketing viram reuniões de venda.",
+    "decisao": "O líder de marketing está acompanhando quantos contatos de Marketing viram reuniões de venda.",
     "resultado": "Em andamento.",
     "licao": null,
     "simulacao": null,
-    "cargoAutor": "Analista de marketing"
+    "cargoAutor": "Líder de marketing"
   },
   {
     "id": "C051",
@@ -300,14 +300,14 @@
     "projeto": null,
     "area": "Gente e Gestão",
     "padroes": [],
-    "situacao": "Uma especialista de Gente e Gestão ajudou o CEO a reformular as retrospectivas dos squads, depois de tentativas que viraram listas de culpados.",
+    "situacao": "A líder de Gente e Gestão ajudou o CEO a reformular as retrospectivas dos squads, depois de tentativas que viraram listas de culpados.",
     "dilema": "Quem deveria conduzir as retrospectivas.",
     "opcoes": null,
     "decisao": "As retrospectivas passaram a ser conduzidas por alguém de Gente e Gestão, de fora do squad.",
     "resultado": "Os squads passaram a falar com mais abertura sobre os problemas.",
     "licao": "Uma pessoa de fora ajuda o squad a falar de situações, e não de culpados.",
     "simulacao": null,
-    "cargoAutor": "Especialista de Gente e Gestão"
+    "cargoAutor": "Líder de Gente e Gestão"
   },
   {
     "id": "C053",
@@ -401,7 +401,7 @@
     "resultado": "As ferramentas chegaram às áreas prontas para uso e viraram parte da rotina do CITi.",
     "licao": "Com muitos pedidos ao mesmo tempo, comece pelo que gera mais impacto para mais pessoas, e só entregue quando estiver pronto de verdade.",
     "simulacao": null,
-    "cargoAutor": "Time de Inovação"
+    "cargoAutor": "Head de Inovação"
   },
   {
     "id": "C058",
@@ -419,7 +419,7 @@
     "resultado": "A ferramenta passou a ser vendida como produto pronto.",
     "licao": "Uma solução interna bem feita pode virar produto quando resolve um problema que outras empresas também têm.",
     "simulacao": null,
-    "cargoAutor": "Time de Inovação"
+    "cargoAutor": "Head de Inovação"
   },
   {
     "id": "C059",

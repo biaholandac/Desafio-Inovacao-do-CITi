@@ -109,20 +109,20 @@
     "padroes": [
       "P1"
     ],
-    "situacao": "No primeiro projeto que gerenciou, um painel de pedidos para uma padaria, a gerente de dados aceitava pequenos ajustes em cada reunião. No fim, o painel tinha o dobro de indicadores combinados.",
+    "situacao": "No primeiro projeto que gerenciou, um painel de pedidos para uma padaria, a gerente de projeto aceitava pequenos ajustes em cada reunião. No fim, o painel tinha o dobro de indicadores combinados.",
     "dilema": "Recusar os ajustes e frustrar o cliente, ou aceitar e estourar o prazo.",
     "opcoes": [
       "Aceitar os ajustes",
       "Registrar cada pedido e avaliar o impacto",
       "Recusar tudo que não estava no contrato"
     ],
-    "decisao": "A gerente de dados aceitou os ajustes até perceber o atraso.",
+    "decisao": "A gerente de projeto aceitou os ajustes até perceber o atraso.",
     "resultado": "O projeto atrasou um mês. Depois disso, ela passou a manter uma lista de pedidos com o impacto de cada um, revisada com o cliente toda semana.",
     "licao": "Escopo não cresce de uma vez, cresce em pedidos pequenos. Registrar cada um torna o crescimento visível para todos.",
     "simulacao": {
       "tipo": "escolha"
     },
-    "cargoAutor": "Gerente de dados"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C006",

@@ -135,14 +135,14 @@
       "Fazer uma rodada de descoberta com as atendentes",
       "Pedir ao comercial que fechasse o escopo"
     ],
-    "decisao": "O gerente de software propôs uma semana de conversa com as atendentes da ótica e uma validação semanal com a dona.",
+    "decisao": "O gerente de projeto propôs uma semana de conversa com as atendentes da ótica e uma validação semanal com a dona.",
     "resultado": "O assistente foi treinado com as dúvidas reais dos clientes da ótica e entrou em uso no prazo.",
     "licao": "Quando o cliente não sabe o que quer, ouvir quem faz o trabalho no dia a dia define o escopo melhor do que qualquer reunião.",
     "simulacao": {
       "tipo": "conversa",
       "personagem": "Dona da Ótica Visão Clara, entusiasmada com IA mas sem clareza do que precisa"
     },
-    "cargoAutor": "Gerente de software"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C022",
@@ -233,7 +233,7 @@
     "simulacao": {
       "tipo": "escolha"
     },
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C026",
@@ -246,7 +246,7 @@
     "padroes": [
       "P6"
     ],
-    "situacao": "Depois do projeto A, a gerente de produto propôs um formato diferente: duas semanas de descoberta com a secretaria da escola, os pais e a direção, e uma reunião curta toda sexta com o cliente para validar o que foi feito.",
+    "situacao": "Depois do projeto A, a gerente de projeto propôs um formato diferente: duas semanas de descoberta com a secretaria da escola, os pais e a direção, e uma reunião curta toda sexta com o cliente para validar o que foi feito.",
     "dilema": "Convencer a gestão de que duas semanas sem código valiam a pena.",
     "opcoes": null,
     "decisao": "A descoberta completa, com a passada de bastão da gerente de contas já incluindo as entrevistas.",
@@ -256,7 +256,7 @@
       "tipo": "conversa",
       "personagem": "Diretora da Escola Aprender Mais, cuidadosa e cheia de perguntas"
     },
-    "cargoAutor": "Gerente de produto"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C027",
@@ -281,7 +281,7 @@
     "simulacao": {
       "tipo": "escolha"
     },
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C028",
@@ -301,7 +301,7 @@
     "resultado": "Quem assumiu não conseguiu atualizar a loja sem quebrar o padrão visual, e o projeto perdeu ritmo.",
     "licao": "Material de design só é legado quando outra pessoa consegue usar sem precisar de quem o criou.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C029",
@@ -314,39 +314,39 @@
     "padroes": [
       "P5"
     ],
-    "situacao": "A gerente de produto assumiu a loja virtual do Ateliê Maré depois da saída de quem cuidava do visual. Não havia guia visual nem registro das decisões tomadas com a cliente.",
+    "situacao": "A gerente de projeto assumiu a loja virtual do Ateliê Maré depois da saída de quem cuidava do visual. Não havia guia visual nem registro das decisões tomadas com a cliente.",
     "dilema": "Reconstruir o que faltava ou pedir à cliente que repetisse tudo.",
     "opcoes": [
       "Reconstruir sozinha a partir da loja",
       "Marcar uma reunião para a cliente repetir as decisões",
       "Combinar as duas coisas e registrar tudo"
     ],
-    "decisao": "A gerente de produto estudou a loja, montou um guia visual e validou com a cliente em uma reunião.",
+    "decisao": "A gerente de projeto estudou a loja, montou um guia visual e validou com a cliente em uma reunião.",
     "resultado": "O projeto voltou a andar, mas com duas semanas de atraso e uma cliente um pouco desconfiada.",
     "licao": "Assumir um projeto sem registro custa tempo e confiança. O guia que faltou agora existe para quem vier depois.",
     "simulacao": {
       "tipo": "conversa",
       "personagem": "Dona do Ateliê Maré, preocupada com a demora"
     },
-    "cargoAutor": "Gerente de produto"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C030",
-    "titulo": "Os primeiros meses como gerente de produto",
+    "titulo": "Os primeiros meses como gerente de projeto",
     "autor": 14,
     "gestao": "2026.2",
     "origem": "fim_gestao",
     "projeto": null,
     "area": "Produto",
     "padroes": [],
-    "situacao": "Ao virar gerente de produto, a gerente de produto passou a cuidar de pessoas e prazos, e não só de entregas.",
+    "situacao": "Ao virar gerente de projeto, a gerente de projeto passou a cuidar de pessoas e prazos, e não só de entregas.",
     "dilema": "Continuar fazendo o trabalho de analista ou confiar mais no time.",
     "opcoes": null,
-    "decisao": "A gerente de produto passou a delegar as entrevistas e a focar na organização do squad e na relação com o cliente.",
+    "decisao": "A gerente de projeto passou a delegar as entrevistas e a focar na organização do squad e na relação com o cliente.",
     "resultado": "O squad ganhou autonomia e as entregas ficaram mais previsíveis.",
     "licao": "Virar gerente é trocar o fazer pelo fazer acontecer.",
     "simulacao": null,
-    "cargoAutor": "Gerente de produto"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C031",
@@ -423,11 +423,11 @@
     "situacao": "Com o uso de IA, tarefas de limpeza e análise de dados ficaram muito mais rápidas.",
     "dilema": "Usar o tempo ganho para fazer mais projetos ou para aprofundar as análises.",
     "opcoes": null,
-    "decisao": "A gerente de dados orientou o time a usar o tempo ganho para entender melhor as perguntas dos clientes.",
+    "decisao": "A gerente de projeto orientou o time a usar o tempo ganho para entender melhor as perguntas dos clientes.",
     "resultado": "As entregas ficaram mais estratégicas e os clientes passaram a pedir análises, não só painéis.",
     "licao": "A IA acelera o trabalho, mas o valor continua em fazer as perguntas certas.",
     "simulacao": null,
-    "cargoAutor": "Gerente de dados"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C035",

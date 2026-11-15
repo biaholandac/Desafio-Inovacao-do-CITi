@@ -37,7 +37,7 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
 | B | Painel de vendas · Mercadinho Boa Praça | 2024.2 | Felipe (contas), Matheus (dados), Gabriel (dev) | P3, P4 |
 | C | Plataforma de matrículas · Escola Aprender Mais | 2025.1 | Bruna (contas), Sofia (produto), Pedro (design), Lucas (dev) | P6 |
 | D | Dashboard de estoque · Distribuidora Litoral | 2025.2 | Bruna (contas), Renata (dados), Ana Clara (dev) | P1 |
-| E | Assistente com IA para atendimento · Ótica Visão Clara | 2026.1 | Clara (contas), Lucas (gerente de software), Ana Clara (dev) | P2, P6 |
+| E | Assistente com IA para atendimento · Ótica Visão Clara | 2026.1 | Clara (contas), Lucas (gerente de projeto), Ana Clara (dev) | P2, P6 |
 | F | Loja virtual · Ateliê Maré | 2026.1–2026.2 | Vinícius (contas), Pedro (design), Isadora (produto) | P5 |
 
 ---
@@ -52,14 +52,14 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
   - A transição para o mandato 2025: o que ela gostaria de ter deixado escrito para o Rafael. *(2024.2 · P5)*
 
 ### 2. Rafael Cordeiro · CEO do mandato 2025 · alumni
-- **Trajetória:** gerente de software (2024.1–2024.2) → CEO (2025.1–2025.2) → saiu ao fim de 2025.2.
+- **Trajetória:** gerente de projeto (2024.1–2024.2) → CEO (2025.1–2025.2) → saiu ao fim de 2025.2.
 - **Jeito de trabalhar:** organizado, obcecado por processos; às vezes rígido demais.
 - **Histórias:**
   - Reformular os rituais de retrospectiva depois de um semestre de sobrecarga. *(2025.1 · P4)*
   - Quando um projeto de dados quase foi cancelado porque o cliente parou de responder, e como a diretoria interveio. *(2025.2 · P3)*
 
 ### 3. Lívia Albuquerque · CEO do mandato 2026 · alumni
-- **Trajetória:** analista de dados (2024.1) → gerente de dados (2024.2–2025.1) → líder de dados (2025.2) → CEO (2026.1–2026.2) → saiu ao fim de 2026.2.
+- **Trajetória:** analista de dados (2024.1) → gerente de projeto (2024.2–2025.1) → líder de dados (2025.2) → CEO (2026.1–2026.2) → saiu ao fim de 2026.2.
 - **Jeito de trabalhar:** analítica, calma sob pressão, gosta de decidir com dados.
 - **Histórias:**
   - Preparar a reorganização das áreas para que a gestão seguinte não perdesse o que cada subárea tinha construído. *(2026.2 · P5)*
@@ -99,7 +99,7 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
 ## Soluções (11)
 
 ### 8. Gabriel Lins · Desenvolvimento → CTO do mandato 2027 · ativo
-- **Trajetória:** pessoa desenvolvedora (2024.2) → gerente de software (2025.1) → líder de desenvolvimento (2025.2–2026.2) → CTO (2027.1).
+- **Trajetória:** pessoa desenvolvedora (2024.2) → gerente de projeto (2025.1) → líder de desenvolvimento (2025.2–2026.2) → CTO (2027.1).
 - **Jeito de trabalhar:** curioso, aprende rápido, adora experimentar tecnologias novas.
 - **Histórias:**
   - Projeto B: construir um painel enquanto o cliente sumia e ele ainda tocava outros dois projetos. *(2024.2 · P3, P4 · projeto B)*
@@ -113,7 +113,7 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
   - Por que, depois que ela saiu, ninguém conseguia mexer no sistema de um cliente. *(2025.1 · P5)*
 
 ### 10. Lucas Ferraz · Desenvolvimento · ativo
-- **Trajetória:** pessoa desenvolvedora (2025.1–2025.2) → gerente de software (2026.1–2027.1).
+- **Trajetória:** pessoa desenvolvedora (2025.1–2025.2) → gerente de projeto (2026.1–2027.1).
 - **Jeito de trabalhar:** metódico, bom em quebrar problemas grandes em partes pequenas.
 - **Histórias:**
   - Projeto C: o projeto que deu certo do começo ao fim. *(2025.1 · P6 · projeto C)*
@@ -128,7 +128,7 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
   - Projeto E: integrar a IA ao atendimento da ótica com o cliente acompanhando toda semana. *(2026.1 · P6 · projeto E)*
 
 ### 12. Sofia Martins · Produto · alumni
-- **Trajetória:** analista de produto (2024.1) → gerente de produto (2024.2–2025.1) → saiu ao fim de 2025.1.
+- **Trajetória:** analista de produto (2024.1) → gerente de projeto (2024.2–2025.1) → saiu ao fim de 2025.1.
 - **Jeito de trabalhar:** obcecada por entender o problema antes de propor solução.
 - **Histórias:**
   - Projeto A: a descoberta que foi cortada para "ganhar tempo", e o preço disso. *(2024.1 · P1, P2 · projeto A)*
@@ -142,11 +142,11 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
   - Projeto F: a identidade visual da loja que só ele sabia atualizar. *(2026.1 · P5 · projeto F)*
 
 ### 14. Isadora Campos · Produto · ativa
-- **Trajetória:** analista de produto (2025.2–2026.1) → gerente de produto (2026.2–2027.1).
+- **Trajetória:** analista de produto (2025.2–2026.1) → gerente de projeto (2026.2–2027.1).
 - **Jeito de trabalhar:** organizada, boa ponte entre cliente e time.
 - **Histórias:**
   - Projeto F: assumir um projeto depois que o designer saiu sem deixar nada documentado. *(2026.2 · P5 · projeto F)*
-  - Os primeiros meses como gerente de produto. *(2026.2)*
+  - Os primeiros meses como gerente de projeto. *(2026.2)*
 
 ### 15. Caio Bezerra · Design de Produto · alumni
 - **Trajetória:** designer de produto (antes de 2024) → líder de design (2024.2–2025.2) → saiu ao fim de 2025.2.
@@ -156,7 +156,7 @@ Só projetos de Soluções têm squad. A Inovação não participa de squads de 
   - O conselho que ele dá para quem vai assumir a liderança de design. *(2025.2)*
 
 ### 16. Renata Freitas · Inteligência de Dados · ativa
-- **Trajetória:** analista de dados (2025.1–2025.2) → gerente de dados (2026.1–2027.1).
+- **Trajetória:** analista de dados (2025.1–2025.2) → gerente de projeto (2026.1–2027.1).
 - **Jeito de trabalhar:** detalhista, ótima em explicar números para quem não é da área.
 - **Histórias:**
   - Projeto D: o cliente que pedia "só mais um gráfico" toda semana. *(2025.2 · P1 · projeto D)*

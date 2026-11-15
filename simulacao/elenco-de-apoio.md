@@ -29,10 +29,10 @@ Completa os mandatos ao lado dos protagonistas da diretoria.
 | 38 | João Victor Melo | Pessoa desenvolvedora (2024.1–2024.2) | alumni | Refazer a tela de login três vezes porque o cliente mudava de ideia em reunião | 2024.1 | P1 |
 | 39 | Sérgio Bastos | Pessoa desenvolvedora (2024.1–2024.2) | alumni | Um aplicativo entregue sem testes que quebrou na primeira semana de uso | 2024.1 | – |
 | 40 | Daniel Coutinho | Pessoa desenvolvedora (2024.1–2025.1) | alumni | A publicação na véspera da entrega que derrubou o sistema do cliente | 2024.2 | P4 |
-| 41 | Pietro Gomes | Gerente de software (2024.1–2024.2) | alumni | Três projetos ao mesmo tempo no auge do crescimento | 2024.2 | P4 |
-| 42 | Carolina Fragoso | Gerente de software (2024.2–2025.1) | alumni | O cliente que sumiu logo depois de aprovar o protótipo | 2024.2 | P3 |
+| 41 | Pietro Gomes | Gerente de projeto (2024.1–2024.2) | alumni | Três projetos ao mesmo tempo no auge do crescimento | 2024.2 | P4 |
+| 42 | Carolina Fragoso | Gerente de projeto (2024.2–2025.1) | alumni | O cliente que sumiu logo depois de aprovar o protótipo | 2024.2 | P3 |
 | 43 | Rodrigo Pacheco | Pessoa desenvolvedora (2024.2–2025.2) | alumni | Herdar um código sem nenhuma documentação | 2025.1 | P5 |
-| 44 | Letícia Prado | Gerente de software (2025.2–2026.2) | alumni | Gerenciar dois squads ao mesmo tempo | 2025.2 | P4 |
+| 44 | Letícia Prado | Gerente de projeto (2025.2–2026.2) | alumni | Gerenciar dois squads ao mesmo tempo | 2025.2 | P4 |
 | 45 | Fernanda Gusmão | Pessoa desenvolvedora (2026.1–2027.1) | ativa | Pedir validação ao cliente toda sexta e ver o projeto andar | 2026.2 | P6 |
 | 46 | Arthur Lemos | Pessoa desenvolvedora (2026.2–2027.1) | ativo | Entrar num projeto pela metade e depender de uma só pessoa para entender tudo | 2026.2 | P5 |
 
@@ -42,7 +42,7 @@ Completa os mandatos ao lado dos protagonistas da diretoria.
 |---|---|---|---|---|---|---|
 | 47 | Gabriela Pinheiro | Designer de produto (2024.1–2025.1) | alumni | Um protótipo aprovado por quem não era o usuário final | 2024.1 | P2 |
 | 48 | Rebeca Amaral | Analista de produto (2024.2–2025.2) | alumni | Entrevistas com usuários que mudaram o escopo para melhor | 2025.1 | P6 |
-| 49 | Murilo Teixeira | Gerente de produto (2025.2–2026.2) | alumni | Escrever os critérios de aceite junto com o cliente | 2025.2 | P6 |
+| 49 | Murilo Teixeira | Gerente de projeto (2025.2–2026.2) | alumni | Escrever os critérios de aceite junto com o cliente | 2025.2 | P6 |
 | 50 | Alice Carvalho | Líder de design (2026.1–2026.2) | alumni | Retomar a biblioteca de componentes que tinha sido abandonada | 2026.1 | P5 |
 | 51 | Diego Fontana | Analista de produto (2026.1–2027.1) | ativo | Descobrir só na terceira reunião quem realmente decidia no cliente | 2026.1 | P2 |
 | 52 | Lorena Batista | Designer de produto (2025.2–2027.1) | ativa | Criar o guia visual de um cliente para não depender de uma pessoa só | 2026.2 | P5 |
@@ -57,7 +57,7 @@ Completa os mandatos ao lado dos protagonistas da diretoria.
 | 56 | Heloísa Barros | Líder de dados (2024.2–2025.1) | alumni | Revisar o padrão de entrega de relatórios de dados | 2025.1 | – |
 | 57 | Ícaro Menezes | Analista de dados (2024.2–2025.2) | alumni | Três projetos de dados ao mesmo tempo | 2025.1 | P4 |
 | 58 | Wesley Araújo | Analista de dados (2025.1–2025.2) | alumni | Um painel entregue que o cliente nunca chegou a usar | 2025.2 | P3 |
-| 59 | Gustavo Nogueira | Gerente de dados (2025.2–2026.2) | alumni | O cliente pediu um painel e descobriu que queria uma previsão | 2025.2 | P1 |
+| 59 | Gustavo Nogueira | Gerente de projeto (2025.2–2026.2) | alumni | O cliente pediu um painel e descobriu que queria uma previsão | 2025.2 | P1 |
 | 60 | Manuela Rios | Analista de dados (2025.2–2027.1) | ativa | Documentar as consultas para quem viesse depois | 2026.1 | P5 |
 | 61 | Renan Castilho | Analista de dados (2026.2–2027.1) | ativo | Um projeto de dados feito com apoio de IA | 2026.2 | – |
 

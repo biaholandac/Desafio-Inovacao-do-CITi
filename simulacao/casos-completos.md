@@ -149,12 +149,12 @@ O CITi viveu um crescimento rápido, com muitos projetos simultâneos, entre ele
 - **Lição:** Uma passagem de gestão precisa registrar não só o que foi decidido, mas por que foi decidido.
 
 ### C005 · O escopo que dobrou sem ninguém perceber
-*Contado por: Gerente de dados · conversa do squad · P1*
+*Contado por: Gerente de projeto · conversa do squad · P1*
 
-- **Situação:** No primeiro projeto que gerenciou, um painel de pedidos para uma padaria, a gerente de dados aceitava pequenos ajustes em cada reunião. No fim, o painel tinha o dobro de indicadores combinados.
+- **Situação:** No primeiro projeto que gerenciou, um painel de pedidos para uma padaria, a gerente de projeto aceitava pequenos ajustes em cada reunião. No fim, o painel tinha o dobro de indicadores combinados.
 - **Dilema:** Recusar os ajustes e frustrar o cliente, ou aceitar e estourar o prazo.
 - **Opções na época:** (a) Aceitar os ajustes; (b) Registrar cada pedido e avaliar o impacto; (c) Recusar tudo que não estava no contrato
-- **Decisão:** A gerente de dados aceitou os ajustes até perceber o atraso.
+- **Decisão:** A gerente de projeto aceitou os ajustes até perceber o atraso.
 - **Resultado:** O projeto atrasou um mês. Depois disso, ela passou a manter uma lista de pedidos com o impacto de cada um, revisada com o cliente toda semana.
 - **Lição:** Escopo não cresce de uma vez, cresce em pedidos pequenos. Registrar cada um torna o crescimento visível para todos.
 - **Simulação:** escolha entre opções
@@ -242,20 +242,20 @@ O CITi viveu um crescimento rápido, com muitos projetos simultâneos, entre ele
 - **Lição:** Publicação nunca deve ficar para a última hora, principalmente quando o time está sobrecarregado.
 
 ### C073 · Três projetos ao mesmo tempo
-*Contado por: Gerente de software · conversa de despedida · P4*
+*Contado por: Gerente de projeto · conversa de despedida · P4*
 
-- **Situação:** O gerente de software gerenciou três projetos simultâneos no auge do crescimento de 2024.
+- **Situação:** O gerente de projeto gerenciou três projetos simultâneos no auge do crescimento de 2024.
 - **Dilema:** Pedir para sair de um projeto ou seguir com os três.
-- **Decisão:** O gerente de software seguiu com os três.
+- **Decisão:** O gerente de projeto seguiu com os três.
 - **Resultado:** Nenhum dos projetos teve a atenção que precisava.
 - **Lição:** Gerenciar bem um projeto exige tempo. Três ao mesmo tempo dividem a atenção em partes pequenas demais.
 
 ### C074 · O cliente que sumiu depois de aprovar o protótipo
-*Contado por: Gerente de software · conversa do squad · P3*
+*Contado por: Gerente de projeto · conversa do squad · P3*
 
 - **Situação:** Depois de aprovar o protótipo, o cliente parou de responder.
 - **Dilema:** Seguir com o desenvolvimento ou esperar.
-- **Decisão:** A gerente de software seguiu com o desenvolvimento.
+- **Decisão:** A gerente de projeto seguiu com o desenvolvimento.
 - **Resultado:** Quando o cliente voltou, pediu mudanças que invalidaram parte do trabalho.
 - **Lição:** Aprovação de protótipo não substitui acompanhamento. Combine validações ao longo do projeto.
 
@@ -344,9 +344,9 @@ Foi a gestão de organizar processos: os rituais de retrospectiva e a biblioteca
 - **Simulação:** escolha entre opções
 
 ### C026 · O projeto que deu certo do começo ao fim
-*Contado por: Gerente de produto · conversa de despedida · projeto C · P6*
+*Contado por: Gerente de projeto · conversa de despedida · projeto C · P6*
 
-- **Situação:** Depois do projeto A, a gerente de produto propôs um formato diferente: duas semanas de descoberta com a secretaria da escola, os pais e a direção, e uma reunião curta toda sexta com o cliente para validar o que foi feito.
+- **Situação:** Depois do projeto A, a gerente de projeto propôs um formato diferente: duas semanas de descoberta com a secretaria da escola, os pais e a direção, e uma reunião curta toda sexta com o cliente para validar o que foi feito.
 - **Dilema:** Convencer a gestão de que duas semanas sem código valiam a pena.
 - **Decisão:** A descoberta completa, com a passada de bastão da gerente de contas já incluindo as entrevistas.
 - **Resultado:** Entrega no prazo, sem mudanças grandes de escopo, e o cliente indicou o CITi para outra escola.
@@ -559,20 +559,20 @@ Os projetos de dados ganharam espaço e o checklist de passada de bastão foi re
 - **Lição:** O que é prometido na venda precisa estar escrito antes do projeto começar.
 
 ### C076 · Gerenciar dois squads ao mesmo tempo
-*Contado por: Gerente de software · conversa de fim de gestão · P4*
+*Contado por: Gerente de projeto · conversa de fim de gestão · P4*
 
-- **Situação:** A gerente de software passou a gerenciar dois squads por falta de gerentes.
+- **Situação:** A gerente de projeto passou a gerenciar dois squads por falta de gerentes.
 - **Dilema:** Aceitar ou pedir apoio.
-- **Decisão:** A gerente de software aceitou e organizou rituais em dias alternados.
+- **Decisão:** A gerente de projeto aceitou e organizou rituais em dias alternados.
 - **Resultado:** Funcionou por um tempo, mas um dos squads sentiu falta de acompanhamento.
 - **Lição:** Acúmulo de gestão é solução temporária, não modelo.
 
 ### C081 · Critérios de aceite escritos com o cliente
-*Contado por: Gerente de produto · conversa do squad · P6*
+*Contado por: Gerente de projeto · conversa do squad · P6*
 
-- **Situação:** O gerente de produto escreveu os critérios de aceite junto com o cliente, antes do desenvolvimento.
+- **Situação:** O gerente de projeto escreveu os critérios de aceite junto com o cliente, antes do desenvolvimento.
 - **Dilema:** Escrever sozinho ou com o cliente.
-- **Decisão:** O gerente de produto escreveu com o cliente.
+- **Decisão:** O gerente de projeto escreveu com o cliente.
 - **Resultado:** Na entrega, não houve discussão sobre o que estava pronto.
 - **Lição:** Combinar o que é pronto antes de começar evita discussões no fim.
 
@@ -586,11 +586,11 @@ Os projetos de dados ganharam espaço e o checklist de passada de bastão foi re
 - **Lição:** Painel sem participação do cliente vira painel sem uso.
 
 ### C091 · O painel que virou previsão
-*Contado por: Gerente de dados · conversa do squad · P1*
+*Contado por: Gerente de projeto · conversa do squad · P1*
 
 - **Situação:** O cliente pediu um painel e, no meio do projeto, percebeu que queria uma previsão.
 - **Dilema:** Seguir com o painel ou mudar o projeto.
-- **Decisão:** O gerente de dados renegociou o escopo com o cliente.
+- **Decisão:** O gerente de projeto renegociou o escopo com o cliente.
 - **Resultado:** O projeto mudou, com novo prazo combinado.
 - **Lição:** Quando o pedido muda de natureza, o escopo precisa ser renegociado, não absorvido.
 
@@ -637,12 +637,12 @@ A gestão entregou o assistente com IA da Ótica Visão Clara e começou as conv
 - **Simulação:** escolha entre opções
 
 ### C021 · Gerenciar um projeto com IA para um cliente
-*Contado por: Gerente de software · conversa do squad · projeto E · P2, P6*
+*Contado por: Gerente de projeto · conversa do squad · projeto E · P2, P6*
 
 - **Situação:** A Ótica Visão Clara contratou um assistente com IA para atendimento. Na passada de bastão, ficou claro que nem o cliente sabia exatamente o que o assistente deveria responder.
 - **Dilema:** Começar a construir com o que havia ou voltar ao cliente para definir melhor o escopo.
 - **Opções na época:** (a) Construir uma primeira versão e ajustar depois; (b) Fazer uma rodada de descoberta com as atendentes; (c) Pedir ao comercial que fechasse o escopo
-- **Decisão:** O gerente de software propôs uma semana de conversa com as atendentes da ótica e uma validação semanal com a dona.
+- **Decisão:** O gerente de projeto propôs uma semana de conversa com as atendentes da ótica e uma validação semanal com a dona.
 - **Resultado:** O assistente foi treinado com as dúvidas reais dos clientes da ótica e entrou em uso no prazo.
 - **Lição:** Quando o cliente não sabe o que quer, ouvir quem faz o trabalho no dia a dia define o escopo melhor do que qualquer reunião.
 - **Simulação:** conversa com: Dona da Ótica Visão Clara, entusiasmada com IA mas sem clareza do que precisa
@@ -666,11 +666,11 @@ A gestão entregou o assistente com IA da Ótica Visão Clara e começou as conv
 - **Lição:** Material de design só é legado quando outra pessoa consegue usar sem precisar de quem o criou.
 
 ### C034 · Como os projetos de dados mudaram com a IA
-*Contado por: Gerente de dados · conversa de fim de gestão*
+*Contado por: Gerente de projeto · conversa de fim de gestão*
 
 - **Situação:** Com o uso de IA, tarefas de limpeza e análise de dados ficaram muito mais rápidas.
 - **Dilema:** Usar o tempo ganho para fazer mais projetos ou para aprofundar as análises.
-- **Decisão:** A gerente de dados orientou o time a usar o tempo ganho para entender melhor as perguntas dos clientes.
+- **Decisão:** A gerente de projeto orientou o time a usar o tempo ganho para entender melhor as perguntas dos clientes.
 - **Resultado:** As entregas ficaram mais estratégicas e os clientes passaram a pedir análises, não só painéis.
 - **Lição:** A IA acelera o trabalho, mas o valor continua em fazer as perguntas certas.
 
@@ -780,22 +780,22 @@ O time de Inovação voltou e liderou a maior implementação de IA do CITi, com
 - **Lição:** Numa passagem de gestão, o plano é a parte fácil de transmitir. O que se perde são os porquês.
 
 ### C029 · Assumir um projeto sem nada documentado
-*Contado por: Gerente de produto · conversa do squad · projeto F · P5*
+*Contado por: Gerente de projeto · conversa do squad · projeto F · P5*
 
-- **Situação:** A gerente de produto assumiu a loja virtual do Ateliê Maré depois da saída do designer. Não havia guia visual nem registro das decisões tomadas com a cliente.
+- **Situação:** A gerente de projeto assumiu a loja virtual do Ateliê Maré depois da saída do designer. Não havia guia visual nem registro das decisões tomadas com a cliente.
 - **Dilema:** Reconstruir o que faltava ou pedir à cliente que repetisse tudo.
 - **Opções na época:** (a) Reconstruir sozinha a partir da loja; (b) Marcar uma reunião para a cliente repetir as decisões; (c) Combinar as duas coisas e registrar tudo
-- **Decisão:** A gerente de produto estudou a loja, montou um guia visual e validou com a cliente em uma reunião.
+- **Decisão:** A gerente de projeto estudou a loja, montou um guia visual e validou com a cliente em uma reunião.
 - **Resultado:** O projeto voltou a andar, mas com duas semanas de atraso e uma cliente um pouco desconfiada.
 - **Lição:** Assumir um projeto sem registro custa tempo e confiança. O guia que faltou agora existe para quem vier depois.
 - **Simulação:** conversa com: Dona do Ateliê Maré, preocupada com a demora
 
-### C030 · Os primeiros meses como gerente de produto
-*Contado por: Gerente de produto · conversa de fim de gestão*
+### C030 · Os primeiros meses como gerente de projeto
+*Contado por: Gerente de projeto · conversa de fim de gestão*
 
-- **Situação:** Ao virar gerente de produto, a gerente de produto passou a cuidar de pessoas e prazos, e não só de entregas.
+- **Situação:** Ao virar gerente de projeto, a gerente de projeto passou a cuidar de pessoas e prazos, e não só de entregas.
 - **Dilema:** Continuar fazendo o trabalho de analista ou confiar mais no time.
-- **Decisão:** A gerente de produto passou a delegar as entrevistas e a focar na organização do squad e na relação com o cliente.
+- **Decisão:** A gerente de projeto passou a delegar as entrevistas e a focar na organização do squad e na relação com o cliente.
 - **Resultado:** O squad ganhou autonomia e as entregas ficaram mais previsíveis.
 - **Lição:** Virar gerente é trocar o fazer pelo fazer acontecer.
 
@@ -814,7 +814,7 @@ O time de Inovação voltou e liderou a maior implementação de IA do CITi, com
 - **Situação:** A dona do Ateliê Maré ligou para o gerente de contas reclamando que a loja virtual não recebia atualizações havia semanas, desde a saída do designer.
 - **Dilema:** Explicar a situação com transparência ou prometer uma solução rápida.
 - **Opções na época:** (a) Prometer atualizações na semana seguinte; (b) Explicar a transição e apresentar um novo plano com prazo realista
-- **Decisão:** O gerente de contas explicou a transição e apresentou o plano da nova gerente de produto, com um prazo realista.
+- **Decisão:** O gerente de contas explicou a transição e apresentou o plano da nova gerente de projeto, com um prazo realista.
 - **Resultado:** A cliente ficou insatisfeita no início, mas renovou o contrato depois de ver o plano cumprido.
 - **Lição:** Transparência sobre um problema interno preserva mais a relação do que uma promessa que não se cumpre.
 - **Simulação:** conversa com: Dona do Ateliê Maré, chateada com a demora

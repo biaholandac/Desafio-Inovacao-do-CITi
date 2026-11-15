@@ -21,9 +21,9 @@ export function salvarDemonstracao(estado) {
 // Área do caso (como nos casos do legado) e fatia do tronco onde ele nasce, a partir do cargo.
 const SETOR_DA_AREA = {
   Diretoria: "Diretoria",
-  Desenvolvimento: "Soluções",
-  "Inteligência de Dados": "Soluções",
-  Produto: "Soluções",
+  Desenvolvimento: "Tech",
+  "Inteligência de Dados": "Tech",
+  Produto: "Produto",
   Comercial: "Negócios",
   Marketing: "Negócios",
   Negócios: "Negócios",

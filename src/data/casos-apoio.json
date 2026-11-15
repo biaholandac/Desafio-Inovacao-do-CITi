@@ -31,11 +31,11 @@
     "situacao": "Cada squad de aplicativo escolhia sua tecnologia, e ninguém conseguia ajudar em projetos de outros squads.",
     "dilema": "Padronizar ou manter a liberdade de cada squad.",
     "opcoes": null,
-    "decisao": "O CTO definiu uma tecnologia padrão para novos aplicativos.",
+    "decisao": "O líder de desenvolvimento definiu uma tecnologia padrão para novos aplicativos.",
     "resultado": "Os membros passaram a circular entre projetos com mais facilidade.",
     "licao": "Padronizar o que se repete libera energia para o que é único em cada projeto.",
     "simulacao": null,
-    "cargoAutor": "CTO"
+    "cargoAutor": "Líder de desenvolvimento"
   },
   {
     "id": "C065",
@@ -165,11 +165,11 @@
     "situacao": "Para cumprir o prazo, um aplicativo foi entregue sem testes.",
     "dilema": "Atrasar para testar ou entregar no prazo.",
     "opcoes": null,
-    "decisao": "A pessoa desenvolvedora entregou no prazo, sem testes.",
+    "decisao": "A analista de software entregou no prazo, sem testes.",
     "resultado": "O aplicativo apresentou falhas na primeira semana de uso.",
     "licao": "Pular testes não economiza tempo, só transfere o problema para o cliente.",
     "simulacao": null,
-    "cargoAutor": "Pessoa desenvolvedora"
+    "cargoAutor": "Analista de software"
   },
   {
     "id": "C072",
@@ -202,14 +202,14 @@
     "padroes": [
       "P4"
     ],
-    "situacao": "O gerente de software gerenciou três projetos simultâneos no auge do crescimento de 2024.",
+    "situacao": "O gerente de projeto gerenciou três projetos simultâneos no auge do crescimento de 2024.",
     "dilema": "Pedir para sair de um projeto ou seguir com os três.",
     "opcoes": null,
-    "decisao": "O gerente de software seguiu com os três.",
+    "decisao": "O gerente de projeto seguiu com os três.",
     "resultado": "Nenhum dos projetos teve a atenção que precisava.",
     "licao": "Gerenciar bem um projeto exige tempo. Três ao mesmo tempo dividem a atenção em partes pequenas demais.",
     "simulacao": null,
-    "cargoAutor": "Gerente de software"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C074",
@@ -225,11 +225,11 @@
     "situacao": "Depois de aprovar o protótipo, o cliente parou de responder.",
     "dilema": "Seguir com o desenvolvimento ou esperar.",
     "opcoes": null,
-    "decisao": "A gerente de software seguiu com o desenvolvimento.",
+    "decisao": "A gerente de projeto seguiu com o desenvolvimento.",
     "resultado": "Quando o cliente voltou, pediu mudanças que invalidaram parte do trabalho.",
     "licao": "Aprovação de protótipo não substitui acompanhamento. Combine validações ao longo do projeto.",
     "simulacao": null,
-    "cargoAutor": "Gerente de software"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C075",
@@ -242,14 +242,14 @@
     "padroes": [
       "P5"
     ],
-    "situacao": "A pessoa desenvolvedora herdou um sistema de quem já tinha saído, sem nenhuma documentação.",
+    "situacao": "A analista de software herdou um sistema de quem já tinha saído, sem nenhuma documentação.",
     "dilema": "Reescrever ou entender o código existente.",
     "opcoes": null,
-    "decisao": "A pessoa desenvolvedora estudou o código e documentou enquanto entendia.",
+    "decisao": "A analista de software estudou o código e documentou enquanto entendia.",
     "resultado": "As próximas manutenções ficaram muito mais rápidas.",
     "licao": "Quem herda código sem documentação pode quebrar o ciclo documentando para o próximo.",
     "simulacao": null,
-    "cargoAutor": "Pessoa desenvolvedora"
+    "cargoAutor": "Analista de software"
   },
   {
     "id": "C076",
@@ -262,14 +262,14 @@
     "padroes": [
       "P4"
     ],
-    "situacao": "A gerente de software passou a gerenciar dois squads por falta de gerentes.",
+    "situacao": "A gerente de projeto passou a gerenciar dois squads por falta de gerentes.",
     "dilema": "Aceitar ou pedir apoio.",
     "opcoes": null,
-    "decisao": "A gerente de software aceitou e organizou rituais em dias alternados.",
+    "decisao": "A gerente de projeto aceitou e organizou rituais em dias alternados.",
     "resultado": "Funcionou por um tempo, mas um dos squads sentiu falta de acompanhamento.",
     "licao": "Acúmulo de gestão é solução temporária, não modelo.",
     "simulacao": null,
-    "cargoAutor": "Gerente de software"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C077",
@@ -329,7 +329,7 @@
     "resultado": "A equipe do cliente estranhou o sistema e pediu mudanças.",
     "licao": "Aprovação de quem paga não é validação de quem usa.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C080",
@@ -349,7 +349,7 @@
     "resultado": "O produto ficou mais simples e mais útil.",
     "licao": "Ouvir os usuários cedo muda o escopo para melhor, não para maior.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C081",
@@ -362,14 +362,14 @@
     "padroes": [
       "P6"
     ],
-    "situacao": "O gerente de produto escreveu os critérios de aceite junto com o cliente, antes do desenvolvimento.",
+    "situacao": "O gerente de projeto escreveu os critérios de aceite junto com o cliente, antes do desenvolvimento.",
     "dilema": "Escrever sozinho ou com o cliente.",
     "opcoes": null,
-    "decisao": "O gerente de produto escreveu com o cliente.",
+    "decisao": "O gerente de projeto escreveu com o cliente.",
     "resultado": "Na entrega, não houve discussão sobre o que estava pronto.",
     "licao": "Combinar o que é pronto antes de começar evita discussões no fim.",
     "simulacao": null,
-    "cargoAutor": "Gerente de produto"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C082",
@@ -409,7 +409,7 @@
     "resultado": "As decisões passaram a ser tomadas mais rápido.",
     "licao": "Descubra cedo quem decide. Essa informação deveria vir na passada de bastão.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C084",
@@ -429,7 +429,7 @@
     "resultado": "Outros operacionais de Produto passaram a atender o cliente sem depender dela.",
     "licao": "Um guia visual transforma o conhecimento de uma pessoa em conhecimento do time.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C085",
@@ -449,7 +449,7 @@
     "resultado": "As telas foram aprovadas sem retrabalho.",
     "licao": "Cliente presente nas revisões é cliente sem surpresas.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C086",
@@ -469,7 +469,7 @@
     "resultado": "A descoberta trouxe informações que mudaram a proposta para melhor.",
     "licao": "Um roteiro é ponto de partida, não limite.",
     "simulacao": null,
-    "cargoAutor": "Operacional de Produto"
+    "cargoAutor": "Operacional de produto"
   },
   {
     "id": "C087",
@@ -563,11 +563,11 @@
     "situacao": "O cliente pediu um painel e, no meio do projeto, percebeu que queria uma previsão.",
     "dilema": "Seguir com o painel ou mudar o projeto.",
     "opcoes": null,
-    "decisao": "O gerente de dados renegociou o escopo com o cliente.",
+    "decisao": "O gerente de projeto renegociou o escopo com o cliente.",
     "resultado": "O projeto mudou, com novo prazo combinado.",
     "licao": "Quando o pedido muda de natureza, o escopo precisa ser renegociado, não absorvido.",
     "simulacao": null,
-    "cargoAutor": "Gerente de dados"
+    "cargoAutor": "Gerente de projeto"
   },
   {
     "id": "C092",
@@ -698,14 +698,14 @@
     "padroes": [
       "P2"
     ],
-    "situacao": "A gerente de contas passou a gravar a reunião de passada de bastão para o time ouvir depois.",
+    "situacao": "A líder de comercial passou a gravar a reunião de passada de bastão para o time ouvir depois.",
     "dilema": "Reunião ao vivo apenas ou gravada.",
     "opcoes": null,
-    "decisao": "A gerente de contas gravou e compartilhou com o squad.",
+    "decisao": "A líder de comercial gravou e compartilhou com o squad.",
     "resultado": "Membros que entraram depois no projeto conseguiram entender o contexto.",
     "licao": "Uma passada de bastão gravada continua útil para quem chega depois.",
     "simulacao": null,
-    "cargoAutor": "Gerente de contas"
+    "cargoAutor": "Líder de comercial"
   },
   {
     "id": "C099",
@@ -853,11 +853,11 @@
     "situacao": "Membros saíram no meio do semestre e deixaram projetos sem dono.",
     "dilema": "Redistribuir rapidamente ou renegociar prazos.",
     "opcoes": null,
-    "decisao": "A especialista de Gente e Gestão redistribuiu os projetos, mas sem registro do que cada um estava fazendo.",
+    "decisao": "A líder de Gente e Gestão redistribuiu os projetos, mas sem registro do que cada um estava fazendo.",
     "resultado": "Os novos responsáveis levaram semanas para retomar.",
     "licao": "Toda saída precisa de uma passagem, mesmo no meio do semestre.",
     "simulacao": null,
-    "cargoAutor": "Especialista de Gente e Gestão"
+    "cargoAutor": "Líder de Gente e Gestão"
   },
   {
     "id": "C107",
@@ -910,14 +910,14 @@
     "padroes": [
       "P4"
     ],
-    "situacao": "O especialista de Gente e Gestão mapeou a alocação de todos os membros.",
+    "situacao": "O analista de Gente e Gestão mapeou a alocação de todos os membros.",
     "dilema": "Mostrar o mapa só à diretoria ou a todos.",
     "opcoes": null,
-    "decisao": "O especialista de Gente e Gestão compartilhou o mapa com todos os gerentes.",
+    "decisao": "O analista de Gente e Gestão compartilhou o mapa com todos os gerentes.",
     "resultado": "Os gerentes passaram a negociar pessoas entre si.",
     "licao": "Quando todos veem a alocação, a sobrecarga é percebida mais cedo.",
     "simulacao": null,
-    "cargoAutor": "Especialista de Gente e Gestão"
+    "cargoAutor": "Analista de Gente e Gestão"
   },
   {
     "id": "C110",

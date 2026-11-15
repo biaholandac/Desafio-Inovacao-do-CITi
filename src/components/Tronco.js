@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import {
-  RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
+  RAIO_NUCLEO, RAIO_EXTERNO, SETORES, meioDoSetor, MEIO_SOLUCOES,
   raiosDoAnel, caminhoOndulado, caminhoAnel, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE, IMAGEM_TRONCO, ZOOM,
 } from "@/lib/geometria";
 import estilos from "./Tronco.module.css";
@@ -20,7 +20,7 @@ const FOTO_CORTE = {
 };
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
-export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false, novo = null, celebrando = null }) {
+export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false, novo = null, celebrando = null, solucoesJuntas = false }) {
   const total = gestoes.length;
 
   // Linhas finas de crescimento dentro de cada anel, para dar textura de madeira.
@@ -52,6 +52,21 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     const meio = interno + (externo - interno) * (0.55 + 0.2 * semente(g.codigo));
     return { chave: g.codigo, d: caminhoFaixa(meio, externo, g.codigo) };
   }).filter(Boolean), [gestoes, total]);
+
+  // Onde vai o nome de cada área: no meio da sua fatia, mas fora das faixas que os painéis cobrem
+  // (a lateral direita e a parte de baixo à esquerda).
+  const rotulos = useMemo(() => {
+    const visivel = (a) => {
+      const g = ((a % 360) + 360) % 360;
+      if (g < 36) return 36;
+      if (g > 324) return -36;
+      if (g > 136 && g < 190) return 136;
+      return a;
+    };
+    const lista = SETORES.map((nome, i) => ({ nome, angulo: visivel(meioDoSetor(i)), abertura: 40 }));
+    if (!solucoesJuntas) return lista;
+    return [...lista.filter((r) => r.nome !== "Tech" && r.nome !== "Produto"), { nome: "Soluções", angulo: visivel(MEIO_SOLUCOES), abertura: 56 }];
+  }, [solucoesJuntas]);
 
   // Painel HUD ligado ao tronco: casos por gestão, do centro para a casca.
   const hud = useMemo(() => {
@@ -234,21 +249,17 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       </g>}
 
       {/* Nomes das áreas, curvados ao longo da casca (fora da perspectiva, para o texto não deformar) */}
-      {!decorativo && SETORES.map((s, i) => {
-        const fatia = 360 / SETORES.length;
-        let meio = -90 + i * fatia + fatia / 2;
-        // Rótulos nas laterais ficariam atrás dos painéis: o da direita desce e o da esquerda sobe dentro da própria fatia.
-        if (Math.abs(Math.cos((meio * Math.PI) / 180)) > 0.85) meio += Math.cos((meio * Math.PI) / 180) > 0 ? 46 : 30;
+      {!decorativo && rotulos.map(({ nome, angulo, abertura }, i) => {
         const r = RAIO_EXTERNO + 46;
-        const embaixo = Math.sin((meio * Math.PI) / 180) > 0.2;
-        const angs = Array.from({ length: 13 }, (_, k) => meio - 26 + (52 * k) / 12);
+        const embaixo = Math.sin((angulo * Math.PI) / 180) > 0.2;
+        const angs = Array.from({ length: 13 }, (_, k) => angulo - abertura / 2 + (abertura * k) / 12);
         const pts = (embaixo ? angs.reverse() : angs).map((a) => naTela(ponto(r, a)));
         const d = "M" + pts.map((p) => `${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join("L");
         return (
-          <g key={s}>
+          <g key={nome}>
             <path id={`setor-${i}`} d={d} fill="none" />
-            <text className={estilos.rotuloSetor} dominantBaseline="middle" paintOrder="stroke">
-              <textPath href={`#setor-${i}`} startOffset="50%" textAnchor="middle">{s.toUpperCase()}</textPath>
+            <text className={`${estilos.rotuloSetor} ${nome === "Soluções" ? estilos.rotuloJunto : ""}`} dominantBaseline="middle" paintOrder="stroke">
+              <textPath href={`#setor-${i}`} startOffset="50%" textAnchor="middle">{nome.toUpperCase()}</textPath>
             </text>
           </g>
         );

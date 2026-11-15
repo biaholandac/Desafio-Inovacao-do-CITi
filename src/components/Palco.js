@@ -42,6 +42,7 @@ export default function Palco({ cargo = null }) {
   const [pergunta, setPergunta] = useState("");
   const [resposta, setResposta] = useState(null);
   const [pensando, setPensando] = useState(false);
+  const [solucoesJuntas, setSolucoesJuntas] = useState(false);
 
   // Conversas de legado feitas nesta demonstração (guardadas só neste navegador).
   const [demo, setDemo] = useState({ casos: [], simuladas: 0 });
@@ -224,9 +225,9 @@ export default function Palco({ cargo = null }) {
       const recepcao = ["C069", "C111"].map((id) => casos.find((c) => c.id === id));
       sugeridos = [...new Map([...chegadaDaArea, ...conselhos.slice(0, 2), ...recepcao].filter(Boolean).map((c) => [c.id, c])).values()].slice(0, 4);
     } else {
-      // Cargo sem casos próprios ainda (como Analista de software): começa pelo que a área deixou.
-      const base = doCargo.length ? doCargo : daArea;
-      sugeridos = recentes(base.filter((c) => c.licao)).slice(0, 3);
+      // Primeiro os casos do próprio cargo; se forem poucos, completa com o que a área deixou.
+      const base = [...recentes(doCargo), ...recentes(daArea.filter((c) => !doCargo.includes(c)))];
+      sugeridos = base.filter((c) => c.licao).slice(0, 3);
     }
     return { mapa, doCargo, daArea, padraoTopo, sugeridos };
   }, [entrada, casos]);
@@ -286,7 +287,7 @@ export default function Palco({ cargo = null }) {
       <div className={estilos.moldura}>
       <div className={estilos.palco}>
         <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
-          <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando}
+          <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando} solucoesJuntas={solucoesJuntas}
             selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0]))
               : lente === "bastao" ? Object.fromEntries(casos.map((c) => [c.id, citadosBastao.has(c.id) ? 2 : c.cargoAutor === cargoBastao ? 1 : 0]))
               : lente === "legado" ? foco?.mapa : null}
@@ -306,6 +307,12 @@ export default function Palco({ cargo = null }) {
             </g>
           )}
         </svg>
+
+        {/* Tech e Produto podem ser vistos juntos, como Soluções */}
+        <button className={estilos.alternarSolucoes} style={{ left: px(40), top: py(128) }} onClick={() => setSolucoesJuntas((v) => !v)}
+          aria-pressed={solucoesJuntas}>
+          {solucoesJuntas ? "Separar Tech e Produto" : "Ver Tech e Produto como Soluções"}
+        </button>
 
         {/* Painel da gestão */}
         {gestao && !resposta && (
@@ -460,8 +467,8 @@ export default function Palco({ cargo = null }) {
                 <div><strong>{foco.doCargo.length}</strong><span>{novato ? "sobre chegar" : "do seu cargo"}</span></div>
                 <div><strong>{novato ? foco.daArea.length - foco.doCargo.length : foco.daArea.length}</strong><span>{novato ? "da sua subárea" : "da sua área"}</span></div>
               </div>
-              {!novato && foco.doCargo.length === 0 && (
-                <p className={estilos.dica}>Ninguém deste cargo contou um caso ainda. Enquanto isso, comece pelo que a sua área já viveu.</p>
+              {!novato && foco.doCargo.length < 3 && (
+                <p className={estilos.dica}>{foco.doCargo.length === 0 ? "Ninguém deste cargo contou um caso ainda." : "Ainda há poucos casos contados por este cargo."} Enquanto isso, comece também pelo que a sua área já viveu.</p>
               )}
               {foco.padraoTopo && (
                 <p className={estilos.alerta}>

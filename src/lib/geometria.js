@@ -4,8 +4,23 @@ export const CENTRO = { x: 800, y: 470 };
 export const RAIO_NUCLEO = 34;
 export const RAIO_EXTERNO = 330;
 
-// Setores do tronco: cada grupo de áreas ocupa uma fatia do círculo.
-export const SETORES = ["Diretoria", "Soluções", "Negócios", "Gente e Gestão", "Inovação"];
+// Setores do tronco: seis fatias iguais de 60°, com o centro de Diretoria no topo.
+// Tech e Produto ficam lado a lado, para poderem ser vistos juntos como Soluções.
+export const SETORES = ["Diretoria", "Inovação", "Tech", "Produto", "Negócios", "Gente e Gestão"];
+export const FATIA = 360 / SETORES.length;
+export const INICIO_SETORES = -90 - FATIA / 2;
+// Ângulo do meio de cada fatia, e o de Tech + Produto juntos.
+export const meioDoSetor = (i) => INICIO_SETORES + i * FATIA + FATIA / 2;
+export const MEIO_SOLUCOES = INICIO_SETORES + 3 * FATIA;
+
+// Fatia de um caso: a área diz se é Tech ou Produto; nos demais, vale o grupo de quem contou.
+const AREAS_TECH = ["Desenvolvimento", "Inteligência de Dados"];
+export function setorDoCaso(c, pessoaPorId) {
+  if (c.setor) return c.setor === "Soluções" ? (c.area === "Produto" ? "Produto" : "Tech") : c.setor;
+  const grupo = pessoaPorId[c.autor]?.grupo;
+  if (grupo === "Soluções") return c.area === "Produto" || /produto/i.test(c.cargoAutor) ? "Produto" : AREAS_TECH.includes(c.area) ? "Tech" : "Tech";
+  return grupo;
+}
 
 // Gera um número pseudoaleatório estável a partir de um texto,
 // para o desenho ser sempre o mesmo a cada carregamento.
@@ -62,12 +77,11 @@ export function posicionarCasos(casos, gestoes, pessoaPorId) {
   const indiceGestao = Object.fromEntries(gestoes.map((g, i) => [g.codigo, i]));
   const grupos = {};
   for (const c of casos) {
-    // Casos novos (da conversa de legado) trazem a fatia pronta; os do legado usam o grupo de quem contou.
-    const setor = Math.max(0, SETORES.indexOf(c.setor ?? pessoaPorId[c.autor]?.grupo));
+    const setor = Math.max(0, SETORES.indexOf(setorDoCaso(c, pessoaPorId)));
     const chave = c.gestao + "|" + setor;
     (grupos[chave] ||= []).push(c);
   }
-  const fatia = 360 / SETORES.length;
+  const fatia = FATIA;
   const posicoes = {};
   for (const [chave, lista] of Object.entries(grupos)) {
     const [gestao, setorTxt] = chave.split("|");
@@ -75,8 +89,8 @@ export function posicionarCasos(casos, gestoes, pessoaPorId) {
     const { interno, externo } = raiosDoAnel(indiceGestao[gestao], gestoes.length);
     lista.sort((a, b) => a.id.localeCompare(b.id));
     lista.forEach((c, i) => {
-      const inicio = -90 + setor * fatia + 6;
-      const angulo = inicio + ((i + 0.5) / lista.length) * (fatia - 12) + (semente(c.id) - 0.5) * 6;
+      const inicio = INICIO_SETORES + setor * fatia + 5;
+      const angulo = inicio + ((i + 0.5) / lista.length) * (fatia - 10) + (semente(c.id) - 0.5) * 5;
       const raio = interno + (externo - interno) * (0.3 + 0.4 * semente(c.id + "r"));
       posicoes[c.id] = { ...ponto(raio, angulo), angulo, raio, interno, externo };
     });

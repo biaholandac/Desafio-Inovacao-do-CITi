@@ -264,3 +264,5 @@
 @media (prefers-reduced-motion: reduce) {
   .casoNasceu .ponto, .nascimento, .anelCelebrando .anelLinha { animation: none; }
 }
+
+.rotuloJunto { fill: #eafff2; font-size: 17px; }
