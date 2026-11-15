@@ -1,5 +1,5 @@
-import Palco from "@/components/Palco";
+import Entrada from "@/components/Entrada";
 
 export default function Inicio() {
-  return <Palco />;
+  return <Entrada />;
 }

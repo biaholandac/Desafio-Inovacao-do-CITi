@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import Tronco from "./Tronco";
 import Marca from "./Marca";
 import Fundo from "./Fundo";
@@ -26,7 +27,8 @@ const ORIGEM = {
 const px = (x) => `${(x / 1600) * 100}%`;
 const py = (y) => `${(y / 900) * 100}%`;
 
-export default function Palco() {
+export default function Palco({ pessoa = null }) {
+  const usuario = pessoa === "novo" ? { nome: "New Pig", cargoAtual: "Acabou de chegar ao CITi" } : pessoaPorId[Number(pessoa)] ?? null;
   const [lente, setLente] = useState("legado");
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
@@ -70,7 +72,15 @@ export default function Palco() {
             </button>
           ))}
         </nav>
-        <div className={estilos.selo}>Dados simulados</div>
+        <div className={estilos.direita}>
+          <div className={estilos.selo}>Dados simulados</div>
+          {usuario && (
+            <Link href="/" className={estilos.usuario} title="Trocar de pessoa">
+              <span className={estilos.avatar}>{usuario.nome === "New Pig" ? "NP" : usuario.nome.split(" ").map((n) => n[0]).slice(0, 2).join("")}</span>
+              <span className={estilos.usuarioTexto}><strong>{usuario.nome}</strong><span>{usuario.cargoAtual}</span></span>
+            </Link>
+          )}
+        </div>
       </header>
 
       <div className={estilos.palco}>
