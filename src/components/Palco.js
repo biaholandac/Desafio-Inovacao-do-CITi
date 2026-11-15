@@ -273,7 +273,7 @@ export default function Palco({ cargo = null }) {
 
         {/* Painel da gestão */}
         {gestao && !resposta && (
-          <section className={estilos.painel} style={{ left: px(28), top: py(520), width: px(300), maxHeight: py(372) }}>
+          <section className={estilos.painel} style={{ left: px(28), top: py(500), width: px(300), maxHeight: py(392) }}>
             <div className={estilos.rotulo}>Anel · gestão</div>
             <h2 className={estilos.tituloGestao}>{gestao.codigo}</h2>
             {gestao.status === "fechando" && (
@@ -291,8 +291,6 @@ export default function Palco({ cargo = null }) {
                 <div className={estilos.barra}><div style={{ width: "100%" }} /></div>
               </div>
             )}
-              </div>
-            )}
             <p className={`${estilos.texto} ${retratoAberto ? "" : estilos.textoRecolhido}`}>{gestao.descricao}</p>
             <button className={estilos.lerMais} onClick={() => setRetratoAberto(!retratoAberto)}>{retratoAberto ? "Ler menos" : "Ler mais"}</button>
             <div className={estilos.numeros}>
@@ -308,6 +306,8 @@ export default function Palco({ cargo = null }) {
                 {(demo.casos.length > 0 || demo.simuladas > 0) && (
                   <button className={estilos.demoBotao} onClick={recomecar}>Recomeçar a demonstração</button>
                 )}
+              </div>
+            )}
           </section>
         )}
 
