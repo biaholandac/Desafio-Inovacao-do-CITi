@@ -1,0 +1,832 @@
+[
+  {
+    "id": 1,
+    "nome": "Helena Vasconcelos",
+    "papel": "CEO do mandato 2024",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "entrou antes de 2024 em Produto → CEO (2024.1–2024.2) → saiu ao fim de 2024.2.",
+    "jeito": "visionária e calorosa; ótima em inspirar, nem sempre em registrar decisões.",
+    "protagonista": true
+  },
+  {
+    "id": 2,
+    "nome": "Rafael Cordeiro",
+    "papel": "CEO do mandato 2025",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "gerente de software (2024.1–2024.2) → CEO (2025.1–2025.2) → saiu ao fim de 2025.2.",
+    "jeito": "organizado, obcecado por processos; às vezes rígido demais.",
+    "protagonista": true
+  },
+  {
+    "id": 3,
+    "nome": "Lívia Albuquerque",
+    "papel": "CEO do mandato 2026",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "analista de dados (2024.1) → gerente de dados (2024.2–2025.1) → líder de dados (2025.2) → CEO (2026.1–2026.2) → saiu ao fim de 2026.2.",
+    "jeito": "analítica, calma sob pressão, gosta de decidir com dados.",
+    "protagonista": true
+  },
+  {
+    "id": 4,
+    "nome": "Thiago Barreto",
+    "papel": "COO do mandato 2024",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "especialista de Gente e Gestão (antes de 2024) → COO (2024.1–2024.2) → saiu ao fim de 2024.2.",
+    "jeito": "escuta muito, protege o time, evita conflitos.",
+    "protagonista": true
+  },
+  {
+    "id": 5,
+    "nome": "Camila Nóbrega",
+    "papel": "CTO do mandato 2025",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "pessoa desenvolvedora (antes de 2024) → líder de desenvolvimento (2024.2) → CTO (2025.1–2025.2) → saiu ao fim de 2025.2.",
+    "jeito": "técnica, direta, defensora de documentação de código.",
+    "protagonista": true
+  },
+  {
+    "id": 6,
+    "nome": "Júlia Fontes",
+    "papel": "CEO do mandato 2027",
+    "grupo": "Diretoria",
+    "status": "ativo",
+    "trajetoria": "analista de Gente e Gestão (2025.1) → especialista de Gente e Gestão (2025.2) → COO (2026.1–2026.2) → CEO (2027.1).",
+    "jeito": "empática e estruturada; transforma conversas difíceis em planos.",
+    "protagonista": true
+  },
+  {
+    "id": 7,
+    "nome": "Davi Monteiro",
+    "papel": "CRO do mandato 2027",
+    "grupo": "Diretoria",
+    "status": "ativo",
+    "trajetoria": "gerente de contas (2024.2–2026.2) → CRO (2027.1).",
+    "jeito": "carismático, negociador nato; tende a prometer rápido.",
+    "protagonista": true
+  },
+  {
+    "id": 8,
+    "nome": "Gabriel Lins",
+    "papel": "Desenvolvimento → CTO do mandato 2027",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "pessoa desenvolvedora (2024.2) → gerente de software (2025.1) → líder de desenvolvimento (2025.2–2026.2) → CTO (2027.1).",
+    "jeito": "curioso, aprende rápido, adora experimentar tecnologias novas.",
+    "protagonista": true
+  },
+  {
+    "id": 9,
+    "nome": "Marina Teles",
+    "papel": "Desenvolvimento",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "pessoa desenvolvedora (2024.1–2025.1) → saiu ao fim de 2025.1.",
+    "jeito": "talentosa e independente; resolvia tudo sozinha.",
+    "protagonista": true
+  },
+  {
+    "id": 10,
+    "nome": "Lucas Ferraz",
+    "papel": "Desenvolvimento",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "pessoa desenvolvedora (2025.1–2025.2) → gerente de software (2026.1–2027.1).",
+    "jeito": "metódico, bom em quebrar problemas grandes em partes pequenas.",
+    "protagonista": true
+  },
+  {
+    "id": 11,
+    "nome": "Ana Clara Rocha",
+    "papel": "Desenvolvimento",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "pessoa desenvolvedora (2025.2–2027.1).",
+    "jeito": "cuidadosa, faz muitas perguntas antes de começar.",
+    "protagonista": true
+  },
+  {
+    "id": 12,
+    "nome": "Sofia Martins",
+    "papel": "Produto",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "analista de produto (2024.1) → gerente de produto (2024.2–2025.1) → saiu ao fim de 2025.1.",
+    "jeito": "obcecada por entender o problema antes de propor solução.",
+    "protagonista": true
+  },
+  {
+    "id": 13,
+    "nome": "Pedro Henrique Sales",
+    "papel": "Design de Produto",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "designer de produto (2025.1–2026.1) → saiu ao fim de 2026.1.",
+    "jeito": "criativo e perfeccionista; guardava tudo nos próprios arquivos.",
+    "protagonista": true
+  },
+  {
+    "id": 14,
+    "nome": "Isadora Campos",
+    "papel": "Produto",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "analista de produto (2025.2–2026.1) → gerente de produto (2026.2–2027.1).",
+    "jeito": "organizada, boa ponte entre cliente e time.",
+    "protagonista": true
+  },
+  {
+    "id": 15,
+    "nome": "Caio Bezerra",
+    "papel": "Design de Produto",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "designer de produto (antes de 2024) → líder de design (2024.2–2025.2) → saiu ao fim de 2025.2.",
+    "jeito": "formador de pessoas; montou o padrão visual dos projetos.",
+    "protagonista": true
+  },
+  {
+    "id": 16,
+    "nome": "Renata Freitas",
+    "papel": "Inteligência de Dados",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "analista de dados (2025.1–2025.2) → gerente de dados (2026.1–2027.1).",
+    "jeito": "detalhista, ótima em explicar números para quem não é da área.",
+    "protagonista": true
+  },
+  {
+    "id": 17,
+    "nome": "Matheus Arruda",
+    "papel": "Inteligência de Dados",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "analista de dados (2024.1–2024.2) → saiu ao fim de 2024.2.",
+    "jeito": "rápido e prático; detesta reuniões longas.",
+    "protagonista": true
+  },
+  {
+    "id": 18,
+    "nome": "Larissa Queiroz",
+    "papel": "Inteligência de Dados",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "analista de dados (2025.1–2025.2) → líder de dados (2026.1–2026.2) → Tech (2027.1).",
+    "jeito": "estrategista; pensa sempre no próximo semestre.",
+    "protagonista": true
+  },
+  {
+    "id": 19,
+    "nome": "Felipe Torres",
+    "papel": "Comercial",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "gerente de contas (2024.1–2025.1) → saiu ao fim de 2025.1.",
+    "jeito": "excelente vendedor, pouco paciente com documentação.",
+    "protagonista": true
+  },
+  {
+    "id": 20,
+    "nome": "Bruna Cavalcanti",
+    "papel": "Comercial",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "gerente de contas (2025.1–2026.1) → saiu ao fim de 2026.1.",
+    "jeito": "organizada; criou o próprio modelo de passada de bastão.",
+    "protagonista": true
+  },
+  {
+    "id": 21,
+    "nome": "Vinícius Moura",
+    "papel": "Comercial → Negócios",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "gerente de contas (2025.2–2027.1).",
+    "jeito": "comunicativo, ótimo em relacionamento de longo prazo.",
+    "protagonista": true
+  },
+  {
+    "id": 22,
+    "nome": "Clara Diniz",
+    "papel": "Comercial → Negócios",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "gerente de contas (2026.1–2027.1).",
+    "jeito": "curiosa e técnica; gosta de entender o que está vendendo.",
+    "protagonista": true
+  },
+  {
+    "id": 23,
+    "nome": "Yasmin Lopes",
+    "papel": "Marketing",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "analista de marketing (2024.2–2025.2) → saiu ao fim de 2025.2.",
+    "jeito": "criativa, cheia de ideias, às vezes começa mais do que termina.",
+    "protagonista": true
+  },
+  {
+    "id": 24,
+    "nome": "Eduardo Pires",
+    "papel": "Marketing → Negócios",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "analista de marketing (2025.2–2027.1).",
+    "jeito": "analítico, mede tudo.",
+    "protagonista": true
+  },
+  {
+    "id": 25,
+    "nome": "Mariana Leal",
+    "papel": "Gente e Gestão",
+    "grupo": "Gente e Gestão",
+    "status": "alumni",
+    "trajetoria": "analista (2024.1–2024.2) → especialista (2025.1) → saiu ao fim de 2025.1.",
+    "jeito": "observadora; percebe problemas de clima antes de todo mundo.",
+    "protagonista": true
+  },
+  {
+    "id": 26,
+    "nome": "Otávio Guerra",
+    "papel": "Gente e Gestão",
+    "grupo": "Gente e Gestão",
+    "status": "ativo",
+    "trajetoria": "analista (2025.2–2027.1).",
+    "jeito": "acolhedor, organiza os ritos da empresa.",
+    "protagonista": true
+  },
+  {
+    "id": 27,
+    "nome": "Nathalia Ribeiro",
+    "papel": "Gente e Gestão",
+    "grupo": "Gente e Gestão",
+    "status": "ativo",
+    "trajetoria": "analista (2026.1–2027.1).",
+    "jeito": "prática; cuida também das finanças da empresa.",
+    "protagonista": true
+  },
+  {
+    "id": 28,
+    "nome": "Henrique Matos",
+    "papel": "Inovação",
+    "grupo": "Inovação",
+    "status": "ativo",
+    "trajetoria": "pessoa desenvolvedora (2025.1–2026.1) → time de Inovação (2026.2–2027.1), à frente da volta do time.",
+    "jeito": "inquieto e perfeccionista; só libera uma ferramenta quando ela está impecável.",
+    "protagonista": true
+  },
+  {
+    "id": 29,
+    "nome": "Lara Peixoto",
+    "papel": "Inovação",
+    "grupo": "Inovação",
+    "status": "ativo",
+    "trajetoria": "analista de produto (2025.2–2026.1) → time de Inovação (2026.2–2027.1).",
+    "jeito": "visão de negócio forte; sempre pergunta \"quem pagaria por isso?\".",
+    "protagonista": true
+  },
+  {
+    "id": 30,
+    "nome": "Samuel Vieira",
+    "papel": "Inovação",
+    "grupo": "Inovação",
+    "status": "ativo",
+    "trajetoria": "analista de dados (2026.1) → time de Inovação desde a volta do time (2026.2–2027.1).",
+    "jeito": "experimental, documenta tudo o que testa.",
+    "protagonista": true
+  },
+  {
+    "id": 31,
+    "nome": "Bianca Moreira",
+    "papel": "CRO 2024 (2024.1–2024.2)",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "CRO 2024 (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 32,
+    "nome": "André Siqueira",
+    "papel": "CTO 2024 (2024.1–2024.2)",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "CTO 2024 (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 33,
+    "nome": "Paula Rezende",
+    "papel": "COO 2025 (2025.1–2025.2)",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "COO 2025 (2025.1–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 34,
+    "nome": "Leonardo Brandão",
+    "papel": "CRO 2025 (2025.1–2025.2)",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "CRO 2025 (2025.1–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 35,
+    "nome": "Tatiana Cunha",
+    "papel": "CTO 2026 (2026.1–2026.2)",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "CTO 2026 (2026.1–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 36,
+    "nome": "Bernardo Alencar",
+    "papel": "CRO 2026 (2026.1–2026.2)",
+    "grupo": "Diretoria",
+    "status": "alumni",
+    "trajetoria": "CRO 2026 (2026.1–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 37,
+    "nome": "Priscila Antunes",
+    "papel": "COO 2027 (2027.1)",
+    "grupo": "Diretoria",
+    "status": "ativo",
+    "trajetoria": "COO 2027 (2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 38,
+    "nome": "João Victor Melo",
+    "papel": "Pessoa desenvolvedora (2024.1–2024.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Pessoa desenvolvedora (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 39,
+    "nome": "Sérgio Bastos",
+    "papel": "Pessoa desenvolvedora (2024.1–2024.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Pessoa desenvolvedora (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 40,
+    "nome": "Daniel Coutinho",
+    "papel": "Pessoa desenvolvedora (2024.1–2025.1)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Pessoa desenvolvedora (2024.1–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 41,
+    "nome": "Pietro Gomes",
+    "papel": "Gerente de software (2024.1–2024.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Gerente de software (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 42,
+    "nome": "Carolina Fragoso",
+    "papel": "Gerente de software (2024.2–2025.1)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Gerente de software (2024.2–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 43,
+    "nome": "Rodrigo Pacheco",
+    "papel": "Pessoa desenvolvedora (2024.2–2025.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Pessoa desenvolvedora (2024.2–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 44,
+    "nome": "Letícia Prado",
+    "papel": "Gerente de software (2025.2–2026.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Gerente de software (2025.2–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 45,
+    "nome": "Fernanda Gusmão",
+    "papel": "Pessoa desenvolvedora (2026.1–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Pessoa desenvolvedora (2026.1–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 46,
+    "nome": "Arthur Lemos",
+    "papel": "Pessoa desenvolvedora (2026.2–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Pessoa desenvolvedora (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 47,
+    "nome": "Gabriela Pinheiro",
+    "papel": "Designer de produto (2024.1–2025.1)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Designer de produto (2024.1–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 48,
+    "nome": "Rebeca Amaral",
+    "papel": "Analista de produto (2024.2–2025.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Analista de produto (2024.2–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 49,
+    "nome": "Murilo Teixeira",
+    "papel": "Gerente de produto (2025.2–2026.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Gerente de produto (2025.2–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 50,
+    "nome": "Alice Carvalho",
+    "papel": "Líder de design (2026.1–2026.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Líder de design (2026.1–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 51,
+    "nome": "Diego Fontana",
+    "papel": "Analista de produto (2026.1–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Analista de produto (2026.1–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 52,
+    "nome": "Lorena Batista",
+    "papel": "Designer de produto (2025.2–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Designer de produto (2025.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 53,
+    "nome": "Enzo Ramalho",
+    "papel": "Designer de produto (2026.2–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Designer de produto (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 54,
+    "nome": "Lia Marques",
+    "papel": "Analista de produto (2026.2–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Analista de produto (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 55,
+    "nome": "Vitória Sampaio",
+    "papel": "Analista de dados (2024.1–2025.1)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Analista de dados (2024.1–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 56,
+    "nome": "Heloísa Barros",
+    "papel": "Líder de dados (2024.2–2025.1)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Líder de dados (2024.2–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 57,
+    "nome": "Ícaro Menezes",
+    "papel": "Analista de dados (2024.2–2025.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Analista de dados (2024.2–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 58,
+    "nome": "Wesley Araújo",
+    "papel": "Analista de dados (2025.1–2025.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Analista de dados (2025.1–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 59,
+    "nome": "Gustavo Nogueira",
+    "papel": "Gerente de dados (2025.2–2026.2)",
+    "grupo": "Soluções",
+    "status": "alumni",
+    "trajetoria": "Gerente de dados (2025.2–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 60,
+    "nome": "Manuela Rios",
+    "papel": "Analista de dados (2025.2–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Analista de dados (2025.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 61,
+    "nome": "Renan Castilho",
+    "papel": "Analista de dados (2026.2–2027.1)",
+    "grupo": "Soluções",
+    "status": "ativo",
+    "trajetoria": "Analista de dados (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 62,
+    "nome": "Amanda Vilela",
+    "papel": "Gerente de contas (2024.1–2024.2)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Gerente de contas (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 63,
+    "nome": "Fábio Queiroga",
+    "papel": "Gerente de contas (2024.2–2025.2)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Gerente de contas (2024.2–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 64,
+    "nome": "Ricardo Paiva",
+    "papel": "Gerente de contas (2025.1–2026.1)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Gerente de contas (2025.1–2026.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 65,
+    "nome": "Jéssica Rangel",
+    "papel": "Gerente de contas (2025.2–2026.2)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Gerente de contas (2025.2–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 66,
+    "nome": "Elisa Mota",
+    "papel": "Gerente de contas (2026.1–2027.1)",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "Gerente de contas (2026.1–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 67,
+    "nome": "Nicolas Freire",
+    "papel": "Gerente de contas (2026.2–2027.1)",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "Gerente de contas (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 68,
+    "nome": "Clarice Vidal",
+    "papel": "Analista de marketing (2026.1–2026.2) → gerente de contas em Negócios (2027.1)",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "Analista de marketing (2026.1–2026.2) → gerente de contas em Negócios (2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 69,
+    "nome": "Cecília Brito",
+    "papel": "Analista de marketing (2024.1–2025.1)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Analista de marketing (2024.1–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 70,
+    "nome": "Raquel Dantas",
+    "papel": "Analista de marketing (2024.2–2025.2)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Analista de marketing (2024.2–2025.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 71,
+    "nome": "Marcelo Assis",
+    "papel": "Analista de marketing (2025.1–2026.1)",
+    "grupo": "Negócios",
+    "status": "alumni",
+    "trajetoria": "Analista de marketing (2025.1–2026.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 72,
+    "nome": "Sabrina Lago",
+    "papel": "Analista de marketing (2026.1–2027.1)",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "Analista de marketing (2026.1–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 73,
+    "nome": "Hugo Valença",
+    "papel": "Analista de marketing (2026.2–2027.1)",
+    "grupo": "Negócios",
+    "status": "ativo",
+    "trajetoria": "Analista de marketing (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 74,
+    "nome": "Valéria Porto",
+    "papel": "Especialista (2024.1–2024.2)",
+    "grupo": "Gente e Gestão",
+    "status": "alumni",
+    "trajetoria": "Especialista (2024.1–2024.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 75,
+    "nome": "Luana Farias",
+    "papel": "Analista (2024.1–2025.1)",
+    "grupo": "Gente e Gestão",
+    "status": "alumni",
+    "trajetoria": "Analista (2024.1–2025.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 76,
+    "nome": "Kevin Souto",
+    "papel": "Analista (2025.1–2026.1)",
+    "grupo": "Gente e Gestão",
+    "status": "alumni",
+    "trajetoria": "Analista (2025.1–2026.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 77,
+    "nome": "Bruno Esteves",
+    "papel": "Especialista (2025.2–2026.2)",
+    "grupo": "Gente e Gestão",
+    "status": "alumni",
+    "trajetoria": "Especialista (2025.2–2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 78,
+    "nome": "Maria Eduarda Leão",
+    "papel": "Analista (2026.1–2027.1)",
+    "grupo": "Gente e Gestão",
+    "status": "ativo",
+    "trajetoria": "Analista (2026.1–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 79,
+    "nome": "Joana Prates",
+    "papel": "Analista (2026.2–2027.1)",
+    "grupo": "Gente e Gestão",
+    "status": "ativo",
+    "trajetoria": "Analista (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 80,
+    "nome": "Yuri Cardoso",
+    "papel": "Inovação (2026.2–2027.1)",
+    "grupo": "Inovação",
+    "status": "ativo",
+    "trajetoria": "Inovação (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 81,
+    "nome": "Mirela Sá",
+    "papel": "Inovação (2026.2)",
+    "grupo": "Inovação",
+    "status": "alumni",
+    "trajetoria": "Inovação (2026.2)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 82,
+    "nome": "Caíque Lima",
+    "papel": "Inovação (2026.2–2027.1)",
+    "grupo": "Inovação",
+    "status": "ativo",
+    "trajetoria": "Inovação (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  },
+  {
+    "id": 83,
+    "nome": "Tainá Oliveira",
+    "papel": "Inovação (2026.2–2027.1)",
+    "grupo": "Inovação",
+    "status": "ativo",
+    "trajetoria": "Inovação (2026.2–2027.1)",
+    "jeito": null,
+    "protagonista": false
+  }
+]

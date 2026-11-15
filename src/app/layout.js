@@ -1,3 +1,7 @@
+import "@fontsource/poppins/300-italic.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource-variable/inter";
 import "./globals.css";
 
 export const metadata = {

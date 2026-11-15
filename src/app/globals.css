@@ -1,13 +1,13 @@
 :root {
-  --fundo: #11140f;
-  --superficie: #1a1e17;
-  --texto: #ede6da;
-  --texto-suave: #a8a090;
-  --madeira-clara: #d9b98c;
-  --madeira: #a87b4f;
-  --madeira-escura: #6b4a2e;
-  --verde-citi: #3fb36b;
-  --borda: #2c3127;
+  --fundo: #030605;
+  --superficie: #0a110c;
+  --texto: #edf5ef;
+  --texto-suave: #8fa396;
+  --verde: #2fd97a;
+  --verde-claro: #8dffc0;
+  --borda: rgba(141, 255, 192, 0.12);
+  --fonte-titulo: "Poppins", system-ui, sans-serif;
+  --fonte-texto: "Inter Variable", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,6 +15,8 @@
 html, body {
   background: var(--fundo);
   color: var(--texto);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--fonte-texto);
   -webkit-font-smoothing: antialiased;
 }
+
+button:focus-visible, input:focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }

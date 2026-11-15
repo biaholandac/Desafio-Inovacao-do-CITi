@@ -1,0 +1,145 @@
+.casca {
+  fill: #0a0f0b;
+  stroke: rgba(56, 230, 130, 0.35);
+  stroke-width: 1.2;
+}
+
+.marcasCasca path {
+  stroke: rgba(56, 230, 130, 0.18);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.crescimento path {
+  fill: none;
+  stroke: rgba(56, 230, 130, 0.13);
+  stroke-width: 0.7;
+}
+
+.rachaduras path {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.7);
+  stroke-width: 1.6;
+}
+
+.anel {
+  fill: none;
+  stroke: var(--verde);
+  stroke-width: 1.6;
+  opacity: 0.75;
+  transition: opacity 0.3s, stroke-width 0.3s;
+}
+
+.anelAtivo {
+  opacity: 1;
+  stroke-width: 3;
+}
+
+.anelPendente {
+  fill: none;
+  stroke: rgba(56, 230, 130, 0.35);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 6;
+}
+
+.anelFormacao {
+  fill: none;
+  stroke: var(--verde);
+  stroke-width: 1.2;
+  stroke-dasharray: 6 8;
+  opacity: 0.6;
+  animation: formando 6s linear infinite;
+}
+
+@keyframes formando {
+  to { stroke-dashoffset: -140; }
+}
+
+.nucleo {
+  fill: rgba(56, 230, 130, 0.18);
+  stroke: var(--verde);
+  stroke-width: 1.2;
+}
+
+.centro {
+  fill: var(--verde);
+}
+
+.pulso {
+  fill: none;
+  stroke: var(--verde);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulsar 3.2s ease-out infinite;
+}
+
+@keyframes pulsar {
+  0% { transform: scale(0.1); opacity: 0.7; }
+  80% { opacity: 0.05; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.alvoAnel {
+  fill: none;
+  stroke: transparent;
+  pointer-events: stroke;
+  cursor: pointer;
+}
+
+.alvoAnel:hover {
+  stroke: rgba(56, 230, 130, 0.06);
+}
+
+.caso {
+  cursor: pointer;
+}
+
+.ponto {
+  fill: var(--verde-claro);
+  opacity: 0.85;
+  transition: r 0.2s, opacity 0.3s;
+}
+
+.caso:hover .ponto {
+  opacity: 1;
+  r: 5;
+}
+
+.pontoAceso {
+  fill: #eafff2;
+  opacity: 1;
+}
+
+.pontoApagado {
+  opacity: 0.15;
+}
+
+.pontoAndamento {
+  fill: none;
+  stroke: var(--verde-claro);
+  stroke-width: 1.2;
+}
+
+.linhaPadrao line {
+  stroke: var(--verde-claro);
+  stroke-width: 1;
+  opacity: 0.45;
+  stroke-dasharray: 2 4;
+  animation: fluir 1.6s linear infinite;
+}
+
+@keyframes fluir {
+  to { stroke-dashoffset: -12; }
+}
+
+.rotuloSetor {
+  fill: rgba(237, 245, 239, 0.45);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  font-family: var(--fonte-texto);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulso, .anelFormacao { animation: none; }
+}
