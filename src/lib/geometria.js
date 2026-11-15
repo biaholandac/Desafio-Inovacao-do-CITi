@@ -158,11 +158,11 @@ export function caminhoFaixa(raioInterno, raioExterno, chave) {
 // Perspectiva: o corte do tronco é visto de cima, então fica oval (achatado na vertical),
 // e sobe um pouco na tela para dar espaço ao tronco e às raízes.
 // ZOOM aproxima ou afasta o tronco inteiro (foto e corte juntos).
-export const ZOOM = 1.6;
+export const ZOOM = 1.52;
 export const ESCALA_X = 0.95 * ZOOM;
 export const ESCALA_Y = 0.56 * ZOOM;
-// O corte fica um pouco à esquerda do centro, para o painel da direita não cobrir os anéis.
-export const CENTRO_TELA = { x: 712, y: 392 };
+// O x compensa o leve deslocamento dos anéis para a direita, para o tronco ficar no centro da tela.
+export const CENTRO_TELA = { x: 778, y: 392 };
 
 // Imagem do tronco com raízes (public/tronco.webp, 1632 x 1632), posicionada para que
 // o corte da imagem fique sob o corte interativo. O corte interativo é maior que o da foto,

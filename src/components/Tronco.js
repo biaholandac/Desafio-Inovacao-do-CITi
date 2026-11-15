@@ -238,7 +238,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         const fatia = 360 / SETORES.length;
         let meio = -90 + i * fatia + fatia / 2;
         // Rótulos nas laterais ficariam atrás dos painéis: o da direita desce e o da esquerda sobe dentro da própria fatia.
-        if (Math.abs(Math.cos((meio * Math.PI) / 180)) > 0.85) meio += 30;
+        if (Math.abs(Math.cos((meio * Math.PI) / 180)) > 0.85) meio += Math.cos((meio * Math.PI) / 180) > 0 ? 46 : 30;
         const r = RAIO_EXTERNO + 46;
         const embaixo = Math.sin((meio * Math.PI) / 180) > 0.2;
         const angs = Array.from({ length: 13 }, (_, k) => meio - 26 + (52 * k) / 12);

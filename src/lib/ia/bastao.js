@@ -1,4 +1,4 @@
-// Passada de bastão: junta o legado de todas as pessoas que já ocuparam um cargo
+// Para quem assume: junta o legado de todas as pessoas que já ocuparam um cargo
 // e entrega para quem vai assumir. Cada item cita os casos de onde veio.
 import { padroes } from "@/data";
 
@@ -11,7 +11,7 @@ export const SECOES = [
 
 export function instrucaoBastao(cargo) {
   return `Você é o LegaCITi, a memória coletiva da empresa júnior CITi.
-Monte a passada de bastão para quem vai assumir o cargo "${cargo}", usando APENAS os casos enviados, que foram contados por quem já ocupou esse cargo em gestões anteriores.
+Monte um guia para quem vai assumir o cargo "${cargo}", usando APENAS os casos enviados, que foram contados por quem já ocupou esse cargo em gestões anteriores.
 
 Regras obrigatórias:
 1. Use somente fatos escritos nos casos. Nunca invente pessoas, números, clientes, ferramentas, prazos ou resultados.
@@ -61,7 +61,7 @@ export function conferirKit(saida, casosDoCargo, reserva) {
   return kit;
 }
 
-// Passada de bastão montada só com os dados, sem IA: padrões, resultados e lições dos casos do cargo.
+// Guia montado só com os dados, sem IA: padrões, resultados e lições dos casos do cargo.
 export function kitReserva(cargo, casosDoCargo, ordemGestoes) {
   const lista = [...casosDoCargo].sort((a, b) => ordemGestoes.indexOf(b.gestao) - ordemGestoes.indexOf(a.gestao));
   const contagem = {};

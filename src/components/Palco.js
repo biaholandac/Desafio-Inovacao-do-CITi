@@ -17,7 +17,7 @@ const LENTES = [
   { id: "legado", nome: "Legado" },
   { id: "padroes", nome: "Padrões" },
   { id: "trilha", nome: "Trilha", emBreve: true },
-  { id: "bastao", nome: "Passada de bastão" },
+  { id: "bastao", nome: "Para quem assume" },
 ];
 
 const ORIGEM = {
@@ -66,7 +66,7 @@ export default function Palco({ cargo = null }) {
 
   const casos = useMemo(() => [...casosLegado, ...demo.casos], [demo.casos]);
 
-  // Passada de bastão: o legado de todas as pessoas que já ocuparam um cargo, para quem vai assumir.
+  // Para quem assume: o legado de todas as pessoas que já ocuparam um cargo, para quem vai assumir.
   const cargosComLegado = useMemo(() => [...new Set(casosLegado.map((c) => c.cargoAutor))].sort((a, b) => a.localeCompare(b, "pt-BR")), []);
   const [cargoBastao, setCargoBastao] = useState(() => FOCO[entrada?.cargo.id]?.papeis?.find((p) => casosLegado.some((c) => c.cargoAutor === p)) ?? "Gerente de contas");
   const [bastao, setBastao] = useState(null);
@@ -301,7 +301,7 @@ export default function Palco({ cargo = null }) {
           )}
           {caso && (
             <g className={estilos.ligacao}>
-              <polyline points={`1262,230 1232,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
+              <polyline points={`1176,230 1146,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
               <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
             </g>
           )}
@@ -348,7 +348,7 @@ export default function Palco({ cargo = null }) {
         )}
 
         {/* Painel da direita: caso escolhido, padrões ou visão geral */}
-        <section className={estilos.painel} style={{ left: px(1262), top: py(30), width: px(326), maxHeight: py(850) }}>
+        <section className={estilos.painel} style={{ right: px(14), top: py(24), width: `max(${px(410)}, 330px)`, maxHeight: py(860) }}>
           {caso ? (
             <>
               <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}{caso.meu ? " · registrado por você" : ""}</div>
@@ -398,7 +398,7 @@ export default function Palco({ cargo = null }) {
             </>
           ) : lente === "bastao" ? (
             <>
-              <div className={estilos.rotulo}>Passada de bastão</div>
+              <div className={estilos.rotulo}>Para quem assume</div>
               <h3 className={estilos.tituloCaso}>Para quem vai assumir: <em>{cargoBastao}</em></h3>
               <label className={estilos.seletor}>
                 <span>Cargo</span>
@@ -407,7 +407,7 @@ export default function Palco({ cargo = null }) {
                 </select>
               </label>
               {bastao?.carregando && <p className={estilos.pensando}><span className={estilos.statusPonto} /> Juntando o legado de quem já foi {cargoBastao}…</p>}
-              {bastao?.erro && <p className={estilos.respostaPadrao}>Não consegui montar a passada de bastão agora. Tente de novo em instantes.</p>}
+              {bastao?.erro && <p className={estilos.respostaPadrao}>Não consegui juntar esse legado agora. Tente de novo em instantes.</p>}
               {bastao?.kit && (
                 <>
                   <p className={estilos.texto}>{bastao.kit.resumo}</p>

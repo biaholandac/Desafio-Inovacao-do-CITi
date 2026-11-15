@@ -29,7 +29,7 @@ export const AREAS = [
     { id: "analista-software", nome: "Analista de software", pessoa: null },
     { id: "analista-dados", nome: "Analista de dados", pessoa: 60 },
   ] },
-  { id: "produto", nome: "Produto", cargos: [{ id: "operacional-produto", nome: "Operacionais", pessoa: 51 }] },
+  { id: "produto", nome: "Produto", cargos: [{ id: "operacional-produto", nome: "Operacional", pessoa: 51 }] },
   { id: "negocios", nome: "Negócios", cargos: [
     { id: "gerente-contas", nome: "Gerente de contas", pessoa: 22 },
     { id: "analista-marketing", nome: "Analista de marketing", pessoa: 24 },
