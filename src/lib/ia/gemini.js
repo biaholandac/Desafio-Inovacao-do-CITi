@@ -50,7 +50,12 @@ export async function gerarJSON({ instrucao, conteudo, esquema }) {
         const { thinkingConfig, ...semPensamento } = corpoBase.generationConfig;
         resposta = await chamar(modelo, chave, { ...corpoBase, generationConfig: semPensamento }, Math.min(LIMITE_TENTATIVA_MS, LIMITE_TOTAL_MS - (Date.now() - inicio)));
       }
-      if (!resposta.ok) { ultimoErro = new Error(resposta.status === 429 ? "limite" : `erro_${resposta.status}`); continue; }
+      if (!resposta.ok) {
+        const detalhe = (await resposta.text().catch(() => "")).slice(0, 300);
+        console.error(`gemini ${modelo} ${resposta.status}: ${detalhe}`);
+        ultimoErro = new Error(`${resposta.status === 429 ? "limite" : "erro_" + resposta.status}_${modelo}`);
+        continue;
+      }
       const dados = await resposta.json();
       const texto = dados?.candidates?.[0]?.content?.parts?.filter((p) => !p.thought).map((p) => p.text ?? "").join("") ?? "";
       if (!texto.trim()) { ultimoErro = new Error("resposta_vazia"); continue; }

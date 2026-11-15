@@ -44,8 +44,9 @@ export async function POST(request) {
       return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
     }
     return Response.json({ tipo: "resposta", resposta: saida.resposta.trim(), casos: citados });
-  } catch {
-    // 5. Modo de segurança: sem IA, mostra os casos mais próximos.
-    return Response.json({ tipo: "indisponivel", resposta: MENSAGENS.indisponivel, casos: encontrados.slice(0, 3).map((c) => c.id) });
+  } catch (erro) {
+    // 5. Modo de segurança: sem IA, mostra os casos mais próximos. O motivo (só um código) ajuda a diagnosticar.
+    console.error("perguntar:", erro?.message);
+    return Response.json({ tipo: "indisponivel", motivo: String(erro?.message ?? "desconhecido").slice(0, 40), resposta: MENSAGENS.indisponivel, casos: encontrados.slice(0, 3).map((c) => c.id) });
   }
 }
