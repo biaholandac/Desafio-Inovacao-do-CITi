@@ -126,7 +126,6 @@ export default function Palco({ cargo = null }) {
             {gestao.status === "em_formacao" && (
               <div className={estilos.status}><span className={estilos.statusPonto} /> Anel em formação</div>
             )}
-            <p className={estilos.diretoria}>{gestao.diretoria}</p>
             <p className={estilos.texto}>{gestao.descricao}</p>
             <div className={estilos.numeros}>
               <div><strong>{casosDaGestao.length}</strong><span>casos</span></div>

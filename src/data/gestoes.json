@@ -1,37 +1,31 @@
 [
   {
     "codigo": "2024.1",
-    "diretoria": "Helena Vasconcelos (CEO), André Siqueira (CTO), Thiago Barreto (COO) e Bianca Moreira (CRO).",
     "descricao": "Foi a gestão do esforço para ampliar a carteira de clientes, com destaque para o aplicativo de agendamento da Clínica Bem Cuidar. Os contratos foram fechados rápido e com escopo pouco detalhado, e muitos pedidos novos foram aceitos em reunião sem registro. Ficou a lição de que vender bem não basta: o que foi combinado com o cliente precisa chegar inteiro ao time.",
     "status": "completa"
   },
   {
     "codigo": "2024.2",
-    "diretoria": "mandato 2024 (a mesma de 2024.1).",
     "descricao": "O CITi viveu um crescimento rápido, com muitos projetos simultâneos, entre eles o painel de vendas do Mercadinho Boa Praça. As mesmas pessoas acabaram em vários projetos ao mesmo tempo, alguns clientes sumiram no meio do caminho, e a pesquisa de clima mostrou sinais de sobrecarga.",
     "status": "completa"
   },
   {
     "codigo": "2025.1",
-    "diretoria": "Rafael Cordeiro (CEO), Camila Nóbrega (CTO), Paula Rezende (COO) e Leonardo Brandão (CRO).",
     "descricao": "Foi a gestão de organizar processos: os rituais de retrospectiva e a biblioteca de componentes de design ganharam força, e o projeto da Escola Aprender Mais virou referência de entrega no prazo. O desafio foram os sistemas que ninguém sabia manter depois que alguém saía.",
     "status": "completa"
   },
   {
     "codigo": "2025.2",
-    "diretoria": "mandato 2025 (a mesma de 2025.1).",
     "descricao": "Os projetos de dados ganharam espaço e o checklist de passada de bastão foi reforçado. Os desafios foram clientes que pediam \"só mais um gráfico\" toda semana e acessos e materiais que se perdiam na troca de gestão.",
     "status": "completa"
   },
   {
     "codigo": "2026.1",
-    "diretoria": "Lívia Albuquerque (CEO), Tatiana Cunha (CTO), Júlia Fontes (COO) e Bernardo Alencar (CRO).",
     "descricao": "A gestão entregou o assistente com IA da Ótica Visão Clara e começou as conversas sobre a reorganização das áreas.",
     "status": "completa"
   },
   {
     "codigo": "2026.2",
-    "diretoria": "mandato 2026 (a mesma de 2026.1).",
     "descricao": "O time de Inovação voltou e liderou a maior implementação de IA do CITi, com ferramentas para a empresa inteira e para subáreas específicas, além da venda de um produto pronto para clientes. Foi também a gestão que planejou em detalhes a reorganização das áreas, enquanto um projeto perdia ritmo depois da saída de uma pessoa-chave (Ateliê Maré). A gestão está terminando: parte das conversas de fim de gestão e de despedida ainda não foi feita.",
     "status": "fechando",
     "conversas": {
@@ -41,7 +35,6 @@
   },
   {
     "codigo": "2027.1",
-    "diretoria": "Júlia Fontes (CEO), Gabriel Lins (CTO), Priscila Antunes (COO) e Davi Monteiro (CRO).",
     "descricao": "Gestão começando: a fusão de Dados e Dev em Tech, e de Marketing e Comercial em Negócios, e a chegada de uma nova turma de New Pigs. O legado desta geração está sendo escrito agora.",
     "status": "em_formacao"
   }
