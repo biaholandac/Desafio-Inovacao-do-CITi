@@ -490,3 +490,51 @@
 }
 .alternarSolucoes:hover { border-color: var(--verde); }
 .alternarSolucoes[aria-pressed="true"] { background: rgba(47, 217, 122, 0.18); border-color: var(--verde); }
+
+/* Trilha */
+.abas { display: flex; flex-wrap: wrap; gap: 0.35em; margin: 0.7em 0 1em; }
+.abas button {
+  font: inherit;
+  font-size: 0.8em;
+  color: var(--texto-suave);
+  background: rgba(3, 8, 5, 0.6);
+  border: 1px solid rgba(56, 230, 130, 0.2);
+  border-radius: 999px;
+  padding: 0.3em 0.85em;
+  cursor: pointer;
+}
+.abas button:hover { color: var(--texto); }
+.abas .abaAtiva { color: #04120a; background: var(--verde); border-color: var(--verde); font-weight: 600; }
+.trilha { list-style: none; position: relative; display: grid; gap: 0.5em; padding-left: 1.4em; }
+.trilha::before { content: ""; position: absolute; left: 0.42em; top: 0.6em; bottom: 0.6em; width: 2px; background: linear-gradient(var(--verde), rgba(56, 230, 130, 0.15)); }
+.trilha > li { position: relative; }
+.trilha > li::before {
+  content: "";
+  position: absolute;
+  left: -1.28em;
+  top: 0.75em;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: #07120b;
+  border: 2px solid var(--verde);
+}
+.degrauVoce::before { background: var(--verde) !important; box-shadow: 0 0 10px var(--verde); }
+.degrau {
+  display: grid;
+  gap: 0.15em;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  color: var(--texto);
+  background: rgba(56, 230, 130, 0.03);
+  border: 1px solid rgba(56, 230, 130, 0.12);
+  padding: 0.55em 0.75em;
+  cursor: pointer;
+}
+.degrau:hover, .degrauAberto .degrau { border-color: rgba(56, 230, 130, 0.45); background: rgba(56, 230, 130, 0.07); }
+.degrauNome { font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5em; }
+.degrauInfo { font-size: 0.85em; color: var(--texto-suave); }
+.degrauNumeros { font-size: 0.75em; color: var(--verde-claro); }
+.voceAqui { font-size: 0.68em; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #04120a; background: var(--verde); border-radius: 999px; padding: 0.1em 0.6em; }
+.degrauCorpo { padding: 0.6em 0.75em 0.2em; }
