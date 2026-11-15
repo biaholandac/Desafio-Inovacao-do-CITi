@@ -80,7 +80,7 @@ export default function Palco({ cargo = null }) {
   useEffect(() => {
     if (lente !== "bastao") return;
     const meusDoCargo = demo.casos.filter((c) => c.cargoAutor === cargoBastao);
-    const chave = `legaciti:bastao:v1:${cargoBastao}:${meusDoCargo.map((c) => c.id).join(",")}`;
+    const chave = `legaciti:bastao:v2:${cargoBastao}:${meusDoCargo.map((c) => c.id).join(",")}`;
     let guardado = cacheBastao.current[chave];
     if (!guardado) { try { guardado = JSON.parse(window.localStorage.getItem(chave) ?? "null"); } catch {} }
     if (guardado) { setBastao(guardado); return; }

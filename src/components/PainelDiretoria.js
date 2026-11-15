@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import estilos from "./PainelDiretoria.module.css";
 
-const CHAVE_PAUTA = "legaciti:pauta:v1";
+const CHAVE_PAUTA = "legaciti:pauta:v2";
 
 export default function PainelDiretoria({ painel, casos, aoAbrirCaso, aoFechar }) {
   const [pauta, setPauta] = useState(null);

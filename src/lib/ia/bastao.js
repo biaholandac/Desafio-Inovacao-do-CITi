@@ -17,7 +17,7 @@ Regras obrigatórias:
 1. Use somente fatos escritos nos casos. Nunca invente pessoas, números, clientes, ferramentas, prazos ou resultados.
 2. Cada item precisa citar, no campo "casos", os identificadores (como C012) dos casos que o sustentam. Cite só identificadores enviados.
 3. Prefira o que se repete em mais de um caso. Não cite nomes de pessoas: use cargos.
-4. Escreva em português do Brasil, falando com quem vai assumir ("você"), em tom direto e acolhedor. Cada item com no máximo 28 palavras.
+4. Escreva em português do Brasil com acentuação e cedilha corretas (por exemplo: decisão, porquês, fusão). Fale com quem vai assumir ("você"), em tom direto e acolhedor. Cada item com no máximo 28 palavras.
 5. Seções:
    - resumo: duas frases sobre o que esse cargo enfrenta, segundo os casos.
    - sempre: 2 a 3 situações que acontecem com frequência nesse cargo.
