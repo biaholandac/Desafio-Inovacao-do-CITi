@@ -17,8 +17,8 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
     gestoes.forEach((g, i) => {
       if (g.status === "em_formacao") return;
       const { interno, externo } = raiosDoAnel(i, total);
-      for (let k = 1; k <= 3; k++) {
-        const r = interno + ((externo - interno) * k) / 4;
+      for (let k = 1; k <= 5; k++) {
+        const r = interno + ((externo - interno) * k) / 6;
         linhas.push({ chave: g.codigo + k, d: caminhoOndulado(r, g.codigo + k, 0.005) });
       }
     });

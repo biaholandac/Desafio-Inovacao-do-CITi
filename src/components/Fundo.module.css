@@ -1,0 +1,27 @@
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.camada {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  opacity: 0.55;
+  animation: derivar 60s ease-in-out infinite alternate;
+}
+@keyframes derivar {
+  from { transform: translate(-2%, -1%) scale(1.02) rotate(-1deg); }
+  to { transform: translate(2%, 1.5%) scale(1.08) rotate(1.5deg); }
+}
+.vinheta {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 50% 50%, rgba(3, 6, 5, 0.45), rgba(3, 6, 5, 0.75) 90%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .camada { animation: none; }
+}

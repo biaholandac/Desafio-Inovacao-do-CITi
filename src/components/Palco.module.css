@@ -1,4 +1,5 @@
 .tela {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,6 +9,8 @@
   overflow: hidden;
 }
 
+.topo, .palco, .pergunta { position: relative; z-index: 1; }
+
 .topo {
   display: flex;
   align-items: center;
@@ -15,14 +18,6 @@
   padding: 22px 40px 0;
 }
 
-.marca {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: -0.02em;
-}
-.marcaLega { color: var(--texto); }
-.marcaCiti { color: var(--verde); font-style: italic; }
 
 .lentes {
   display: flex;

@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Tronco from "./Tronco";
+import Marca from "./Marca";
+import Fundo from "./Fundo";
 import { casos, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto } from "@/lib/geometria";
 import estilos from "./Palco.module.css";
@@ -57,10 +59,9 @@ export default function Palco() {
 
   return (
     <div className={estilos.tela}>
+      <Fundo />
       <header className={estilos.topo}>
-        <div className={estilos.marca}>
-          <span className={estilos.marcaLega}>Lega</span><span className={estilos.marcaCiti}>CITi</span>
-        </div>
+        <Marca altura={30} />
         <nav className={estilos.lentes} aria-label="Lentes">
           {LENTES.map((l) => (
             <button key={l.id} disabled={l.emBreve} onClick={() => escolherLente(l.id)}

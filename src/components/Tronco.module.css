@@ -12,8 +12,8 @@
 
 .crescimento path {
   fill: none;
-  stroke: rgba(56, 230, 130, 0.13);
-  stroke-width: 0.7;
+  stroke: rgba(56, 230, 130, 0.17);
+  stroke-width: 0.6;
 }
 
 .rachaduras path {
@@ -25,8 +25,8 @@
 .anel {
   fill: none;
   stroke: var(--verde);
-  stroke-width: 1.6;
-  opacity: 0.75;
+  stroke-width: 1.8;
+  opacity: 0.85;
   transition: opacity 0.3s, stroke-width 0.3s;
 }
 
