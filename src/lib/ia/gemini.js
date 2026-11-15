@@ -22,7 +22,7 @@ async function chamar(modelo, chave, corpo, limiteMs) {
   }
 }
 
-export async function gerarJSON({ instrucao, conteudo, esquema }) {
+export async function gerarJSON({ instrucao, conteudo, esquema, maxTokens = 700 }) {
   const chave = process.env.GEMINI_API_KEY;
   if (!chave) throw new Error("sem_chave");
 
@@ -31,7 +31,7 @@ export async function gerarJSON({ instrucao, conteudo, esquema }) {
     contents: [{ role: "user", parts: [{ text: conteudo }] }],
     generationConfig: {
       temperature: 0.2,
-      maxOutputTokens: 700,
+      maxOutputTokens: maxTokens,
       responseMimeType: "application/json",
       responseSchema: esquema,
       // Pensamento no mínimo: a resposta sai rápida e o limite de tokens vai todo para o texto.

@@ -160,7 +160,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         // Lenho tardio: a faixa escura e mais densa que fecha cada ano de crescimento.
         const tardio = caminhoAnel(externo - 1.5, g.codigo + "t", { minima: largura * 0.12, maxima: largura * 0.38 });
         const fim = g.status === "fechando" ? -90 + 360 * (g.conversas.feitas / g.conversas.esperadas) : 270;
-        const linha = caminhoAnel(externo, g.codigo, { minima: ativo ? 1.6 : 0.8, maxima: ativo ? 5.5 : 3.6, inicio: -90, fim });
+        const linha = caminhoAnel(externo, g.codigo, { minima: ativo ? 3 : 2, maxima: ativo ? 8 : 5.5, inicio: -90, fim });
         return (
           <g key={g.codigo} className={`${estilos.anel} ${ativo ? estilos.anelAtivo : ""} ${celebrando === g.codigo ? estilos.anelCelebrando : ""}`}>
             <path d={tardio} className={estilos.anelTardio} />
@@ -237,9 +237,9 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       {!decorativo && SETORES.map((s, i) => {
         const fatia = 360 / SETORES.length;
         let meio = -90 + i * fatia + fatia / 2;
-        // Rótulos nas laterais ficariam atrás dos painéis: descem para a parte de baixo da fatia.
-        if (Math.abs(Math.cos((meio * Math.PI) / 180)) > 0.85) meio += Math.cos((meio * Math.PI) / 180) > 0 ? 30 : -30;
-        const r = RAIO_EXTERNO + 50;
+        // Rótulos nas laterais ficariam atrás dos painéis: o da direita desce e o da esquerda sobe dentro da própria fatia.
+        if (Math.abs(Math.cos((meio * Math.PI) / 180)) > 0.85) meio += 30;
+        const r = RAIO_EXTERNO + 46;
         const embaixo = Math.sin((meio * Math.PI) / 180) > 0.2;
         const angs = Array.from({ length: 13 }, (_, k) => meio - 26 + (52 * k) / 12);
         const pts = (embaixo ? angs.reverse() : angs).map((a) => naTela(ponto(r, a)));
@@ -247,7 +247,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
         return (
           <g key={s}>
             <path id={`setor-${i}`} d={d} fill="none" />
-            <text className={estilos.rotuloSetor} dominantBaseline="middle">
+            <text className={estilos.rotuloSetor} dominantBaseline="middle" paintOrder="stroke">
               <textPath href={`#setor-${i}`} startOffset="50%" textAnchor="middle">{s.toUpperCase()}</textPath>
             </text>
           </g>

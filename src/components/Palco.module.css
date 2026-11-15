@@ -427,3 +427,44 @@
 }
 .aviso strong { font-family: var(--fonte-titulo); font-size: 16px; color: var(--verde-claro); }
 @keyframes avisoEntra { from { transform: translate(-50%, 16px); opacity: 0; } }
+
+/* Passada de bastão */
+.seletor { display: flex; align-items: center; gap: 0.6em; margin: 0.6em 0 0.9em; font-size: 0.85em; color: var(--texto-suave); }
+.seletor select {
+  flex: 1;
+  font: inherit;
+  color: var(--texto);
+  background: rgba(3, 8, 5, 0.85);
+  border: 1px solid rgba(56, 230, 130, 0.3);
+  border-radius: 999px;
+  padding: 0.45em 0.9em;
+  cursor: pointer;
+}
+.fonteBastao { font-size: 0.78em; color: var(--texto-suave); margin: 0.5em 0 0.2em; }
+.secaoBastao { margin-top: 0.9em; }
+.bastaoLista, .checklist { list-style: none; display: grid; gap: 0.55em; margin-top: 0.4em; }
+.bastaoLista li, .checklist li { display: grid; gap: 0.25em; padding-left: 0.9em; border-left: 2px solid rgba(56, 230, 130, 0.35); }
+.checklist li { border-left: none; padding-left: 1.6em; position: relative; }
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 0.85em;
+  height: 0.85em;
+  border: 1.5px solid var(--verde);
+  border-radius: 3px;
+}
+.citacoes { display: flex; flex-wrap: wrap; gap: 0.3em; }
+.citacoes button {
+  font: inherit;
+  font-size: 0.72em;
+  letter-spacing: 0.06em;
+  color: var(--verde-claro);
+  background: rgba(56, 230, 130, 0.08);
+  border: 1px solid rgba(56, 230, 130, 0.3);
+  border-radius: 999px;
+  padding: 0.1em 0.6em;
+  cursor: pointer;
+}
+.citacoes button:hover { background: rgba(56, 230, 130, 0.2); }

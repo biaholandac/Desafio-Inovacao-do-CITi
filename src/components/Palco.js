@@ -7,6 +7,7 @@ import Marca from "./Marca";
 import Fundo from "./Fundo";
 import Entrevista from "./Entrevista";
 import { lerDemonstracao, salvarDemonstracao, novoCaso } from "@/lib/meusCasos";
+import { SECOES } from "@/lib/ia/bastao";
 import { casos as casosLegado, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto, naTela } from "@/lib/geometria";
 import { acharCargo, relevancia, ehNovato, CHEGADA, FOCO } from "@/data/cargos";
@@ -16,7 +17,7 @@ const LENTES = [
   { id: "legado", nome: "Legado" },
   { id: "padroes", nome: "Padrões" },
   { id: "trilha", nome: "Trilha", emBreve: true },
-  { id: "kit", nome: "Kit do sucessor", emBreve: true },
+  { id: "bastao", nome: "Passada de bastão" },
 ];
 
 const ORIGEM = {
@@ -64,6 +65,37 @@ export default function Palco({ cargo = null }) {
   }
 
   const casos = useMemo(() => [...casosLegado, ...demo.casos], [demo.casos]);
+
+  // Passada de bastão: o legado de todas as pessoas que já ocuparam um cargo, para quem vai assumir.
+  const cargosComLegado = useMemo(() => [...new Set(casosLegado.map((c) => c.cargoAutor))].sort((a, b) => a.localeCompare(b, "pt-BR")), []);
+  const [cargoBastao, setCargoBastao] = useState(() => FOCO[entrada?.cargo.id]?.papeis?.find((p) => casosLegado.some((c) => c.cargoAutor === p)) ?? "Gerente de contas");
+  const [bastao, setBastao] = useState(null);
+  const cacheBastao = useRef({});
+  useEffect(() => {
+    if (lente !== "bastao") return;
+    const meusDoCargo = demo.casos.filter((c) => c.cargoAutor === cargoBastao);
+    const chave = `legaciti:bastao:v1:${cargoBastao}:${meusDoCargo.map((c) => c.id).join(",")}`;
+    let guardado = cacheBastao.current[chave];
+    if (!guardado) { try { guardado = JSON.parse(window.localStorage.getItem(chave) ?? "null"); } catch {} }
+    if (guardado) { setBastao(guardado); return; }
+    let cancelado = false;
+    setBastao({ cargo: cargoBastao, carregando: true });
+    const controle = new AbortController();
+    const relogio = setTimeout(() => controle.abort(), 28000);
+    fetch("/api/bastao", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cargo: cargoBastao, extras: meusDoCargo }), signal: controle.signal })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((dados) => {
+        if (cancelado) return;
+        cacheBastao.current[chave] = dados;
+        // Só a versão feita pela IA fica guardada; a versão só com dados é refeita na próxima vez.
+        if (dados.origem === "ia") { try { window.localStorage.setItem(chave, JSON.stringify(dados)); } catch {} }
+        setBastao(dados);
+      })
+      .catch(() => { if (!cancelado) setBastao({ cargo: cargoBastao, erro: true }); })
+      .finally(() => clearTimeout(relogio));
+    return () => { cancelado = true; controle.abort(); };
+  }, [lente, cargoBastao, demo.casos]);
+  const citadosBastao = useMemo(() => new Set(bastao?.kit ? SECOES.flatMap((s) => bastao.kit[s.id] ?? []).flatMap((i) => i.casos) : []), [bastao]);
 
   // O anel em andamento avança a cada conversa registrada e fecha quando todas forem feitas.
   const ANEL_ATUAL = "2026.2";
@@ -218,6 +250,8 @@ export default function Palco({ cargo = null }) {
 
   function escolherLente(id) {
     setLente(id);
+    setResposta(null);
+    setCasoAtivo(null);
     if (id !== "padroes") setPadraoAtivo(null);
     if (id === "padroes" && !padraoAtivo) setPadraoAtivo("P5");
   }
@@ -253,19 +287,21 @@ export default function Palco({ cargo = null }) {
       <div className={estilos.palco}>
         <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
           <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando}
-            selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0])) : lente === "legado" ? foco?.mapa : null}
+            selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0]))
+              : lente === "bastao" ? Object.fromEntries(casos.map((c) => [c.id, citadosBastao.has(c.id) ? 2 : c.cargoAutor === cargoBastao ? 1 : 0]))
+              : lente === "legado" ? foco?.mapa : null}
             aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); setResposta(null); }} />
 
           {/* Linhas que ligam os painéis ao tronco */}
           {alvoGestao && !resposta && (
             <g className={estilos.ligacao}>
-              <polyline points={`328,560 358,560 ${alvoGestao.x},${alvoGestao.y}`} />
+              <polyline points={`314,610 344,610 ${alvoGestao.x},${alvoGestao.y}`} />
               <circle cx={alvoGestao.x} cy={alvoGestao.y} r="4" />
             </g>
           )}
           {caso && (
             <g className={estilos.ligacao}>
-              <polyline points={`1252,230 1222,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
+              <polyline points={`1262,230 1232,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
               <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
             </g>
           )}
@@ -273,7 +309,7 @@ export default function Palco({ cargo = null }) {
 
         {/* Painel da gestão */}
         {gestao && !resposta && (
-          <section className={estilos.painel} style={{ left: px(28), top: py(500), width: px(300), maxHeight: py(392) }}>
+          <section className={estilos.painel} style={{ left: px(24), top: py(518), width: px(290), maxHeight: py(374) }}>
             <div className={estilos.rotulo}>Anel · gestão</div>
             <h2 className={estilos.tituloGestao}>{gestao.codigo}</h2>
             {gestao.status === "fechando" && (
@@ -312,7 +348,7 @@ export default function Palco({ cargo = null }) {
         )}
 
         {/* Painel da direita: caso escolhido, padrões ou visão geral */}
-        <section className={estilos.painel} style={{ left: px(1252), top: py(40), width: px(330), maxHeight: py(840) }}>
+        <section className={estilos.painel} style={{ left: px(1262), top: py(30), width: px(326), maxHeight: py(850) }}>
           {caso ? (
             <>
               <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}{caso.meu ? " · registrado por você" : ""}</div>
@@ -359,6 +395,42 @@ export default function Palco({ cargo = null }) {
                 </>
               )}
               <button className={estilos.fechar} onClick={() => { setResposta(null); setPergunta(""); }}>Fechar resposta</button>
+            </>
+          ) : lente === "bastao" ? (
+            <>
+              <div className={estilos.rotulo}>Passada de bastão</div>
+              <h3 className={estilos.tituloCaso}>Para quem vai assumir: <em>{cargoBastao}</em></h3>
+              <label className={estilos.seletor}>
+                <span>Cargo</span>
+                <select value={cargoBastao} onChange={(e) => setCargoBastao(e.target.value)}>
+                  {cargosComLegado.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </label>
+              {bastao?.carregando && <p className={estilos.pensando}><span className={estilos.statusPonto} /> Juntando o legado de quem já foi {cargoBastao}…</p>}
+              {bastao?.erro && <p className={estilos.respostaPadrao}>Não consegui montar a passada de bastão agora. Tente de novo em instantes.</p>}
+              {bastao?.kit && (
+                <>
+                  <p className={estilos.texto}>{bastao.kit.resumo}</p>
+                  <p className={estilos.fonteBastao}>
+                    Feita a partir de {bastao.total} {bastao.total === 1 ? "caso" : "casos"} de quem já ocupou o cargo{bastao.origem === "dados" ? " · montada só com os dados, sem IA" : ""}. Toque num código para abrir o caso.
+                  </p>
+                  {SECOES.map((sec) => bastao.kit[sec.id]?.length > 0 && (
+                    <div key={sec.id} className={estilos.secaoBastao}>
+                      <div className={estilos.rotuloLista}>{sec.nome}</div>
+                      <ul className={sec.id === "primeirasSemanas" ? estilos.checklist : estilos.bastaoLista}>
+                        {bastao.kit[sec.id].map((item, i) => (
+                          <li key={i}>
+                            <span>{item.texto}</span>
+                            <span className={estilos.citacoes}>
+                              {item.casos.map((id) => <button key={id} onClick={() => setCasoAtivo(id)}>{id}</button>)}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </>
+              )}
             </>
           ) : lente === "padroes" ? (
             <>

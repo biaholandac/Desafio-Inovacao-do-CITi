@@ -47,8 +47,8 @@
 }
 
 .anel { opacity: 0.9; transition: opacity 0.3s; }
-.anelTardio { fill: rgba(0, 12, 5, 0.42); }
-.anelLinha { fill: #4dff9e; opacity: 0.85; }
+.anelTardio { fill: rgba(0, 12, 5, 0.5); }
+.anelLinha { fill: #5dffa8; opacity: 1; }
 .anelAtivo { opacity: 1; }
 .anelAtivo .anelLinha { fill: #8dffc4; opacity: 1; }
 
@@ -172,10 +172,15 @@
 }
 
 .rotuloSetor {
-  fill: rgba(237, 245, 239, 0.45);
-  font-size: 11px;
-  letter-spacing: 0.22em;
+  fill: #b9ffd9;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
   font-family: var(--fonte-texto);
+  stroke: rgba(2, 8, 4, 0.85);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(47, 217, 122, 0.55));
 }
 
 @media (prefers-reduced-motion: reduce) {
