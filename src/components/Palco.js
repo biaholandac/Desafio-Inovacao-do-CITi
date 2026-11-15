@@ -160,13 +160,13 @@ export default function Palco({ cargo = null }) {
           {/* Linhas que ligam os painéis ao tronco */}
           {alvoGestao && !resposta && (
             <g className={estilos.ligacao}>
-              <polyline points={`390,250 420,250 ${alvoGestao.x},${alvoGestao.y}`} />
+              <polyline points={`338,250 368,250 ${alvoGestao.x},${alvoGestao.y}`} />
               <circle cx={alvoGestao.x} cy={alvoGestao.y} r="4" />
             </g>
           )}
           {caso && (
             <g className={estilos.ligacao}>
-              <polyline points={`1200,230 1170,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
+              <polyline points={`1268,230 1238,230 ${naTela(posicoes[caso.id]).x},${naTela(posicoes[caso.id]).y}`} />
               <circle cx={naTela(posicoes[caso.id]).x} cy={naTela(posicoes[caso.id]).y} r="9" className={estilos.mira} />
             </g>
           )}
@@ -174,7 +174,7 @@ export default function Palco({ cargo = null }) {
 
         {/* Painel da gestão */}
         {gestao && !resposta && (
-          <section className={estilos.painel} style={{ left: px(40), top: py(150), width: px(350), maxHeight: py(720) }}>
+          <section className={estilos.painel} style={{ left: px(28), top: py(150), width: px(310), maxHeight: py(720) }}>
             <div className={estilos.rotulo}>Anel · gestão</div>
             <h2 className={estilos.tituloGestao}>{gestao.codigo}</h2>
             {gestao.status === "fechando" && (
@@ -197,7 +197,7 @@ export default function Palco({ cargo = null }) {
         )}
 
         {/* Painel da direita: caso escolhido, padrões ou visão geral */}
-        <section className={estilos.painel} style={{ left: px(1200), top: py(110), width: px(370), maxHeight: py(770) }}>
+        <section className={estilos.painel} style={{ left: px(1268), top: py(110), width: px(316), maxHeight: py(770) }}>
           {caso ? (
             <>
               <div className={estilos.rotulo}>Caso {caso.id} · {caso.gestao}</div>

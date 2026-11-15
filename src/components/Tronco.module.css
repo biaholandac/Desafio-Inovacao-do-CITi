@@ -46,18 +46,11 @@
   stroke-width: 0.6;
 }
 
-.anel {
-  fill: none;
-  stroke: var(--verde);
-  stroke-width: 1.8;
-  opacity: 0.85;
-  transition: opacity 0.3s, stroke-width 0.3s;
-}
-
-.anelAtivo {
-  opacity: 1;
-  stroke-width: 3;
-}
+.anel { opacity: 0.9; transition: opacity 0.3s; }
+.anelTardio { fill: rgba(0, 12, 5, 0.42); }
+.anelLinha { fill: #4dff9e; opacity: 0.85; }
+.anelAtivo { opacity: 1; }
+.anelAtivo .anelLinha { fill: #8dffc4; opacity: 1; }
 
 .anelPendente {
   fill: none;

@@ -116,6 +116,25 @@ function afastarCasos(posicoes, distanciaMinima = 22, voltas = 80) {
   return posicoes;
 }
 
+// Anel de madeira desenhado como faixa: a borda ondula de forma irregular e a espessura
+// engrossa e afina ao longo da volta, como os anéis de crescimento de um tronco de verdade.
+export function caminhoAnel(raio, chave, { minima = 1, maxima = 4, intensidade = 0.012, inicio = 0, fim = 360 } = {}) {
+  const f = [1, 2, 3, 4, 5].map((k) => semente(chave + "f" + k) * Math.PI * 2);
+  const passos = Math.max(24, Math.round((fim - inicio) / 1.5));
+  const fora = [], dentro = [];
+  for (let i = 0; i <= passos; i++) {
+    const ang = inicio + ((fim - inicio) * i) / passos;
+    const t = (ang * Math.PI) / 180;
+    const onda = intensidade * (Math.sin(3 * t + f[0]) + 0.55 * Math.sin(7 * t + f[1]) + 0.3 * Math.sin(13 * t + f[2]) + 0.12 * Math.sin(31 * t + f[3]));
+    const r = raio * (1 + onda);
+    const largura = minima + (maxima - minima) * (0.5 + 0.5 * Math.sin(2 * t + f[4])) * (0.65 + 0.35 * Math.sin(5 * t + f[1]));
+    fora.push(ponto(r, ang));
+    dentro.push(ponto(r - largura, ang));
+  }
+  const fmt = (p) => p.x.toFixed(1) + " " + p.y.toFixed(1);
+  return "M" + fora.map(fmt).join("L") + "L" + dentro.reverse().map(fmt).join("L") + "Z";
+}
+
 // Contorno rugoso da casca: muitas irregularidades pequenas.
 export function caminhoCasca(raio, chave = "casca") {
   const passos = 260;
@@ -138,20 +157,23 @@ export function caminhoFaixa(raioInterno, raioExterno, chave) {
 // Perspectiva: o corte do tronco é visto de cima, então fica oval (achatado na vertical),
 // e sobe um pouco na tela para dar espaço ao tronco e às raízes.
 // ZOOM aproxima ou afasta o tronco inteiro (foto e corte juntos).
-export const ZOOM = 1.14;
+export const ZOOM = 1.24;
 export const ESCALA_X = 0.95 * ZOOM;
 export const ESCALA_Y = 0.56 * ZOOM;
-export const CENTRO_TELA = { x: 800, y: 292 };
+export const CENTRO_TELA = { x: 800, y: 304 };
 
 // Imagem do tronco com raízes (public/tronco.webp, 1632 x 1632), posicionada para que
 // o corte da imagem fique sob o corte interativo. O corte interativo é maior que o da foto,
 // para os anéis e os casos ficarem fáceis de ler e tocar.
-// O ponto (445, 217) da foto de 816 px fica no centro do corte; a foto é esticada 1,72 x 1,25.
+// A foto (816 px) foi estendida nas bordas para as raízes chegarem até a beira da tela:
+// 150 px à esquerda, 250 à direita, 120 em cima e 200 embaixo (1216 x 1136 no total).
+// O ponto (445, 217) da foto original fica no centro do corte; ela é esticada 1,72 x 1,25.
+const FOTO = { esticarX: 1.72, esticarY: 1.25, centro: { x: 445 + 150, y: 217 + 120 }, largura: 1216, altura: 1136 };
 export const IMAGEM_TRONCO = {
-  x: CENTRO_TELA.x - 445 * 1.72 * ZOOM,
-  y: CENTRO_TELA.y - 217 * 1.25 * ZOOM,
-  largura: 816 * 1.72 * ZOOM,
-  altura: 816 * 1.25 * ZOOM,
+  x: CENTRO_TELA.x - FOTO.centro.x * FOTO.esticarX * ZOOM,
+  y: CENTRO_TELA.y - FOTO.centro.y * FOTO.esticarY * ZOOM,
+  largura: FOTO.largura * FOTO.esticarX * ZOOM,
+  altura: FOTO.altura * FOTO.esticarY * ZOOM,
 };
 export const TRANSFORMACAO_CORTE = `translate(${CENTRO_TELA.x} ${CENTRO_TELA.y}) scale(${ESCALA_X} ${ESCALA_Y}) translate(${-CENTRO.x} ${-CENTRO.y})`;
 export function naTela(p) {

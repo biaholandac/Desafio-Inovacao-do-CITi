@@ -3,14 +3,15 @@
 import { useMemo } from "react";
 import {
   RAIO_NUCLEO, RAIO_EXTERNO, SETORES,
-  raiosDoAnel, caminhoOndulado, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE, IMAGEM_TRONCO, ZOOM,
+  raiosDoAnel, caminhoOndulado, caminhoAnel, caminhoCasca, caminhoFaixa, centroPara, ponto, semente, naTela, TRANSFORMACAO_CORTE, IMAGEM_TRONCO, ZOOM,
 } from "@/lib/geometria";
 import estilos from "./Tronco.module.css";
 
 // O corte da foto (public/corte.webp) é um recorte de 430 x 240 px da imagem original, com o centro
 // da madeira em (212,5; 114,5) e raios de 162 x 95 px. Aqui ele é esticado para coincidir com a madeira do desenho.
 const RAIO_MADEIRA = RAIO_EXTERNO + 5;
-const CENTRO_MADEIRA = centroPara(RAIO_MADEIRA);
+// O miolo da foto fica exatamente sobre o núcleo desenhado.
+const CENTRO_MADEIRA = centroPara(RAIO_NUCLEO);
 const FOTO_CORTE = {
   x: CENTRO_MADEIRA.x - 212.5 * (RAIO_MADEIRA / 162),
   y: CENTRO_MADEIRA.y - 114.5 * (RAIO_MADEIRA / 95),
@@ -131,7 +132,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
 
       {/* Tronco com raízes: imagem de referência da autora, com o corte coberto pelo desenho interativo */}
       <image href="/tronco.webp" x={IMAGEM_TRONCO.x} y={IMAGEM_TRONCO.y} width={IMAGEM_TRONCO.largura} height={IMAGEM_TRONCO.altura}
-        preserveAspectRatio="none" mask="url(#mascaraFoto)" className={estilos.foto} />
+        preserveAspectRatio="none" className={estilos.foto} />
       {/* Sombra sob a borda do corte, para ele assentar no tronco */}
       <ellipse cx={naTela(centroPara(0)).x} cy={naTela(centroPara(0)).y + 22} rx={372 * ZOOM} ry={214 * ZOOM} fill="url(#sombraCorte)" opacity="0.7" />
 
@@ -148,24 +149,25 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       <circle cx={centroPara(RAIO_EXTERNO / 2).x} cy={centroPara(RAIO_EXTERNO / 2).y} r={RAIO_EXTERNO} className={estilos.pulso} />
 
 
-      {/* Anéis: uma gestão cada */}
+      {/* Anéis: uma gestão cada, desenhados como anéis de madeira */}
       {gestoes.map((g, i) => {
-        const { externo } = raiosDoAnel(i, total);
+        const { interno, externo } = raiosDoAnel(i, total);
         const ativo = gestaoAtiva === g.codigo;
         if (g.status === "em_formacao") {
-          return <path key={g.codigo} d={caminhoOndulado(externo, g.codigo)} className={`${estilos.anelFormacao} ${ativo ? estilos.anelAtivo : ""}`} />;
+          return <path key={g.codigo} d={caminhoOndulado(externo, g.codigo, 0.012)} className={`${estilos.anelFormacao} ${ativo ? estilos.anelAtivo : ""}`} />;
         }
-        if (g.status === "fechando") {
-          const fracao = g.conversas.feitas / g.conversas.esperadas;
-          const fim = -90 + 360 * fracao;
-          return (
-            <g key={g.codigo}>
-              <path d={caminhoOndulado(externo, g.codigo, 0.007, -90, fim)} className={`${estilos.anel} ${ativo ? estilos.anelAtivo : ""}`} filter="url(#brilho)" />
-              <path d={caminhoOndulado(externo, g.codigo, 0.007, fim, 270)} className={estilos.anelPendente} />
-            </g>
-          );
-        }
-        return <path key={g.codigo} d={caminhoOndulado(externo, g.codigo)} className={`${estilos.anel} ${ativo ? estilos.anelAtivo : ""}`} filter="url(#brilho)" />;
+        const largura = externo - interno;
+        // Lenho tardio: a faixa escura e mais densa que fecha cada ano de crescimento.
+        const tardio = caminhoAnel(externo - 1.5, g.codigo + "t", { minima: largura * 0.12, maxima: largura * 0.38 });
+        const fim = g.status === "fechando" ? -90 + 360 * (g.conversas.feitas / g.conversas.esperadas) : 270;
+        const linha = caminhoAnel(externo, g.codigo, { minima: ativo ? 1.6 : 0.8, maxima: ativo ? 5.5 : 3.6, inicio: -90, fim });
+        return (
+          <g key={g.codigo} className={`${estilos.anel} ${ativo ? estilos.anelAtivo : ""}`}>
+            <path d={tardio} className={estilos.anelTardio} />
+            <path d={linha} className={estilos.anelLinha} filter="url(#brilho)" />
+            {g.status === "fechando" && <path d={caminhoOndulado(externo, g.codigo, 0.012, fim, 270)} className={estilos.anelPendente} />}
+          </g>
+        );
       })}
 
       {/* Núcleo */}
