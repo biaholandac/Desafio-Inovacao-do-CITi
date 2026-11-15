@@ -16,6 +16,7 @@
   width: min(1240px, 100%);
   max-height: calc(100dvh - 112px);
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(56, 230, 130, 0.35) transparent;
   padding: 26px 30px 30px;
