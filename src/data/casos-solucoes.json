@@ -379,7 +379,7 @@
     "dilema": "O que priorizar: a qualidade das entregas ou o desenvolvimento das pessoas.",
     "opcoes": null,
     "decisao": "O líder de Produto deixou como conselho dedicar tempo fixo para revisar o trabalho dos operacionais junto com eles.",
-    "resultado": "O conselho entrou no kit do sucessor de quem assume a liderança de Produto.",
+    "resultado": "O conselho passou a fazer parte do que o LegaCITi mostra para quem assume a liderança de Produto.",
     "licao": "A qualidade das entregas vem da qualidade das pessoas. Revisar junto ensina mais do que corrigir sozinho.",
     "simulacao": null,
     "cargoAutor": "Líder de produto"
@@ -486,11 +486,11 @@
     "area": "Inteligência de Dados",
     "padroes": [],
     "situacao": "A líder de dados sabia que a subárea seria unida a Dev em 2027.1.",
-    "dilema": "Como garantir que as práticas de Dados não se perdessem na fusão.",
+    "dilema": "Como levar para Tech as boas práticas que a subárea de Dados construiu.",
     "opcoes": null,
     "decisao": "A líder de dados registrou as práticas, os modelos de entrega e as lições da subárea antes da fusão.",
     "resultado": "O material serviu de base para o CTO da nova área de Tech.",
-    "licao": "Antes de uma fusão, registre o que cada parte faz bem. É isso que se perde primeiro.",
+    "licao": "Antes de unir duas áreas, registre o que cada uma faz bem: assim a nova área começa com o melhor das duas.",
     "simulacao": null,
     "cargoAutor": "Líder de dados"
   },

@@ -2,7 +2,7 @@ import { casos } from "@/data";
 import { relevancia } from "@/data/cargos";
 import { buscarCasos, casosComoTexto } from "@/lib/ia/busca";
 import { gerarJSON } from "@/lib/ia/gemini";
-import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel } from "@/lib/ia/regras";
+import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem } from "@/lib/ia/regras";
 
 // A função pode rodar por até 30 s na Vercel; a IA tem 18 s e, depois disso, entra o modo de segurança.
 export const maxDuration = 30;
@@ -43,6 +43,10 @@ export async function POST(request) {
     // 4. Conferência: só valem citações de casos que foram realmente enviados.
     const permitidos = new Set(encontrados.map((c) => c.id));
     const citados = (saida.casos ?? []).filter((id) => permitidos.has(id));
+    // Conferência de números: a resposta não pode trazer números que não estão nos casos citados.
+    if (saida.tipo === "resposta" && !numerosConferem(saida.resposta, casosComoTexto(encontrados.filter((c) => citados.includes(c.id))) + " " + texto)) {
+      throw new Error("numero_sem_fonte");
+    }
     if (saida.tipo !== "resposta" || citados.length === 0 || !saida.resposta?.trim()) {
       return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
     }

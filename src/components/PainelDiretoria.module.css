@@ -84,7 +84,7 @@
 .chaveMedia { background: rgba(141, 255, 192, 0.25); margin-left: 8px; }
 
 .explica { color: var(--texto-suave); font-size: 13px; line-height: 1.5; margin: 6px 0 12px; display: flex; gap: 8px; align-items: center; }
-.alertas li, .pontos li { display: grid; gap: 4px; padding-left: 12px; border-left: 2px solid rgba(255, 179, 122, 0.55); }
+.alertas li, .pontos li { display: grid; gap: 4px; padding-left: 12px; border-left: 2px solid rgba(56, 230, 130, 0.45); }
 .pontos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 10px; counter-reset: ponto; }
 .pontos li { border-left-color: var(--verde); line-height: 1.5; }
 .pontos strong { font-family: var(--fonte-titulo); font-size: 15px; }
@@ -127,3 +127,5 @@
 @media (prefers-reduced-motion: reduce) {
   .fundo, .quadro, .pontinho { animation: none; }
 }
+
+.aprendizado { font-size: 13px; font-style: italic; color: var(--verde-claro); line-height: 1.45; }

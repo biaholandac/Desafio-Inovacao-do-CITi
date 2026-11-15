@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import estilos from "./PainelDiretoria.module.css";
 
-const CHAVE_PAUTA = "legaciti:pauta:v2";
+const CHAVE_PAUTA = "legaciti:pauta:v3";
 
 export default function PainelDiretoria({ painel, casos, aoAbrirCaso, aoFechar }) {
   const [pauta, setPauta] = useState(null);
@@ -97,16 +97,16 @@ export default function PainelDiretoria({ painel, casos, aoAbrirCaso, aoFechar }
           </section>
 
           <section className={estilos.bloco}>
-            <div className={estilos.rotulo}>Pontos de atenção em {painel.formacao}</div>
-            <p className={estilos.explica}>Situações em andamento que se parecem com casos antigos que deram errado.</p>
-            {painel.alertas.length === 0 && <p className={estilos.explica}>Nenhuma situação em andamento lembra problemas antigos.</p>}
+            <div className={estilos.rotulo}>Legado que apoia {painel.formacao}</div>
+            <p className={estilos.explica}>Para cada situação em andamento, o aprendizado de casos anteriores que pode ajudar.</p>
+            {painel.apoio.length === 0 && <p className={estilos.explica}>Ainda não há casos anteriores próximos das situações em andamento.</p>}
             <ul className={estilos.alertas}>
-              {painel.alertas.map((a) => (
+              {painel.apoio.map((a) => (
                 <li key={a.caso.id}>
                   <button className={estilos.casoLink} onClick={() => aoAbrirCaso(a.caso.id)}>{a.caso.titulo}</button>
-                  <span className={estilos.risco}>Lembra {a.padrao} · {a.nome}</span>
+                  <span className={estilos.aprendizado}>“{a.aprendizado}”</span>
                   <span className={estilos.citacoes}>
-                    Parecido com {a.parecidos.map((x) => <button key={x.id} title={x.titulo} onClick={() => aoAbrirCaso(x.id)}>{x.id}</button>)}
+                    Do legado {a.parecidos.map((x) => <button key={x.id} title={x.titulo} onClick={() => aoAbrirCaso(x.id)}>{x.id}</button>)}
                   </span>
                 </li>
               ))}

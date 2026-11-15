@@ -28,14 +28,15 @@ export async function POST(request) {
     .slice(0, 16);
   const reserva = kitReserva(cargo, doCargo, ORDEM);
 
+  const fontes = casosComoTexto(doCargo);
   try {
     const saida = await gerarJSON({
       instrucao: instrucaoBastao(cargo),
-      conteudo: `Casos contados por quem já foi ${cargo}:\n\n${casosComoTexto(doCargo)}`,
+      conteudo: `Casos contados por quem já foi ${cargo}:\n\n${fontes}`,
       esquema: ESQUEMA_BASTAO,
       maxTokens: 1600,
     });
-    return Response.json({ cargo, total: doCargo.length, kit: conferirKit(saida, doCargo, reserva), origem: "ia" });
+    return Response.json({ cargo, total: doCargo.length, kit: conferirKit(saida, doCargo, reserva, fontes + ` ${doCargo.length}`), origem: "ia" });
   } catch (erro) {
     console.error("bastao:", erro?.message);
     return Response.json({ cargo, total: doCargo.length, kit: reserva, origem: "dados" });
