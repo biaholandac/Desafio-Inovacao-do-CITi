@@ -10,7 +10,6 @@ import PainelDiretoria from "./PainelDiretoria";
 import { montarPainel } from "@/lib/diretoria";
 import { lerDemonstracao, salvarDemonstracao, novoCaso } from "@/lib/meusCasos";
 import { SECOES } from "@/lib/ia/bastao";
-import { TRILHAS, trilhaInicial, cargosDoDegrau } from "@/data/trilhas";
 import { casos as casosLegado, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto, naTela } from "@/lib/geometria";
 import { acharCargo, relevancia, ehNovato, CHEGADA, FOCO } from "@/data/cargos";
@@ -19,7 +18,6 @@ import estilos from "./Palco.module.css";
 const LENTES = [
   { id: "legado", nome: "Legado" },
   { id: "padroes", nome: "Padrões" },
-  { id: "trilha", nome: "Trilha" },
   { id: "bastao", nome: "Para quem assume" },
 ];
 
@@ -71,30 +69,6 @@ export default function Palco({ cargo = null }) {
   }
 
   const casos = useMemo(() => [...casosLegado, ...demo.casos], [demo.casos]);
-  // Trilha: o caminho de carreira da área, com o legado de cada degrau.
-  const [trilhaId, setTrilhaId] = useState(() => trilhaInicial(entrada));
-  const [degrauAtivo, setDegrauAtivo] = useState(null);
-  const trilha = TRILHAS.find((t) => t.id === trilhaId) ?? TRILHAS[0];
-  const degraus = useMemo(() => {
-    const peso = { despedida: 3, fim_gestao: 2, squad: 1, em_andamento: 0 };
-    const ordem = gestoes.map((g) => g.codigo);
-    return trilha.degraus.map((d, i) => {
-      const nomes = cargosDoDegrau(d);
-      const lista = nomes[0] === "New Pig"
-        ? CHEGADA.map((id) => casos.find((c) => c.id === id)).filter(Boolean)
-        : casos.filter((c) => nomes.includes(c.cargoAutor));
-      const contagem = {};
-      for (const c of lista) for (const p of c.padroes) contagem[p] = (contagem[p] || 0) + 1;
-      const padrao = Object.entries(contagem).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
-      const melhores = [...lista].filter((c) => c.licao)
-        .sort((a, b) => peso[b.origem] - peso[a.origem] || ordem.indexOf(b.gestao) - ordem.indexOf(a.gestao));
-      const voce = entrada && (nomes.includes(entrada.cargo.nome) || (nomes[0] === "New Pig" && novato));
-      return { ...d, indice: i, nomes, casos: lista, padrao, conselho: melhores[0] ?? null, destaques: melhores.slice(0, 3), voce };
-    });
-  }, [trilha, casos, entrada, novato]);
-  const casosDaTrilha = useMemo(() => new Set(degraus.flatMap((d) => d.casos.map((c) => c.id))), [degraus]);
-  const casosDoDegrau = useMemo(() => new Set(degrauAtivo === null ? [] : degraus[degrauAtivo]?.casos.map((c) => c.id) ?? []), [degraus, degrauAtivo]);
-
   const painelDiretoria = useMemo(() => montarPainel({ casos, gestoes, meusCasos: demo.casos, simuladas: demo.simuladas }), [casos, demo]);
 
   // Para quem assume: o legado de todas as pessoas que já ocuparam um cargo, para quem vai assumir.
@@ -319,7 +293,6 @@ export default function Palco({ cargo = null }) {
         <svg viewBox="0 0 1600 900" className={estilos.desenho} role="img" aria-label="Tronco do LegaCITi: cada anel é uma gestão do CITi e cada ponto é um caso">
           <Tronco gestoes={gestoesVivas} casos={casos} posicoes={posicoes} novo={nasceu} celebrando={celebrando} solucoesJuntas={solucoesJuntas}
             selecionado={casoAtivo} gestaoAtiva={gestaoAtiva} padraoAtivo={padraoAtivo} relevancia={resposta?.casos?.length ? Object.fromEntries(casos.map((c) => [c.id, resposta.casos.includes(c.id) ? 2 : 0]))
-              : lente === "trilha" ? Object.fromEntries(casos.map((c) => [c.id, casosDoDegrau.size ? (casosDoDegrau.has(c.id) ? 2 : casosDaTrilha.has(c.id) ? 1 : 0) : casosDaTrilha.has(c.id) ? 2 : 0]))
               : lente === "bastao" ? Object.fromEntries(casos.map((c) => [c.id, citadosBastao.has(c.id) ? 2 : c.cargoAutor === cargoBastao ? 1 : 0]))
               : lente === "legado" ? foco?.mapa : null}
             aoEscolherCaso={(id) => setCasoAtivo(id)} aoEscolherGestao={(g) => { setGestaoAtiva(g); setCasoAtivo(null); setRetratoAberto(false); setResposta(null); }} />
@@ -433,56 +406,6 @@ export default function Palco({ cargo = null }) {
                 </>
               )}
               <button className={estilos.fechar} onClick={() => { setResposta(null); setPergunta(""); }}>Fechar resposta</button>
-            </>
-          ) : lente === "trilha" ? (
-            <>
-              <div className={estilos.rotulo}>Trilha</div>
-              <h3 className={estilos.tituloCaso}>O caminho em <em>{trilha.nome}</em></h3>
-              <div className={estilos.abas} role="tablist" aria-label="Área da trilha">
-                {TRILHAS.map((t) => (
-                  <button key={t.id} role="tab" aria-selected={t.id === trilhaId} className={t.id === trilhaId ? estilos.abaAtiva : ""}
-                    onClick={() => { setTrilhaId(t.id); setDegrauAtivo(null); }}>{t.nome}</button>
-                ))}
-              </div>
-              <ol className={estilos.trilha}>
-                {degraus.map((d) => {
-                  const aberto = degrauAtivo === d.indice;
-                  return (
-                    <li key={d.indice} className={`${aberto ? estilos.degrauAberto : ""} ${d.voce ? estilos.degrauVoce : ""}`}>
-                      <button className={estilos.degrau} onClick={() => setDegrauAtivo(aberto ? null : d.indice)} aria-expanded={aberto}>
-                        <span className={estilos.degrauNome}>{d.nomes.join(" · ")}{d.voce && <span className={estilos.voceAqui}>você está aqui</span>}</span>
-                        <span className={estilos.degrauInfo}>{d.descricao}</span>
-                        <span className={estilos.degrauNumeros}>
-                          {d.casos.length} {d.casos.length === 1 ? "caso" : "casos"}{d.padrao ? ` · mais comum: ${d.padrao} ${padroes[d.padrao]}` : ""}
-                        </span>
-                      </button>
-                      {aberto && (
-                        <div className={estilos.degrauCorpo}>
-                          {d.conselho ? (
-                            <>
-                              <div className={estilos.rotuloLista}>Quem passou por aqui deixou</div>
-                              <p className={estilos.licao}>“{d.conselho.licao}”</p>
-                              <ul className={estilos.sugeridos}>
-                                {d.destaques.map((c) => (
-                                  <li key={c.id}>
-                                    <button onClick={() => setCasoAtivo(c.id)}>
-                                      <span className={estilos.sugeridoGestao}>{c.gestao}</span>
-                                      <span>{c.titulo}</span>
-                                    </button>
-                                  </li>
-                                ))}
-                              </ul>
-                            </>
-                          ) : (
-                            <p className={estilos.dica}>Ninguém deste degrau contou um caso ainda. Quando alguém contar, o aprendizado aparece aqui.</p>
-                          )}
-                        </div>
-                      )}
-                    </li>
-                  );
-                })}
-              </ol>
-              <p className={estilos.dica}>Toque num degrau para ver o que ficou dele. No tronco, brilham os casos da trilha.</p>
             </>
           ) : lente === "bastao" ? (
             <>
