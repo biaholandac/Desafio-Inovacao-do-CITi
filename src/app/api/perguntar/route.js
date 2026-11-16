@@ -6,6 +6,7 @@ import { gerarJSON } from "@/lib/ia/gemini";
 import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem, pedeNomes, pedidoVago, perguntaSobre, perguntaDeNumeros } from "@/lib/ia/regras";
 import { panorama, gestoesCitadas } from "@/lib/ia/panorama";
 import { gestoes } from "@/data";
+import { limparExtra } from "@/lib/ia/extras";
 
 // A função pode rodar por até 30 s na Vercel; a IA tem 18 s e, depois disso, entra o modo de segurança.
 export const maxDuration = 30;
@@ -108,12 +109,3 @@ export async function POST(request) {
   }
 }
 
-const corta = (t, max = 600) => String(t ?? "").slice(0, max);
-function limparExtra(c) {
-  if (!c || !/^N\d{3,4}$/.test(String(c.id))) return null;
-  return {
-    id: c.id, titulo: corta(c.titulo, 90), gestao: corta(c.gestao, 8), cargoAutor: corta(c.cargoAutor, 60), area: corta(c.area, 40),
-    situacao: corta(c.situacao), dilema: corta(c.dilema), decisao: corta(c.decisao), resultado: corta(c.resultado), licao: corta(c.licao, 300),
-    padroes: (Array.isArray(c.padroes) ? c.padroes : []).filter((p) => /^P[1-6]$/.test(p)), origem: corta(c.origem, 20),
-  };
-}

@@ -5,6 +5,7 @@ import { padroes } from "@/data";
 import estilos from "./Entrevista.module.css";
 
 const TIPOS = [
+  { id: "momento", nome: "Algo que aconteceu", detalhe: "Uma situação que incomodou ou que vale registrar agora para quem ocupar o seu cargo depois." },
   { id: "squad", nome: "Fim de projeto", detalhe: "O que o squad aprendeu no projeto que terminou." },
   { id: "fim_gestao", nome: "Fim de gestão", detalhe: "A situação desta gestão que vale passar adiante." },
   { id: "despedida", nome: "Despedida", detalhe: "O que você quer deixar antes de sair do CITi." },
@@ -137,11 +138,11 @@ export default function Entrevista({ entrada, gestao, aoFechar, aoRegistrar }) {
   const etapa = !tipo ? "tipo" : rascunho ? "previa" : "conversa";
 
   return (
-    <div className={estilos.fundo} role="dialog" aria-modal="true" aria-label="Conversa de legado">
+    <div className={estilos.fundo} role="dialog" aria-modal="true" aria-label="Registro de legado">
       <div className={estilos.caixa}>
         <header className={estilos.topo}>
           <div>
-            <div className={estilos.rotulo}>Conversa de legado{tipo ? ` · ${NOME_TIPO[tipo]}` : ""} · anel {gestao}</div>
+            <div className={estilos.rotulo}>Registro de legado{tipo ? ` · ${NOME_TIPO[tipo]}` : ""} · anel {gestao}</div>
             <div className={estilos.quem}>{entrada ? `${entrada.cargo.nome}` : "Membro do CITi"}</div>
           </div>
           <button className={estilos.fechar} onClick={aoFechar} aria-label="Fechar conversa">✕</button>
@@ -149,7 +150,7 @@ export default function Entrevista({ entrada, gestao, aoFechar, aoRegistrar }) {
 
         {etapa === "tipo" && (
           <div className={estilos.corpo}>
-            <h2 className={estilos.pergunta}>Que conversa você quer ter agora?</h2>
+            <h2 className={estilos.pergunta}>O que você quer registrar?</h2>
             <p className={estilos.explica}>São poucas perguntas, uma de cada vez. Você pode digitar ou falar. No fim, você revisa o caso antes de ele entrar no tronco.</p>
             <div className={estilos.tipos}>
               {TIPOS.map((t) => (

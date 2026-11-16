@@ -269,6 +269,8 @@
   transition: background 0.2s, box-shadow 0.2s;
 }
 .contar span { font-size: 18px; line-height: 1; }
+.briefing { background: rgba(7, 13, 9, 0.85); }
+.briefing span { font-size: 15px; }
 .contar:hover { background: rgba(47, 217, 122, 0.22); box-shadow: 0 0 40px rgba(32, 184, 104, 0.35); }
 .pergunta {
   flex: 1;
@@ -558,14 +560,15 @@
     width: 100%;
     margin: 0;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-    flex-direction: column-reverse;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
     background: rgba(3, 7, 5, 0.94);
     border-top: 1px solid rgba(56, 230, 130, 0.15);
     backdrop-filter: blur(10px);
   }
-  .contar { height: 42px; width: 100%; justify-content: center; }
-  .pergunta { width: 100%; flex: none; }
+  .contar { height: 42px; flex: 1 1 0; min-width: 0; justify-content: center; padding: 0 10px; font-size: 13px; }
+  .pergunta { width: 100%; flex: none; order: -1; }
   .aviso { bottom: 130px; }
 }
 

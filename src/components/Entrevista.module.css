@@ -75,7 +75,8 @@
 }
 .explica { color: var(--texto-suave); font-size: 14px; line-height: 1.55; margin-bottom: 18px; }
 
-.tipos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.tipos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .tipos { grid-template-columns: 1fr; } }
 .tipo {
   font: inherit;
   text-align: left;

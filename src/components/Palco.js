@@ -5,6 +5,7 @@ import Link from "next/link";
 import Tronco from "./Tronco";
 import Marca from "./Marca";
 import Fundo from "./Fundo";
+import Briefing from "./Briefing";
 import Entrevista from "./Entrevista";
 import PainelDiretoria from "./PainelDiretoria";
 import { montarPainel } from "@/lib/diretoria";
@@ -22,6 +23,7 @@ const LENTES = [
 ];
 
 const ORIGEM = {
+  momento: "Registro do momento",
   squad: "Conversa do squad",
   fim_gestao: "Conversa de fim de gestão",
   despedida: "Conversa de despedida",
@@ -61,6 +63,7 @@ export default function Palco({ cargo = null }) {
   // Conversas de legado feitas nesta demonstração (guardadas só neste navegador).
   const [demo, setDemo] = useState({ casos: [], simuladas: 0 });
   const [entrevistaAberta, setEntrevistaAberta] = useState(false);
+  const [briefingAberto, setBriefingAberto] = useState(false);
   const [nasceu, setNasceu] = useState(null);
   const [aviso, setAviso] = useState(null);
   const [celebrando, setCelebrando] = useState(null);
@@ -239,7 +242,7 @@ export default function Palco({ cargo = null }) {
       // Quem está chegando: primeiro o que se aprende ao entrar na sua subárea,
       // depois os conselhos de quem saiu e, por fim, como o CITi recebe quem chega.
       const areas = FOCO[entrada.cargo.id].areas;
-      const peso = { despedida: 3, fim_gestao: 2, squad: 1, em_andamento: 0 };
+      const peso = { despedida: 3, fim_gestao: 2, squad: 1, momento: 1, em_andamento: 0 };
       const chegadaDaArea = CHEGADA.map((id) => casos.find((c) => c.id === id)).filter((c) => c && areas.includes(c.area));
       const conselhos = recentes(casos.filter((c) => areas.includes(c.area) && c.licao && !CHEGADA.includes(c.id)))
         .sort((a, b) => peso[b.origem] - peso[a.origem]);
@@ -536,7 +539,10 @@ export default function Palco({ cargo = null }) {
 
       <div className={estilos.base}>
         <button className={estilos.contar} onClick={() => setEntrevistaAberta(true)}>
-          <span aria-hidden="true">＋</span> Contar meu legado
+          <span aria-hidden="true">＋</span> Registro de legado
+        </button>
+        <button className={`${estilos.contar} ${estilos.briefing}`} onClick={() => setBriefingAberto(true)}>
+          <span aria-hidden="true">◎</span> Novo projeto
         </button>
         <form className={estilos.pergunta} onSubmit={perguntar}>
           <input value={pergunta} onChange={(e) => setPergunta(e.target.value)} maxLength={500}
@@ -555,6 +561,11 @@ export default function Palco({ cargo = null }) {
       {lente === "diretoria" && daDiretoria && (
         <PainelDiretoria painel={painelDiretoria} casos={casos} aoFechar={() => escolherLente("legado")}
           aoAbrirCaso={(id) => { escolherLente("legado"); setCasoAtivo(id); }} />
+      )}
+
+      {briefingAberto && (
+        <Briefing extras={demo.casos} aoFechar={() => setBriefingAberto(false)}
+          aoAbrirCaso={(id) => { setBriefingAberto(false); escolherLente("legado"); setResposta(null); setCasoAtivo(id); }} />
       )}
 
       {entrevistaAberta && (
