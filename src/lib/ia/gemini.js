@@ -22,7 +22,8 @@ async function chamar(modelo, chave, corpo, limiteMs) {
   }
 }
 
-export async function gerarJSON({ instrucao, conteudo, esquema, maxTokens = 700 }) {
+// limiteMs: tempo total desta chamada (padrão 18 s); respostas longas, como o briefing, pedem mais.
+export async function gerarJSON({ instrucao, conteudo, esquema, maxTokens = 700, limiteMs = LIMITE_TOTAL_MS }) {
   const chave = process.env.GEMINI_API_KEY;
   if (!chave) throw new Error("sem_chave");
 
@@ -39,24 +40,26 @@ export async function gerarJSON({ instrucao, conteudo, esquema, maxTokens = 700 
     },
   };
 
+  const limiteTotal = limiteMs;
+  const limiteTentativa = Math.max(LIMITE_TENTATIVA_MS, limiteMs - 6000);
   const inicio = Date.now();
   let ultimoErro = new Error("sem_modelo");
   for (const modelo of MODELOS) {
-    const restante = LIMITE_TOTAL_MS - (Date.now() - inicio);
+    const restante = limiteTotal - (Date.now() - inicio);
     if (restante < 1500) break;
     try {
-      let resposta = await chamar(modelo, chave, corpoBase, Math.min(LIMITE_TENTATIVA_MS, restante));
+      let resposta = await chamar(modelo, chave, corpoBase, Math.min(limiteTentativa, restante));
       // Limite momentâneo do plano gratuito: espera um pouco e tenta de novo (até duas vezes).
       for (let tentativa = 1; resposta.status === 429 && tentativa <= 2; tentativa++) {
-        const sobra = LIMITE_TOTAL_MS - (Date.now() - inicio);
+        const sobra = limiteTotal - (Date.now() - inicio);
         if (sobra < 5000) break;
         await new Promise((r) => setTimeout(r, 1800 * tentativa));
-        resposta = await chamar(modelo, chave, corpoBase, Math.min(LIMITE_TENTATIVA_MS, LIMITE_TOTAL_MS - (Date.now() - inicio)));
+        resposta = await chamar(modelo, chave, corpoBase, Math.min(limiteTentativa, limiteTotal - (Date.now() - inicio)));
       }
       // Modelos que não aceitam desligar o pensamento: tenta de novo sem essa opção.
       if (resposta.status === 400) {
         const { thinkingConfig, ...semPensamento } = corpoBase.generationConfig;
-        resposta = await chamar(modelo, chave, { ...corpoBase, generationConfig: semPensamento }, Math.min(LIMITE_TENTATIVA_MS, LIMITE_TOTAL_MS - (Date.now() - inicio)));
+        resposta = await chamar(modelo, chave, { ...corpoBase, generationConfig: semPensamento }, Math.min(limiteTentativa, limiteTotal - (Date.now() - inicio)));
       }
       if (!resposta.ok) {
         const detalhe = (await resposta.text().catch(() => "")).slice(0, 300);

@@ -5,7 +5,7 @@ import { MENSAGENS, pedeParaSairDoPapel } from "@/lib/ia/regras";
 import { selecionarParaProjeto, INSTRUCAO_BRIEFING, ESQUEMA_BRIEFING, conferirBriefing, briefingReserva } from "@/lib/ia/briefing";
 import { limparExtra } from "@/lib/ia/extras";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 // Briefing de projeto: a pessoa descreve o projeto que vai começar e recebe o que o legado ensina sobre ele.
 export async function POST(request) {
@@ -37,7 +37,8 @@ export async function POST(request) {
       instrucao: INSTRUCAO_BRIEFING,
       conteudo: `Casos do legado do CITi ligados ao projeto:\n\n${fontes}\n\nProjeto que vai começar:\n${texto}`,
       esquema: ESQUEMA_BRIEFING,
-      maxTokens: 1800,
+      maxTokens: 1300,
+      limiteMs: 34000,
     });
     return Response.json({ tipo: "briefing", briefing: conferirBriefing(saida, escolhidos, reserva, fontes + " " + texto), casos: escolhidos.map((c) => c.id), origem: "ia" });
   } catch (erro) {

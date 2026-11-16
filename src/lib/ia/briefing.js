@@ -26,6 +26,7 @@ export async function selecionarParaProjeto(descricao, legado) {
     conteudo: `Catálogo:\n${legado.map(linha).join("\n")}\n\nProjeto que vai começar:\n${descricao}`,
     esquema: { type: "OBJECT", properties: { casos: { type: "ARRAY", items: { type: "STRING" } } }, required: ["casos"] },
     maxTokens: 220,
+    limiteMs: 14000,
   });
   const porId = new Map(legado.map((c) => [c.id, c]));
   return [...new Set(saida.casos ?? [])].map((id) => porId.get(id)).filter(Boolean).slice(0, 10);
@@ -40,11 +41,11 @@ Regras obrigatórias:
 3. Não escreva os identificadores no texto dos itens. Não use nomes de pessoas: use cargos.
 4. Seções:
    - resumo: duas frases ligando o projeto descrito ao que o legado mostra. Se algum caso for de um cliente, produto ou setor parecido (por exemplo, outra clínica ou outro aplicativo), diga isso logo na primeira frase, sem nomear o cliente. Só se nenhum for parecido, diga que os aprendizados vêm de projetos com fases semelhantes.
-   - deuCerto: 2 a 4 práticas que funcionaram.
-   - deuErrado: 2 a 4 situações que deram errado e o que custaram.
-   - perguntas: 3 a 5 perguntas para fazer ao cliente na primeira conversa, cada uma motivada pelo que aconteceu nos casos citados. Escreva só a pergunta, dirigida ao cliente.
-   - riscos: 2 a 4 riscos para acompanhar durante o projeto, com o sinal que indica que estão acontecendo.
-5. Fale com o squad ("vocês"), em tom direto. Cada item com no máximo 28 palavras.
+   - deuCerto: 2 ou 3 práticas que funcionaram.
+   - deuErrado: 2 ou 3 situações que deram errado e o que custaram.
+   - perguntas: 3 ou 4 perguntas para fazer ao cliente na primeira conversa, cada uma motivada pelo que aconteceu nos casos citados. Escreva só a pergunta, dirigida ao cliente.
+   - riscos: 2 ou 3 riscos para acompanhar durante o projeto, com o sinal que indica que estão acontecendo.
+5. Fale com o squad ("vocês"), em tom direto. Cada item com no máximo 24 palavras.
 6. Se os casos não sustentam uma seção, deixe a lista dela vazia.
 7. A reorganização das áreas do CITi é uma decisão já tomada pela empresa: nunca a apresente como problema, risco ou erro.
 8. Escreva em português do Brasil com acentuação e cedilha corretas.

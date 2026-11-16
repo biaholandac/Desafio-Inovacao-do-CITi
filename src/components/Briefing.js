@@ -32,7 +32,7 @@ export default function Briefing({ extras = [], aoFechar, aoAbrirCaso }) {
     setPensando(true);
     setResultado(null);
     const controle = new AbortController();
-    const relogio = setTimeout(() => controle.abort(), 28000);
+    const relogio = setTimeout(() => controle.abort(), 58000);
     try {
       const r = await fetch("/api/briefing", {
         method: "POST",
@@ -74,7 +74,7 @@ export default function Briefing({ extras = [], aoFechar, aoAbrirCaso }) {
                   placeholder="Ex.: um aplicativo de agendamento para uma clínica, com área do paciente e agenda da recepção" aria-label="Descrição do projeto" />
                 <div className={base.acoes}>
                   {!descricao && <button type="button" className={estilos.exemplo} onClick={() => setDescricao(EXEMPLO)}>Usar um exemplo</button>}
-                  <span className={base.dica}>{pensando ? "Procurando projetos parecidos no legado…" : "Enter gera o briefing"}</span>
+                  <span className={base.dica}>{pensando ? "Procurando projetos parecidos no legado… pode levar até meio minuto" : "Enter gera o briefing"}</span>
                   <button className={base.enviar} disabled={!descricao.trim() || pensando}>{pensando ? "Gerando…" : "Gerar briefing"}</button>
                 </div>
               </form>
@@ -105,7 +105,9 @@ export default function Briefing({ extras = [], aoFechar, aoAbrirCaso }) {
               </div>
               <div className={base.acoesFinais}>
                 <span className={base.dica}>
-                  Feito a partir de {resultado.casos.length} casos do legado{resultado.origem === "dados" ? ", montado só com os dados, sem IA" : ""}. Toque num código para abrir o caso.
+                  {resultado.origem === "dados"
+                    ? `A IA demorou para responder, então este briefing foi montado direto dos ${resultado.casos.length} casos mais ligados ao projeto, com o texto dos próprios casos. Tente de novo em instantes para a versão escrita pela IA.`
+                    : `Feito a partir de ${resultado.casos.length} casos do legado.`} Toque num código para abrir o caso.
                 </span>
                 <button className={estilos.exemplo} onClick={() => setResultado(null)}>Descrever outro projeto</button>
               </div>
