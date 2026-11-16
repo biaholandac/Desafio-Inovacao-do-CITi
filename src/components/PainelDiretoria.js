@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AVISOS } from "@/lib/avisos";
 import estilos from "./PainelDiretoria.module.css";
 
 const CHAVE_PAUTA = "legaciti:pauta:v3";
@@ -141,7 +142,7 @@ export default function PainelDiretoria({ painel, casos, aoAbrirCaso, aoFechar }
                     </li>
                   ))}
                 </ol>
-                <p className={estilos.legenda}>{pauta.origem === "ia" ? "Sugerida pela IA com base só nos dados e casos citados." : "Montada só com os dados, sem IA."} <button className={estilos.refazer} onClick={gerarPauta}>Refazer</button></p>
+                <p className={pauta.origem === "ia" ? estilos.legenda : estilos.avisoSemIA}>{pauta.origem === "ia" ? "Sugerida pela IA com base só nos dados e casos citados." : AVISOS.pauta} <button className={estilos.refazer} onClick={gerarPauta}>Refazer</button></p>
               </>
             )}
           </section>

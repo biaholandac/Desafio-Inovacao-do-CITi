@@ -47,3 +47,12 @@
 }
 .fontes button:hover { background: rgba(56, 230, 130, 0.2); }
 @media (max-width: 640px) { .secoes { grid-template-columns: 1fr; } }
+.semIA {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #f6dfae;
+  background: rgba(243, 196, 107, 0.08);
+  border: 1px solid rgba(243, 196, 107, 0.35);
+  padding: 12px 14px;
+  margin-bottom: 18px;
+}

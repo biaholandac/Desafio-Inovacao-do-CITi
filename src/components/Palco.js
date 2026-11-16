@@ -14,6 +14,7 @@ import { SECOES } from "@/lib/ia/bastao";
 import { casos as casosLegado, gestoes, padroes, pessoaPorId } from "@/data";
 import { posicionarCasos, raiosDoAnel, ponto, naTela } from "@/lib/geometria";
 import { acharCargo, relevancia, ehNovato, CHEGADA, FOCO } from "@/data/cargos";
+import { AVISOS } from "@/lib/avisos";
 import estilos from "./Palco.module.css";
 
 const LENTES = [
@@ -90,13 +91,14 @@ export default function Palco({ cargo = null }) {
   const [cargoBastao, setCargoBastao] = useState(() => FOCO[entrada?.cargo.id]?.papeis?.find((p) => casosLegado.some((c) => c.cargoAutor === p)) ?? "Gerente de contas");
   const [bastao, setBastao] = useState(null);
   const cacheBastao = useRef({});
+  const [tentativaBastao, setTentativaBastao] = useState(0);
   useEffect(() => {
     if (lente !== "bastao") return;
     const meusDoCargo = demo.casos.filter((c) => c.cargoAutor === cargoBastao);
     const chave = `legaciti:bastao:v3:${cargoBastao}:${meusDoCargo.map((c) => c.id).join(",")}`;
     let guardado = cacheBastao.current[chave];
     if (!guardado) { try { guardado = JSON.parse(window.localStorage.getItem(chave) ?? "null"); } catch {} }
-    if (guardado) { setBastao(guardado); return; }
+    if (guardado && !(tentativaBastao && guardado.origem !== "ia")) { setBastao(guardado); return; }
     let cancelado = false;
     setBastao({ cargo: cargoBastao, carregando: true });
     const controle = new AbortController();
@@ -113,7 +115,7 @@ export default function Palco({ cargo = null }) {
       .catch(() => { if (!cancelado) setBastao({ cargo: cargoBastao, erro: true }); })
       .finally(() => clearTimeout(relogio));
     return () => { cancelado = true; controle.abort(); };
-  }, [lente, cargoBastao, demo.casos]);
+  }, [lente, cargoBastao, demo.casos, tentativaBastao]);
   const citadosBastao = useMemo(() => new Set(bastao?.kit ? SECOES.flatMap((s) => bastao.kit[s.id] ?? []).flatMap((i) => i.casos) : []), [bastao]);
 
   // O anel em andamento avança a cada conversa registrada e fecha quando todas forem feitas.
@@ -211,7 +213,7 @@ export default function Palco({ cargo = null }) {
       const dados = await r.json();
       setResposta({ pergunta: texto, ...dados });
     } catch {
-      setResposta({ pergunta: texto, tipo: "indisponivel", resposta: "Não consegui falar com o LegaCITi agora. Tente de novo em instantes.", casos: [] });
+      setResposta({ pergunta: texto, tipo: "indisponivel", resposta: AVISOS.conexao, casos: [] });
     } finally {
       clearTimeout(relogio);
       setPensando(false);
@@ -449,8 +451,14 @@ export default function Palco({ cargo = null }) {
               {bastao?.kit && (
                 <>
                   <p className={estilos.texto}>{bastao.kit.resumo}</p>
+                  {bastao.origem === "dados" && (
+                    <div className={estilos.avisoSemIA}>
+                      {AVISOS.paraQuemAssume}
+                      <button className={estilos.tentarDeNovo} onClick={() => setTentativaBastao((n) => n + 1)}>Tentar de novo</button>
+                    </div>
+                  )}
                   <p className={estilos.fonteBastao}>
-                    Feita a partir de {bastao.total} {bastao.total === 1 ? "caso" : "casos"} de quem já ocupou o cargo{bastao.origem === "dados" ? " · montada só com os dados, sem IA" : ""}. Toque num código para abrir o caso.
+                    Feita a partir de {bastao.total} {bastao.total === 1 ? "caso" : "casos"} de quem já ocupou o cargo. Toque num código para abrir o caso.
                   </p>
                   {SECOES.map((sec) => bastao.kit[sec.id]?.length > 0 && (
                     <div key={sec.id} className={estilos.secaoBastao}>

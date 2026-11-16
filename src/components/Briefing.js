@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import base from "./Entrevista.module.css";
+import { AVISOS } from "@/lib/avisos";
 import estilos from "./Briefing.module.css";
 
 const SECOES = [
@@ -43,7 +44,7 @@ export default function Briefing({ extras = [], aoFechar, aoAbrirCaso }) {
       if (!r.ok) throw new Error();
       setResultado(await r.json());
     } catch {
-      setResultado({ tipo: "erro", resposta: "Não consegui falar com o LegaCITi agora. Tente de novo em instantes." });
+      setResultado({ tipo: "erro", resposta: AVISOS.conexao });
     } finally {
       clearTimeout(relogio);
       setPensando(false);
@@ -85,7 +86,9 @@ export default function Briefing({ extras = [], aoFechar, aoAbrirCaso }) {
           {briefing && (
             <>
               <p className={estilos.projeto}>{descricao}</p>
-              <p className={estilos.resumo}>{briefing.resumo}</p>
+              {resultado.origem === "dados"
+                ? <p className={estilos.semIA}>{AVISOS.briefing(resultado.casos.length)}</p>
+                : <p className={estilos.resumo}>{briefing.resumo}</p>}
               <div className={estilos.secoes}>
                 {SECOES.map((s) => (briefing[s.id]?.length ? (
                   <section key={s.id} className={`${estilos.secao} ${estilos[s.id]}`}>
@@ -105,10 +108,9 @@ export default function Briefing({ extras = [], aoFechar, aoAbrirCaso }) {
               </div>
               <div className={base.acoesFinais}>
                 <span className={base.dica}>
-                  {resultado.origem === "dados"
-                    ? `A IA demorou para responder, então este briefing foi montado direto dos ${resultado.casos.length} casos mais ligados ao projeto, com o texto dos próprios casos. Tente de novo em instantes para a versão escrita pela IA.`
-                    : `Feito a partir de ${resultado.casos.length} casos do legado.`} Toque num código para abrir o caso.
+                  Feito a partir de {resultado.casos.length} casos do legado. Toque num código para abrir o caso.
                 </span>
+                {resultado.origem === "dados" && <button className={estilos.exemplo} onClick={() => gerar()} disabled={pensando}>{pensando ? "Gerando…" : "Gerar de novo"}</button>}
                 <button className={estilos.exemplo} onClick={() => setResultado(null)}>Descrever outro projeto</button>
               </div>
             </>

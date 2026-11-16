@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { padroes } from "@/data";
+import { AVISOS } from "@/lib/avisos";
 import estilos from "./Entrevista.module.css";
 
 const TIPOS = [
@@ -64,6 +65,7 @@ export default function Entrevista({ entrada, gestao, aoFechar, aoRegistrar }) {
   const [pensando, setPensando] = useState(false);
   const [rascunho, setRascunho] = useState(null);
   const [aviso, setAviso] = useState("");
+  const [casoSemIA, setCasoSemIA] = useState(false);
   const campo = useRef(null);
 
   const voz = useVoz(({ final, parcial }) => {
@@ -95,6 +97,7 @@ export default function Entrevista({ entrada, gestao, aoFechar, aoRegistrar }) {
       const dados = await r.json();
       if (dados.acao === "concluir") {
         setRascunho(dados.caso);
+        setCasoSemIA(dados.origem === "reserva");
         setPergunta("");
       } else {
         if (dados.acao === "redirecionar") {
@@ -210,7 +213,7 @@ export default function Entrevista({ entrada, gestao, aoFechar, aoRegistrar }) {
         {etapa === "previa" && (
           <div className={estilos.corpo}>
             <div className={estilos.rotulo}>Prévia do seu caso</div>
-            <p className={estilos.explica}>Escrito só com o que você contou. Ajuste o que quiser antes de registrar.</p>
+            <p className={estilos.explica}>{casoSemIA ? AVISOS.entrevista : "Escrito só com o que você contou. Ajuste o que quiser antes de registrar."}</p>
             <div className={estilos.previa}>
               <input className={estilos.titulo} value={rascunho.titulo} onChange={(e) => editar("titulo", e.target.value)} aria-label="Título" maxLength={90} />
               {[["situacao", "Situação"], ["decisao", "Decisão"], ["resultado", "Resultado"], ["licao", "Lição"]].map(([k, nome]) => (

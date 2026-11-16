@@ -1,3 +1,4 @@
+import { AVISOS } from "@/lib/avisos";
 // Regras que mantêm a IA do LegaCITi no papel e presa aos fatos registrados.
 
 // Respostas padrão. Elas não passam pela IA: o próprio servidor as envia.
@@ -17,9 +18,7 @@ export const MENSAGENS = {
   ajuda:
     "Pergunte sobre situações de trabalho no CITi e eu respondo com o que as gestões anteriores viveram, sempre citando os casos. " +
     "Por exemplo: \"como lidar com um cliente que some\", \"o que o CITi aprendeu sobre escopo\" ou \"resuma o que a gestão 2025.1 aprendeu\".",
-  indisponivel:
-    "O LegaCITi está recebendo muitas perguntas agora e a IA fez uma pausa. " +
-    "Enquanto isso, estes são os casos do legado mais próximos da sua pergunta.",
+  indisponivel: AVISOS.pergunte,
 };
 
 // Pedidos para sair do papel, ignorar regras ou inventar: respondidos sem chamar a IA.

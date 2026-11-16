@@ -129,3 +129,12 @@
 }
 
 .aprendizado { font-size: 13px; font-style: italic; color: var(--verde-claro); line-height: 1.45; }
+.avisoSemIA {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #f6dfae;
+  background: rgba(243, 196, 107, 0.08);
+  border: 1px solid rgba(243, 196, 107, 0.35);
+  padding: 10px 12px;
+  margin-top: 10px;
+}
