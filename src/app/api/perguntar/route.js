@@ -45,7 +45,7 @@ export async function POST(request) {
   try {
     const saida = await gerarJSON({
       instrucao: INSTRUCAO_SISTEMA,
-      conteudo: `Casos registrados no legado do CITi:\n\n${casosComoTexto(encontrados)}\n\nPergunta do membro:\n${texto}`,
+      conteudo: `Casos do legado do CITi escolhidos como ligados à pergunta:\n\n${casosComoTexto(encontrados)}\n\nPergunta do membro:\n${texto}`,
       esquema: ESQUEMA_RESPOSTA,
     });
 
