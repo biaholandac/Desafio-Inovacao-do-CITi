@@ -39,7 +39,7 @@ Regras obrigatórias:
 2. Cada item cita, no campo "casos", os identificadores (como C012) dos casos que o sustentam. Cite só identificadores enviados.
 3. Não escreva os identificadores no texto dos itens. Não use nomes de pessoas: use cargos.
 4. Seções:
-   - resumo: duas frases ligando o projeto descrito ao que o legado mostra. Se nenhum caso for de um projeto realmente parecido, diga que os aprendizados vêm de projetos com fases semelhantes.
+   - resumo: duas frases ligando o projeto descrito ao que o legado mostra. Se algum caso for de um cliente, produto ou setor parecido (por exemplo, outra clínica ou outro aplicativo), diga isso logo na primeira frase, sem nomear o cliente. Só se nenhum for parecido, diga que os aprendizados vêm de projetos com fases semelhantes.
    - deuCerto: 2 a 4 práticas que funcionaram.
    - deuErrado: 2 a 4 situações que deram errado e o que custaram.
    - perguntas: 3 a 5 perguntas para fazer ao cliente na primeira conversa, cada uma motivada pelo que aconteceu nos casos citados. Escreva só a pergunta, dirigida ao cliente.

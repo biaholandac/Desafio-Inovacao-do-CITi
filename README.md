@@ -21,7 +21,8 @@ O centro do LegaCITi é o corte de um tronco: cada anel é uma gestão, cada pon
 | Tronco do legado | 7 gestões em anéis, 115 casos em pontos; os do cargo de quem entrou brilham mais |
 | Para você | Casos do cargo e da área, padrão mais comum e por onde começar |
 | Pergunte ao LegaCITi | Respostas só com casos registrados, sempre citando a fonte |
-| Contar meu legado | Entrevista por texto ou voz; o caso nasce no anel ao vivo e o anel fecha |
+| Registro de legado | Entrevista por texto ou voz em quatro momentos: algo que aconteceu, fim de projeto, fim de gestão e despedida; o caso nasce no anel ao vivo |
+| Novo projeto | Briefing de projeto: descreve o projeto e recebe o que deu certo e errado em projetos parecidos, perguntas para o cliente e riscos, tudo citando os casos |
 | Padrões | Liga casos do mesmo padrão através das gerações |
 | Para quem assume | O legado de todos que já ocuparam um cargo, com citações |
 | Painel da diretoria | Conversas por área, padrões da gestão, legado que apoia 2027.1 e pauta da reunião |
@@ -54,7 +55,8 @@ Sem chave, tudo funciona no modo de segurança: busca, entrevista com roteiro fi
 |---|---|
 | `src/app/page.js`, `src/app/tronco` | Tela de entrada e tela do tronco |
 | `src/app/api/perguntar` | Pergunte ao LegaCITi |
-| `src/app/api/entrevista` | Conversa de legado (captura) |
+| `src/app/api/entrevista` | Registro de legado (captura) |
+| `src/app/api/briefing` | Briefing de projeto |
 | `src/app/api/bastao` | Para quem assume |
 | `src/app/api/diretoria` | Pauta da reunião de diretoria |
 | `src/app/api/saude` | Diagnóstico da IA |
