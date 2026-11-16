@@ -37,7 +37,8 @@ export default function Palco({ cargo = null }) {
   const novato = ehNovato(entrada?.cargo.id);
   // O painel da diretoria aparece só para CEO e diretores.
   const daDiretoria = entrada?.area.id === "ceo" || entrada?.area.id === "diretoria";
-  const [lente, setLente] = useState("legado");
+  // New Pigs chegam direto em "Para quem assume": o legado de quem já começou no mesmo lugar.
+  const [lente, setLente] = useState(novato ? "bastao" : "legado");
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
   const [padraoAtivo, setPadraoAtivo] = useState(null);
@@ -66,16 +67,16 @@ export default function Palco({ cargo = null }) {
   const fechadoAntes = useRef(null);
   const [pronto, setPronto] = useState(false);
   useEffect(() => {
-    const salvo = lerDemonstracao();
+    const salvo = lerDemonstracao(cargo);
     // Ao recarregar, um anel que já estava fechado não comemora de novo.
     const g = gestoes.find((x) => x.codigo === "2026.2");
     fechadoAntes.current = g.conversas.feitas + salvo.casos.length + salvo.simuladas >= g.conversas.esperadas;
     setDemo(salvo);
     setPronto(true);
-  }, []);
+  }, [cargo]);
   function atualizarDemo(novo) {
     setDemo(novo);
-    salvarDemonstracao(novo);
+    salvarDemonstracao(novo, cargo);
   }
 
   const casos = useMemo(() => [...casosLegado, ...demo.casos], [demo.casos]);
@@ -170,7 +171,7 @@ export default function Palco({ cargo = null }) {
           return atual;
         }
         const novo = { ...atual, simuladas: atual.simuladas + 1 };
-        salvarDemonstracao(novo);
+        salvarDemonstracao(novo, cargo);
         return novo;
       });
     }, 160);
@@ -281,7 +282,10 @@ export default function Palco({ cargo = null }) {
     <div className={estilos.tela}>
       <Fundo />
       <header className={estilos.topo}>
-        <Marca altura={30} />
+        <div className={estilos.marcaBloco}>
+          <Marca altura={30} />
+          <span className={estilos.slogan}>A memória coletiva do CITi</span>
+        </div>
         <nav className={estilos.lentes} aria-label="Lentes">
           {[...LENTES, ...(daDiretoria ? [{ id: "diretoria", nome: "Diretoria" }] : [])].map((l) => (
             <button key={l.id} disabled={l.emBreve} onClick={() => escolherLente(l.id)}
@@ -425,8 +429,12 @@ export default function Palco({ cargo = null }) {
             </>
           ) : lente === "bastao" ? (
             <>
-              <div className={estilos.rotulo}>Para quem assume</div>
-              <h3 className={estilos.tituloCaso}>Para quem vai assumir: <em>{cargoBastao}</em></h3>
+              <div className={estilos.rotulo}>Para quem assume{novato ? ` · ${entrada.cargo.nome}` : ""}</div>
+              {novato ? (
+                <h3 className={estilos.tituloCaso}>Boas-vindas ao CITi. <em>Comece pelo que quem já foi {cargoBastao} deixou.</em></h3>
+              ) : (
+                <h3 className={estilos.tituloCaso}>Para quem vai assumir: <em>{cargoBastao}</em></h3>
+              )}
               <label className={estilos.seletor}>
                 <span>Cargo</span>
                 <select value={cargoBastao} onChange={(e) => setCargoBastao(e.target.value)}>

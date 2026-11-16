@@ -47,7 +47,7 @@ export default function Entrada() {
             aoEscolherCaso={() => {}} aoEscolherGestao={() => {}} decorativo />
         </svg>
 
-        <div className={estilos.marca}><Marca altura={58} /></div>
+        <div className={estilos.marca}><Marca altura={58} /><span className={estilos.slogan}>A memória coletiva do CITi</span></div>
         <h1 className={estilos.titulo}>
           Tudo o que o CITi já viveu, <span>de volta para quem faz agora.</span>
         </h1>

@@ -1,6 +1,7 @@
 import { casos } from "@/data";
 import { relevancia } from "@/data/cargos";
 import { buscarCasos, casosComoTexto } from "@/lib/ia/busca";
+import { selecionarCasos } from "@/lib/ia/selecao";
 import { gerarJSON } from "@/lib/ia/gemini";
 import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem } from "@/lib/ia/regras";
 
@@ -22,8 +23,19 @@ export async function POST(request) {
     return Response.json({ tipo: "fora_do_papel", resposta: MENSAGENS.foraDoPapel, casos: [] });
   }
 
-  // 2. Busca os casos do legado. Sem casos próximos, não há o que responder.
-  const encontrados = buscarCasos(texto, legado, { relevanciaCargo: cargo ? (c) => relevancia(c, cargo) : null });
+  // 2. Busca os casos do legado de dois jeitos: por palavras (local) e por significado (a IA escolhe no catálogo).
+  //    Sem casos ligados à pergunta, não há o que responder.
+  const porPalavras = buscarCasos(texto, legado, { relevanciaCargo: cargo ? (c) => relevancia(c, cargo) : null });
+  let porSignificado = null;
+  try {
+    porSignificado = await selecionarCasos(texto, legado);
+  } catch (erro) {
+    console.error("selecao:", erro?.message);
+  }
+  // Com a seleção por significado, ela manda; as palavras completam. Sem ela, valem só as palavras.
+  const encontrados = porSignificado
+    ? [...new Map([...porSignificado, ...(porSignificado.length ? porPalavras.slice(0, 2) : [])].map((c) => [c.id, c])).values()].slice(0, 7)
+    : porPalavras;
   if (encontrados.length === 0) {
     return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
   }

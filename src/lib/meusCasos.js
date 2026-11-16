@@ -4,17 +4,19 @@ import { FOCO } from "@/data/cargos";
 
 const CHAVE = "legaciti:demonstracao:v1";
 
-export function lerDemonstracao() {
+// A demonstração pertence ao perfil que a fez: entrando com outro cargo, ela recomeça do zero.
+export function lerDemonstracao(cargo) {
   try {
     const dados = JSON.parse(window.localStorage.getItem(CHAVE) ?? "null");
-    if (dados && Array.isArray(dados.casos)) return { casos: dados.casos, simuladas: Number(dados.simuladas) || 0 };
+    if (dados && dados.cargo === cargo && Array.isArray(dados.casos)) return { casos: dados.casos, simuladas: Number(dados.simuladas) || 0 };
+    window.localStorage.removeItem(CHAVE);
   } catch {}
   return { casos: [], simuladas: 0 };
 }
 
-export function salvarDemonstracao(estado) {
+export function salvarDemonstracao(estado, cargo) {
   try {
-    window.localStorage.setItem(CHAVE, JSON.stringify(estado));
+    window.localStorage.setItem(CHAVE, JSON.stringify({ ...estado, cargo }));
   } catch {}
 }
 

@@ -150,15 +150,13 @@
     "origem": "despedida",
     "projeto": null,
     "area": "Diretoria",
-    "padroes": [
-      "P5"
-    ],
-    "situacao": "A CEO planejou a fusão das áreas durante todo o semestre, mas muitas decisões estavam só na cabeça dela e de poucos diretores. Ela sairia antes de a fusão acontecer.",
+    "padroes": [],
+    "situacao": "A CEO conduziu o planejamento da fusão das áreas durante todo o semestre e encerraria a gestão antes de a nova estrutura começar a funcionar.",
     "dilema": "Como entregar para a próxima CEO não só o plano, mas os porquês de cada decisão.",
     "opcoes": null,
     "decisao": "A CEO fez a conversa de despedida no LegaCITi e registrou um caso para cada decisão importante da fusão, com o que foi considerado e descartado.",
     "resultado": "A nova CEO começou 2027.1 com o legado de todos os CEOs anteriores e o registro de cada decisão da fusão, com seus porquês.",
-    "licao": "Numa passagem de gestão, o plano é a parte fácil de transmitir. O que se perde são os porquês.",
+    "licao": "Numa passagem de gestão, além do plano, vale entregar os porquês de cada decisão: é isso que permite à próxima gestão seguir e adaptar com segurança.",
     "simulacao": null,
     "cargoAutor": "CEO"
   },

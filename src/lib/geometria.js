@@ -184,7 +184,8 @@ export const CENTRO_TELA = { x: 778, y: 392 };
 // A foto (816 px) foi estendida nas bordas para as raízes chegarem até a beira da tela:
 // 150 px à esquerda, 250 à direita, 120 em cima e 200 embaixo (1216 x 1136 no total).
 // O ponto (445, 217) da foto original fica no centro do corte; ela é esticada 1,72 x 1,25.
-const FOTO = { esticarX: 1.72, esticarY: 1.25, centro: { x: 445 + 150, y: 217 + 120 }, largura: 1216, altura: 1136 };
+// esticarX acompanha a largura do anel interativo, para a borda do corte nunca sobrar fora do tronco.
+const FOTO = { esticarX: 1.96, esticarY: 1.3, centro: { x: 445 + 150, y: 217 + 120 }, largura: 1216, altura: 1136 };
 export const IMAGEM_TRONCO = {
   x: CENTRO_TELA.x - FOTO.centro.x * FOTO.esticarX * ZOOM,
   y: CENTRO_TELA.y - FOTO.centro.y * FOTO.esticarY * ZOOM,
