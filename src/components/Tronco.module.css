@@ -241,7 +241,7 @@
 .hud .numero { font-family: var(--fonte-titulo); fill: var(--verde); font-size: 20px; letter-spacing: 0; font-weight: 700; }
 
 .foto { pointer-events: none; }
-.veuMadeira { fill: rgba(1, 10, 5, 0.5); stroke: rgba(80, 245, 150, 0.35); stroke-width: 1.2; }
+.veuMadeira { fill: rgba(1, 10, 5, 0.42); stroke: none; }
 
 /* Um caso novo nasce no anel: o ponto cresce e duas ondas se espalham */
 .casoNasceu .ponto { animation: nascer 1.2s cubic-bezier(0.2, 0.9, 0.3, 1.4) both; }

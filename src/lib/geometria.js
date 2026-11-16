@@ -44,7 +44,8 @@ export function raiosDoAnel(indice, total) {
 
 // Num tronco real o centro não fica no meio: cada anel cresce um pouco mais
 // para um lado. O centro de cada círculo se desloca conforme o raio.
-const EXCENTRICIDADE = { x: 0.045, y: -0.028 };
+// Na foto do tronco, o miolo fica um pouco acima do centro da borda (o corte é visto de frente e de cima).
+const EXCENTRICIDADE = { x: 0.009, y: 0.085 };
 export function centroPara(raio) {
   return { x: CENTRO.x + raio * EXCENTRICIDADE.x, y: CENTRO.y + raio * EXCENTRICIDADE.y };
 }
@@ -176,21 +177,22 @@ export const ZOOM = 1.52;
 export const ESCALA_X = 0.95 * ZOOM;
 export const ESCALA_Y = 0.56 * ZOOM;
 // O x compensa o leve deslocamento dos anéis para a direita, para o tronco ficar no centro da tela.
-export const CENTRO_TELA = { x: 778, y: 392 };
+export const CENTRO_TELA = { x: 778, y: 366 };
 
 // Imagem do tronco com raízes (public/tronco.webp, 1632 x 1632), posicionada para que
 // o corte da imagem fique sob o corte interativo. O corte interativo é maior que o da foto,
 // para os anéis e os casos ficarem fáceis de ler e tocar.
-// A foto (816 px) foi estendida nas bordas para as raízes chegarem até a beira da tela:
-// 150 px à esquerda, 250 à direita, 120 em cima e 200 embaixo (1216 x 1136 no total).
-// O ponto (445, 217) da foto original fica no centro do corte; ela é esticada 1,72 x 1,25.
-// esticarX acompanha a largura do anel interativo, para a borda do corte nunca sobrar fora do tronco.
-const FOTO = { esticarX: 1.96, esticarY: 1.3, centro: { x: 445 + 150, y: 217 + 120 }, largura: 1216, altura: 1136 };
+// Foto do tronco (public/tronco.webp): imagem de 1126 x 912 px estendida nas bordas (260 px dos lados,
+// 60 em cima, 120 embaixo) até 1646 x 1092. Nela, o miolo fica em (835, 332) e a borda da madeira
+// tem raios de 328 x 188 px. A foto é esticada para essa borda coincidir com o raio 342 do desenho.
+const FOTO = { largura: 1646, altura: 1092, miolo: { x: 835, y: 332 }, raioX: 328, raioY: 188, raioDesenho: 342 };
+const FOTO_X = (FOTO.raioDesenho * ESCALA_X) / FOTO.raioX;
+const FOTO_Y = (FOTO.raioDesenho * ESCALA_Y) / FOTO.raioY;
 export const IMAGEM_TRONCO = {
-  x: CENTRO_TELA.x - FOTO.centro.x * FOTO.esticarX * ZOOM,
-  y: CENTRO_TELA.y - FOTO.centro.y * FOTO.esticarY * ZOOM,
-  largura: FOTO.largura * FOTO.esticarX * ZOOM,
-  altura: FOTO.altura * FOTO.esticarY * ZOOM,
+  x: CENTRO_TELA.x - FOTO.miolo.x * FOTO_X,
+  y: CENTRO_TELA.y - FOTO.miolo.y * FOTO_Y,
+  largura: FOTO.largura * FOTO_X,
+  altura: FOTO.altura * FOTO_Y,
 };
 export const TRANSFORMACAO_CORTE = `translate(${CENTRO_TELA.x} ${CENTRO_TELA.y}) scale(${ESCALA_X} ${ESCALA_Y}) translate(${-CENTRO.x} ${-CENTRO.y})`;
 export function naTela(p) {

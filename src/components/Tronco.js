@@ -7,17 +7,6 @@ import {
 } from "@/lib/geometria";
 import estilos from "./Tronco.module.css";
 
-// O corte da foto (public/corte.webp) é um recorte de 430 x 240 px da imagem original, com o centro
-// da madeira em (212,5; 114,5) e raios de 162 x 95 px. Aqui ele é esticado para coincidir com a madeira do desenho.
-const RAIO_MADEIRA = RAIO_EXTERNO + 5;
-// O miolo da foto fica exatamente sobre o núcleo desenhado.
-const CENTRO_MADEIRA = centroPara(RAIO_NUCLEO);
-const FOTO_CORTE = {
-  x: CENTRO_MADEIRA.x - 212.5 * (RAIO_MADEIRA / 162),
-  y: CENTRO_MADEIRA.y - 114.5 * (RAIO_MADEIRA / 95),
-  largura: 430 * (RAIO_MADEIRA / 162),
-  altura: 240 * (RAIO_MADEIRA / 95),
-};
 
 // Desenho do tronco. Cada anel é uma gestão; cada ponto é um caso.
 export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAtiva, padraoAtivo, relevancia, aoEscolherCaso, aoEscolherGestao, decorativo = false, novo = null, celebrando = null, solucoesJuntas = false, compacto = false }) {
@@ -151,15 +140,8 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
       {/* Tronco com raízes: imagem de referência da autora, com o corte coberto pelo desenho interativo */}
       <image href="/tronco.webp" x={IMAGEM_TRONCO.x} y={IMAGEM_TRONCO.y} width={IMAGEM_TRONCO.largura} height={IMAGEM_TRONCO.altura}
         preserveAspectRatio="none" className={estilos.foto} />
-      {/* Sombra sob a borda do corte, para ele assentar no tronco */}
-      <ellipse cx={naTela(centroPara(0)).x} cy={naTela(centroPara(0)).y + 22} rx={372 * ZOOM} ry={214 * ZOOM} fill="url(#sombraCorte)" opacity="0.7" />
-
       {/* Corte do tronco, visto em perspectiva */}
       <g transform={TRANSFORMACAO_CORTE}>
-      {/* Madeira e casca da própria foto, ampliadas na medida dos anéis interativos (sem a rachadura) */}
-      <clipPath id="recorteCorte"><path d={casca} /></clipPath>
-      <image href="/corte.webp" x={FOTO_CORTE.x} y={FOTO_CORTE.y} width={FOTO_CORTE.largura} height={FOTO_CORTE.altura}
-        preserveAspectRatio="none" clipPath="url(#recorteCorte)" className={estilos.foto} />
       {/* Véu escuro sobre a madeira, para os anéis das gestões e os casos se destacarem */}
       <path d={cascaInterna} className={estilos.veuMadeira} />
 
