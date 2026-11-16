@@ -3,7 +3,7 @@ import { relevancia } from "@/data/cargos";
 import { buscarCasos, casosComoTexto } from "@/lib/ia/busca";
 import { selecionarCasos } from "@/lib/ia/selecao";
 import { gerarJSON } from "@/lib/ia/gemini";
-import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem, pedeNomes, pedidoVago } from "@/lib/ia/regras";
+import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem, pedeNomes, pedidoVago, perguntaSobre, perguntaDeNumeros } from "@/lib/ia/regras";
 import { panorama, gestoesCitadas } from "@/lib/ia/panorama";
 import { gestoes } from "@/data";
 
@@ -27,6 +27,7 @@ export async function POST(request) {
 
   // Pedidos de nomes: regra de privacidade. Pedidos vagos: explica o que dá para perguntar.
   if (pedeNomes(texto)) return Response.json({ tipo: "sem_informacao", etapa: "nomes", resposta: MENSAGENS.semNomes, casos: [] });
+  if (perguntaSobre(texto)) return Response.json({ tipo: "sem_informacao", etapa: "sobre", resposta: MENSAGENS.sobre, casos: [] });
   if (pedidoVago(texto)) return Response.json({ tipo: "sem_informacao", etapa: "ajuda", resposta: MENSAGENS.ajuda, casos: [] });
 
   // Um caso pedido pelo código (como C057) é mostrado direto, sem IA.
@@ -63,6 +64,14 @@ export async function POST(request) {
     const daGestao = legado.filter((c) => existentes.includes(c.gestao) && c.licao && !encontrados.includes(c));
     const faltam = Math.max(0, 4 * existentes.length - encontrados.filter((c) => existentes.includes(c.gestao)).length);
     encontrados = [...encontrados, ...daGestao.slice(0, faltam)].slice(0, 10);
+  }
+  // Pergunta sobre os números do legado: os padrões mais comuns entram com um caso de exemplo cada.
+  if (perguntaDeNumeros(texto) && encontrados.length < 3) {
+    const contagem = {};
+    for (const c of legado) for (const p of c.padroes) contagem[p] = (contagem[p] || 0) + 1;
+    const exemplos = Object.entries(contagem).sort((a, b) => b[1] - a[1]).slice(0, 4)
+      .map(([p]) => legado.find((c) => c.padroes.includes(p) && c.licao && !encontrados.includes(c))).filter(Boolean);
+    encontrados = [...encontrados, ...exemplos];
   }
   if (encontrados.length === 0) {
     return Response.json({ tipo: "sem_informacao", etapa: falhaSelecao ? `busca (${falhaSelecao})` : "busca", resposta: MENSAGENS.semInformacao, casos: [] });
