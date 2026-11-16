@@ -3,7 +3,9 @@ import { relevancia } from "@/data/cargos";
 import { buscarCasos, casosComoTexto } from "@/lib/ia/busca";
 import { selecionarCasos } from "@/lib/ia/selecao";
 import { gerarJSON } from "@/lib/ia/gemini";
-import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem } from "@/lib/ia/regras";
+import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem, pedeNomes, pedidoVago } from "@/lib/ia/regras";
+import { panorama, gestoesCitadas } from "@/lib/ia/panorama";
+import { gestoes } from "@/data";
 
 // A função pode rodar por até 30 s na Vercel; a IA tem 18 s e, depois disso, entra o modo de segurança.
 export const maxDuration = 30;
@@ -23,6 +25,25 @@ export async function POST(request) {
     return Response.json({ tipo: "fora_do_papel", resposta: MENSAGENS.foraDoPapel, casos: [] });
   }
 
+  // Pedidos de nomes: regra de privacidade. Pedidos vagos: explica o que dá para perguntar.
+  if (pedeNomes(texto)) return Response.json({ tipo: "sem_informacao", etapa: "nomes", resposta: MENSAGENS.semNomes, casos: [] });
+  if (pedidoVago(texto)) return Response.json({ tipo: "sem_informacao", etapa: "ajuda", resposta: MENSAGENS.ajuda, casos: [] });
+
+  // Um caso pedido pelo código (como C057) é mostrado direto, sem IA.
+  const codigos = [...texto.toUpperCase().matchAll(/\b([CN]\d{3})\b/g)].map((m) => m[1]);
+  if (codigos.length) {
+    const achados = codigos.map((id) => legado.find((c) => c.id === id)).filter(Boolean);
+    if (achados.length) return Response.json({ tipo: "resposta", resposta: achados.map((c) => `${c.id} · ${c.titulo} (${c.gestao}): ${c.licao ?? c.situacao}`).join("\n"), casos: achados.map((c) => c.id) });
+    return Response.json({ tipo: "sem_informacao", etapa: "codigo", resposta: MENSAGENS.semInformacao, casos: [] });
+  }
+
+  // Gestões citadas que não existem no legado (como 2023.2): sem registros, sem IA.
+  const citadas = gestoesCitadas(texto);
+  const existentes = citadas.filter((c) => gestoes.some((g) => g.codigo === c));
+  if (citadas.length && !existentes.length) {
+    return Response.json({ tipo: "sem_informacao", etapa: "gestao", resposta: MENSAGENS.semInformacao, casos: [] });
+  }
+
   // 2. Busca os casos do legado de dois jeitos: por palavras (local) e por significado (a IA escolhe no catálogo).
   //    Sem casos ligados à pergunta, não há o que responder.
   const porPalavras = buscarCasos(texto, legado, { relevanciaCargo: cargo ? (c) => relevancia(c, cargo) : null });
@@ -34,18 +55,25 @@ export async function POST(request) {
     falhaSelecao = String(erro?.message ?? "erro").slice(0, 40);
   }
   // Com a seleção por significado, ela manda; as palavras completam. Sem ela, valem só as palavras.
-  const encontrados = porSignificado
+  let encontrados = porSignificado
     ? [...new Map([...porSignificado, ...(porSignificado.length ? porPalavras.slice(0, 2) : [])].map((c) => [c.id, c])).values()].slice(0, 7)
     : porPalavras;
+  // Pergunta sobre uma ou duas gestões: garante que os casos delas estejam entre as fontes.
+  if (existentes.length && existentes.length <= 2) {
+    const daGestao = legado.filter((c) => existentes.includes(c.gestao) && c.licao && !encontrados.includes(c));
+    const faltam = Math.max(0, 4 * existentes.length - encontrados.filter((c) => existentes.includes(c.gestao)).length);
+    encontrados = [...encontrados, ...daGestao.slice(0, faltam)].slice(0, 10);
+  }
   if (encontrados.length === 0) {
     return Response.json({ tipo: "sem_informacao", etapa: falhaSelecao ? `busca (${falhaSelecao})` : "busca", resposta: MENSAGENS.semInformacao, casos: [] });
   }
 
-  // 3. A IA escreve a resposta usando apenas esses casos.
+  // 3. A IA escreve a resposta usando apenas esses casos (e o panorama com os números do legado).
+  const visao = panorama(legado, existentes);
   try {
     const saida = await gerarJSON({
       instrucao: INSTRUCAO_SISTEMA,
-      conteudo: `Casos do legado do CITi escolhidos como ligados à pergunta:\n\n${casosComoTexto(encontrados)}\n\nPergunta do membro:\n${texto}`,
+      conteudo: `${visao}\n\nCasos do legado do CITi escolhidos como ligados à pergunta:\n\n${casosComoTexto(encontrados)}\n\nPergunta do membro:\n${texto}`,
       esquema: ESQUEMA_RESPOSTA,
     });
 
@@ -57,7 +85,7 @@ export async function POST(request) {
     const permitidos = new Set(encontrados.map((c) => c.id));
     const citados = (saida.casos ?? []).filter((id) => permitidos.has(id));
     // Conferência de números: a resposta não pode trazer números que não estão nos casos citados.
-    if (saida.tipo === "resposta" && !numerosConferem(saida.resposta, casosComoTexto(encontrados.filter((c) => citados.includes(c.id))) + " " + texto)) {
+    if (saida.tipo === "resposta" && !numerosConferem(saida.resposta, casosComoTexto(encontrados.filter((c) => citados.includes(c.id))) + " " + texto + " " + visao)) {
       throw new Error("numero_sem_fonte");
     }
     if (saida.tipo !== "resposta" || citados.length === 0 || !saida.resposta?.trim()) {

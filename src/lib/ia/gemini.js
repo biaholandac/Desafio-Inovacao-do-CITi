@@ -46,6 +46,13 @@ export async function gerarJSON({ instrucao, conteudo, esquema, maxTokens = 700 
     if (restante < 1500) break;
     try {
       let resposta = await chamar(modelo, chave, corpoBase, Math.min(LIMITE_TENTATIVA_MS, restante));
+      // Limite momentâneo do plano gratuito: espera um pouco e tenta de novo (até duas vezes).
+      for (let tentativa = 1; resposta.status === 429 && tentativa <= 2; tentativa++) {
+        const sobra = LIMITE_TOTAL_MS - (Date.now() - inicio);
+        if (sobra < 5000) break;
+        await new Promise((r) => setTimeout(r, 1800 * tentativa));
+        resposta = await chamar(modelo, chave, corpoBase, Math.min(LIMITE_TENTATIVA_MS, LIMITE_TOTAL_MS - (Date.now() - inicio)));
+      }
       // Modelos que não aceitam desligar o pensamento: tenta de novo sem essa opção.
       if (resposta.status === 400) {
         const { thinkingConfig, ...semPensamento } = corpoBase.generationConfig;
