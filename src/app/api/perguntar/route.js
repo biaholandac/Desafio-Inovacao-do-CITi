@@ -26,18 +26,19 @@ export async function POST(request) {
   // 2. Busca os casos do legado de dois jeitos: por palavras (local) e por significado (a IA escolhe no catálogo).
   //    Sem casos ligados à pergunta, não há o que responder.
   const porPalavras = buscarCasos(texto, legado, { relevanciaCargo: cargo ? (c) => relevancia(c, cargo) : null });
-  let porSignificado = null;
+  let porSignificado = null, falhaSelecao = null;
   try {
     porSignificado = await selecionarCasos(texto, legado);
   } catch (erro) {
     console.error("selecao:", erro?.message);
+    falhaSelecao = String(erro?.message ?? "erro").slice(0, 40);
   }
   // Com a seleção por significado, ela manda; as palavras completam. Sem ela, valem só as palavras.
   const encontrados = porSignificado
     ? [...new Map([...porSignificado, ...(porSignificado.length ? porPalavras.slice(0, 2) : [])].map((c) => [c.id, c])).values()].slice(0, 7)
     : porPalavras;
   if (encontrados.length === 0) {
-    return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
+    return Response.json({ tipo: "sem_informacao", etapa: falhaSelecao ? `busca (${falhaSelecao})` : "busca", resposta: MENSAGENS.semInformacao, casos: [] });
   }
 
   // 3. A IA escreve a resposta usando apenas esses casos.
@@ -60,7 +61,7 @@ export async function POST(request) {
       throw new Error("numero_sem_fonte");
     }
     if (saida.tipo !== "resposta" || citados.length === 0 || !saida.resposta?.trim()) {
-      return Response.json({ tipo: "sem_informacao", resposta: MENSAGENS.semInformacao, casos: [] });
+      return Response.json({ tipo: "sem_informacao", etapa: `resposta (${saida.tipo}; ${encontrados.map((c) => c.id).join(",")})`, resposta: MENSAGENS.semInformacao, casos: [] });
     }
     return Response.json({ tipo: "resposta", resposta: saida.resposta.trim(), casos: citados });
   } catch (erro) {
