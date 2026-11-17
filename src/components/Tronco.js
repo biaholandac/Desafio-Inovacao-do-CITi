@@ -235,7 +235,7 @@ export default function Tronco({ gestoes, casos, posicoes, selecionado, gestaoAt
 
       {/* Nomes das áreas, curvados ao longo da casca (fora da perspectiva, para o texto não deformar) */}
       {!decorativo && rotulos.map(({ nome, angulo, abertura }, i) => {
-        const r = RAIO_EXTERNO + (compacto ? 62 : 46);
+        const r = RAIO_EXTERNO + (compacto ? 64 : 52);
         const embaixo = Math.sin((angulo * Math.PI) / 180) > 0.2;
         const angs = Array.from({ length: 13 }, (_, k) => angulo - abertura / 2 + (abertura * k) / 12);
         const pts = (embaixo ? angs.reverse() : angs).map((a) => naTela(ponto(r, a)));

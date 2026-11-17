@@ -41,7 +41,7 @@ export default function Palco({ cargo = null }) {
   // O painel da diretoria aparece só para CEO e diretores.
   const daDiretoria = entrada?.area.id === "ceo" || entrada?.area.id === "diretoria";
   // New Pigs chegam direto em "Para quem assume": o legado de quem já começou no mesmo lugar.
-  const [lente, setLente] = useState(novato ? "bastao" : daDiretoria ? "diretoria" : "legado");
+  const [lente, setLente] = useState(novato ? "bastao" : "legado");
   const [gestaoAtiva, setGestaoAtiva] = useState("2026.2");
   const [casoAtivo, setCasoAtivo] = useState(null);
   const [padraoAtivo, setPadraoAtivo] = useState(null);
