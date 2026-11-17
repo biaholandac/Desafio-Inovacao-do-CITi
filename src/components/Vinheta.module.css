@@ -1,0 +1,51 @@
+.vinheta {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: radial-gradient(ellipse at 50% 46%, #04140b 0%, #020403 70%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  animation: sair 0.8s ease-in 7.4s both;
+}
+.saindo { animation: sair 0.45s ease-in both; }
+.gravando { animation: none; }
+@keyframes sair { to { opacity: 0; visibility: hidden; } }
+
+.aneis { position: absolute; left: 50%; top: 46%; width: min(1100px, 130vw); transform: translate(-50%, -50%); overflow: visible;
+  animation: recuar 1.4s cubic-bezier(.6, 0, .2, 1) 4.7s both; }
+@keyframes recuar { to { opacity: 0.28; transform: translate(-50%, -50%) scale(1.12); } }
+
+.miolo { animation: acender 0.9s ease-out 0.1s both; }
+@keyframes acender { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
+
+.anel { transform-box: fill-box; transform-origin: center;
+  animation: nascer 0.9s cubic-bezier(.2, .8, .2, 1) calc(0.5s + var(--i) * 0.48s) both, pulsar 1.2s ease-in-out 6s both; }
+@keyframes nascer { from { opacity: 0; transform: scale(0.55); } 60% { opacity: 1; } to { opacity: 0.85; transform: scale(1); } }
+@keyframes pulsar { 50% { opacity: 1; } }
+
+.ano { fill: #d8ffe9; font: 700 17px var(--fonte-texto); letter-spacing: 0.16em; paint-order: stroke; stroke: #020403; stroke-width: 5px;
+  animation: piscar 0.46s linear calc(0.84s + var(--i) * 0.48s) both; }
+@keyframes piscar { 0% { opacity: 0; transform: translateY(6px); } 18% { opacity: 1; transform: none; } 78% { opacity: 1; } 100% { opacity: 0; } }
+
+.frase { position: absolute; bottom: 14%; left: 0; right: 0; text-align: center; margin: 0;
+  font-family: "Syne", var(--fonte-texto); font-weight: 800; font-size: clamp(26px, 4.2vw, 56px); color: #eef5f0; letter-spacing: -0.01em; padding: 0 24px; }
+.frase em { font-style: normal; color: #2fd97a; text-shadow: 0 0 28px rgba(47, 217, 122, 0.6); }
+.frase1 { animation: frase 2s ease 0.7s both; }
+.frase2 { animation: frase 2.1s ease 2.8s both; }
+@keyframes frase { 0% { opacity: 0; transform: translateY(14px); } 18% { opacity: 1; transform: none; } 82% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-10px); } }
+
+.marca { position: relative; display: flex; flex-direction: column; align-items: center; gap: 18px;
+  animation: marca 1.1s cubic-bezier(.2, .8, .2, 1) 5.1s both; }
+.marca svg { filter: drop-shadow(0 0 24px rgba(47, 217, 122, 0.45)); }
+@keyframes marca { from { opacity: 0; transform: scale(0.92); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+.slogan { font-size: clamp(11px, 1.2vw, 15px); letter-spacing: 0.42em; text-transform: uppercase; color: #2fd97a;
+  animation: frase-simples 0.9s ease 5.8s both; }
+@keyframes frase-simples { from { opacity: 0; } to { opacity: 1; } }
+
+.pular { position: absolute; right: 28px; bottom: 26px; font: inherit; font-size: 13px; color: #8fa396; background: rgba(3, 12, 7, 0.6);
+  border: 1px solid rgba(47, 217, 122, 0.3); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.pular:hover { color: #eef5f0; border-color: rgba(47, 217, 122, 0.6); }
+.veio { transform-box: fill-box; transform-origin: center; opacity: 0;
+  animation: veio 1.2s ease-out calc(0.45s + var(--i) * 0.48s) both; }
+@keyframes veio { from { opacity: 0; transform: scale(0.7); } to { opacity: 0.22; transform: scale(1); } }

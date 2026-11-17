@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Marca from "./Marca";
+import Vinheta from "./Vinheta";
 import Fundo from "./Fundo";
 import Tronco from "./Tronco";
 import { casos, gestoes, pessoaPorId } from "@/data";
@@ -38,6 +39,8 @@ export default function Entrada() {
   }
 
   return (
+    <>
+      <Vinheta />
     <main className={estilos.tela}>
       <Fundo />
       <div className={estilos.conteudo}>
@@ -85,5 +88,6 @@ export default function Entrada() {
         <p className={estilos.rodape}>Demonstração com dados simulados · personagens e casos fictícios</p>
       </div>
     </main>
+    </>
   );
 }

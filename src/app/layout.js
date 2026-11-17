@@ -5,6 +5,7 @@ import "@fontsource-variable/inter";
 import "@fontsource/bricolage-grotesque/700.css";
 import "@fontsource/unbounded/600.css";
 import "@fontsource/syne/700.css";
+import "@fontsource/syne/800.css";
 import "@fontsource/kanit/900-italic.css";
 import "./globals.css";
 
