@@ -6,7 +6,7 @@ export const POR_QUE_IA =
 export const AVISOS = {
   pergunte:
     "A IA não respondeu a tempo desta vez. " + POR_QUE_IA + " " +
-    "Para não arriscar uma resposta inventada, o LegaCITi mostra abaixo os casos reais do legado mais ligados à sua pergunta. " +
+    "Para não arriscar uma resposta inventada, o LegaCITi mostra abaixo os casos registrados no legado mais ligados à sua pergunta. " +
     "Espere cerca de um minuto e pergunte de novo para receber a resposta escrita.",
   conexao: "Não foi possível falar com o LegaCITi agora. Confira a conexão com a internet e tente de novo.",
   briefing: (n) =>
