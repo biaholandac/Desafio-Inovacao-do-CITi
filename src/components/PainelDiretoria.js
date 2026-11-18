@@ -21,7 +21,7 @@ export default function PainelDiretoria({ painel, casos, aoAbrirCaso, aoFechar }
   async function gerarPauta() {
     setPauta({ carregando: true });
     const controle = new AbortController();
-    const relogio = setTimeout(() => controle.abort(), 28000);
+    const relogio = setTimeout(() => controle.abort(), 58000);
     try {
       const r = await fetch("/api/diretoria", { method: "POST", signal: controle.signal });
       if (!r.ok) throw new Error();

@@ -85,7 +85,7 @@ export default function Entrevista({ entrada, gestao, aoFechar, aoRegistrar }) {
     setPensando(true);
     setAviso("");
     const controle = new AbortController();
-    const relogio = setTimeout(() => controle.abort(), 25000);
+    const relogio = setTimeout(() => controle.abort(), 58000);
     try {
       const r = await fetch("/api/entrevista", {
         method: "POST",

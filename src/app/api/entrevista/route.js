@@ -4,8 +4,9 @@ import {
   TIPOS, ROTEIRO_RESERVA, MINIMO_RESPOSTAS, MAXIMO_RESPOSTAS, MENSAGEM_REDIRECIONAR,
   instrucaoEntrevista, ESQUEMA_ENTREVISTA, conferirCaso, casoReserva, historicoComoTexto,
 } from "@/lib/ia/entrevista";
+import { passoGuardado } from "@/lib/ia/entrevistaGuardada";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 // Conversa de legado: devolve a próxima pergunta ou o caso montado.
 // Camadas: pedido para sair do papel → IA → conferência → roteiro reserva se a IA falhar.
@@ -32,6 +33,7 @@ export async function POST(request) {
       instrucao: instrucaoEntrevista({ tipo, cargo }),
       conteudo: `${historicoComoTexto(historico)}\n\n${concluirAgora ? "A conversa chegou ao limite: use a ação \"concluir\" agora." : "Decida a próxima ação."}`,
       esquema: ESQUEMA_ENTREVISTA,
+      limiteMs: 40000,
     });
 
     if (saida.acao === "redirecionar") {
@@ -48,6 +50,9 @@ export async function POST(request) {
     throw new Error("sem_pergunta");
   } catch (erro) {
     console.error("entrevista:", erro?.message);
+    // As respostas são as do roteiro da demonstração: segue a conversa que a IA já conduziu com elas.
+    const guardado = passoGuardado(historico);
+    if (guardado) return Response.json(guardado);
     // Sem IA: segue o roteiro fixo e, no fim, monta o caso com as palavras da própria pessoa.
     if (n - 1 < ROTEIRO_RESERVA.length) return Response.json({ acao: "perguntar", pergunta: ROTEIRO_RESERVA[n - 1], origem: "reserva" });
     return Response.json({ acao: "concluir", caso: casoReserva(historico), origem: "reserva" });

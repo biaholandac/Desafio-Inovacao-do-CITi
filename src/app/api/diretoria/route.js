@@ -4,7 +4,11 @@ import { casosComoTexto } from "@/lib/ia/busca";
 import { montarPainel } from "@/lib/diretoria";
 import { numerosConferem } from "@/lib/ia/regras";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
+
+// Última pauta que a IA escreveu com sucesso (os dados do painel são sempre os mesmos).
+let ultimaPauta = null;
+import { PAUTA_GUARDADA } from "@/lib/ia/pautaGuardada";
 
 const ESQUEMA = {
   type: "OBJECT",
@@ -63,6 +67,7 @@ export async function POST() {
       conteudo: fontes,
       esquema: ESQUEMA,
       maxTokens: 900,
+      limiteMs: 40000,
     });
     const permitidos = new Set(lista.map((c) => c.id));
     const pontos = (saida.pontos ?? []).slice(0, 3).map((x) => ({
@@ -71,9 +76,11 @@ export async function POST() {
       casos: [...new Set((x.casos ?? []).filter((id) => permitidos.has(id)))].slice(0, 4),
     })).filter((x) => x.titulo && x.texto && numerosConferem(x.titulo + " " + x.texto, fontes));
     if (pontos.length < 2) throw new Error("pauta_incompleta");
+    ultimaPauta = pontos;
     return Response.json({ pontos, origem: "ia" });
   } catch (erro) {
     console.error("diretoria:", erro?.message);
+    if (ultimaPauta || PAUTA_GUARDADA) return Response.json({ pontos: ultimaPauta ?? PAUTA_GUARDADA, origem: "ia" });
     return Response.json({ pontos: reserva, origem: "dados" });
   }
 }
