@@ -201,7 +201,7 @@ export default function Palco({ cargo = null }) {
     setResposta({ pergunta: texto, carregando: true });
     // Se a resposta não chegar em 25 s, o LegaCITi desiste e avisa, em vez de ficar pensando para sempre.
     const controle = new AbortController();
-    const relogio = setTimeout(() => controle.abort(), 25000);
+    const relogio = setTimeout(() => controle.abort(), 58000);
     try {
       const r = await fetch("/api/perguntar", {
         method: "POST",

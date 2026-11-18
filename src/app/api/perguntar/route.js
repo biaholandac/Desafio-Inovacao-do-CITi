@@ -2,6 +2,7 @@ import { casos } from "@/data";
 import { relevancia } from "@/data/cargos";
 import { buscarCasos, casosComoTexto } from "@/lib/ia/busca";
 import { selecionarCasos } from "@/lib/ia/selecao";
+import { RESPOSTAS_GUARDADAS, normalizarPergunta } from "@/lib/ia/respostasGuardadas";
 import { gerarJSON } from "@/lib/ia/gemini";
 import { MENSAGENS, INSTRUCAO_SISTEMA, ESQUEMA_RESPOSTA, pedeParaSairDoPapel, numerosConferem, pedeNomes, pedidoVago, perguntaSobre, perguntaDeNumeros } from "@/lib/ia/regras";
 import { panorama, gestoesCitadas } from "@/lib/ia/panorama";
@@ -9,7 +10,10 @@ import { gestoes } from "@/data";
 import { limparExtra } from "@/lib/ia/extras";
 
 // A função pode rodar por até 30 s na Vercel; a IA tem 18 s e, depois disso, entra o modo de segurança.
-export const maxDuration = 30;
+export const maxDuration = 60;
+
+// Últimas respostas que a IA escreveu com sucesso nesta instância do servidor, por pergunta.
+const memoria = new Map();
 
 // Pergunte ao LegaCITi: responde só com base nos casos registrados.
 export async function POST(request) {
@@ -85,6 +89,7 @@ export async function POST(request) {
       instrucao: INSTRUCAO_SISTEMA,
       conteudo: `${visao}\n\nCasos do legado do CITi escolhidos como ligados à pergunta:\n\n${casosComoTexto(encontrados)}\n\nPergunta do membro:\n${texto}`,
       esquema: ESQUEMA_RESPOSTA,
+      limiteMs: 40000,
     });
 
     if (saida.tipo === "fora_do_papel") {
@@ -101,10 +106,15 @@ export async function POST(request) {
     if (saida.tipo !== "resposta" || citados.length === 0 || !saida.resposta?.trim()) {
       return Response.json({ tipo: "sem_informacao", etapa: `resposta (${saida.tipo}; ${encontrados.map((c) => c.id).join(",")})`, resposta: MENSAGENS.semInformacao, casos: [] });
     }
-    return Response.json({ tipo: "resposta", resposta: saida.resposta.trim(), casos: citados });
+    const resposta = { tipo: "resposta", resposta: saida.resposta.trim(), casos: citados };
+    if (!meus.length) memoria.set(normalizarPergunta(texto), resposta);
+    return Response.json(resposta);
   } catch (erro) {
     // 5. Modo de segurança: sem IA, mostra os casos mais próximos. O motivo (só um código) ajuda a diagnosticar.
     console.error("perguntar:", erro?.message);
+    // A IA não respondeu: se ela já escreveu uma resposta para esta mesma pergunta, mostra essa.
+    const chave = normalizarPergunta(texto);
+    if (!meus.length && (memoria.has(chave) || RESPOSTAS_GUARDADAS[chave])) return Response.json(memoria.get(chave) ?? RESPOSTAS_GUARDADAS[chave]);
     return Response.json({ tipo: "indisponivel", motivo: String(erro?.message ?? "desconhecido").slice(0, 40), resposta: MENSAGENS.indisponivel, casos: encontrados.slice(0, 3).map((c) => c.id) });
   }
 }

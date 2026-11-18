@@ -20,6 +20,7 @@ export async function selecionarCasos(pergunta, legado) {
     conteudo: `Catálogo:\n${legado.map(linha).join("\n")}\n\nPergunta:\n${pergunta}`,
     esquema: ESQUEMA,
     maxTokens: 200,
+    limiteMs: 9000,
   });
   const porId = new Map(legado.map((c) => [c.id, c]));
   return [...new Set(saida.casos ?? [])].map((id) => porId.get(id)).filter(Boolean).slice(0, 8);
