@@ -1,10 +1,10 @@
 # LegaCITi
 
-**A memória coletiva do CITi.** O LegaCITi guarda o que cada geração viveu, encontra padrões que nenhuma pessoa sozinha conseguiria ver e devolve isso para quem está trabalhando agora.
+**Funciona como a memória coletiva do CITi** Ele junta a experiência de todas as gerações, encontra padrões e entrega isso de volta para quem está fazendo o trabalho agora, antes de o erro se repetir.
 
-Projeto de Beatriz para o desafio de Inovação do Processo Seletivo do CITi 2026.2.
+Projeto para o desafio de Inovação do Processo Seletivo do CITi 2026.2.
 
-- **No ar:** https://legaciti.vercel.app
+- **Link:** https://legaciti.vercel.app
 - **Documentação completa:** entregue junto com o projeto (plataforma, funcionalidades, tecnologias e uso de IA)
 
 > **Dados simulados.** Personagens, clientes e casos da demonstração são fictícios. O produto não mostra nenhum nome de pessoa.
@@ -17,7 +17,7 @@ O centro do LegaCITi é o corte de um tronco: cada anel é uma gestão, cada pon
 
 | Funcionalidade | O que faz |
 |---|---|
-| Entrada por cargo | Tudo o que a pessoa vê se adapta à área e ao cargo, inclusive para New Pigs |
+| Entrada por cargo | Tudo o que a pessoa vê se adapta à área e ao cargo |
 | Tronco do legado | 7 gestões em anéis, 115 casos em pontos; os do cargo de quem entrou brilham mais |
 | Para você | Casos do cargo e da área, padrão mais comum e por onde começar |
 | Pergunte ao LegaCITi | Respostas só com casos registrados, sempre citando a fonte |
@@ -27,7 +27,7 @@ O centro do LegaCITi é o corte de um tronco: cada anel é uma gestão, cada pon
 | Para quem assume | O legado de todos que já ocuparam um cargo, com citações |
 | Painel da diretoria | Conversas por área, padrões da gestão, legado que apoia 2027.1 e pauta da reunião |
 
-## Uma IA que não inventa
+## A IA dentro da plataforma:
 
 1. Pedidos para sair do papel são barrados antes de chegar à IA.
 2. Sem caso parecido na busca local, a IA nem é chamada.
@@ -45,9 +45,7 @@ cp .env.example .env.local   # coloque a sua GEMINI_API_KEY
 npm run build && npm start
 ```
 
-Sem chave, tudo funciona no modo de segurança: busca, entrevista com roteiro fixo e guias montados só com os dados.
-
-`/api/saude` mostra se a IA está respondendo e em quanto tempo, sem revelar a chave.
+Sem chave, tudo funciona no modo de segurança. /api/saude mostra se a IA está respondendo.
 
 ## Estrutura
 
@@ -70,4 +68,4 @@ Sem chave, tudo funciona no modo de segurança: busca, entrevista com roteiro fi
 
 Next.js 16 · SVG desenhado em código · Gemini 3.5 Flash-Lite (nível gratuito) · Web Speech API · Vercel · GitHub · Playwright (testes) · Python e OpenCV (tratamento da imagem do tronco, gerada com GPT Image 2.5).
 
-Construído com o Claude (Anthropic): ideação, código, dados da simulação, testes e documentação, com todas as decisões de produto, conteúdo e visual tomadas por Beatriz.
+Construído com o Claude (Anthropic): código, dados da simulação, e testes, com todas as decisões de produto, conteúdo e visual tomadas por mim.
